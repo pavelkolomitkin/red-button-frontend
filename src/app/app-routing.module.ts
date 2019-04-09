@@ -4,11 +4,10 @@ import {NotFoundPageComponent} from './core/not-found-page/not-found-page.compon
 import {AuthUserGuard} from "./security/services/guards/AuthUserGuard";
 
 const routes: Routes = [
-    // { path: 'security', loadChildren: './security/security.module#SecurityModule' },
-    // { path: '', redirectTo: '/security/login', pathMatch: 'full' },
-    // { path: '404', component: NotFoundPageComponent },
-    // { path: '**', redirectTo: '404', pathMatch: 'full'}
-    { path: '', component: NotFoundPageComponent },
+    { path: 'security', loadChildren: './security/security.module#SecurityModule' },
+    { path: '', redirectTo: '/security/login', pathMatch: 'full' },
+    { path: '404', component: NotFoundPageComponent },
+    { path: '**', redirectTo: '404', pathMatch: 'full'}
 ];
 
 @NgModule({
