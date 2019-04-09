@@ -14,7 +14,7 @@ import {
 } from '../actions';
 import {mergeMap, catchError, map, tap} from 'rxjs/operators';
 import {SecurityService} from '../../services/security.service';
-import User from '../../../core/model/user.model';
+import User from '../../../core/data/model/user.model';
 import {GlobalProgressHide, GlobalProgressShow} from "../../../core/data/actions";
 import {Router} from "@angular/router";
 import {State} from "../../../app.state";

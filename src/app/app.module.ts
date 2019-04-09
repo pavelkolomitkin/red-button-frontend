@@ -15,16 +15,16 @@ import {environment} from '../environments/environment';
   ],
   imports: [
     BrowserModule,
-      BrowserAnimationsModule,
-      CoreModule,
-      SharedModule,
-      AppRoutingModule,
-      StoreDevtoolsModule.instrument(
-          {
-            maxAge: 25,
-            logOnly: !environment.production
-          }
-      )
+    BrowserAnimationsModule,
+    CoreModule,
+    SharedModule,
+    AppRoutingModule,
+    StoreDevtoolsModule.instrument(
+        {
+          maxAge: 25,
+          logOnly: !environment.production
+        }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

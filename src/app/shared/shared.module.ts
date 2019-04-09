@@ -4,7 +4,6 @@ import {FormsModule} from '@angular/forms';
 import {FormFieldErrorListComponent} from '../core/form-field-error-list/form-field-error-list.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MomentModule } from 'ngx-moment';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -14,15 +13,13 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     CommonModule,
     FormsModule,
     InfiniteScrollModule,
-    NgbModule,
     MomentModule
   ],
   exports: [
     FormsModule,
     FormFieldErrorListComponent,
     InfiniteScrollModule,
-    MomentModule,
-    NgbModule
+    MomentModule
   ]
 })
 export class SharedModule { }

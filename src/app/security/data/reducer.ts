@@ -1,6 +1,6 @@
 import * as actions from './actions';
 import RegisterData from './model/register-data.model';
-import User from '../../core/model/user.model';
+import User from '../../core/data/model/user.model';
 
 export interface State {
   registerInputData: RegisterData;

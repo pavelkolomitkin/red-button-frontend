@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import { SecurityService } from "../../security/services/security.service";
 import {LocalStorageService} from "./local-storage.service";
-import User from "../model/user.model";
+import User from "../data/model/user.model";
 import {Store} from "@ngrx/store";
 import {State} from "../../app.state";
 import {UserInitializeError, UserInitializeSuccess} from "../../security/data/actions";

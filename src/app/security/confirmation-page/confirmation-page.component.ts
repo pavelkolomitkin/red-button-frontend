@@ -4,8 +4,9 @@ import {select, Store} from "@ngrx/store";
 import {State} from "../../app.state";
 import {UserRegistrationConfirmStart} from "../data/actions";
 import {Subscription} from "rxjs";
-import User from "../../core/model/user.model";
+import User from "../../core/data/model/user.model";
 import {isArray} from "util";
+
 
 @Component({
   selector: 'app-confirmation-page',

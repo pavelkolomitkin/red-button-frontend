@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import User from '../../core/model/user.model';
+import User from '../../core/data/model/user.model';
 import RegisterData from './model/register-data.model';
 import LoginCredentials from './model/login-credentials.model';
 
