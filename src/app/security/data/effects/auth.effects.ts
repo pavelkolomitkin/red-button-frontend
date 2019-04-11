@@ -3,7 +3,8 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {Action, Store} from '@ngrx/store';
 import {Observable, of} from 'rxjs';
 import {
-  USER_INITIALIZE_START,
+  USER_INITIALIZE_ERROR,
+  USER_INITIALIZE_START, USER_INITIALIZE_SUCCESS,
   USER_LOGIN_START,
   USER_LOGIN_SUCCESS, USER_LOGOUT,
   UserInitializeError, UserInitializeStart,
@@ -20,6 +21,7 @@ import {State} from '../../../core/data/reducer';
 import {GlobalProgressHide, GlobalProgressShow} from '../../../core/data/actions';
 import {Router} from '@angular/router';
 import {LocalStorageService} from '../../../core/services/local-storage.service';
+import {NgxPermissionsService} from 'ngx-permissions';
 
 
 @Injectable()
@@ -95,8 +97,28 @@ export class AuthEffects
     ofType(USER_LOGOUT),
     tap(() => {
       this.localStorageService.remove('token');
+      this.permissionService.loadPermissions([]);
       this.router.navigate(['/security', 'login']);
     })
+  );
+
+  @Effect({ dispatch: false })
+  initializeSuccess: Observable<Action> = this.actions.pipe(
+      ofType(USER_INITIALIZE_SUCCESS),
+      tap((action:UserInitializeSuccess) => {
+
+        const { user: { roles } } = action;
+
+        this.permissionService.loadPermissions(roles);
+      })
+  );
+
+  @Effect({ dispatch: false })
+  initializeError: Observable<Action> = this.actions.pipe(
+      ofType(USER_INITIALIZE_ERROR),
+      tap(() => {
+        this.permissionService.loadPermissions([]);
+      })
   );
 
   constructor(
@@ -104,6 +126,7 @@ export class AuthEffects
     private service: SecurityService,
     private store: Store<State>,
     private router: Router,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private permissionService: NgxPermissionsService
   ) {}
 }

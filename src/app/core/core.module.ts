@@ -21,9 +21,10 @@ import { AuthUserGuard } from '../security/services/guards/AuthUserGuard';
 import { RouterModule } from '@angular/router';
 import { MomentModule } from 'ngx-moment';
 import { SharedModule } from '../shared/shared.module';
-import {GlobalProgressComponent} from './global-progress/global-progress.component';
-import {NotFoundPageComponent} from './not-found-page/not-found-page.component';
-import {SecurityService} from '../security/services/security.service';
+import { GlobalProgressComponent } from './global-progress/global-progress.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { SecurityService } from '../security/services/security.service';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -42,6 +43,7 @@ const httpInterceptorProviders = [
     RouterModule,
     HttpClientModule,
     SharedModule,
+    NgxPermissionsModule.forRoot(),
     StoreModule.forRoot({
       core: coreReducer,
       security: securityReducer,
@@ -67,7 +69,8 @@ const httpInterceptorProviders = [
     GlobalProgressComponent,
     MomentModule,
     StoreModule,
-    EffectsModule
+    EffectsModule,
+    NgxPermissionsModule
   ]
 })
 export class CoreModule { }

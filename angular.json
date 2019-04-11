@@ -33,6 +33,7 @@
               "node_modules/admin-lte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css",
               "node_modules/admin-lte/bower_components/bootstrap-daterangepicker/daterangepicker.css",
               "node_modules/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css",
+              "node_modules/admin-lte/plugins/iCheck/square/blue.css",
               "src/styles.css"
             ],
             "scripts": [
@@ -51,7 +52,11 @@
               "node_modules/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js",
               "node_modules/admin-lte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js",
               "node_modules/admin-lte/bower_components/fastclick/lib/fastclick.js",
-              "node_modules/admin-lte/dist/js/adminlte.min.js"
+              "node_modules/admin-lte/dist/js/adminlte.min.js",
+              "node_modules/admin-lte/plugins/iCheck/icheck.min.js",
+              "node_modules/admin-lte/plugins/input-mask/jquery.inputmask.js",
+              "node_modules/admin-lte/plugins/input-mask/jquery.inputmask.date.extensions.js",
+              "node_modules/admin-lte/plugins/input-mask/jquery.inputmask.extensions.js"
             ],
             "es5BrowserSupport": true
           },
