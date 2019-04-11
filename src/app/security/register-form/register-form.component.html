@@ -27,19 +27,20 @@
     <app-form-field-error-list [field]="'fullName'" [errors]="validationErrors"></app-form-field-error-list>
   </div>
 
-  <div class="form-group has-feedback input-group">
-    <div class="input-group-addon">
-      <i class="fa">+7</i>
+  <div class="form-group has-feedback">
+    <div class="input-group">
+      <div class="input-group-addon">
+        <i class="fa">+7</i>
+      </div>
+      <input
+              ngModel
+              name="phoneNumber"
+              type="text"
+              class="form-control"
+              placeholder="Phone number(optional)"
+      >
+      <span class="glyphicon glyphicon-phone form-control-feedback" style="z-index: 5;"></span>
     </div>
-    <input
-            ngModel
-            name="phoneNumber"
-            type="tel"
-            class="form-control"
-            placeholder="Phone number(optional)"
-            data-inputmask='"mask": "(999) 999-9999"' data-mask
-    >
-    <span class="glyphicon glyphicon-phone form-control-feedback" style="z-index: 5;"></span>
     <app-form-field-error-list [field]="'phoneNumber'" [errors]="validationErrors"></app-form-field-error-list>
   </div>
 

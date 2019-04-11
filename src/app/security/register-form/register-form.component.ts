@@ -10,6 +10,10 @@ declare var $: any;
 })
 export class RegisterFormComponent implements OnInit {
 
+  static DEFAULT_PHONE_COUNTRY_CODE = '+7';
+
+  phoneNumber: string = '';
+
   @Input() validationErrors:{} = {
     plainPassword: {}
   };
@@ -20,17 +24,26 @@ export class RegisterFormComponent implements OnInit {
 
   ngOnInit() {
 
-    $('[data-mask]').inputmask();
+    $('form [name="phoneNumber"]').inputmask({
+      mask: '(999) 999-9999',
+      autoUnmask: true,
+      oncomplete: this.onPhoneNumberChange
+    })
+  }
+
+  onPhoneNumberChange = (event) => {
+    this.phoneNumber = RegisterFormComponent.DEFAULT_PHONE_COUNTRY_CODE + event.currentTarget.value;
   }
 
   onSubmit(form:NgForm)
   {
-    const { email, fullName, phoneNumber, password, passwordRepeat } = form.value;
+    const { email, fullName, password, passwordRepeat } = form.value;
 
+    debugger
     const data: RegisterData = {
       email: email,
       fullName: fullName,
-      phoneNumber: phoneNumber,
+      phoneNumber: this.phoneNumber,
       plainPassword: {
         password: password,
         passwordRepeat: passwordRepeat
