@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {AdminRoutingModule} from './admin-routing.module';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [ProfilePageComponent],
   imports: [
     CommonModule,
     AdminRoutingModule

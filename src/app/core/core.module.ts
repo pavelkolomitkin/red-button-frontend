@@ -25,6 +25,7 @@ import { GlobalProgressComponent } from './global-progress/global-progress.compo
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { SecurityService } from '../security/services/security.service';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import {DefaultRedirectGuard} from '../security/services/guards/default-redirect-guard.service';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -54,6 +55,7 @@ const httpInterceptorProviders = [
   ],
   providers: [
     AuthUserGuard,
+    DefaultRedirectGuard,
     httpInterceptorProviders,
     SecurityService,
     LocalStorageService,

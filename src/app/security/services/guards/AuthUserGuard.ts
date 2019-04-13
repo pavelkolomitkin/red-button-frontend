@@ -12,11 +12,11 @@ import {Observable} from "rxjs";
 import {NgxPermissionsService} from 'ngx-permissions';
 
 @Injectable()
-export class AuthUserGuard implements CanActivate, CanActivateChild {
+export class AuthUserGuard implements CanActivate {
 
   static routePermissionRules: { [s: string]: Array<string> } = {
-      admin: [ 'ROLE_ADMIN' ],
-      client: [ 'ROLE_CLIENT' ]
+      admin: [ 'ROLE_ADMIN_USER' ],
+      client: [ 'ROLE_CLIENT_USER' ]
   };
 
   constructor(
@@ -28,28 +28,28 @@ export class AuthUserGuard implements CanActivate, CanActivateChild {
     return this.getAuthChecker(route);
   }
 
-  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.getAuthChecker(childRoute);
-  }
-
-
   private getAuthChecker(route: ActivatedRouteSnapshot)
   {
       return new Promise<boolean>((resolve, reject) => {
 
           let result: boolean = false;
 
-          const urlPrefix = route.url[0].toString();
-          const routeRoles = AuthUserGuard.routePermissionRules[urlPrefix];
+          if (route.url.length > 0) {
+              const urlPrefix = route.url[0].toString();
+              const routeRoles = AuthUserGuard.routePermissionRules[urlPrefix];
 
-          const permissions = this.permissionService.getPermissions();
-          for (let role in permissions)
-          {
-              result = routeRoles.includes(role);
-              if (result)
-              {
-                  break;
+              const permissions = this.permissionService.getPermissions();
+              for (let role in permissions) {
+                  result = routeRoles.includes(role);
+                  if (result) {
+                      break;
+                  }
               }
+          }
+
+          if (!result)
+          {
+              this.router.navigate(['/security', 'login']);
           }
 
           resolve(result);

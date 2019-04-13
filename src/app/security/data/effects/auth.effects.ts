@@ -11,8 +11,7 @@ import {
   UserInitializeSuccess,
   UserLoginError,
   UserLoginStart,
-  UserLoginSuccess,
-  UserLogout
+  UserLoginSuccess
 } from '../actions';
 import {mergeMap, catchError, map, tap} from 'rxjs/operators';
 import { SecurityService } from '../../services/security.service';
@@ -27,6 +26,17 @@ import {NgxPermissionsService} from 'ngx-permissions';
 @Injectable()
 export class AuthEffects
 {
+    /*
+    possibleUserRoles = [
+        'ROLE_CLIENT_USER',
+        'ROLE_ADMIN_USER'
+    ];
+    userRoleProfileRouteMap = {
+        'ROLE_CLIENT_USER': '/client/profile',
+        'ROLE_ADMIN_USER': '/admin/profile',
+    };
+*/
+
   @Effect()
   loginStart: Observable<Action> = this.actions.pipe(
     ofType(USER_LOGIN_START),
@@ -110,6 +120,17 @@ export class AuthEffects
         const { user: { roles } } = action;
 
         this.permissionService.loadPermissions(roles);
+/*
+        for (let role of this.possibleUserRoles)
+        {
+            if (roles.includes(role))
+            {
+                this.router.navigateByUrl(this.userRoleProfileRouteMap[role]);
+                return;
+            }
+        }
+
+          this.router.navigateByUrl('/');*/
       })
   );
 
@@ -118,6 +139,7 @@ export class AuthEffects
       ofType(USER_INITIALIZE_ERROR),
       tap(() => {
         this.permissionService.loadPermissions([]);
+        this.router.navigate(['/security', 'login']);
       })
   );
 

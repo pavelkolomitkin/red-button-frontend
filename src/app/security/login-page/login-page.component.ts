@@ -24,7 +24,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       (user: User) => {
         if (user !== null)
         {
-          this.router.navigate(['/note', 'list']);
+          this.router.navigateByUrl('/');
         }
       }
     );
