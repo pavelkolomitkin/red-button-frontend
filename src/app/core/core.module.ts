@@ -1,0 +1,78 @@
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { BaseApiUrlInterceptor } from './services/interceptors/base-api-url.interceptor';
+import { DefaultHttpHeadersInterceptor } from './services/interceptors/default-http-headers.interceptor';
+import { AuthTokenInjectorInterceptor } from './services/interceptors/auth-token-injector.interceptor';
+import { ErrorResponseHandlerInterceptor } from './services/interceptors/error-response-handler.interceptor';
+
+import { LocalStorageService } from './services/local-storage.service';
+import { appInitializeHandler, AppInitializerService } from './services/app-initializer.service';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { reducer as coreReducer } from './data/reducer';
+import { reducer as securityReducer } from '../security/data/reducer';
+import { RegisterEffects } from '../security/data/effects/register.effects';
+import { AuthEffects } from '../security/data/effects/auth.effects';
+import { AuthUserGuard } from '../security/services/guards/AuthUserGuard';
+import { RouterModule } from '@angular/router';
+import { MomentModule } from 'ngx-moment';
+import { SharedModule } from '../shared/shared.module';
+import { GlobalProgressComponent } from './global-progress/global-progress.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { SecurityService } from '../security/services/security.service';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import {DefaultRedirectGuard} from '../security/services/guards/default-redirect-guard.service';
+
+const httpInterceptorProviders = [
+  { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: DefaultHttpHeadersInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInjectorInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: ErrorResponseHandlerInterceptor, multi: true },
+];
+
+@NgModule({
+  declarations: [
+    NotFoundPageComponent,
+    GlobalProgressComponent,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    HttpClientModule,
+    SharedModule,
+    NgxPermissionsModule.forRoot(),
+    StoreModule.forRoot({
+      core: coreReducer,
+      security: securityReducer,
+    }),
+    EffectsModule.forRoot([
+      RegisterEffects, AuthEffects
+    ])
+  ],
+  providers: [
+    AuthUserGuard,
+    DefaultRedirectGuard,
+    httpInterceptorProviders,
+    SecurityService,
+    LocalStorageService,
+    AppInitializerService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializeHandler,
+      deps: [AppInitializerService],
+      multi: true
+    }
+  ],
+  exports: [
+    GlobalProgressComponent,
+    MomentModule,
+    StoreModule,
+    EffectsModule,
+    NgxPermissionsModule
+  ]
+})
+export class CoreModule { }

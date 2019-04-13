@@ -1,0 +1,6 @@
+<p class="alert alert-success" *ngIf="activatedUser">
+  You have confirmed your profile! Now use your login and password to <a routerLink="/security/login">sign in!</a>
+</p>
+<p class="alert alert-danger" *ngIf="activationErrors">
+  {{ activationErrors }}
+</p>
