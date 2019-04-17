@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from '@angular/router';
-import {NotFoundPageComponent} from './core/not-found-page/not-found-page.component';
+import {NotFoundPageComponent} from './core/components/not-found-page/not-found-page.component';
 import {AuthUserGuard} from "./security/services/guards/AuthUserGuard";
 import {DefaultRedirectGuard} from './security/services/guards/default-redirect-guard.service';
 

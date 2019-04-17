@@ -21,11 +21,17 @@ import { AuthUserGuard } from '../security/services/guards/AuthUserGuard';
 import { RouterModule } from '@angular/router';
 import { MomentModule } from 'ngx-moment';
 import { SharedModule } from '../shared/shared.module';
-import { GlobalProgressComponent } from './global-progress/global-progress.component';
-import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { GlobalProgressComponent } from './components/global-progress/global-progress.component';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { SecurityService } from '../security/services/security.service';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import {DefaultRedirectGuard} from '../security/services/guards/default-redirect-guard.service';
+import {CommonLayoutComponent} from './components/common-layout/common-layout.component';
+import {ContentComponent} from './components/content/content.component';
+import {ContentHeaderComponent} from './components/content-header/content-header.component';
+import {HeaderComponent} from './components/header/header.component';
+import {MainFooterComponent} from './components/main-footer/main-footer.component';
+import {MainMenuComponent} from './components/main-menu/main-menu.component';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -38,6 +44,12 @@ const httpInterceptorProviders = [
   declarations: [
     NotFoundPageComponent,
     GlobalProgressComponent,
+    CommonLayoutComponent,
+    ContentComponent,
+    ContentHeaderComponent,
+    HeaderComponent,
+    MainFooterComponent,
+    MainMenuComponent
   ],
   imports: [
     CommonModule,
@@ -69,7 +81,12 @@ const httpInterceptorProviders = [
   ],
   exports: [
     GlobalProgressComponent,
-    MomentModule,
+    CommonLayoutComponent,
+    ContentComponent,
+    ContentHeaderComponent,
+    HeaderComponent,
+    MainFooterComponent,
+    MainMenuComponent,
     StoreModule,
     EffectsModule,
     NgxPermissionsModule

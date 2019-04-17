@@ -1,2 +1,9 @@
-<router-outlet></router-outlet>
+<ng-container *ngIf="user !== null;else bareLayout">
+    <app-common-layout>
+        <router-outlet></router-outlet>
+    </app-common-layout>
+</ng-container>
+<ng-template #bareLayout>
+    <router-outlet></router-outlet>
+</ng-template>
 <app-global-progress></app-global-progress>
