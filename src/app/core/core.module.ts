@@ -35,6 +35,7 @@ import {MainFooterComponent} from './components/main-footer/main-footer.componen
 import {MainMenuComponent} from './components/main-menu/main-menu.component';
 import {GeoLocationService} from './services/geo-location.service';
 import {VideoService} from '../client/services/video.service';
+import {ComplaintTagService} from '../client/services/complaint-tag.service';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -77,6 +78,7 @@ const httpInterceptorProviders = [
     LocalStorageService,
     GeoLocationService,
     VideoService,
+    ComplaintTagService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,

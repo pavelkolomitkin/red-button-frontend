@@ -10,8 +10,10 @@ import { ComplaintFormComponent } from './components/complaint-form/complaint-fo
 import { SharedModule } from '../shared/shared.module';
 import {StoreModule} from '@ngrx/store';
 import { reducer as videoReducer } from './data/video.reducer';
+import { reducer as complaintTagReducer } from './data/complaint-tag.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {VideoEffects} from './data/effects/video.effects';
+import {ComplaintTagEffects} from './data/effects/complaint-tag.effects';
 
 @NgModule({
   declarations: [
@@ -26,8 +28,9 @@ import {VideoEffects} from './data/effects/video.effects';
     CommonModule,
     ClientRoutingModule,
     SharedModule,
-    StoreModule.forFeature('client', videoReducer),
-    EffectsModule.forFeature([VideoEffects])
+    StoreModule.forFeature('video', videoReducer),
+    StoreModule.forFeature('complaintTag', complaintTagReducer),
+    EffectsModule.forFeature([VideoEffects, ComplaintTagEffects])
   ],
   exports: [
       StoreModule,
