@@ -8,6 +8,10 @@ import { ComplaintCreatePageComponent } from './components/complaint-create-page
 import { ComplaintEditPageComponent } from './components/complaint-edit-page/complaint-edit-page.component';
 import { ComplaintFormComponent } from './components/complaint-form/complaint-form.component';
 import { SharedModule } from '../shared/shared.module';
+import {StoreModule} from '@ngrx/store';
+import { reducer as videoReducer } from './data/video.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import {VideoEffects} from './data/effects/video.effects';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,13 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     ClientRoutingModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forFeature('client', videoReducer),
+    EffectsModule.forFeature([VideoEffects])
+  ],
+  exports: [
+      StoreModule,
+      EffectsModule
   ]
 })
 export class ClientModule { }

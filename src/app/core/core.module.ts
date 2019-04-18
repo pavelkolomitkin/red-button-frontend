@@ -33,6 +33,8 @@ import {ContentHeaderComponent} from './components/content-header/content-header
 import {HeaderComponent} from './components/header/header.component';
 import {MainFooterComponent} from './components/main-footer/main-footer.component';
 import {MainMenuComponent} from './components/main-menu/main-menu.component';
+import {GeoLocationService} from './services/geo-location.service';
+import {VideoService} from '../client/services/video.service';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -73,6 +75,8 @@ const httpInterceptorProviders = [
     httpInterceptorProviders,
     SecurityService,
     LocalStorageService,
+    GeoLocationService,
+    VideoService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,
