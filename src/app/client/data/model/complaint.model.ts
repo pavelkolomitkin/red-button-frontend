@@ -4,7 +4,7 @@ import {Region} from '../../../core/data/model/region.model';
 import {ComplaintPicture} from './complaint-picture.model';
 import {Video} from './video.model';
 
-export interface Complaint {
+export class Complaint {
 
     id ?: number;
 

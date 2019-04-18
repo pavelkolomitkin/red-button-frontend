@@ -18,6 +18,9 @@ import {VideoEffects} from './data/effects/video.effects';
 import {ComplaintTagEffects} from './data/effects/complaint-tag.effects';
 import {ComplaintPictureEffects} from './data/effects/complaint-picture.effects';
 import {ComplaintEffects} from './data/effects/complaint.effects';
+import { GeoLocationSelectorFieldComponent } from './components/geo-location-selector-field/geo-location-selector-field.component';
+import { ComplaintPicturesFieldComponent } from './components/complaint-pictures-field/complaint-pictures-field.component';
+import { VideosFieldComponent } from './components/videos-field/videos-field.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import {ComplaintEffects} from './data/effects/complaint.effects';
     ComplaintDetailsPageComponent,
     ComplaintCreatePageComponent,
     ComplaintEditPageComponent,
-    ComplaintFormComponent
+    ComplaintFormComponent,
+    GeoLocationSelectorFieldComponent,
+    ComplaintPicturesFieldComponent,
+    VideosFieldComponent
   ],
   imports: [
     CommonModule,

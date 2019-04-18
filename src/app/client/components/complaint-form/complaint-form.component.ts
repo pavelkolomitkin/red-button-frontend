@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {Complaint} from '../../data/model/complaint.model';
 
 @Component({
   selector: 'app-complaint-form',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComplaintFormComponent implements OnInit {
 
+  @Input() complaint: Complaint;
+
+  @Input() errors;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+
+  onSubmitHandler(form: NgForm)
+  {
+
+  }
 }
