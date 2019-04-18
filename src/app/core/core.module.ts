@@ -39,6 +39,8 @@ import {VideoService} from '../client/services/video.service';
 import {ComplaintTagService} from '../client/services/complaint-tag.service';
 import {ComplaintPictureService} from '../client/services/complaint-picture.service';
 import {ServiceTypeEffects} from './data/effects/service-type.effects';
+import {ServiceTypeService} from './services/service-type.service';
+import {ComplaintService} from '../client/services/complaint.service';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -84,6 +86,8 @@ const httpInterceptorProviders = [
     VideoService,
     ComplaintTagService,
     ComplaintPictureService,
+    ServiceTypeService,
+    ComplaintService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,
