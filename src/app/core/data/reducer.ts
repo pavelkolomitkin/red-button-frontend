@@ -1,18 +1,26 @@
 import * as actions from './actions';
 import {NotifyMessage} from "./model/notify-message.model";
+import BreadCrumb from './model/bread-crumb.model';
 
 export interface State {
   globalProgressLoaders: number;
 
   lastSuccessMessage: NotifyMessage;
   lastErrorMessage: NotifyMessage;
+
+  currentPageTitle: string;
+  currentPageSubtitle: string;
+  breadCrumbs: Array<BreadCrumb>;
 }
 
 const initialState: State = {
   globalProgressLoaders: 0,
 
   lastSuccessMessage: null,
-  lastErrorMessage: null
+  lastErrorMessage: null,
+  currentPageTitle: '',
+  currentPageSubtitle: '',
+  breadCrumbs: []
 };
 
 export function reducer(state = initialState, action: actions.CoreActions): State {
@@ -56,6 +64,21 @@ export function reducer(state = initialState, action: actions.CoreActions): Stat
       return {
         ...state,
         lastErrorMessage: action.message
+      };
+
+    case actions.GLOBAL_SET_PAGE_TITLE:
+
+      return {
+        ...state,
+        currentPageTitle: action.title,
+        currentPageSubtitle: action.subTitle
+      };
+
+    case actions.GLOBAL_SET_BREAD_CRUMBS:
+
+      return {
+        ...state,
+        breadCrumbs: action.items
       };
 
     default:
