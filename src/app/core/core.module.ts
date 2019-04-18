@@ -16,6 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducer as coreReducer } from './data/reducer';
 import { reducer as securityReducer } from '../security/data/reducer';
 import { reducer as geoLocationReducer } from './data/geo-location.reducer';
+import { reducer as serviceTypeReducer } from './data/service-type.reducer';
 import { RegisterEffects } from '../security/data/effects/register.effects';
 import { AuthEffects } from '../security/data/effects/auth.effects';
 import { AuthUserGuard } from '../security/services/guards/AuthUserGuard';
@@ -37,6 +38,7 @@ import {GeoLocationService} from './services/geo-location.service';
 import {VideoService} from '../client/services/video.service';
 import {ComplaintTagService} from '../client/services/complaint-tag.service';
 import {ComplaintPictureService} from '../client/services/complaint-picture.service';
+import {ServiceTypeEffects} from './data/effects/service-type.effects';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -66,9 +68,10 @@ const httpInterceptorProviders = [
       core: coreReducer,
       security: securityReducer,
       geoLocation: geoLocationReducer,
+      serviceType: serviceTypeReducer
     }),
     EffectsModule.forRoot([
-      RegisterEffects, AuthEffects
+      RegisterEffects, AuthEffects, ServiceTypeEffects
     ])
   ],
   providers: [
