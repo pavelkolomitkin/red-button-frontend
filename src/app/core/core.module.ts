@@ -36,6 +36,7 @@ import {MainMenuComponent} from './components/main-menu/main-menu.component';
 import {GeoLocationService} from './services/geo-location.service';
 import {VideoService} from '../client/services/video.service';
 import {ComplaintTagService} from '../client/services/complaint-tag.service';
+import {ComplaintPictureService} from '../client/services/complaint-picture.service';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -79,6 +80,7 @@ const httpInterceptorProviders = [
     GeoLocationService,
     VideoService,
     ComplaintTagService,
+    ComplaintPictureService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,

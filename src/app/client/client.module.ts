@@ -11,9 +11,11 @@ import { SharedModule } from '../shared/shared.module';
 import {StoreModule} from '@ngrx/store';
 import { reducer as videoReducer } from './data/video.reducer';
 import { reducer as complaintTagReducer } from './data/complaint-tag.reducer';
+import { reducer as complaintPictureReducer } from './data/complaint-picture.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {VideoEffects} from './data/effects/video.effects';
 import {ComplaintTagEffects} from './data/effects/complaint-tag.effects';
+import {ComplaintPictureEffects} from './data/effects/complaint-picture.effects';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import {ComplaintTagEffects} from './data/effects/complaint-tag.effects';
     SharedModule,
     StoreModule.forFeature('video', videoReducer),
     StoreModule.forFeature('complaintTag', complaintTagReducer),
-    EffectsModule.forFeature([VideoEffects, ComplaintTagEffects])
+    StoreModule.forFeature('complaintPicture', complaintPictureReducer),
+    EffectsModule.forFeature([VideoEffects, ComplaintTagEffects, ComplaintPictureEffects])
   ],
   exports: [
       StoreModule,
