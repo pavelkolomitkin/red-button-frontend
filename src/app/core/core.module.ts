@@ -15,6 +15,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducer as coreReducer } from './data/reducer';
 import { reducer as securityReducer } from '../security/data/reducer';
+import { reducer as geoLocationReducer } from './data/geo-location.reducer';
 import { RegisterEffects } from '../security/data/effects/register.effects';
 import { AuthEffects } from '../security/data/effects/auth.effects';
 import { AuthUserGuard } from '../security/services/guards/AuthUserGuard';
@@ -60,6 +61,7 @@ const httpInterceptorProviders = [
     StoreModule.forRoot({
       core: coreReducer,
       security: securityReducer,
+      geoLocation: geoLocationReducer,
     }),
     EffectsModule.forRoot([
       RegisterEffects, AuthEffects
