@@ -23,16 +23,16 @@ export class AppComponent implements AfterContentChecked, AfterContentInit, Afte
   }
 
   ngAfterViewInit(): void {
-    console.log('App -> ngAfterViewInit...');
+    //console.log('App -> ngAfterViewInit...');
   }
   ngAfterContentInit(): void {
-    console.log('App -> ngAfterContentInit...');
+    //console.log('App -> ngAfterContentInit...');
   }
 
   ngAfterContentChecked(): void {
 
     // TODO move it out
-    console.log('Fix layout...');
+    //console.log('Fix layout...');
     $('body').layout('fix');
   }
 }

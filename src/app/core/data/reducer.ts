@@ -1,6 +1,8 @@
 import * as actions from './actions';
 import {NotifyMessage} from "./model/notify-message.model";
 import BreadCrumb from './model/bread-crumb.model';
+import {GeoLocation} from './model/geo-location.model';
+import {take} from 'rxjs/operators';
 
 export interface State {
   globalProgressLoaders: number;
@@ -11,6 +13,8 @@ export interface State {
   currentPageTitle: string;
   currentPageSubtitle: string;
   breadCrumbs: Array<BreadCrumb>;
+
+  deviceGeoLocation: GeoLocation;
 }
 
 const initialState: State = {
@@ -20,7 +24,8 @@ const initialState: State = {
   lastErrorMessage: null,
   currentPageTitle: '',
   currentPageSubtitle: '',
-  breadCrumbs: []
+  breadCrumbs: [],
+  deviceGeoLocation: null
 };
 
 export function reducer(state = initialState, action: actions.CoreActions): State {
@@ -79,6 +84,13 @@ export function reducer(state = initialState, action: actions.CoreActions): Stat
       return {
         ...state,
         breadCrumbs: action.items
+      };
+
+    case actions.GLOBAL_DEVICE_GEO_LOCATION_DETECT_DONE:
+
+      return {
+        ...state,
+        deviceGeoLocation: action.location
       };
 
     default:

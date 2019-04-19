@@ -41,6 +41,8 @@ import {ComplaintPictureService} from '../client/services/complaint-picture.serv
 import {ServiceTypeEffects} from './data/effects/service-type.effects';
 import {ServiceTypeService} from './services/service-type.service';
 import {ComplaintService} from '../client/services/complaint.service';
+import {ClientLocationService} from './services/client-location.service';
+import {ClientDeviceEffects} from './data/effects/client-device.effects';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -73,7 +75,7 @@ const httpInterceptorProviders = [
       serviceType: serviceTypeReducer
     }),
     EffectsModule.forRoot([
-      RegisterEffects, AuthEffects, ServiceTypeEffects
+      RegisterEffects, AuthEffects, ServiceTypeEffects, ClientDeviceEffects
     ])
   ],
   providers: [
@@ -88,6 +90,7 @@ const httpInterceptorProviders = [
     ComplaintPictureService,
     ServiceTypeService,
     ComplaintService,
+    ClientLocationService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,

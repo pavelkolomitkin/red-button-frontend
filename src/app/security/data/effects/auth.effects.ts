@@ -26,17 +26,6 @@ import {NgxPermissionsService} from 'ngx-permissions';
 @Injectable()
 export class AuthEffects
 {
-    /*
-    possibleUserRoles = [
-        'ROLE_CLIENT_USER',
-        'ROLE_ADMIN_USER'
-    ];
-    userRoleProfileRouteMap = {
-        'ROLE_CLIENT_USER': '/client/profile',
-        'ROLE_ADMIN_USER': '/admin/profile',
-    };
-*/
-
   @Effect()
   loginStart: Observable<Action> = this.actions.pipe(
     ofType(USER_LOGIN_START),

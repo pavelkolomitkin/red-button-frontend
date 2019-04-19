@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import {NotifyMessage} from './model/notify-message.model';
 import BreadCrumb from './model/bread-crumb.model';
+import {GeoLocation} from './model/geo-location.model';
 
 export const GLOBAL_PROGRESS_SHOW = 'GLOBAL_PROGRESS_SHOW';
 export const GLOBAL_PROGRESS_HIDE = 'GLOBAL_PROGRESS_HIDE';
@@ -10,6 +11,9 @@ export const GLOBAL_NOTIFY_ERROR_MESSAGE = 'GLOBAL_NOTIFY_ERROR_MESSAGE';
 
 export const GLOBAL_SET_BREAD_CRUMBS = 'GLOBAL_SET_BREAD_CRUMBS';
 export const GLOBAL_SET_PAGE_TITLE = 'GLOBAL_SET_PAGE_TITLE';
+
+export const GLOBAL_DEVICE_GEO_LOCATION_DETECT_START = 'GLOBAL_DEVICE_GEO_LOCATION_DETECT_START';
+export const GLOBAL_DEVICE_GEO_LOCATION_DETECT_DONE = 'GLOBAL_DEVICE_GEO_LOCATION_DETECT_DONE';
 
 export class GlobalProgressShow implements Action
 {
@@ -52,6 +56,19 @@ export class GlobalSetBreadCrumbs implements Action
 }
 
 
+export class GlobalDeviceGeoLocationDetectStart implements Action
+{
+  readonly type = GLOBAL_DEVICE_GEO_LOCATION_DETECT_START;
+}
+
+export class GlobalDeviceGeoLocationDetectDone implements Action
+{
+  readonly type = GLOBAL_DEVICE_GEO_LOCATION_DETECT_DONE;
+
+  constructor(public location: GeoLocation) {}
+}
+
+
 export type CoreActions =
     GlobalProgressShow
     | GlobalProgressHide
@@ -61,4 +78,7 @@ export type CoreActions =
 
     | GlobalSetPageTitle
     | GlobalSetBreadCrumbs
+
+    | GlobalDeviceGeoLocationDetectStart
+    | GlobalDeviceGeoLocationDetectDone
   ;
