@@ -34,6 +34,16 @@ export function reducer(state = initialState, action: actions.GeoLocationActions
                 selectedLocation: action.location
             };
 
+        case actions.GEO_LOCATION_GET_ADDRESS_RESET:
+
+            return {
+                ...state,
+                selectedLocation: null,
+                targetAddressRegion: null,
+                targetAddressAddition: null,
+                gettingAddressErrors: {}
+            };
+
         case actions.GEO_LOCATION_GET_ADDRESS_START:
 
             return {

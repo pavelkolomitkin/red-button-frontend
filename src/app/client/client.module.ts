@@ -23,6 +23,7 @@ import { GeoLocationSelectorFieldComponent } from './components/geo-location-sel
 import { ComplaintPicturesFieldComponent } from './components/complaint-pictures-field/complaint-pictures-field.component';
 import { VideosFieldComponent } from './components/videos-field/videos-field.component';
 import { GeoLocationSelectorComponent } from './components/geo-location-selector/geo-location-selector.component';
+import { MapSelectedLocationComponent } from './components/map-selected-location/map-selected-location.component';
 
 @NgModule({
   declarations: [
@@ -35,16 +36,17 @@ import { GeoLocationSelectorComponent } from './components/geo-location-selector
     GeoLocationSelectorFieldComponent,
     ComplaintPicturesFieldComponent,
     VideosFieldComponent,
-    GeoLocationSelectorComponent
+    GeoLocationSelectorComponent,
+    MapSelectedLocationComponent
   ],
   imports: [
     CommonModule,
     ClientRoutingModule,
     SharedModule,
-    StoreModule.forFeature('video', videoReducer),
-    StoreModule.forFeature('complaintTag', complaintTagReducer),
-    StoreModule.forFeature('complaintPicture', complaintPictureReducer),
-    StoreModule.forFeature('complaint', complaintReducer),
+    StoreModule.forFeature('clientVideo', videoReducer),
+    StoreModule.forFeature('clientComplaintTag', complaintTagReducer),
+    StoreModule.forFeature('clientComplaintPicture', complaintPictureReducer),
+    StoreModule.forFeature('clientComplaint', complaintReducer),
     StoreModule.forFeature('clientGeoLocation', geoLocationReducer),
     EffectsModule.forFeature([
       VideoEffects,

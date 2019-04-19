@@ -9,14 +9,12 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {Region} from '../../../core/data/model/region.model';
+import {Subscription} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../app.state';
 import {MapComponent} from '../../../shared/components/map/map.component';
 import {GeoLocation} from '../../../core/data/model/geo-location.model';
 import {GeoLocationSelectingWindowStateChanged} from '../../data/geo-location.actions';
-import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-geo-location-selector',
@@ -32,16 +30,12 @@ export class GeoLocationSelectorComponent implements OnInit, OnDestroy {
   @ViewChild('mapContainer', { read: ViewContainerRef }) mapContainerRef: ViewContainerRef;
   mapInstance: MapComponent;
 
-  @Input() selectedLocation: GeoLocation = null;
-  @Output('onAddressSelected') addressSelected: EventEmitter<{ region: Region, addition: Object }> = new EventEmitter();
+  //@Output('onAddressSelected') addressSelected: EventEmitter<{ region: Region, addition: Object }> = new EventEmitter();
 
   mapCenter: GeoLocation;
   deviceLocationSubscription: Subscription;
 
-  constructor(
-      private store:Store<State>,
-      private componentResolver: ComponentFactoryResolver
-  )
+  constructor(private store:Store<State>, private componentResolver: ComponentFactoryResolver)
   {
     this.deviceLocationSubscription = this.store.pipe(select(state => state.core.deviceGeoLocation)).subscribe((location: GeoLocation) => {
       this.mapCenter = location;
@@ -99,7 +93,9 @@ export class GeoLocationSelectorComponent implements OnInit, OnDestroy {
   }
 
   onMapLocationClickHandler = (location: GeoLocation) => {
-    console.log('Map Location Selected');
-    console.log(location);
+    // console.log('Map Location Selected');
+    // console.log(location);
+
+
   }
 }

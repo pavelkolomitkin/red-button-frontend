@@ -11,11 +11,6 @@ export class ComplaintCreatePageComponent implements OnInit {
 
   complaint: Complaint = new Complaint();
 
-  selectedLocation: GeoLocation = {
-    latitude: 48.762144,
-    longitude: 44.551344
-  };
-
   errors: Object = {};
 
   constructor() {

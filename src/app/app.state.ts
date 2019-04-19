@@ -14,9 +14,9 @@ export interface State
   core: coreReducer.State;
   geoLocation: geoLocationReducer.State;
   clientGeoLocation: clientGeoLocationReducer.State;
-  video: videoReducer.State;
-  complaintTag: complaintTagReducer.State;
-  complaintPicture: complaintPictureReducer.State;
+  clientVideo: videoReducer.State;
+  clientComplaintTag: complaintTagReducer.State;
+  clientComplaintPicture: complaintPictureReducer.State;
   serviceType: serviceTypeReducer.State;
-  complaint: complaintReducer.State;
+  clientComplaint: complaintReducer.State;
 }

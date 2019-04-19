@@ -14,6 +14,8 @@ export class MapComponent implements OnInit, OnDestroy {
 
   map: Map;
 
+  balloonComponents: Array<any> = [];
+
   // input fields
   @Input() defaultCenter: GeoLocation;
 
@@ -59,5 +61,19 @@ export class MapComponent implements OnInit, OnDestroy {
     };
 
     this.locationClick.emit(location);
+  }
+
+  addBalloon(component: any)
+  {
+    const componentIndex = this.balloonComponents.indexOf(component);
+    if (componentIndex !== -1)
+    {
+
+    }
+  }
+
+  removeBalloon(component: any)
+  {
+
   }
 }

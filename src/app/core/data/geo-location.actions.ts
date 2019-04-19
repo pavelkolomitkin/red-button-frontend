@@ -4,6 +4,7 @@ import {Region} from './model/region.model';
 
 export const GEO_LOCATION_SELECTED = 'GEO_LOCATION_SELECTED';
 
+export const GEO_LOCATION_GET_ADDRESS_RESET = 'GEO_LOCATION_GET_ADDRESS_RESET';
 export const GEO_LOCATION_GET_ADDRESS_START = 'GEO_LOCATION_GET_ADDRESS_START';
 export const GEO_LOCATION_GET_ADDRESS_SUCCESS = 'GEO_LOCATION_GET_ADDRESS_SUCCESS';
 export const GEO_LOCATION_GET_ADDRESS_ERROR = 'GEO_LOCATION_GET_ADDRESS_ERROR';
@@ -13,6 +14,11 @@ export class GeoLocationSelected implements Action
     readonly type = GEO_LOCATION_SELECTED;
 
     constructor(public location: GeoLocation ) {}
+}
+
+export class GeoLocationGetAddressReset implements Action
+{
+    readonly type = GEO_LOCATION_GET_ADDRESS_RESET;
 }
 
 export class GeoLocationGetAddressStart implements Action
@@ -38,6 +44,7 @@ export class GeoLocationGetAddressError implements Action
 
 export type GeoLocationActions =
     GeoLocationSelected
+    | GeoLocationGetAddressReset
     | GeoLocationGetAddressStart
     | GeoLocationGetAddressSuccess
     | GeoLocationGetAddressError

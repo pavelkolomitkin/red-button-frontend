@@ -5,11 +5,13 @@ import {FormFieldErrorListComponent} from '../core/components/form-field-error-l
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MomentModule } from 'ngx-moment';
 import {MapComponent} from './components/map/map.component';
+import { MapBalloonComponent } from './components/map-balloon/map-balloon.component';
 
 @NgModule({
   declarations: [
     FormFieldErrorListComponent,
     MapComponent,
+    MapBalloonComponent,
   ],
   imports: [
     CommonModule,
