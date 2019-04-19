@@ -13,6 +13,7 @@ import { reducer as videoReducer } from './data/video.reducer';
 import { reducer as complaintTagReducer } from './data/complaint-tag.reducer';
 import { reducer as complaintPictureReducer } from './data/complaint-picture.reducer';
 import { reducer as complaintReducer } from './data/complaint.reducer';
+import { reducer as geoLocationReducer } from './data/geo-location.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {VideoEffects} from './data/effects/video.effects';
 import {ComplaintTagEffects} from './data/effects/complaint-tag.effects';
@@ -21,6 +22,7 @@ import {ComplaintEffects} from './data/effects/complaint.effects';
 import { GeoLocationSelectorFieldComponent } from './components/geo-location-selector-field/geo-location-selector-field.component';
 import { ComplaintPicturesFieldComponent } from './components/complaint-pictures-field/complaint-pictures-field.component';
 import { VideosFieldComponent } from './components/videos-field/videos-field.component';
+import { GeoLocationSelectorComponent } from './components/geo-location-selector/geo-location-selector.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { VideosFieldComponent } from './components/videos-field/videos-field.com
     ComplaintFormComponent,
     GeoLocationSelectorFieldComponent,
     ComplaintPicturesFieldComponent,
-    VideosFieldComponent
+    VideosFieldComponent,
+    GeoLocationSelectorComponent
   ],
   imports: [
     CommonModule,
@@ -42,6 +45,7 @@ import { VideosFieldComponent } from './components/videos-field/videos-field.com
     StoreModule.forFeature('complaintTag', complaintTagReducer),
     StoreModule.forFeature('complaintPicture', complaintPictureReducer),
     StoreModule.forFeature('complaint', complaintReducer),
+    StoreModule.forFeature('clientGeoLocation', geoLocationReducer),
     EffectsModule.forFeature([
       VideoEffects,
       ComplaintTagEffects,

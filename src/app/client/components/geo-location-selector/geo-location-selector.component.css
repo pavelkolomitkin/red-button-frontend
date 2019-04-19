@@ -1,0 +1,15 @@
+.geo-location-selector-container
+{
+    position: absolute;
+    background: #ffffff;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.geo-location-selector-container.visible
+{
+    z-index: 99900;
+}

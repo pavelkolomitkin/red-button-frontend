@@ -58,7 +58,7 @@ const httpInterceptorProviders = [
     ContentHeaderComponent,
     HeaderComponent,
     MainFooterComponent,
-    MainMenuComponent
+    MainMenuComponent,
   ],
   imports: [
     CommonModule,

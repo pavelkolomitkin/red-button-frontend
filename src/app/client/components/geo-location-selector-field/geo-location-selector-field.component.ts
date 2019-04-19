@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {State} from '../../../app.state';
+import {Store} from '@ngrx/store';
+import {GeoLocationSelectingWindowStateChanged} from '../../data/geo-location.actions';
 
 @Component({
   selector: 'app-geo-location-selector-field',
@@ -7,11 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GeoLocationSelectorFieldComponent implements OnInit {
 
-
-
-  constructor() { }
+  constructor(private store: Store<State>) { }
 
   ngOnInit() {
   }
 
+  onChooseButtonClickHandler(event: Event)
+  {
+    this.store.dispatch(new GeoLocationSelectingWindowStateChanged(true));
+  }
 }

@@ -6,12 +6,14 @@ import * as complaintTagReducer from './client/data/complaint-tag.reducer';
 import * as complaintPictureReducer from './client/data/complaint-picture.reducer';
 import * as serviceTypeReducer from './core/data/service-type.reducer';
 import * as complaintReducer from './client/data/complaint.reducer';
+import * as clientGeoLocationReducer from './client/data/geo-location.reducer';
 
 export interface State
 {
   security: securityReducer.State;
   core: coreReducer.State;
   geoLocation: geoLocationReducer.State;
+  clientGeoLocation: clientGeoLocationReducer.State;
   video: videoReducer.State;
   complaintTag: complaintTagReducer.State;
   complaintPicture: complaintPictureReducer.State;

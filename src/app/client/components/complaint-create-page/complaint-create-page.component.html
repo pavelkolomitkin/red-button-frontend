@@ -7,3 +7,4 @@
     <app-complaint-form [complaint]="complaint" [errors]="errors"></app-complaint-form>
   </div>
 </div>
+<app-geo-location-selector [selectedLocation]="selectedLocation" (onAddressSelected)="onAddressSelectedHandler($event)"></app-geo-location-selector>
