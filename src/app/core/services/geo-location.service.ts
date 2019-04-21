@@ -12,8 +12,8 @@ export class GeoLocationService
     getAddressByCoordinates(location: GeoLocation): Observable<{ region: Region, addition: Object }>
     {
         let params = new HttpParams();
-        params.append('latitude', location.latitude.toString());
-        params.append('longitude', location.longitude.toString());
+        params = params.append('latitude', location.latitude.toString());
+        params = params.append('longitude', location.longitude.toString());
 
         return this.http.get<{ region: Region, addition: Object }>('/geo/get', { params });
     }

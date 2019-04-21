@@ -1,11 +1,12 @@
 <app-map-balloon>
-  <div *ngIf="currentState === 'STATE_LOADING'">
-    <div class="box box-default">
+  <div class="map-selected-location">
+
+    <div class="box box-default box-container" *ngIf="currentState === 'STATE_LOADING'">
       <div class="box-header">
-        <h3 class="box-title">Loading state</h3>
+        <h3 class="box-title">Loading...</h3>
       </div>
       <div class="box-body">
-        The body of the box
+
       </div>
       <!-- /.box-body -->
       <!-- Loading (remove the following to stop the loading)-->
@@ -15,46 +16,40 @@
       <!-- end loading -->
     </div>
 
-  </div>
-  <div *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">
-    <div class="box box-success">
+
+
+    <div class="box box-success box-container" *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">
       <div class="box-header with-border">
         <h3 class="box-title">Confirm the location</h3>
 
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-        </div>
+<!--          <div class="box-tools pull-right">-->
+<!--            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>-->
+<!--          </div>-->
         <!-- /.box-tools -->
       </div>
       <!-- /.box-header -->
       <div class="box-body">
-        <table>
-          <tbody>
-            <tr>
-              <td>Region: </td>
-              <td>{{ region.title }}<span class="text-muted">({{ region.federalDistrict.title }})</span></td>
-            </tr>
-            <tr>
-              <td>Address: </td>
-              <td>{{ address.toString() }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div>
+          {{ region.title }}<span class="text-muted">({{ region.federalDistrict.title }})</span>
+        </div>
+        <div>
+          <span class="text-muted">{{ address.displayName }}</span>
+        </div>
       </div>
       <!-- /.box-body -->
-      <div class="box box-footer">
+      <div class="box-footer">
         <span class="btn btn-success" (click)="onConfirmAddressClick($event)">Confirm</span>
       </div>
     </div>
-  </div>
-  <div *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'">
-    <div class="box box-danger">
+
+
+    <div class="box box-danger box-container" *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'">
       <div class="box-header with-border">
         <h3 class="box-title">Cannot identify the region!</h3>
 
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-        </div>
+<!--          <div class="box-tools pull-right">-->
+<!--            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>-->
+<!--          </div>-->
         <!-- /.box-tools -->
       </div>
       <!-- /.box-header -->
@@ -64,4 +59,5 @@
       <!-- /.box-body -->
     </div>
   </div>
+
 </app-map-balloon>
