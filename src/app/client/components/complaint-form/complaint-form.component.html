@@ -18,8 +18,16 @@
 
   <div class="form-group">
     <label>Service Type <span class="text-muted">(optional)</span></label>
-    <select class="form-control">
-      <option [value]="null">None</option>
+    <select
+        class="form-control"
+        [(ngModel)]="complaint.serviceType"
+        [compareWith]="compareServiceTypes"
+        [required]="false"
+        name="selectedServiceType"
+        id="selectedServiceType"
+    >
+      <option [value]="null">-</option>
+      <option *ngFor="let serviceType of serviceTypes | async" [ngValue]="serviceType">{{ serviceType.title }}</option>
     </select>
   </div>
 
