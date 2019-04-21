@@ -1,10 +1,7 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {select, Store} from '@ngrx/store';
-import {State} from '../../../app.state';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {GeoLocation} from '../../../core/data/model/geo-location.model';
-import {GeoLocationGetAddressStart} from '../../../core/data/geo-location.actions';
-import {filter} from 'rxjs/operators';
 import {Region} from '../../../core/data/model/region.model';
+import {GeoLocationService} from '../../../core/services/geo-location.service';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -18,39 +15,19 @@ export class MapSelectedLocationComponent implements OnInit, OnDestroy {
   static STATE_LOCATION_DETECTED_SUCCESS = 'STATE_LOCATION_DETECTED_SUCCESS';
   static STATE_LOCATION_DETECTED_ERROR = 'STATE_LOCATION_DETECTED_ERROR';
 
+  @Output('onAddressSuccess') addressSuccess:EventEmitter<{ region: Region, address: Object, location: GeoLocation }> = new EventEmitter();
+  @Output('onAddressError') addressError:EventEmitter<{ location: GeoLocation, message: string }> = new EventEmitter();
+  @Output('onAddressSelect') addressSelected: EventEmitter<{ region: Region, address: Object, location: GeoLocation }> = new EventEmitter();
+
   currentState = MapSelectedLocationComponent.STATE_LOADING;
 
   region: Region;
   address: Object;
 
-  addressSubscription: Subscription;
-  errorSubscription: Subscription;
-
-
   _location: GeoLocation = null;
+  addressSubscription: Subscription = null;
 
-  constructor(private store:Store<State>) {
-
-    this.addressSubscription = this.store.pipe(select(
-        state => state.geoLocation),
-        filter(result => (result.targetAddressRegion !== null) && (result.targetAddressAddition !== null))
-    ).subscribe(({targetAddressRegion, targetAddressAddition}) => {
-
-      this.currentState = MapSelectedLocationComponent.STATE_LOCATION_DETECTED_SUCCESS;
-
-      this.region = targetAddressRegion;
-      this.address = targetAddressAddition;
-
-    });
-
-    this.errorSubscription = this.store.pipe(select(state => state.geoLocation.gettingAddressErrors)).subscribe((error) => {
-      if (Object.entries(error).length !== 0)
-      {
-        this.currentState = MapSelectedLocationComponent.STATE_LOCATION_DETECTED_ERROR;
-      }
-    });
-
-  }
+  constructor(private locationService: GeoLocationService) { }
 
   get location() : GeoLocation
   {
@@ -66,10 +43,34 @@ export class MapSelectedLocationComponent implements OnInit, OnDestroy {
 
   identifyAddress()
   {
-    if (this._location !== null)
+    if (this._location === null)
     {
-      this.store.dispatch(new GeoLocationGetAddressStart(this._location));
+      return;
     }
+
+    if (this.addressSubscription !== null)
+    {
+      this.addressSubscription.unsubscribe();
+      this.addressSubscription = null;
+    }
+
+    this.addressSubscription = this.locationService.getAddressByCoordinates(this._location).subscribe(
+        ({region, addition}) => {
+
+          this.region = region;
+          this.address = addition;
+
+          this.currentState = MapSelectedLocationComponent.STATE_LOCATION_DETECTED_SUCCESS;
+
+          this.addressSuccess.emit({region: this.region, address: this.address, location: this._location});
+        },
+        (errors) => {
+
+          this.currentState = MapSelectedLocationComponent.STATE_LOCATION_DETECTED_ERROR;
+
+          //this.addressError.emit(errors.error.errors['location'] ? errors.error.errors['location'] : 'Cannot identify region!');
+        }
+    );
   }
 
   ngOnInit() {
@@ -77,8 +78,18 @@ export class MapSelectedLocationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.addressSubscription.unsubscribe();
-    this.errorSubscription.unsubscribe();
+
+    if (this.addressSubscription !== null)
+    {
+      this.addressSubscription.unsubscribe();
+      this.addressSubscription = null;
+    }
+  }
+
+  onConfirmAddressClick(event) {
+
+    this.addressSelected.emit({location: this._location, address: this.address, region: this.region});
+
   }
 
 }

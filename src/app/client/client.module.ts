@@ -58,6 +58,7 @@ import { MapSelectedLocationComponent } from './components/map-selected-location
   exports: [
       StoreModule,
       EffectsModule
-  ]
+  ],
+  entryComponents: [MapSelectedLocationComponent]
 })
 export class ClientModule { }

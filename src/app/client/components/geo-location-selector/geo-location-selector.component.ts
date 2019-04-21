@@ -1,11 +1,9 @@
 import {
   Component,
-  ComponentFactoryResolver,
-  EventEmitter, HostListener,
-  Input,
+  ComponentFactoryResolver, ComponentRef,
+  HostListener,
   OnDestroy,
   OnInit,
-  Output,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
@@ -15,6 +13,7 @@ import {State} from '../../../app.state';
 import {MapComponent} from '../../../shared/components/map/map.component';
 import {GeoLocation} from '../../../core/data/model/geo-location.model';
 import {GeoLocationSelectingWindowStateChanged} from '../../data/geo-location.actions';
+import {MapSelectedLocationComponent} from '../map-selected-location/map-selected-location.component';
 
 @Component({
   selector: 'app-geo-location-selector',
@@ -26,14 +25,13 @@ export class GeoLocationSelectorComponent implements OnInit, OnDestroy {
   isVisible: Boolean;
 
   windowStateChangeSubscription: Subscription;
+  deviceLocationSubscription:    Subscription;
 
   @ViewChild('mapContainer', { read: ViewContainerRef }) mapContainerRef: ViewContainerRef;
   mapInstance: MapComponent;
+  mapCenter:   GeoLocation;
 
-  //@Output('onAddressSelected') addressSelected: EventEmitter<{ region: Region, addition: Object }> = new EventEmitter();
-
-  mapCenter: GeoLocation;
-  deviceLocationSubscription: Subscription;
+  selectedLocationBalloon: ComponentRef<MapSelectedLocationComponent> = null;
 
   constructor(private store:Store<State>, private componentResolver: ComponentFactoryResolver)
   {
@@ -59,12 +57,25 @@ export class GeoLocationSelectorComponent implements OnInit, OnDestroy {
 
 
     this.mapInstance.defaultCenter = this.mapCenter;
+
+
+
+    //========================== INITIALIZE MAP EVENT HANDLERS ===============
+
     this.mapInstance.locationClick.subscribe(this.onMapLocationClickHandler);
+
+    //========================// INITIALIZE MAP EVENT HANDLERS ===============
   }
 
   disposeMap()
   {
+    //========================== DISPOSE MAP EVENT HANDLERS ==================
+
     this.mapInstance.locationClick.unsubscribe();
+
+    //========================// DISPOSE MAP EVENT HANDLERS ==================
+
+
 
     this.store.dispatch(new GeoLocationSelectingWindowStateChanged(false));
     this.mapContainerRef.clear();
@@ -90,12 +101,47 @@ export class GeoLocationSelectorComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.windowStateChangeSubscription.unsubscribe();
     this.deviceLocationSubscription.unsubscribe();
+
+    this.removeBalloon()
   }
 
+
+  removeBalloon = () => {
+
+    if (this.selectedLocationBalloon !== null)
+    {
+      const { instance } = this.selectedLocationBalloon;
+
+      instance.addressSelected.unsubscribe();
+
+      this.mapInstance.removeBalloon(this.selectedLocationBalloon);
+    }
+  }
+
+  initBalloon = (location: GeoLocation) => {
+
+    this.removeBalloon();
+
+    this.selectedLocationBalloon = this.mapInstance.addBalloon(MapSelectedLocationComponent, location);
+
+    const balloonComponent: MapSelectedLocationComponent = this.selectedLocationBalloon.instance;
+    balloonComponent.addressSelected.subscribe(({ location, region, address }) => {
+
+      console.log("Address confirmed!");
+      console.log(location);
+      console.log(region);
+      console.log(address);
+
+    });
+    balloonComponent.location = location;
+
+  }
+
+  //===================== MAP EVENT HANDLERS ======================
   onMapLocationClickHandler = (location: GeoLocation) => {
-    // console.log('Map Location Selected');
-    // console.log(location);
 
-
+    this.initBalloon(location);
   }
+
+  //===================// MAP EVENT HANDLERS ======================
 }

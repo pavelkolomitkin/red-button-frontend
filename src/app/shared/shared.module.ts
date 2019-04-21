@@ -19,13 +19,14 @@ import { MapBalloonComponent } from './components/map-balloon/map-balloon.compon
     InfiniteScrollModule,
     MomentModule
   ],
-  exports: [
-    FormsModule,
-    InfiniteScrollModule,
-    MomentModule,
-    FormFieldErrorListComponent,
-    MapComponent
-  ],
+    exports: [
+        FormsModule,
+        InfiniteScrollModule,
+        MomentModule,
+        FormFieldErrorListComponent,
+        MapComponent,
+        MapBalloonComponent
+    ],
   entryComponents: [MapComponent]
 })
 export class SharedModule { }

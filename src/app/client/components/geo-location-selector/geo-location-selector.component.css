@@ -1,6 +1,6 @@
 .geo-location-selector-container
 {
-    position: absolute;
+    position: fixed;
     background: #ffffff;
     top: 0;
     right: 0;

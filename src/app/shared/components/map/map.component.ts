@@ -1,5 +1,16 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver, ComponentRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output, Type,
+  ViewChild,
+  ViewContainerRef, ViewRef
+} from '@angular/core';
 import {Map, View} from 'ol';
+import Overlay from 'ol/Overlay';
 import {fromLonLat, toLonLat } from 'ol/proj.js';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
@@ -14,7 +25,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
   map: Map;
 
-  balloonComponents: Array<any> = [];
+  @ViewChild('mapContainer', { read: ViewContainerRef }) mapContainerRef: ViewContainerRef;
 
   // input fields
   @Input() defaultCenter: GeoLocation;
@@ -22,7 +33,13 @@ export class MapComponent implements OnInit, OnDestroy {
   // output fields
   @Output('onLocationClick') locationClick: EventEmitter<GeoLocation> = new EventEmitter();
 
-  constructor() { }
+  constructor(private componentResolver: ComponentFactoryResolver) { }
+
+  lastMapObjectId: number = 0;
+  generateMapObjectId()
+  {
+    return ++this.lastMapObjectId;
+  }
 
   ngOnInit() {
 
@@ -63,17 +80,44 @@ export class MapComponent implements OnInit, OnDestroy {
     this.locationClick.emit(location);
   }
 
-  addBalloon(component: any)
+  addBalloon<C>(component: Type<C>, location: GeoLocation): ComponentRef<C>
   {
-    const componentIndex = this.balloonComponents.indexOf(component);
-    if (componentIndex !== -1)
-    {
+    const factory = this.componentResolver.resolveComponentFactory(component);
+    const result = this.mapContainerRef.createComponent(factory);
 
-    }
+    const position = fromLonLat([location.longitude, location.latitude]);
+
+    const overlay: Overlay = this.createOverlay(result);
+    overlay.setPosition(position);
+    this.map.addOverlay(overlay);
+
+    return result;
   }
 
-  removeBalloon(component: any)
+  removeBalloon<C>(component: ComponentRef<C>)
   {
+    let result = false;
 
+    const componentIndex = this.mapContainerRef.indexOf(component.hostView);
+    if (componentIndex !== -1)
+    {
+      this.mapContainerRef.remove(componentIndex);
+      result = true;
+    }
+
+    return result;
+  }
+
+  createOverlay<C>(component: ComponentRef<C>): Overlay
+  {
+    const result = new Overlay({
+      element: component.location.nativeElement,
+      autoPan: true,
+      autoPanAnimation: {
+        duration: 250
+      }
+    });
+
+    return result;
   }
 }
