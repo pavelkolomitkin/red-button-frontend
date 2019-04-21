@@ -23,4 +23,11 @@ export class ComplaintFormComponent implements OnInit {
   {
 
   }
+
+  onAddressSelectHandler({ region, address, location })
+  {
+    this.complaint.region = region;
+    this.complaint.address = address;
+    this.complaint.location = location;
+  }
 }

@@ -25,8 +25,8 @@ export class ComplaintService {
         const body = {
             message: complaint.message,
             serviceType: complaint.serviceType,
-            latitude: complaint.latitude,
-            longitude: complaint.longitude,
+            latitude: complaint.location.latitude,
+            longitude: complaint.location.longitude,
             pictures: complaint.picture.map(picture => picture.id),
             video: complaint.videos.map(video => video.id),
             tags: complaint.tags.map(tag => tag.title)
@@ -42,8 +42,8 @@ export class ComplaintService {
         const body = {
             message: complaint.message,
             serviceType: complaint.serviceType,
-            latitude: complaint.latitude,
-            longitude: complaint.longitude,
+            latitude: complaint.location.latitude,
+            longitude: complaint.location.longitude,
             pictures: complaint.picture.map(picture => picture.id),
             video: complaint.videos.map(video => video.id),
             tags: complaint.tags.map(tag => tag.title)

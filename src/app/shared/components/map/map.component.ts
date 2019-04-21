@@ -25,21 +25,17 @@ export class MapComponent implements OnInit, OnDestroy {
 
   map: Map;
 
-  @ViewChild('mapContainer', { read: ViewContainerRef }) mapContainerRef: ViewContainerRef;
+  // output fields
+  @Output('onLocationClick') locationClick: EventEmitter<GeoLocation> = new EventEmitter();
+  @Output('onReady') ready: EventEmitter<any> = new EventEmitter();
 
   // input fields
   @Input() defaultCenter: GeoLocation;
+  @Input() defaultZoom: number = 10;
 
-  // output fields
-  @Output('onLocationClick') locationClick: EventEmitter<GeoLocation> = new EventEmitter();
+  @ViewChild('mapContainer', { read: ViewContainerRef }) mapContainerRef: ViewContainerRef;
 
   constructor(private componentResolver: ComponentFactoryResolver) { }
-
-  lastMapObjectId: number = 0;
-  generateMapObjectId()
-  {
-    return ++this.lastMapObjectId;
-  }
 
   ngOnInit() {
 
@@ -54,12 +50,14 @@ export class MapComponent implements OnInit, OnDestroy {
       ],
       view: new View({
         center: fromLonLat([longitude, latitude]),
-        zoom: 10
+        zoom: this.defaultZoom
       })
     });
 
 
     this.map.on('singleclick', this.onMapClickHandler);
+
+    this.ready.emit();
   }
 
   ngOnDestroy(): void {
@@ -67,6 +65,21 @@ export class MapComponent implements OnInit, OnDestroy {
     this.map.un('singleclick');
 
   }
+
+  //======================= VIEW APP =============================
+
+  setCenter(location: GeoLocation)
+  {
+    this.map.getView().setCenter(fromLonLat([location.longitude, location.latitude]));
+  }
+
+  setZoom(value: number)
+  {
+    this.map.getView().setZoom(value);
+  }
+
+  //=====================// VIEW APP =============================
+
 
   onMapClickHandler = (event) => {
 

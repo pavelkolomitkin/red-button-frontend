@@ -1,9 +1,9 @@
 import {
   Component,
-  ComponentFactoryResolver, ComponentRef,
-  HostListener,
+  ComponentFactoryResolver, ComponentRef, EventEmitter,
+  HostListener, Input,
   OnDestroy,
-  OnInit,
+  OnInit, Output,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
@@ -14,6 +14,7 @@ import {MapComponent} from '../../../shared/components/map/map.component';
 import {GeoLocation} from '../../../core/data/model/geo-location.model';
 import {GeoLocationSelectingWindowStateChanged} from '../../data/geo-location.actions';
 import {MapSelectedLocationComponent} from '../map-selected-location/map-selected-location.component';
+import {Region} from '../../../core/data/model/region.model';
 
 @Component({
   selector: 'app-geo-location-selector',
@@ -22,22 +23,27 @@ import {MapSelectedLocationComponent} from '../map-selected-location/map-selecte
 })
 export class GeoLocationSelectorComponent implements OnInit, OnDestroy {
 
+  @Output('onAddressSelect') addressSelected: EventEmitter<{ region: Region, address: Object, location: GeoLocation }> = new EventEmitter();
+
+  @Input() defaultLocation: GeoLocation = null;
+
   isVisible: Boolean;
 
   windowStateChangeSubscription: Subscription;
+
   deviceLocationSubscription:    Subscription;
+
+  selectedLocationBalloon: ComponentRef<MapSelectedLocationComponent> = null;
 
   @ViewChild('mapContainer', { read: ViewContainerRef }) mapContainerRef: ViewContainerRef;
   mapInstance: MapComponent;
   mapCenter:   GeoLocation;
 
-  selectedLocationBalloon: ComponentRef<MapSelectedLocationComponent> = null;
-
   constructor(private store:Store<State>, private componentResolver: ComponentFactoryResolver)
   {
-    this.deviceLocationSubscription = this.store.pipe(select(state => state.core.deviceGeoLocation)).subscribe((location: GeoLocation) => {
-      this.mapCenter = location;
-    });
+      this.deviceLocationSubscription = this.store.pipe(select(state => state.core.deviceGeoLocation)).subscribe((location: GeoLocation) => {
+        this.mapCenter = location;
+      });
   }
 
   @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
@@ -56,13 +62,17 @@ export class GeoLocationSelectorComponent implements OnInit, OnDestroy {
     this.mapInstance = mapComponent.instance;
 
 
-    this.mapInstance.defaultCenter = this.mapCenter;
-
-
+    this.mapInstance.defaultCenter = !!this.defaultLocation ? this.defaultLocation : this.mapCenter;
 
     //========================== INITIALIZE MAP EVENT HANDLERS ===============
 
     this.mapInstance.locationClick.subscribe(this.onMapLocationClickHandler);
+    this.mapInstance.ready.subscribe(() => {
+      if (!!this.defaultLocation)
+      {
+        this.initBalloon(this.defaultLocation);
+      }
+    });
 
     //========================// INITIALIZE MAP EVENT HANDLERS ===============
   }
@@ -71,6 +81,7 @@ export class GeoLocationSelectorComponent implements OnInit, OnDestroy {
   {
     //========================== DISPOSE MAP EVENT HANDLERS ==================
 
+    this.mapInstance.ready.unsubscribe();
     this.mapInstance.locationClick.unsubscribe();
 
     //========================// DISPOSE MAP EVENT HANDLERS ==================
@@ -127,10 +138,7 @@ export class GeoLocationSelectorComponent implements OnInit, OnDestroy {
     const balloonComponent: MapSelectedLocationComponent = this.selectedLocationBalloon.instance;
     balloonComponent.addressSelected.subscribe(({ location, region, address }) => {
 
-      console.log("Address confirmed!");
-      console.log(location);
-      console.log(region);
-      console.log(address);
+      this.addressSelected.emit({region, address, location});
 
     });
     balloonComponent.location = location;

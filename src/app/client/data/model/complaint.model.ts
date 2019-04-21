@@ -3,6 +3,7 @@ import {ServiceType} from '../../../core/data/model/service-type.model';
 import {Region} from '../../../core/data/model/region.model';
 import {ComplaintPicture} from './complaint-picture.model';
 import {Video} from './video.model';
+import {GeoLocation} from '../../../core/data/model/geo-location.model';
 
 export class Complaint {
 
@@ -16,13 +17,11 @@ export class Complaint {
 
     region ?: Region;
 
+    address ?: Object;
+
     picture: Array<ComplaintPicture>;
 
     videos: Array<Video>;
 
-    // TODO: its name should be corrected
-    latitude ?: number;
-
-    // TODO: its name should be corrected
-    longitude ?: number;
+    location ?: GeoLocation;
 }

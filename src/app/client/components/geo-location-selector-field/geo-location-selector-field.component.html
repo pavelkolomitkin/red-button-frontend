@@ -1,6 +1,10 @@
-<p>
-  <span class="text text-primary">Волгоградская область</span>
+<div *ngIf="!!region">
+  <span class="text text-primary">{{ region.title }}</span><span class="text-muted">({{ region.federalDistrict.title }})</span>
   <br />
+  <span class="text-muted">{{ address.displayName }}</span>
+</div>
+<div>
   <span class="btn btn-primary" (click)="onChooseButtonClickHandler($event)">Choose a location</span>
-</p>
-<app-geo-location-selector></app-geo-location-selector>
+</div>
+
+<app-geo-location-selector [defaultLocation]="location" (onAddressSelect)="onAddressSelectHandler($event)"></app-geo-location-selector>
