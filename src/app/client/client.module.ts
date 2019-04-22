@@ -28,6 +28,8 @@ import {UploadedComplaintPicturePreviewComponent} from './components/complaint-p
 import { VideoListFieldComponent } from './components/video-list-field/video-list-field.component';
 import { VideoItemFormFieldComponent } from './components/video-item-form-field/video-item-form-field.component';
 import { VideoFormComponent } from './components/video-form/video-form.component';
+import { TagListFieldComponent } from './components/tag-list-field/tag-list-field.component';
+import { TagItemComponent } from './components/tag-list-field/tag-item/tag-item.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { VideoFormComponent } from './components/video-form/video-form.component
     UploadedComplaintPicturePreviewComponent,
     VideoListFieldComponent,
     VideoItemFormFieldComponent,
-    VideoFormComponent
+    VideoFormComponent,
+    TagListFieldComponent,
+    TagItemComponent
   ],
   imports: [
     CommonModule,
