@@ -15,6 +15,9 @@ export class ComplaintVideoListFieldComponent implements OnInit {
   @ViewChild('addVideoModal') addVideoWindowTemplate: TemplateRef<any>;
   addVideoWindow: NgbModalRef = null;
 
+  @ViewChild('removeAlertModal') removeVideoModalWindowTemplate: TemplateRef<any>;
+  removeVideoModalWindow: NgbModalRef = null;
+
   constructor(private modal: NgbModal) { }
 
   ngOnInit() {
@@ -22,8 +25,23 @@ export class ComplaintVideoListFieldComponent implements OnInit {
 
   onVideoDeleteHandler(video: Video)
   {
-    console.log('Deleting video...');
-    console.log(video);
+    this.removeVideoModalWindow = this.modal.open(this.removeVideoModalWindowTemplate, {centered: true});
+    this.removeVideoModalWindow.result
+        .then(
+            (result) => {
+
+              const videoIndex = this.complaint.videos.findIndex(item => item.id === video.id);
+              if (videoIndex !== -1)
+              {
+                this.complaint.videos.splice(videoIndex, 1);
+              }
+
+              this.removeVideoModalWindow = null;
+            },
+            () => {
+              this.removeVideoModalWindow = null;
+            }
+            );
   }
 
   onConfirmVideoHandler(video: Video)
@@ -33,7 +51,7 @@ export class ComplaintVideoListFieldComponent implements OnInit {
     this.complaint.videos.push(video);
   }
 
-  onAddVideoClickHandler()
+  onAddVideoClickHandler(event)
   {
     this.addVideoWindow = this.modal.open(this.addVideoWindowTemplate, {centered: true});
     this.addVideoWindow.result
