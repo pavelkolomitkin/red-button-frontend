@@ -2,3 +2,13 @@ body
 {
     background-color: #d2d6de;
 }
+
+.modal.fade
+{
+    opacity: 1 !important;
+}
+
+.modal-dialog
+{
+    margin: 70px auto !important;
+}

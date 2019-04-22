@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {UploadItem} from '../../../shared/data/model/upload-item.model';
 import {ComplaintPicture} from '../../data/model/complaint-picture.model';
 import {select, Store} from '@ngrx/store';
@@ -9,6 +9,7 @@ import {NotifyMessage} from '../../../core/data/model/notify-message.model';
 import {Observable, Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {Complaint} from '../../data/model/complaint.model';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-complaint-pictures-field',
@@ -26,12 +27,14 @@ export class ComplaintPicturesFieldComponent implements OnInit, OnDestroy {
   @Input() complaint: Complaint;
 
   @ViewChild('fileSelector') fileSelector: ElementRef;
+  @ViewChild('removeAlertModal') removePictureModalWindowTemplate: TemplateRef<any>;
+  removePictureModalWindow: NgbModalRef = null;
 
   uploadingFiles: Observable<Array<UploadItem<ComplaintPicture>>>;
 
   uploadSubscription: Subscription;
 
-  constructor(private store: Store<State>) {
+  constructor(private store: Store<State>, private modal: NgbModal) {
 
     this.store.dispatch(new ComplaintPictureUploadReset());
 
@@ -99,10 +102,19 @@ export class ComplaintPicturesFieldComponent implements OnInit, OnDestroy {
 
   onPictureDeleteHandler(picture: ComplaintPicture)
   {
-    const deletingImageIndex = this.complaint.pictures.findIndex(item => item.id === picture.id);
-    if (deletingImageIndex !== -1)
-    {
-      this.complaint.pictures.splice(deletingImageIndex, 1);
-    }
+
+    this.removePictureModalWindow = this.modal.open(this.removePictureModalWindowTemplate, {centered: true});
+    this.removePictureModalWindow.result
+        .then((result) => {
+          const removingItemIndex = this.complaint.pictures.findIndex(item => picture.id === item.id);
+          if (removingItemIndex !== -1)
+          {
+            this.complaint.pictures.splice(removingItemIndex, 1);
+          }
+
+          this.removePictureModalWindow = null;
+        }, () => {
+          this.removePictureModalWindow = null;
+        });
   }
 }

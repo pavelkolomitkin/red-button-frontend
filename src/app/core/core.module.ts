@@ -109,7 +109,7 @@ const httpInterceptorProviders = [
     MainMenuComponent,
     StoreModule,
     EffectsModule,
-    NgxPermissionsModule
+    NgxPermissionsModule,
   ]
 })
 export class CoreModule { }

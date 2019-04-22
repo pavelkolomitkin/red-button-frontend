@@ -7,6 +7,7 @@ import { MomentModule } from 'ngx-moment';
 import {MapComponent} from './components/map/map.component';
 import { MapBalloonComponent } from './components/map-balloon/map-balloon.component';
 import { UploadItemComponent } from './components/upload-item/upload-item.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,12 +20,14 @@ import { UploadItemComponent } from './components/upload-item/upload-item.compon
     CommonModule,
     FormsModule,
     InfiniteScrollModule,
-    MomentModule
+    MomentModule,
+    NgbModule
   ],
     exports: [
         FormsModule,
         InfiniteScrollModule,
         MomentModule,
+        NgbModule,
         FormFieldErrorListComponent,
         MapComponent,
         MapBalloonComponent,

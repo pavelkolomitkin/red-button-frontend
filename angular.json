@@ -40,6 +40,7 @@
             "scripts": [
               "node_modules/admin-lte/bower_components/jquery/dist/jquery.min.js",
               "node_modules/admin-lte/bower_components/jquery-ui/jquery-ui.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/admin-lte/bower_components/raphael/raphael.min.js",
               "node_modules/admin-lte/bower_components/morris.js/morris.min.js",
