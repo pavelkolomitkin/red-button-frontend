@@ -1,12 +1,13 @@
-<div>
+<div class="control-container">
   <span class="btn btn-success" (click)="onAddVideoClickHandler($event)"><i class="fa fa-plus"></i> Add video</span>
 </div>
 
-<div>
-  <app-video-item-form-field
-          *ngFor="let video of complaint.videos"
-          [video]="video"
-          (onDelete)="onVideoDeleteHandler($event)"></app-video-item-form-field>
+<div class="row">
+  <div class="col-md-4 col-sm-4 col-lg-2 col-xl-2 col-4" *ngFor="let video of complaint.videos">
+    <app-video-item-form-field
+            [video]="video"
+            (onDelete)="onVideoDeleteHandler($event)"></app-video-item-form-field>
+  </div>
 </div>
 
 <ng-template #addVideoModal let-modal>

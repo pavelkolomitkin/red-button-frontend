@@ -1,0 +1,19 @@
+.item
+{
+    position: relative;
+}
+
+.item .preview-container {}
+.item .preview-container img
+{
+    width: 100%;
+}
+
+.close
+{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #cccccc;
+    opacity: 1 !important;
+}

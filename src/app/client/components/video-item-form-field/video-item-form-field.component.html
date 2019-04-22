@@ -1,3 +1,11 @@
-<div>
-  <span class="btn btn-danger" (click)="onDeleteHandler($event)"><i class="fa fa-trash"></i></span>
+<div class="item box box-default">
+  <div class="box-body">
+    <div class="preview-container">
+      <img [src]="video.metaData.thumbnail_url" />
+    </div>
+    <div>
+      <span class="text-muted">{{ video.title }}</span>
+    </div>
+  </div>
+  <span class="close" (click)="onDeleteHandler($event)"><i class="fa fa-trash"></i></span>
 </div>

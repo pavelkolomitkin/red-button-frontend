@@ -17,7 +17,7 @@ export class VideoItemFormFieldComponent implements OnInit {
   ngOnInit() {
   }
 
-  onDeleteHandler()
+  onDeleteHandler(event)
   {
     this.deleteVideo.emit(this.video);
   }
