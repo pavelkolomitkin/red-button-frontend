@@ -8,6 +8,11 @@ body
     opacity: 1 !important;
 }
 
+.modal-backdrop.fade
+{
+    transition: none !important;
+}
+
 .modal-dialog
 {
     margin: 70px auto !important;

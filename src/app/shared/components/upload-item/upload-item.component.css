@@ -1,11 +1,14 @@
 .upload-item
 {
-
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .upload-item .preview-container
 {
-
+    width: 150px;
+    height: 150px;
+    margin-bottom: 3px;
 }
 
 .upload-item .progress

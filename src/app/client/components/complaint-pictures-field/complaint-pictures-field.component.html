@@ -19,13 +19,13 @@
 
 </div>
 
-
-<div class="complaint-uploading-pictures">
-  <app-upload-item *ngFor="let item of uploadingFiles | async" [uploadItem]="item">
-    <app-upload-picture-preview [imageFile]="item.file"></app-upload-picture-preview>
-  </app-upload-item>
+<div class="complaint-uploading-pictures row">
+  <div class="col-md-6 col-sm-4 col-lg-2 col-xl-2 col-4" *ngFor="let item of uploadingFiles | async">
+    <app-upload-item [uploadItem]="item">
+      <app-upload-picture-preview [imageFile]="item.file"></app-upload-picture-preview>
+    </app-upload-item>
+  </div>
 </div>
-
 
 <ng-template #removeAlertModal let-modal>
   <div class="modal-header">
