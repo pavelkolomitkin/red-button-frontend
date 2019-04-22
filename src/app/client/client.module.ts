@@ -21,11 +21,13 @@ import {ComplaintPictureEffects} from './data/effects/complaint-picture.effects'
 import {ComplaintEffects} from './data/effects/complaint.effects';
 import { GeoLocationSelectorFieldComponent } from './components/geo-location-selector-field/geo-location-selector-field.component';
 import { ComplaintPicturesFieldComponent } from './components/complaint-pictures-field/complaint-pictures-field.component';
-import { VideosFieldComponent } from './components/videos-field/videos-field.component';
 import { GeoLocationSelectorComponent } from './components/geo-location-selector/geo-location-selector.component';
 import { MapSelectedLocationComponent } from './components/map-selected-location/map-selected-location.component';
 import { UploadPicturePreviewComponent } from './components/upload-picture-preview/upload-picture-preview.component';
 import {UploadedComplaintPicturePreviewComponent} from './components/complaint-pictures-field/uploaded-complaint-picture-preview/uploaded-complaint-picture-preview.component';
+import { ComplaintVideoListFieldComponent } from './components/complaint-video-list-field/complaint-video-list-field.component';
+import { VideoItemFormFieldComponent } from './components/video-item-form-field/video-item-form-field.component';
+import { VideoFormComponent } from './components/video-form/video-form.component';
 
 @NgModule({
   declarations: [
@@ -37,11 +39,13 @@ import {UploadedComplaintPicturePreviewComponent} from './components/complaint-p
     ComplaintFormComponent,
     GeoLocationSelectorFieldComponent,
     ComplaintPicturesFieldComponent,
-    VideosFieldComponent,
     GeoLocationSelectorComponent,
     MapSelectedLocationComponent,
     UploadPicturePreviewComponent,
-    UploadedComplaintPicturePreviewComponent
+    UploadedComplaintPicturePreviewComponent,
+    ComplaintVideoListFieldComponent,
+    VideoItemFormFieldComponent,
+    VideoFormComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,14 @@
+<div>
+  <span class="btn btn-success" (click)="onAddVideoClickHandler($event)"><i class="fa fa-plus"></i> Add video</span>
+</div>
+
+<div>
+  <app-video-item-form-field
+          *ngFor="let video of complaint.videos"
+          [video]="video"
+          (onDelete)="onVideoDeleteHandler($event)"></app-video-item-form-field>
+</div>
+
+<ng-template #addVideoModal let-modal>
+  <app-video-form (onConfirmVideo)="onConfirmVideoHandler($event)"></app-video-form>
+</ng-template>

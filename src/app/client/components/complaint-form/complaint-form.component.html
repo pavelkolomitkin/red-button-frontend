@@ -29,16 +29,19 @@
       <option [value]="null">-</option>
       <option *ngFor="let serviceType of serviceTypes | async" [ngValue]="serviceType">{{ serviceType.title }}</option>
     </select>
+    <app-form-field-error-list [field]="'serviceType'" [errors]="errors"></app-form-field-error-list>
   </div>
 
   <div class="form-group">
     <label>Pictures</label>
     <app-complaint-pictures-field [complaint]="complaint"></app-complaint-pictures-field>
+    <app-form-field-error-list [field]="'pictures'" [errors]="errors"></app-form-field-error-list>
   </div>
 
   <div class="form-group">
     <label>Video Links(use youtube to point videos)</label>
-    <app-videos-field></app-videos-field>
+    <app-complaint-video-list-field [complaint]="complaint"></app-complaint-video-list-field>
+    <app-form-field-error-list [field]="'videos'" [errors]="errors"></app-form-field-error-list>
   </div>
 
   <div class="form-group">
