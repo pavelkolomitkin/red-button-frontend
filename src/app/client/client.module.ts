@@ -24,6 +24,8 @@ import { ComplaintPicturesFieldComponent } from './components/complaint-pictures
 import { VideosFieldComponent } from './components/videos-field/videos-field.component';
 import { GeoLocationSelectorComponent } from './components/geo-location-selector/geo-location-selector.component';
 import { MapSelectedLocationComponent } from './components/map-selected-location/map-selected-location.component';
+import { UploadPicturePreviewComponent } from './components/upload-picture-preview/upload-picture-preview.component';
+import {UploadedComplaintPicturePreviewComponent} from './components/complaint-pictures-field/uploaded-complaint-picture-preview/uploaded-complaint-picture-preview.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { MapSelectedLocationComponent } from './components/map-selected-location
     ComplaintPicturesFieldComponent,
     VideosFieldComponent,
     GeoLocationSelectorComponent,
-    MapSelectedLocationComponent
+    MapSelectedLocationComponent,
+    UploadPicturePreviewComponent,
+    UploadedComplaintPicturePreviewComponent
   ],
   imports: [
     CommonModule,

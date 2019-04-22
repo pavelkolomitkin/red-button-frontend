@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import {UploadPicture} from './model/upload-picture.model';
+import {UploadItem} from '../../shared/data/model/upload-item.model';
 import {ComplaintPicture} from './model/complaint-picture.model';
 
 export const COMPLAINT_PICTURE_UPLOAD_RESET = 'COMPLAINT_PICTURE_UPLOAD_RESET';
@@ -17,28 +17,28 @@ export class ComplaintPictureUploadSelect implements Action
 {
     readonly type = COMPLAINT_PICTURE_UPLOAD_SELECT;
 
-    constructor(public picture: UploadPicture<ComplaintPicture>) {}
+    constructor(public picture: UploadItem<ComplaintPicture>) {}
 }
 
 export class ComplaintPictureUploadProgress implements Action
 {
     readonly type = COMPLAINT_PICTURE_UPLOAD_PROGRESS;
 
-    constructor(public picture: UploadPicture<ComplaintPicture>) {}
+    constructor(public picture: UploadItem<ComplaintPicture>) {}
 }
 
 export class ComplaintPictureUploadComplete implements Action
 {
     readonly type = COMPLAINT_PICTURE_UPLOAD_COMPLETE;
 
-    constructor(public picture: UploadPicture<ComplaintPicture>) {}
+    constructor(public picture: UploadItem<ComplaintPicture>) {}
 }
 
 export class ComplaintPictureUploadError implements Action
 {
     readonly type = COMPLAINT_PICTURE_UPLOAD_ERROR;
 
-    constructor(public picture: UploadPicture<ComplaintPicture>) {}
+    constructor(public picture: UploadItem<ComplaintPicture>) {}
 }
 
 export type ComplaintPictureActions = ComplaintPictureUploadReset

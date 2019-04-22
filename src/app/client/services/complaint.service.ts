@@ -14,7 +14,7 @@ export class ComplaintService {
         
         for (let [name, value] of Object.entries(params))
         {
-            parameters.append(name, value.toString());
+            parameters = parameters.append(name, value.toString());
         }
 
         return this.http.get<{ complaints: Array<Complaint>, total: number }>('/client/complaint/my/list', { params: parameters });
@@ -27,7 +27,7 @@ export class ComplaintService {
             serviceType: complaint.serviceType,
             latitude: complaint.location.latitude,
             longitude: complaint.location.longitude,
-            pictures: complaint.picture.map(picture => picture.id),
+            pictures: complaint.pictures.map(picture => picture.id),
             video: complaint.videos.map(video => video.id),
             tags: complaint.tags.map(tag => tag.title)
         };
@@ -44,7 +44,7 @@ export class ComplaintService {
             serviceType: complaint.serviceType,
             latitude: complaint.location.latitude,
             longitude: complaint.location.longitude,
-            pictures: complaint.picture.map(picture => picture.id),
+            pictures: complaint.pictures.map(picture => picture.id),
             video: complaint.videos.map(video => video.id),
             tags: complaint.tags.map(tag => tag.title)
         };

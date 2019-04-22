@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
-import {UploadPicture} from '../data/model/upload-picture.model';
+import {UploadItem} from '../../shared/data/model/upload-item.model';
 import {ComplaintPicture} from '../data/model/complaint-picture.model';
 import {Observable} from 'rxjs';
 
@@ -9,7 +9,7 @@ export class ComplaintPictureService
 {
     constructor(private http: HttpClient) {}
 
-    upload(picture: UploadPicture<ComplaintPicture>)
+    upload(picture: UploadItem<ComplaintPicture>)
     {
         return new Observable((observer) => {
 
@@ -17,7 +17,7 @@ export class ComplaintPictureService
             formData.append('imageFile', picture.file);
 
             const request = new HttpRequest(
-                'POST', '/note-attachment/create',
+                'POST', '/client/complaint-picture/create',
                 formData,
                 {
                     reportProgress: true,
@@ -35,7 +35,7 @@ export class ComplaintPictureService
                     else if (event instanceof HttpResponse)
                     {
                         // success
-                        picture.uploaded = event.body['attachment'];
+                        picture.uploaded = event.body['picture'];
                         observer.next(picture);
                     }
                 },

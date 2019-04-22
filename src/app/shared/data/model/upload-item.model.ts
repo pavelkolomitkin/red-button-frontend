@@ -1,4 +1,4 @@
-export class UploadPicture<UploadableType>
+export class UploadItem<UploadableType>
 {
     public uploaded: UploadableType = null;
 
@@ -9,7 +9,7 @@ export class UploadPicture<UploadableType>
 
     public percentageProgress: number = 0;
 
-    protected constructor(public id: string, public file: File) {}
+    public constructor(public id: string, public file: File) {}
 
     public setProgress(uploadedBytes: number, totalSizeBytes: number)
     {

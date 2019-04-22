@@ -1,11 +1,11 @@
 import * as actions from './complaint-picture.actions';
-import {UploadPicture} from './model/upload-picture.model';
+import {UploadItem} from '../../shared/data/model/upload-item.model';
 import {ComplaintPicture} from './model/complaint-picture.model';
 
 export interface State {
-    uploadingFileSet: Array<UploadPicture<ComplaintPicture>>;
-    lastUploadCompletedItem: UploadPicture<ComplaintPicture>;
-    lastUploadErrorItem: UploadPicture<ComplaintPicture>;
+    uploadingFileSet: Array<UploadItem<ComplaintPicture>>;
+    lastUploadCompletedItem: UploadItem<ComplaintPicture>;
+    lastUploadErrorItem: UploadItem<ComplaintPicture>;
 }
 
 const initialState: State = {

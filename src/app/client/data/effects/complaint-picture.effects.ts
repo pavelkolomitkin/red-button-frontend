@@ -13,7 +13,7 @@ import {
 } from '../complaint-picture.actions';
 import {ComplaintPictureService} from '../../services/complaint-picture.service';
 import {ComplaintPicture} from '../model/complaint-picture.model';
-import {UploadPicture} from '../model/upload-picture.model';
+import {UploadItem} from '../../../shared/data/model/upload-item.model';
 
 
 @Injectable()
@@ -27,7 +27,7 @@ export class ComplaintPictureEffects
             const { picture } = action;
 
             return this.service.upload(picture).pipe(
-                map((picture: UploadPicture<ComplaintPicture>) => {
+                map((picture: UploadItem<ComplaintPicture>) => {
                     if (picture.uploaded !== null)
                     {
                         return new ComplaintPictureUploadComplete(picture);

@@ -11,7 +11,7 @@ export class Complaint {
 
     message: string;
 
-    tags: Array<ComplaintTag>;
+    tags: Array<ComplaintTag> = [];
 
     serviceType ?: ServiceType;
 
@@ -19,9 +19,9 @@ export class Complaint {
 
     address ?: Object;
 
-    picture: Array<ComplaintPicture>;
+    pictures: Array<ComplaintPicture> = [];
 
-    videos: Array<Video>;
+    videos: Array<Video> = [];
 
     location ?: GeoLocation;
 }

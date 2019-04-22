@@ -6,12 +6,14 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MomentModule } from 'ngx-moment';
 import {MapComponent} from './components/map/map.component';
 import { MapBalloonComponent } from './components/map-balloon/map-balloon.component';
+import { UploadItemComponent } from './components/upload-item/upload-item.component';
 
 @NgModule({
   declarations: [
     FormFieldErrorListComponent,
     MapComponent,
     MapBalloonComponent,
+    UploadItemComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { MapBalloonComponent } from './components/map-balloon/map-balloon.compon
         MomentModule,
         FormFieldErrorListComponent,
         MapComponent,
-        MapBalloonComponent
+        MapBalloonComponent,
+        UploadItemComponent
     ],
   entryComponents: [MapComponent]
 })
