@@ -40,7 +40,7 @@
 
   <div class="form-group">
     <label>Video Links(use youtube to point videos)</label>
-    <app-complaint-video-list-field [complaint]="complaint"></app-complaint-video-list-field>
+    <app-video-list-field [list]="complaint.videos"></app-video-list-field>
     <app-form-field-error-list [field]="'videos'" [errors]="errors"></app-form-field-error-list>
   </div>
 

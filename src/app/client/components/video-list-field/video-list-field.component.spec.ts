@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ComplaintVideoListFieldComponent } from './complaint-video-list-field.component';
+import { ComplaintVideoListFieldComponent } from './video-list-field.component';
 
 describe('ComplaintVideoListFieldComponent', () => {
   let component: ComplaintVideoListFieldComponent;

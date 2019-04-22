@@ -3,7 +3,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-4 col-sm-4 col-lg-2 col-xl-2 col-4" *ngFor="let video of complaint.videos">
+  <div class="col-md-4 col-sm-4 col-lg-2 col-xl-2 col-4" *ngFor="let video of list">
     <app-video-item-form-field
             [video]="video"
             (onDelete)="onVideoDeleteHandler($event)"></app-video-item-form-field>

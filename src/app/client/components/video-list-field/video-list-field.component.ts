@@ -1,16 +1,15 @@
-import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {Complaint} from '../../data/model/complaint.model';
+import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {Video} from '../../data/model/video.model';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-complaint-video-list-field',
-  templateUrl: './complaint-video-list-field.component.html',
-  styleUrls: ['./complaint-video-list-field.component.css']
+  selector: 'app-video-list-field',
+  templateUrl: './video-list-field.component.html',
+  styleUrls: ['./video-list-field.component.css']
 })
-export class ComplaintVideoListFieldComponent implements OnInit {
+export class VideoListFieldComponent implements OnInit {
 
-  @Input() complaint: Complaint;
+  @Input() list: Array<Video> = [];
 
   @ViewChild('addVideoModal') addVideoWindowTemplate: TemplateRef<any>;
   addVideoWindow: NgbModalRef = null;
@@ -30,10 +29,10 @@ export class ComplaintVideoListFieldComponent implements OnInit {
         .then(
             (result) => {
 
-              const videoIndex = this.complaint.videos.findIndex(item => item.id === video.id);
+              const videoIndex = this.list.findIndex(item => item.id === video.id);
               if (videoIndex !== -1)
               {
-                this.complaint.videos.splice(videoIndex, 1);
+                this.list.splice(videoIndex, 1);
               }
 
               this.removeVideoModalWindow = null;
@@ -48,7 +47,7 @@ export class ComplaintVideoListFieldComponent implements OnInit {
   {
     this.addVideoWindow.close();
 
-    this.complaint.videos.push(video);
+    this.list.push(video);
   }
 
   onAddVideoClickHandler(event)

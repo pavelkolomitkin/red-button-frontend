@@ -25,7 +25,7 @@ import { GeoLocationSelectorComponent } from './components/geo-location-selector
 import { MapSelectedLocationComponent } from './components/map-selected-location/map-selected-location.component';
 import { UploadPicturePreviewComponent } from './components/upload-picture-preview/upload-picture-preview.component';
 import {UploadedComplaintPicturePreviewComponent} from './components/complaint-pictures-field/uploaded-complaint-picture-preview/uploaded-complaint-picture-preview.component';
-import { ComplaintVideoListFieldComponent } from './components/complaint-video-list-field/complaint-video-list-field.component';
+import { VideoListFieldComponent } from './components/video-list-field/video-list-field.component';
 import { VideoItemFormFieldComponent } from './components/video-item-form-field/video-item-form-field.component';
 import { VideoFormComponent } from './components/video-form/video-form.component';
 
@@ -43,7 +43,7 @@ import { VideoFormComponent } from './components/video-form/video-form.component
     MapSelectedLocationComponent,
     UploadPicturePreviewComponent,
     UploadedComplaintPicturePreviewComponent,
-    ComplaintVideoListFieldComponent,
+    VideoListFieldComponent,
     VideoItemFormFieldComponent,
     VideoFormComponent
   ],
