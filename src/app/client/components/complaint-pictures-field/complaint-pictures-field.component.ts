@@ -99,7 +99,10 @@ export class ComplaintPicturesFieldComponent implements OnInit, OnDestroy {
 
   onPictureDeleteHandler(picture: ComplaintPicture)
   {
-    console.log('Deleting picture');
-    console.log(picture);
+    const deletingImageIndex = this.complaint.pictures.findIndex(item => item.id === picture.id);
+    if (deletingImageIndex !== -1)
+    {
+      this.complaint.pictures.splice(deletingImageIndex, 1);
+    }
   }
 }
