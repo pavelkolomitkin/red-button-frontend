@@ -17,3 +17,12 @@ body
 {
     margin: 70px auto !important;
 }
+
+
+button.dropdown-item
+{
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+}

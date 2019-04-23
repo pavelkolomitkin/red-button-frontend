@@ -3,7 +3,7 @@ import {ComplaintTagService} from '../../services/complaint-tag.service';
 import {ComplaintTag} from '../../data/model/complaint-tag.model';
 import {NgbTypeaheadSelectItemEvent} from '@ng-bootstrap/ng-bootstrap';
 import {Observable, of} from 'rxjs';
-import {debounceTime, map} from 'rxjs/operators';
+import {debounceTime, map, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-tag-list-field',
@@ -22,27 +22,22 @@ export class TagListFieldComponent implements OnInit {
 
   }
 
-  searchHandler(text$: Observable<string>)
-  {
-    //debugger
-    // text$.pipe(
-    //     debounceTime(200),
-    //     map((term) =>
-    //     {
-    //       debugger
-    //       if (term.trim() === '')
-    //       {
-    //         return [];
-    //       }
-    //
-    //       return this.service.search(term).pipe(
-    //           map(({tags, total}) => {
-    //             return tags;
-    //           })
-    //       );
-    //     })
-    // );
+  search = (text$: Observable<string>) => {
+    return text$.pipe(
+        debounceTime(200),
+        mergeMap((term) => {
+          if (term.trim() === '')
+          {
+            return of([]);
+          }
 
+          return this.service.search(term).pipe(
+              map(({tags, total}) => {
+                return tags;
+              })
+          );
+        })
+    );
   }
 
   onItemSelectHandler(event: NgbTypeaheadSelectItemEvent)
@@ -52,18 +47,30 @@ export class TagListFieldComponent implements OnInit {
 
   onEnterHandler(event)
   {
-    // check that is not empty
-    // TODO: create a new tag with a new title and push to the array
+    const newTag = event.target.value.trim();
+    if (newTag === '')
+    {
+      return;
+    }
+
+    if (this.tags.findIndex(tag => tag.title === newTag) !== -1)
+    {
+      return;
+    }
+
+    this.tags.push({ title: newTag });
+
+    event.target.value = '';
   }
 
-  searchItemResultFormatter(item)
+  formatter = (x: {title: string}) =>
   {
-    return item.title;
+    return x.title;
   }
 
   onRemoveTagHandler(tag: ComplaintTag)
   {
-    const tagIndex = this.tags.findIndex(item => item.id === tag.id);
+    const tagIndex = this.tags.findIndex(item => item.title === tag.title);
     if (tagIndex !== -1)
     {
       this.tags.splice(tagIndex, 1);
