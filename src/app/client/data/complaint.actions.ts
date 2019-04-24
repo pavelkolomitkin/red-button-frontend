@@ -6,6 +6,7 @@ export const COMPLAINT_USER_LIST_LOAD_START = 'COMPLAINT_USER_LIST_LOAD_START';
 export const COMPLAINT_USER_LIST_LOAD_SUCCESS = 'COMPLAINT_USER_LIST_LOAD_SUCCESS';
 export const COMPLAINT_USER_LIST_LOAD_ERROR = 'COMPLAINT_USER_LIST_LOAD_ERROR';
 
+export const COMPLAINT_CREATE_RESET = 'COMPLAINT_CREATE_RESET';
 export const COMPLAINT_CREATE_START = 'COMPLAINT_CREATE_START';
 export const COMPLAINT_CREATE_SUCCESS = 'COMPLAINT_CREATE_SUCCESS';
 export const COMPLAINT_CREATE_ERROR = 'COMPLAINT_CREATE_ERROR';
@@ -52,6 +53,10 @@ export class ComplaintUserListLoadError implements Action
     constructor(public errors: Object) {}
 }
 
+export class ComplaintCreateReset implements Action {
+
+    readonly type = COMPLAINT_CREATE_RESET;
+}
 
 export class ComplaintCreateStart implements Action
 {
@@ -164,6 +169,7 @@ export type ComplaintActions =
     | ComplaintUserListLoadSuccess
     | ComplaintUserListLoadError
 
+    | ComplaintCreateReset
     | ComplaintCreateStart
     | ComplaintCreateSuccess
     | ComplaintCreateError

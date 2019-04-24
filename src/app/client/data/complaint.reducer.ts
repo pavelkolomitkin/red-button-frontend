@@ -72,6 +72,14 @@ export function reducer(state: State = initialState, action: actions.ComplaintAc
             };
 
 
+        case actions.COMPLAINT_CREATE_RESET:
+
+            return {
+                ...state,
+                createdComplaint: null,
+                creationComplaintErrors: {}
+            };
+
         case actions.COMPLAINT_CREATE_SUCCESS:
 
             return {

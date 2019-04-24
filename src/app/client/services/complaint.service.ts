@@ -24,7 +24,7 @@ export class ComplaintService {
 
         const body = {
             message: complaint.message,
-            serviceType: complaint.serviceType,
+            serviceType: complaint.serviceType ? complaint.serviceType.id : null,
             latitude: complaint.location.latitude,
             longitude: complaint.location.longitude,
             pictures: complaint.pictures.map(picture => picture.id),
