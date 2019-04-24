@@ -145,6 +145,11 @@ export class GeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   }
 
+  onCloseControlClickHandler(event)
+  {
+    this.disposeMap();
+  }
+
   //===================== MAP EVENT HANDLERS ======================
   onMapLocationClickHandler = (location: GeoLocation) => {
 

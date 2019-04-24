@@ -13,3 +13,17 @@
 {
     z-index: 99900;
 }
+
+
+
+.geo-location-selector-container .controls {
+    position: absolute;
+    z-index: 9999;
+    top: 0;
+    right: 0;
+
+    background: #cccccc;
+}
+.geo-location-selector-container .controls .control {
+
+}
