@@ -1,63 +1,38 @@
-<app-map-balloon>
-  <div class="map-selected-location">
+<app-map-balloon [colorStyle]="
+    currentState === 'STATE_LOCATION_DETECTED_SUCCESS' ? 'success' :
+    currentState === 'STATE_LOCATION_DETECTED_ERROR' ? 'danger' : 'default'">
 
-    <div class="box box-default box-container" *ngIf="currentState === 'STATE_LOADING'">
-      <div class="box-header">
-        <h3 class="box-title">Loading...</h3>
-      </div>
-      <div class="box-body">
+  <div class="balloon-title">
+    <ng-container *ngIf="currentState === 'STATE_LOADING'"></ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">Confirm the location</ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'">Cannot identify the region!</ng-container>
+  </div>
 
-      </div>
-      <!-- /.box-body -->
-      <!-- Loading (remove the following to stop the loading)-->
+  <div class="balloon-content">
+    <ng-container *ngIf="currentState === 'STATE_LOADING'">
       <div class="overlay">
         <i class="fa fa-refresh fa-spin"></i>
       </div>
-      <!-- end loading -->
-    </div>
-
-
-
-    <div class="box box-success box-container" *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">
-      <div class="box-header with-border">
-        <h3 class="box-title">Confirm the location</h3>
-
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-        </div>
-
+    </ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">
+      <div>
+        {{ region.title }}<span class="text-muted">({{ region.federalDistrict.title }})</span>
       </div>
-      <!-- /.box-header -->
-      <div class="box-body">
-        <div>
-          {{ region.title }}<span class="text-muted">({{ region.federalDistrict.title }})</span>
-        </div>
-        <div>
-          <span class="text-muted">{{ address.displayName }}</span>
-        </div>
+      <div>
+        <span class="text-muted">{{ address.displayName }}</span>
       </div>
-      <!-- /.box-body -->
-      <div class="box-footer">
-        <span class="btn btn-success" (click)="onConfirmAddressClick($event)">Confirm</span>
-      </div>
-    </div>
+    </ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'">
+      Cannot identify the region! Try only to choose location in a Russia!
+    </ng-container>
+  </div>
 
-
-    <div class="box box-danger box-container" *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'">
-      <div class="box-header with-border">
-        <h3 class="box-title">Cannot identify the region!</h3>
-
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-        </div>
-
-      </div>
-      <!-- /.box-header -->
-      <div class="box-body">
-        Cannot identify the region! Try only to choose location in a Russia!
-      </div>
-      <!-- /.box-body -->
-    </div>
+  <div class="balloon-footer">
+    <ng-container *ngIf="currentState === 'STATE_LOADING'"></ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">
+      <span class="btn btn-success" (click)="onConfirmAddressClick($event)">Confirm</span>
+    </ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'"></ng-container>
   </div>
 
 </app-map-balloon>
