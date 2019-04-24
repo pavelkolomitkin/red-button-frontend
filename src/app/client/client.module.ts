@@ -30,6 +30,11 @@ import { VideoItemFormFieldComponent } from './components/video-item-form-field/
 import { VideoFormComponent } from './components/video-form/video-form.component';
 import { TagListFieldComponent } from './components/tag-list-field/tag-list-field.component';
 import { TagItemComponent } from './components/tag-list-field/tag-item/tag-item.component';
+import { ComplaintItemComponent } from './components/complaint-list-page/complaint-item/complaint-item.component';
+import { CommonTagItemComponent } from './components/common-tag-item/common-tag-item.component';
+import {ComplaintPictureItemComponent} from './components/picture/complaint-picture-item/complaint-picture-item.component';
+import { VideoItemComponent } from './components/video/video-item/video-item.component';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +54,11 @@ import { TagItemComponent } from './components/tag-list-field/tag-item/tag-item.
     VideoItemFormFieldComponent,
     VideoFormComponent,
     TagListFieldComponent,
-    TagItemComponent
+    TagItemComponent,
+    ComplaintItemComponent,
+    CommonTagItemComponent,
+    ComplaintPictureItemComponent,
+    VideoItemComponent
   ],
   imports: [
     CommonModule,

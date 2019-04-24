@@ -28,7 +28,7 @@ export class ComplaintService {
             latitude: complaint.location.latitude,
             longitude: complaint.location.longitude,
             pictures: complaint.pictures.map(picture => picture.id),
-            video: complaint.videos.map(video => video.id),
+            videos: complaint.videos.map(video => video.id),
             tags: complaint.tags.map(tag => tag.title)
         };
 
@@ -45,7 +45,7 @@ export class ComplaintService {
             latitude: complaint.location.latitude,
             longitude: complaint.location.longitude,
             pictures: complaint.pictures.map(picture => picture.id),
-            video: complaint.videos.map(video => video.id),
+            videos: complaint.videos.map(video => video.id),
             tags: complaint.tags.map(tag => tag.title)
         };
 

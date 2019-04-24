@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {ComplaintTagService} from '../../services/complaint-tag.service';
 import {ComplaintTag} from '../../data/model/complaint-tag.model';
 import {NgbTypeaheadSelectItemEvent} from '@ng-bootstrap/ng-bootstrap';
@@ -13,6 +13,8 @@ import {debounceTime, map, mergeMap} from 'rxjs/operators';
 export class TagListFieldComponent implements OnInit {
 
   public model: any;
+
+  @ViewChild('inputElement') inputElement: ElementRef;
 
   @Input() tags: Array<ComplaintTag> = [];
 
@@ -42,12 +44,20 @@ export class TagListFieldComponent implements OnInit {
 
   onItemSelectHandler(event: NgbTypeaheadSelectItemEvent)
   {
-    this.tags.push(event.item);
+    this.addTag(event.item.title);
   }
 
   onEnterHandler(event)
   {
-    const newTag = event.target.value.trim();
+    this.addTag(event.target.value);
+
+    event.target.value = '';
+  }
+
+  addTag(tag: string)
+  {
+    const newTag = tag.trim();
+
     if (newTag === '')
     {
       return;
@@ -59,8 +69,6 @@ export class TagListFieldComponent implements OnInit {
     }
 
     this.tags.push({ title: newTag });
-
-    event.target.value = '';
   }
 
   formatter = (x: {title: string}) =>

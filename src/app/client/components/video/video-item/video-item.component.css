@@ -1,0 +1,32 @@
+.video-item
+{
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+/*.video img*/
+/*{*/
+/*    width: 100% !important;*/
+/*}*/
+
+img
+{
+    width: 100% !important;
+}
+
+.video-item .icon
+{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    color: #ffffff;
+    opacity: 0.8;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.video-item .small
+{
+    width: 70px;
+}
