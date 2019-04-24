@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmitHandler(form)" #form="ngForm">
+<form appPreventEnterSubmitForm (ngSubmit)="onSubmitHandler($event)" #form="ngForm">
   <div class="box-body">
     <div class="form-group">
       <label>Select Geo Location</label>

@@ -43,7 +43,7 @@ export class ComplaintFormComponent implements OnInit {
   }
 
 
-  onSubmitHandler(form: NgForm)
+  onSubmitHandler(event)
   {
     this.submitForm.emit(this.complaint);
   }
