@@ -1,3 +1,12 @@
-<p>
-  complaint-edit-page works!
-</p>
+<div class="box box-primary" *ngIf="complaint !== null">
+  <div class="box-header with-border">
+    <h3 class="box-title">Describe the problem</h3>
+  </div>
+
+  <app-complaint-form
+          [complaint]="complaint"
+          [errors]="errors"
+          (onSubmit)="onSubmitForm($event)"
+  ></app-complaint-form>
+
+</div>

@@ -3,7 +3,7 @@
     <h4>{{ complaint.region.title }} <small>({{ complaint.region.federalDistrict.title }})</small></h4>
 
     <div class="box-tools pull-right">
-      <button type="button" class="btn btn-box-tool"><i class="fa fa-edit"></i></button>
+      <a routerLink="/client/complaint/{{complaint.id}}/edit" type="button" class="btn btn-box-tool"><i class="fa fa-edit"></i></a>
       <button type="button" class="btn btn-box-tool"><i class="fa fa-trash"></i></button>
     </div>
   </div>

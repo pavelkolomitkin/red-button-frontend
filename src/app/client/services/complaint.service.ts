@@ -8,6 +8,19 @@ export class ComplaintService {
 
     constructor(private http: HttpClient) {}
 
+    transformEntity = (complaint) => {
+
+        const result = {
+            ...complaint,
+            location: {
+                latitude: complaint.address.latitude,
+                longitude: complaint.address.longitude
+            }};
+
+
+        return result;
+    }
+
     getUserComplaints(params: Object, page: number = 1)
     {
         let parameters: HttpParams = new HttpParams().set('page', page.toString());
@@ -17,7 +30,20 @@ export class ComplaintService {
             parameters = parameters.append(name, value.toString());
         }
 
-        return this.http.get<{ complaints: Array<Complaint>, total: number }>('/client/complaint/my/list', { params: parameters });
+        return this
+            .http
+            .get<{ complaints: Array<Complaint>, total: number }>(
+                '/client/complaint/my/list',
+                { params: parameters }
+                )
+            .pipe(
+                map(({ complaints, total }) => {
+                    return {
+                        complaints: complaints.map(item => this.transformEntity(item)),
+                        total: total
+                    };
+                })
+            );
     }
 
     create(complaint: Complaint) {
@@ -33,7 +59,8 @@ export class ComplaintService {
         };
 
         return this.http.post<{ complaint: Complaint }>('/client/complaint', body).pipe(
-            map(result => result.complaint)
+            map(result => result.complaint),
+            map(complaint => this.transformEntity(complaint))
         );
     }
 
@@ -41,7 +68,7 @@ export class ComplaintService {
     {
         const body = {
             message: complaint.message,
-            serviceType: complaint.serviceType,
+            serviceType: complaint.serviceType ? complaint.serviceType.id : null,
             latitude: complaint.location.latitude,
             longitude: complaint.location.longitude,
             pictures: complaint.pictures.map(picture => picture.id),
@@ -50,14 +77,16 @@ export class ComplaintService {
         };
 
         return this.http.put<{ complaint: Complaint }>('/client/complaint/' + complaint.id, body).pipe(
-            map(result => result.complaint)
+            map(result => result.complaint),
+            map(complaint => this.transformEntity(complaint))
         );
     }
 
     get(id: number)
     {
         return this.http.get<{ complaint: Complaint }>('/client/complaint/' + id).pipe(
-            map(result => result.complaint)
+            map(result => result.complaint),
+            map(complaint => this.transformEntity(complaint))
         );
     }
 
