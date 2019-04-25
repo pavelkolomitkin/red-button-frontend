@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {State} from '../../../app.state';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import BreadCrumb from '../../data/model/bread-crumb.model';
+import { BreadCrumb } from '../../data/model/bread-crumb.model';
 
 @Component({
   selector: 'app-content-header',
@@ -17,8 +17,13 @@ export class ContentHeaderComponent implements OnInit {
   breadCrumbs: Observable<Array<BreadCrumb>>;
 
   constructor(private store:Store<State>) {
-    this.title = this.store.pipe(select(state => state.core.currentPageTitle));
-    this.subTitle = this.store.pipe(select(state => state.core.currentPageSubtitle));
+    // this.store.pipe(select(state => state.core.currentPageTitle)).subscribe((value) => {
+    //   debugger
+    //   console.log('Page Title is ' + value);
+    // });
+
+    this.title = this.store.pipe(select(state => state.core.pageTitle));
+    this.subTitle = this.store.pipe(select(state => state.core.pageSubTitle));
 
     this.breadCrumbs = this.store.pipe(select(state => state.core.breadCrumbs));
   }

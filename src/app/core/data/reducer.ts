@@ -1,8 +1,8 @@
 import * as actions from './actions';
 import {NotifyMessage} from "./model/notify-message.model";
-import BreadCrumb from './model/bread-crumb.model';
 import {GeoLocation} from './model/geo-location.model';
 import {ActionConfirmation} from './model/action-confirmation.model';
+import {BreadCrumb} from './model/bread-crumb.model';
 
 export interface State {
   globalProgressLoaders: number;
@@ -10,14 +10,15 @@ export interface State {
   lastSuccessMessage: NotifyMessage;
   lastErrorMessage: NotifyMessage;
 
-  currentPageTitle: string;
-  currentPageSubtitle: string;
-  breadCrumbs: Array<BreadCrumb>;
-
   deviceGeoLocation: GeoLocation;
 
   lastInitConfirmation: ActionConfirmation;
   lastRespondedConfirmation: ActionConfirmation;
+
+  pageTitle: string;
+  pageSubTitle: string;
+
+  breadCrumbs: Array<BreadCrumb>;
 
 }
 
@@ -26,12 +27,14 @@ const initialState: State = {
 
   lastSuccessMessage: null,
   lastErrorMessage: null,
-  currentPageTitle: '',
-  currentPageSubtitle: '',
-  breadCrumbs: [],
   deviceGeoLocation: null,
   lastInitConfirmation: null,
-  lastRespondedConfirmation: null
+  lastRespondedConfirmation: null,
+
+  pageTitle: '',
+  pageSubTitle: '',
+
+  breadCrumbs: []
 };
 
 export function reducer(state = initialState, action: actions.CoreActions): State {
@@ -77,21 +80,6 @@ export function reducer(state = initialState, action: actions.CoreActions): Stat
         lastErrorMessage: action.message
       };
 
-    case actions.GLOBAL_SET_PAGE_TITLE:
-
-      return {
-        ...state,
-        currentPageTitle: action.title,
-        currentPageSubtitle: action.subTitle
-      };
-
-    case actions.GLOBAL_SET_BREAD_CRUMBS:
-
-      return {
-        ...state,
-        breadCrumbs: action.items
-      };
-
     case actions.GLOBAL_DEVICE_GEO_LOCATION_DETECT_DONE:
 
       return {
@@ -119,6 +107,21 @@ export function reducer(state = initialState, action: actions.CoreActions): Stat
         ...state,
         lastInitConfirmation: null,
         lastRespondedConfirmation: null
+      };
+
+    case actions.GLOBAL_PAGE_TITLE:
+
+      return {
+        ...state,
+        pageTitle: action.title,
+        pageSubTitle: action.subTitle
+      };
+
+    case actions.GLOBAL_BREAD_CRUMBS:
+
+      return {
+        ...state,
+        breadCrumbs: [...action.items]
       };
 
     default:

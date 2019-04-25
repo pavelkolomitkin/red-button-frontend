@@ -1,5 +1,3 @@
-export default interface BreadCrumb {
-    icon: string;
-    route: string;
-    title: string;
+export class BreadCrumb {
+    constructor(public title: string, public route ?: string, public icon ?: string) {}
 }

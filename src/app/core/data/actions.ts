@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import {NotifyMessage} from './model/notify-message.model';
-import BreadCrumb from './model/bread-crumb.model';
+import { BreadCrumb } from './model/bread-crumb.model';
 import {GeoLocation} from './model/geo-location.model';
 import {ActionConfirmation} from './model/action-confirmation.model';
 
@@ -10,8 +10,8 @@ export const GLOBAL_PROGRESS_HIDE = 'GLOBAL_PROGRESS_HIDE';
 export const GLOBAL_NOTIFY_SUCCESS_MESSAGE = 'GLOBAL_NOTIFY_SUCCESS_MESSAGE';
 export const GLOBAL_NOTIFY_ERROR_MESSAGE = 'GLOBAL_NOTIFY_ERROR_MESSAGE';
 
-export const GLOBAL_SET_BREAD_CRUMBS = 'GLOBAL_SET_BREAD_CRUMBS';
-export const GLOBAL_SET_PAGE_TITLE = 'GLOBAL_SET_PAGE_TITLE';
+export const GLOBAL_PAGE_TITLE = 'GLOBAL_PAGE_TITLE';
+export const GLOBAL_BREAD_CRUMBS = 'GLOBAL_BREAD_CRUMBS';
 
 export const GLOBAL_DEVICE_GEO_LOCATION_DETECT_START = 'GLOBAL_DEVICE_GEO_LOCATION_DETECT_START';
 export const GLOBAL_DEVICE_GEO_LOCATION_DETECT_DONE = 'GLOBAL_DEVICE_GEO_LOCATION_DETECT_DONE';
@@ -19,6 +19,21 @@ export const GLOBAL_DEVICE_GEO_LOCATION_DETECT_DONE = 'GLOBAL_DEVICE_GEO_LOCATIO
 export const GLOBAL_CONFIRMATION_INIT = 'GLOBAL_CONFIRMATION_INIT';
 export const GLOBAL_CONFIRMATION_RESPONSE = 'GLOBAL_CONFIRMATION_RESPONSE';
 export const GLOBAL_CONFIRMATION_RESET = 'GLOBAL_CONFIRMATION_RESET';
+
+
+export class GlobalPageTitle implements Action
+{
+  readonly type = GLOBAL_PAGE_TITLE;
+
+  constructor(public title: string, public subTitle: string = '') {}
+}
+
+export class GlobalBreadCrumbs implements Action
+{
+  readonly type = GLOBAL_BREAD_CRUMBS;
+
+  constructor(public items: Array<BreadCrumb> = []) {}
+}
 
 export class GlobalProgressShow implements Action
 {
@@ -45,21 +60,6 @@ export class GlobalNotifyErrorMessage implements Action
 
   constructor(public message: NotifyMessage) {}
 }
-
-export class GlobalSetPageTitle implements Action
-{
-  readonly type = GLOBAL_SET_PAGE_TITLE;
-
-  constructor(public title: string, public subTitle: string = '') {}
-}
-
-export class GlobalSetBreadCrumbs implements Action
-{
-  readonly type = GLOBAL_SET_BREAD_CRUMBS;
-
-  constructor(public items: Array<BreadCrumb>) {}
-}
-
 
 export class GlobalDeviceGeoLocationDetectStart implements Action
 {
@@ -100,11 +100,11 @@ export type CoreActions =
     | GlobalNotifySuccessMessage
     | GlobalNotifyErrorMessage
 
-    | GlobalSetPageTitle
-    | GlobalSetBreadCrumbs
-
     | GlobalDeviceGeoLocationDetectStart
     | GlobalDeviceGeoLocationDetectDone
+
+    | GlobalPageTitle
+    | GlobalBreadCrumbs
 
     | GlobalConfirmationInit
     | GlobalConfirmationResponse

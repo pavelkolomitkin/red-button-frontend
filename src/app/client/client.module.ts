@@ -34,6 +34,7 @@ import { ComplaintItemComponent } from './components/complaint-list-page/complai
 import { CommonTagItemComponent } from './components/common-tag-item/common-tag-item.component';
 import {ComplaintPictureItemComponent} from './components/picture/complaint-picture-item/complaint-picture-item.component';
 import { VideoItemComponent } from './components/video/video-item/video-item.component';
+import {CoreModule} from '../core/core.module';
 
 
 @NgModule({
@@ -60,22 +61,23 @@ import { VideoItemComponent } from './components/video/video-item/video-item.com
     ComplaintPictureItemComponent,
     VideoItemComponent
   ],
-  imports: [
-    CommonModule,
-    ClientRoutingModule,
-    SharedModule,
-    StoreModule.forFeature('clientVideo', videoReducer),
-    StoreModule.forFeature('clientComplaintTag', complaintTagReducer),
-    StoreModule.forFeature('clientComplaintPicture', complaintPictureReducer),
-    StoreModule.forFeature('clientComplaint', complaintReducer),
-    StoreModule.forFeature('clientGeoLocation', geoLocationReducer),
-    EffectsModule.forFeature([
-      VideoEffects,
-      ComplaintTagEffects,
-      ComplaintPictureEffects,
-      ComplaintEffects
-    ])
-  ],
+    imports: [
+        CommonModule,
+        ClientRoutingModule,
+        SharedModule,
+        StoreModule.forFeature('clientVideo', videoReducer),
+        StoreModule.forFeature('clientComplaintTag', complaintTagReducer),
+        StoreModule.forFeature('clientComplaintPicture', complaintPictureReducer),
+        StoreModule.forFeature('clientComplaint', complaintReducer),
+        StoreModule.forFeature('clientGeoLocation', geoLocationReducer),
+        EffectsModule.forFeature([
+            VideoEffects,
+            ComplaintTagEffects,
+            ComplaintPictureEffects,
+            ComplaintEffects
+        ]),
+        CoreModule
+    ],
   exports: [
       StoreModule,
       EffectsModule
