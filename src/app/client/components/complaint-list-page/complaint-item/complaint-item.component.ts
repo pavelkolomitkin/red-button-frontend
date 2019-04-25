@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Complaint} from '../../../data/model/complaint.model';
 
 @Component({
@@ -8,11 +8,18 @@ import {Complaint} from '../../../data/model/complaint.model';
 })
 export class ComplaintItemComponent implements OnInit {
 
+  @Output('onDelete') deleteEvent: EventEmitter<Complaint> = new EventEmitter();
+
   @Input() complaint: Complaint;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onDeleteClickHandler(event)
+  {
+    this.deleteEvent.emit(this.complaint);
   }
 
 }

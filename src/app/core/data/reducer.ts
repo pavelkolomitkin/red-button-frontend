@@ -2,7 +2,7 @@ import * as actions from './actions';
 import {NotifyMessage} from "./model/notify-message.model";
 import BreadCrumb from './model/bread-crumb.model';
 import {GeoLocation} from './model/geo-location.model';
-import {take} from 'rxjs/operators';
+import {ActionConfirmation} from './model/action-confirmation.model';
 
 export interface State {
   globalProgressLoaders: number;
@@ -15,6 +15,10 @@ export interface State {
   breadCrumbs: Array<BreadCrumb>;
 
   deviceGeoLocation: GeoLocation;
+
+  lastInitConfirmation: ActionConfirmation;
+  lastRespondedConfirmation: ActionConfirmation;
+
 }
 
 const initialState: State = {
@@ -25,7 +29,9 @@ const initialState: State = {
   currentPageTitle: '',
   currentPageSubtitle: '',
   breadCrumbs: [],
-  deviceGeoLocation: null
+  deviceGeoLocation: null,
+  lastInitConfirmation: null,
+  lastRespondedConfirmation: null
 };
 
 export function reducer(state = initialState, action: actions.CoreActions): State {
@@ -91,6 +97,28 @@ export function reducer(state = initialState, action: actions.CoreActions): Stat
       return {
         ...state,
         deviceGeoLocation: action.location
+      };
+
+    case actions.GLOBAL_CONFIRMATION_INIT:
+
+      return {
+        ...state,
+        lastInitConfirmation: action.confirmation
+      };
+
+    case actions.GLOBAL_CONFIRMATION_RESPONSE:
+
+      return {
+        ...state,
+        lastRespondedConfirmation: action.confirmation
+      };
+
+    case actions.GLOBAL_CONFIRMATION_RESET:
+
+      return {
+        ...state,
+        lastInitConfirmation: null,
+        lastRespondedConfirmation: null
       };
 
     default:

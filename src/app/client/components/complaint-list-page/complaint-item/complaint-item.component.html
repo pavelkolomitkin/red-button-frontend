@@ -4,7 +4,7 @@
 
     <div class="box-tools pull-right">
       <a routerLink="/client/complaint/{{complaint.id}}/edit" type="button" class="btn btn-box-tool"><i class="fa fa-edit"></i></a>
-      <button type="button" class="btn btn-box-tool"><i class="fa fa-trash"></i></button>
+      <button type="button" class="btn btn-box-tool" (click)="onDeleteClickHandler($event)"><i class="fa fa-trash"></i></button>
     </div>
   </div>
 

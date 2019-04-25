@@ -4,6 +4,7 @@ import {Region} from '../../../core/data/model/region.model';
 import {ComplaintPicture} from './complaint-picture.model';
 import {Video} from './video.model';
 import {GeoLocation} from '../../../core/data/model/geo-location.model';
+import User from '../../../core/data/model/user.model';
 
 export class Complaint {
 
@@ -28,4 +29,6 @@ export class Complaint {
     createdAt ?: number;
 
     updatedAt ?: number;
+
+    client ?: User;
 }

@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Complaint} from '../data/model/complaint.model';
-import {map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
+import {of} from 'rxjs';
 
 @Injectable()
 export class ComplaintService {
@@ -86,7 +87,12 @@ export class ComplaintService {
     {
         return this.http.get<{ complaint: Complaint }>('/client/complaint/' + id).pipe(
             map(result => result.complaint),
-            map(complaint => this.transformEntity(complaint))
+            map(complaint => this.transformEntity(complaint)),
+            catchError((response) => {
+                throw {
+                    error: 'Not found'
+                };
+            })
         );
     }
 

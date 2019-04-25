@@ -43,6 +43,9 @@ import {ServiceTypeService} from './services/service-type.service';
 import {ComplaintService} from '../client/services/complaint.service';
 import {ClientLocationService} from './services/client-location.service';
 import {ClientDeviceEffects} from './data/effects/client-device.effects';
+import { ConfirmationWindowComponent } from './components/confirmation-window/confirmation-window.component';
+import { ControlItemComponent } from './components/confirmation-window/control-item/control-item.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -61,6 +64,9 @@ const httpInterceptorProviders = [
     HeaderComponent,
     MainFooterComponent,
     MainMenuComponent,
+    ConfirmationWindowComponent,
+    ControlItemComponent,
+    ConfirmationComponent,
   ],
   imports: [
     CommonModule,
@@ -99,17 +105,18 @@ const httpInterceptorProviders = [
       multi: true
     }
   ],
-  exports: [
-    GlobalProgressComponent,
-    CommonLayoutComponent,
-    ContentComponent,
-    ContentHeaderComponent,
-    HeaderComponent,
-    MainFooterComponent,
-    MainMenuComponent,
-    StoreModule,
-    EffectsModule,
-    NgxPermissionsModule,
-  ]
+    exports: [
+        GlobalProgressComponent,
+        CommonLayoutComponent,
+        ContentComponent,
+        ContentHeaderComponent,
+        HeaderComponent,
+        MainFooterComponent,
+        MainMenuComponent,
+        StoreModule,
+        EffectsModule,
+        NgxPermissionsModule,
+        ConfirmationComponent,
+    ]
 })
 export class CoreModule { }

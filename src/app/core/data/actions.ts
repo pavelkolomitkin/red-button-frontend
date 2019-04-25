@@ -2,6 +2,7 @@ import { Action } from '@ngrx/store';
 import {NotifyMessage} from './model/notify-message.model';
 import BreadCrumb from './model/bread-crumb.model';
 import {GeoLocation} from './model/geo-location.model';
+import {ActionConfirmation} from './model/action-confirmation.model';
 
 export const GLOBAL_PROGRESS_SHOW = 'GLOBAL_PROGRESS_SHOW';
 export const GLOBAL_PROGRESS_HIDE = 'GLOBAL_PROGRESS_HIDE';
@@ -14,6 +15,10 @@ export const GLOBAL_SET_PAGE_TITLE = 'GLOBAL_SET_PAGE_TITLE';
 
 export const GLOBAL_DEVICE_GEO_LOCATION_DETECT_START = 'GLOBAL_DEVICE_GEO_LOCATION_DETECT_START';
 export const GLOBAL_DEVICE_GEO_LOCATION_DETECT_DONE = 'GLOBAL_DEVICE_GEO_LOCATION_DETECT_DONE';
+
+export const GLOBAL_CONFIRMATION_INIT = 'GLOBAL_CONFIRMATION_INIT';
+export const GLOBAL_CONFIRMATION_RESPONSE = 'GLOBAL_CONFIRMATION_RESPONSE';
+export const GLOBAL_CONFIRMATION_RESET = 'GLOBAL_CONFIRMATION_RESET';
 
 export class GlobalProgressShow implements Action
 {
@@ -69,6 +74,25 @@ export class GlobalDeviceGeoLocationDetectDone implements Action
 }
 
 
+export class GlobalConfirmationInit implements Action
+{
+  readonly type = GLOBAL_CONFIRMATION_INIT;
+
+  constructor(public confirmation: ActionConfirmation) {}
+}
+
+export class GlobalConfirmationResponse implements Action
+{
+  readonly type = GLOBAL_CONFIRMATION_RESPONSE;
+
+  constructor(public confirmation: ActionConfirmation) {}
+}
+
+export class GlobalConfirmationReset implements Action
+{
+  readonly type = GLOBAL_CONFIRMATION_RESET;
+}
+
 export type CoreActions =
     GlobalProgressShow
     | GlobalProgressHide
@@ -81,4 +105,8 @@ export type CoreActions =
 
     | GlobalDeviceGeoLocationDetectStart
     | GlobalDeviceGeoLocationDetectDone
+
+    | GlobalConfirmationInit
+    | GlobalConfirmationResponse
+    | GlobalConfirmationReset
   ;

@@ -54,7 +54,7 @@ export class ComplaintEffects
                     return new ComplaintGetSuccess(complaint);
                 }),
                 catchError((errors) => {
-                    return of(new ComplaintGetError(errors.error.errors));
+                    return of(new ComplaintGetError(errors.error));
                 })
             );
         })

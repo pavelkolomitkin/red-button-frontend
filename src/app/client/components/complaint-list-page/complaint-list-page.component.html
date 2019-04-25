@@ -3,11 +3,12 @@
   <div infiniteScroll
        [infiniteScrollDistance]="2"
        [infiniteScrollThrottle]="50"
+       [infiniteScrollDisabled]="infinityScrollDisabled"
        (scrolled)="onScroll()"
     >
 
     <div *ngFor="let complaint of list">
-      <app-complaint-item [complaint]="complaint"></app-complaint-item>
+      <app-complaint-item [complaint]="complaint" (onDelete)="onDeleteHandler($event)"></app-complaint-item>
     </div>
 
   </div>
