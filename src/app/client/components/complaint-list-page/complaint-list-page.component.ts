@@ -3,7 +3,7 @@ import {select, Store} from '@ngrx/store';
 import {State} from '../../../app.state';
 import {Complaint} from '../../data/model/complaint.model';
 import {Subscription} from 'rxjs';
-import {ComplaintUserListLoadStart} from '../../data/complaint.actions';
+import {ComplaintUserListLoadStart, ComplaintUserListReset} from '../../data/complaint.actions';
 
 @Component({
   selector: 'app-complaint-list-page',
@@ -20,16 +20,26 @@ export class ComplaintListPageComponent implements OnInit, OnDestroy {
   listSubscription: Subscription;
 
   constructor(private store: Store<State>) {
-
+    this.currentPage = 1;
+    this.list = [];
   }
 
   ngOnInit() {
 
+    //debugger
+    this.currentPage = 1;
     this.list = [];
+
+    this.store.dispatch(new ComplaintUserListReset());
 
     this.listSubscription = this.store.pipe(select(state => state.clientComplaint)).subscribe(
         ({ userComplaintList, userComplaintTotal }) => {
 
+          //debugger
+          if (this.currentPage === 1)
+          {
+            this.list = [];
+          }
 
           this.list = this.list.concat(userComplaintList);
 
@@ -47,11 +57,12 @@ export class ComplaintListPageComponent implements OnInit, OnDestroy {
   }
 
   onScroll = () => {
-    this.loadList(++this.currentPage);
+    this.currentPage++;
+    this.loadList();
   }
 
-  loadList = (pageNumber = 1) =>
+  loadList = () =>
   {
-    this.store.dispatch(new ComplaintUserListLoadStart(pageNumber))
+    this.store.dispatch(new ComplaintUserListLoadStart(this.currentPage))
   }
 }

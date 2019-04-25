@@ -26,3 +26,13 @@ button.dropdown-item
     width: 100%;
     text-align: left;
 }
+
+.box.box-solid>.box-header .btn:hover, .box.box-solid>.box-header a:hover
+{
+    background: none !important;
+}
+
+.btn.btn-box-tool
+{
+    font-size: 1.2em !important;
+}

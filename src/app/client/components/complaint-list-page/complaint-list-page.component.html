@@ -5,11 +5,11 @@
        [infiniteScrollThrottle]="50"
        (scrolled)="onScroll()"
     >
-    <div class="row">
-      <div class="col-md-6 col-sm-12" *ngFor="let complaint of list">
-        <app-complaint-item [complaint]="complaint"></app-complaint-item>
-      </div>
+
+    <div *ngFor="let complaint of list">
+      <app-complaint-item [complaint]="complaint"></app-complaint-item>
     </div>
+
   </div>
 
 </div>

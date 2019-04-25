@@ -24,4 +24,8 @@ export class Complaint {
     videos: Array<Video> = [];
 
     location ?: GeoLocation;
+
+    createdAt ?: number;
+
+    updatedAt ?: number;
 }
