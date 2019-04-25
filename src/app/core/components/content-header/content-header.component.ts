@@ -17,10 +17,6 @@ export class ContentHeaderComponent implements OnInit {
   breadCrumbs: Observable<Array<BreadCrumb>>;
 
   constructor(private store:Store<State>) {
-    // this.store.pipe(select(state => state.core.currentPageTitle)).subscribe((value) => {
-    //   debugger
-    //   console.log('Page Title is ' + value);
-    // });
 
     this.title = this.store.pipe(select(state => state.core.pageTitle));
     this.subTitle = this.store.pipe(select(state => state.core.pageSubTitle));

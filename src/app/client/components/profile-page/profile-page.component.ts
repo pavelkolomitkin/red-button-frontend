@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Store} from '@ngrx/store';
 import {State} from '../../../app.state';
-import {GlobalPageTitle} from '../../../core/data/actions';
 
 @Component({
   selector: 'app-profile-page',
@@ -14,7 +13,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new GlobalPageTitle('Profile Page', 'hello'));
+
   }
 
 }

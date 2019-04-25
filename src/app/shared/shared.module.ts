@@ -9,6 +9,7 @@ import { MapBalloonComponent } from './components/map-balloon/map-balloon.compon
 import { UploadItemComponent } from './components/upload-item/upload-item.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {PreventEnterSubmitFormDirective} from './directives/prevent-enter-submit-form.directive';
+import {PageHeaderDirective} from './directives/page-header.directive';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {PreventEnterSubmitFormDirective} from './directives/prevent-enter-submit
     MapComponent,
     MapBalloonComponent,
     UploadItemComponent,
-    PreventEnterSubmitFormDirective
+    PreventEnterSubmitFormDirective,
+      PageHeaderDirective,
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import {PreventEnterSubmitFormDirective} from './directives/prevent-enter-submit
         MapComponent,
         MapBalloonComponent,
         UploadItemComponent,
-        PreventEnterSubmitFormDirective
+        PreventEnterSubmitFormDirective,
+        PageHeaderDirective
     ],
   entryComponents: [MapComponent]
 })

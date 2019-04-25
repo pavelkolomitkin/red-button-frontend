@@ -1,4 +1,4 @@
-import { PageHeaderDirective } from './page-header.directive';
+import { PageHeaderDirective } from '../../shared/directives/page-header.directive';
 
 describe('PageHeaderDirective', () => {
   it('should create an instance', () => {

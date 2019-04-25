@@ -45,7 +45,6 @@ import {ClientDeviceEffects} from './data/effects/client-device.effects';
 import { ConfirmationWindowComponent } from './components/confirmation-window/confirmation-window.component';
 import { ControlItemComponent } from './components/confirmation-window/control-item/control-item.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
-import { PageHeaderDirective } from './directives/page-header.directive';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -67,7 +66,6 @@ const httpInterceptorProviders = [
     ConfirmationWindowComponent,
     ControlItemComponent,
     ConfirmationComponent,
-    PageHeaderDirective,
   ],
   imports: [
     CommonModule,
@@ -118,7 +116,6 @@ const httpInterceptorProviders = [
         EffectsModule,
         NgxPermissionsModule,
         ConfirmationComponent,
-        PageHeaderDirective,
     ]
 })
 export class CoreModule { }

@@ -34,7 +34,7 @@ import { ComplaintItemComponent } from './components/complaint-list-page/complai
 import { CommonTagItemComponent } from './components/common-tag-item/common-tag-item.component';
 import {ComplaintPictureItemComponent} from './components/picture/complaint-picture-item/complaint-picture-item.component';
 import { VideoItemComponent } from './components/video/video-item/video-item.component';
-import {CoreModule} from '../core/core.module';
+import { CommonLayoutComponent } from './components/common-layout/common-layout.component';
 
 
 @NgModule({
@@ -59,7 +59,8 @@ import {CoreModule} from '../core/core.module';
     ComplaintItemComponent,
     CommonTagItemComponent,
     ComplaintPictureItemComponent,
-    VideoItemComponent
+    VideoItemComponent,
+    CommonLayoutComponent
   ],
     imports: [
         CommonModule,
@@ -76,7 +77,6 @@ import {CoreModule} from '../core/core.module';
             ComplaintPictureEffects,
             ComplaintEffects
         ]),
-        CoreModule
     ],
   exports: [
       StoreModule,
