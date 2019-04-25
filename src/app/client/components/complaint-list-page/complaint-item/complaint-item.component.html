@@ -9,24 +9,24 @@
   </div>
 
   <div class="box-body">
-    <div *ngIf="!!complaint.serviceType">
+    <p *ngIf="!!complaint.serviceType">
       <span class="text-primary">{{ complaint.serviceType.title }}</span>
-    </div>
-    <div class="text-muted">{{ complaint.message }}</div>
-    <div>
+    </p>
+    <p class="text-muted">{{ complaint.message }}</p>
+    <p *ngIf="complaint.pictures.length > 0">
       <app-complaint-picture-item
               *ngFor="let picture of complaint.pictures"
               [picture]="picture"
               [size]="'previewSmall'"
       ></app-complaint-picture-item>
-    </div>
-    <div>
+    </p>
+    <p *ngIf="complaint.videos.length > 0">
       <app-video-item
               *ngFor="let video of complaint.videos"
               [video]="video"
               [size]="'small'"
       ></app-video-item>
-    </div>
+    </p>
   </div>
 
   <div class="box-footer">
