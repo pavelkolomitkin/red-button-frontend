@@ -1,4 +1,4 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Store} from "@ngrx/store";
@@ -7,6 +7,7 @@ import {tap} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {GlobalNotifyErrorMessage} from "../../data/actions";
 import {NotifyMessage} from "../../data/model/notify-message.model";
+import {UserLogout} from '../../../security/data/actions';
 
 @Injectable()
 export class ErrorResponseHandlerInterceptor implements HttpInterceptor
@@ -26,12 +27,12 @@ export class ErrorResponseHandlerInterceptor implements HttpInterceptor
 
         },
         (error) => {
-          if (error instanceof HttpResponse)
+
+          if (error instanceof HttpErrorResponse)
           {
             if (error.status === ErrorResponseHandlerInterceptor.UNAUTHORIZE_ERROR_CODE)
             {
-              this.store.dispatch(new GlobalNotifyErrorMessage(new NotifyMessage('You are unauthorized!')));
-              this.router.navigateByUrl('/security/login');
+              this.store.dispatch(new UserLogout());
 
               return;
             }
