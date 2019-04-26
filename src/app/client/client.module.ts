@@ -84,11 +84,12 @@ import { ComplaintDetailsBalloonComponent } from './components/complaint-details
             ComplaintTagEffects,
             ComplaintPictureEffects,
             ComplaintEffects
-        ]),
+        ])
     ],
   exports: [
       StoreModule,
-      EffectsModule
+      EffectsModule,
+      SharedModule
   ],
   entryComponents: [MapSelectedLocationComponent, ComplaintDetailsBalloonComponent]
 })

@@ -1,4 +1,12 @@
 <div>
-    <app-complaint-picture-item [ngStyle]="{ cursor: 'pointer' }" *ngFor="let picture of list" [picture]="picture" [size]="'previewMiddle'"></app-complaint-picture-item>
+    <app-complaint-picture-item
+            [ngStyle]="{ cursor: 'pointer' }"
+            *ngFor="let picture of list"
+            [picture]="picture"
+            [size]="'previewMiddle'"
+            (click)="onPictureClickHandler($event)"
+    ></app-complaint-picture-item>
 </div>
-
+<app-light-box [isVisible]="isLightBoxVisible">
+    <app-carousel [pictures]="list"></app-carousel>
+</app-light-box>

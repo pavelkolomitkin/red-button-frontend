@@ -7,9 +7,11 @@ import { MomentModule } from 'ngx-moment';
 import {MapComponent} from './components/map/map.component';
 import { MapBalloonComponent } from './components/map-balloon/map-balloon.component';
 import { UploadItemComponent } from './components/upload-item/upload-item.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {PreventEnterSubmitFormDirective} from './directives/prevent-enter-submit-form.directive';
 import {PageHeaderDirective} from './directives/page-header.directive';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { LightBoxComponent } from './components/light-box/light-box.component';
 
 
 @NgModule({
@@ -20,13 +22,16 @@ import {PageHeaderDirective} from './directives/page-header.directive';
     UploadItemComponent,
     PreventEnterSubmitFormDirective,
       PageHeaderDirective,
+      CarouselComponent,
+      LightBoxComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     InfiniteScrollModule,
     MomentModule,
-    NgbModule
+    NgbModule,
+
   ],
     exports: [
         FormsModule,
@@ -38,7 +43,9 @@ import {PageHeaderDirective} from './directives/page-header.directive';
         MapBalloonComponent,
         UploadItemComponent,
         PreventEnterSubmitFormDirective,
-        PageHeaderDirective
+        PageHeaderDirective,
+        LightBoxComponent,
+        CarouselComponent
     ],
   entryComponents: [MapComponent]
 })

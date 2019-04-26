@@ -1,0 +1,16 @@
+<div id="app-carousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li *ngFor="let picture of pictures; index as i;" data-target="#app-carousel" [attr.data-slide-to]="i" class=""></li>
+  </ol>
+  <div class="carousel-inner">
+    <div  *ngFor="let picture of pictures; index as i;" class="item" [ngClass]="i === 0 ? 'active' : ''">
+      <img [src]="picture.sources['previewNormal']">
+    </div>
+  </div>
+  <a class="left carousel-control" href="#app-carousel" data-slide="prev">
+    <span class="fa fa-angle-left"></span>
+  </a>
+  <a class="right carousel-control" href="#app-carousel" data-slide="next">
+    <span class="fa fa-angle-right"></span>
+  </a>
+</div>

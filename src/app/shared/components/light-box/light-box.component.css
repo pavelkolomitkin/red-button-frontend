@@ -1,0 +1,30 @@
+.light-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+
+    display: none;
+}
+.light-box.visible {
+    display: block;
+}
+.light-box .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 999999;
+    background: #000000;
+    opacity: 0.5;
+}
+
+.light-box .content {
+    position: relative;
+    z-index: 9999999;
+    width: 70%;
+    margin: 0 auto;
+}

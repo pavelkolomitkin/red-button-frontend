@@ -10,9 +10,16 @@ export class PictureListComponent implements OnInit {
 
   @Input() list: Array<ComplaintPicture> = [];
 
+  isLightBoxVisible: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onPictureClickHandler(event)
+  {
+    this.isLightBoxVisible = true;
   }
 
 }

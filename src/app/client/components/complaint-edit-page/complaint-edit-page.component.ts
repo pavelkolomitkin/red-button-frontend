@@ -66,7 +66,7 @@ export class ComplaintEditPageComponent implements OnInit, OnDestroy {
     this.updateSuccessSubscription = this.store.pipe(select(state => state.clientComplaint.updatedComplaint),
         filter(result => result !== null)).subscribe(
         (complaint: Complaint) => {
-          this.router.navigateByUrl('/client/complaint/list');
+          this.router.navigateByUrl('/client/complaint/' + complaint.id.toString());
         }
     );
 

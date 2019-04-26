@@ -1,6 +1,7 @@
-export interface ComplaintPicture
+import {PictureInterface} from '../../../shared/data/model/picture-interface.model';
+
+export interface ComplaintPicture extends PictureInterface
 {
     id ?: number;
-    sources ?: Object;
     createdAt ?: number;
 }
