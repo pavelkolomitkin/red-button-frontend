@@ -1,3 +1,19 @@
 <app-client-common-layout>
-    <div class="alert alert-success">On the profile page!</div>
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3>{{ (user | async).fullName }}</h3>
+        </div>
+        <div class="box-body">
+
+            <b>Email</b>
+            <br/>
+            <div class="text-primary">{{ (user | async).email }}</div>
+
+            <b>Phone Number</b>
+            <br/>
+            <div class="text-muted">{{ (user | async).phoneNumber }}</div>
+
+
+        </div>
+    </div>
 </app-client-common-layout>

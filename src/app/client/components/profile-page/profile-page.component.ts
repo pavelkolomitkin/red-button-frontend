@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {State} from '../../../app.state';
+import {Observable} from 'rxjs';
+import User from '../../../core/data/model/user.model';
 
 @Component({
   selector: 'app-profile-page',
@@ -9,10 +11,15 @@ import {State} from '../../../app.state';
 })
 export class ProfilePageComponent implements OnInit {
 
-  constructor(private store: Store<State>) {
+  user: Observable<User>;
+
+  constructor(private store: Store<State>)
+  {
+    this.user = this.store.pipe(select(state => state.security.authorizedUser));
   }
 
-  ngOnInit() {
+  ngOnInit()
+  {
 
   }
 
