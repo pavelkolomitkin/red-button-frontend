@@ -1,3 +1,3 @@
-<p>
-  video-list works!
-</p>
+<div>
+  <app-video-item [ngStyle]="{ cursor: 'pointer' }" *ngFor="let video of list" [video]="video" [size]="'medium'"></app-video-item>
+</div>

@@ -8,7 +8,7 @@ import {Video} from '../../../data/model/video.model';
 })
 export class VideoListComponent implements OnInit {
 
-  @Input() list: Array<Video> = []
+  @Input() list: Array<Video> = [];
 
   constructor() { }
 

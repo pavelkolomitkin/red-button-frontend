@@ -1,3 +1,4 @@
-<p>
-  picture-list works!
-</p>
+<div>
+    <app-complaint-picture-item [ngStyle]="{ cursor: 'pointer' }" *ngFor="let picture of list" [picture]="picture" [size]="'previewMiddle'"></app-complaint-picture-item>
+</div>
+

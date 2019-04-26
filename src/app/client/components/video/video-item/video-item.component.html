@@ -1,13 +1,8 @@
 <div class="video-item">
 
-  <ng-container *ngIf="size === 'small'">
-
-    <div class="small">
-      <img class="image" [src]="video.metaData.thumbnail_url">
-      <i class="icon fa fa-video-camera"></i>
-    </div>
-
-  </ng-container>
-
+  <div [ngClass]="size">
+    <img class="image" [src]="video.metaData.thumbnail_url">
+    <i class="icon fa fa-video-camera"></i>
+  </div>
 
 </div>

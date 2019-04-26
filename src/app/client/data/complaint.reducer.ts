@@ -121,6 +121,13 @@ export function reducer(state: State = initialState, action: actions.ComplaintAc
                 updatingComplaintErrors: action.errors
             };
 
+        case actions.COMPLAINT_DELETE_RESET:
+
+            return {
+                deletingComplaint: null,
+                deletedComplaint: null,
+                deleteComplaintErrors: {}
+            };
 
         case actions.COMPLAINT_DELETE_INIT:
 

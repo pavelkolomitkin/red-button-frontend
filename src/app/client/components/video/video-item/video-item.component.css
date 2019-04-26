@@ -23,10 +23,20 @@ img
     top: 50%;
     color: #ffffff;
     opacity: 0.8;
-    transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%) scale(1.5);
 }
 
 .video-item .small
 {
     width: 70px;
+}
+
+.video-item .medium
+{
+    width: 150px;
+}
+
+.video-item .medium .icon
+{
+    transform: translateX(-50%) translateY(-50%) scale(1.5);
 }

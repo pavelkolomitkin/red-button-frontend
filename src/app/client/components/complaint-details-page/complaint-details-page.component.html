@@ -2,15 +2,24 @@
     <div class="box box-primary" *ngIf="!!complaint">
         <div class="box-header with-border">
             <h3 class="box-title">{{ complaint.region.title }} <span class="text-muted">({{ complaint.region.federalDistrict.title }})</span></h3>
+
+            <div class="box-tools pull-right">
+                <a routerLink="/client/complaint/{{complaint.id}}/edit" type="button" class="btn btn-box-tool"><i class="fa fa-edit"></i></a>
+                <button type="button" class="btn btn-box-tool" (click)="onDeleteClickHandler($event)"><i class="fa fa-trash"></i></button>
+            </div>
         </div>
         <div class="box-body">
-            <div>
-                <app-map-view [complaint]="complaint"></app-map-view>
-            </div>
             <p>
-                <span class="text">{{ complaint.message }}</span>
+                <app-map-view [complaint]="complaint"></app-map-view>
             </p>
             <p>
+                <b>Message</b>
+                <br/>
+                <span class="text">{{ complaint.message }}</span>
+            </p>
+            <p *ngIf="complaint.pictures.length > 0">
+                <b>Pictures</b>
+                <br/>
                 <app-picture-list [list]="complaint.pictures"></app-picture-list>
             </p>
             <p>

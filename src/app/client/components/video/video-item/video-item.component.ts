@@ -10,6 +10,9 @@ export class VideoItemComponent implements OnInit {
 
   @Input() video: Video;
 
+  /**
+   * using values: 'small', 'medium'
+   */
   @Input() size: string = 'small';
 
   constructor() { }

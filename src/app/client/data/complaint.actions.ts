@@ -21,6 +21,7 @@ export const COMPLAINT_GET_START = 'COMPLAINT_GET_START';
 export const COMPLAINT_GET_SUCCESS = 'COMPLAINT_GET_SUCCESS';
 export const COMPLAINT_GET_ERROR = 'COMPLAINT_GET_ERROR';
 
+export const COMPLAINT_DELETE_RESET = 'COMPLAINT_DELETE_RESET';
 export const COMPLAINT_DELETE_INIT = 'COMPLAINT_DELETE_INIT';
 export const COMPLAINT_DELETE_START = 'COMPLAINT_DELETE_START';
 export const COMPLAINT_DELETE_SUCCESS = 'COMPLAINT_DELETE_SUCCESS';
@@ -133,6 +134,11 @@ export class ComplaintGetError implements Action
 }
 
 
+export class ComplaintDeleteReset implements Action
+{
+    readonly type = COMPLAINT_DELETE_RESET;
+}
+
 export class ComplaintDeleteInit implements Action
 {
     readonly type = COMPLAINT_DELETE_INIT;
@@ -184,6 +190,7 @@ export type ComplaintActions =
     | ComplaintGetSuccess
     | ComplaintGetError
 
+    | ComplaintDeleteReset
     | ComplaintDeleteInit
     | ComplaintDeleteStart
     | ComplaintDeleteSuccess
