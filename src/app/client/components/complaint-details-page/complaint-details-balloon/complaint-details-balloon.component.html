@@ -2,5 +2,6 @@
   <div class="balloon-title">{{ complaint.region.title }}</div>
   <div class="balloon-content">
     {{ complaint.address.displayName }}
+    <div class="text-primary" *ngIf="!!complaint.serviceType">{{ complaint.serviceType.title }}</div>
   </div>
 </app-map-balloon>

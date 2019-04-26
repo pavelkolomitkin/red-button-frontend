@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ComplaintPicture} from '../../../data/model/complaint-picture.model';
+import {Lightbox} from 'ngx-lightbox';
 
 @Component({
   selector: 'app-picture-list',
@@ -10,16 +11,26 @@ export class PictureListComponent implements OnInit {
 
   @Input() list: Array<ComplaintPicture> = [];
 
-  isLightBoxVisible: boolean = false;
+  lightBoxItems: Array<{ src: string, caption: string, thumb: string }>;
 
-  constructor() { }
+  constructor(private lightBox: Lightbox) {
 
-  ngOnInit() {
   }
 
-  onPictureClickHandler(event)
+  ngOnInit() {
+
+    this.lightBoxItems = this.list.map((item) => {
+      return {
+        src: item.sources['previewNormal'] as string,
+        caption: '',
+        thumb: item.sources['previewMiddle'] as string
+      }
+    });
+  }
+
+  onPictureClickHandler(event, index)
   {
-    this.isLightBoxVisible = true;
+    this.lightBox.open(this.lightBoxItems, index);
   }
 
 }

@@ -10,8 +10,7 @@ import { UploadItemComponent } from './components/upload-item/upload-item.compon
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {PreventEnterSubmitFormDirective} from './directives/prevent-enter-submit-form.directive';
 import {PageHeaderDirective} from './directives/page-header.directive';
-import { CarouselComponent } from './components/carousel/carousel.component';
-import { LightBoxComponent } from './components/light-box/light-box.component';
+import {LightboxModule} from 'ngx-lightbox';
 
 
 @NgModule({
@@ -21,9 +20,7 @@ import { LightBoxComponent } from './components/light-box/light-box.component';
     MapBalloonComponent,
     UploadItemComponent,
     PreventEnterSubmitFormDirective,
-      PageHeaderDirective,
-      CarouselComponent,
-      LightBoxComponent,
+    PageHeaderDirective
   ],
   imports: [
     CommonModule,
@@ -31,6 +28,7 @@ import { LightBoxComponent } from './components/light-box/light-box.component';
     InfiniteScrollModule,
     MomentModule,
     NgbModule,
+      LightboxModule
 
   ],
     exports: [
@@ -44,8 +42,7 @@ import { LightBoxComponent } from './components/light-box/light-box.component';
         UploadItemComponent,
         PreventEnterSubmitFormDirective,
         PageHeaderDirective,
-        LightBoxComponent,
-        CarouselComponent
+        LightboxModule
     ],
   entryComponents: [MapComponent]
 })

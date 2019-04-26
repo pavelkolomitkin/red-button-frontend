@@ -35,6 +35,7 @@
               "node_modules/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css",
               "node_modules/admin-lte/plugins/iCheck/square/blue.css",
               "node_modules/ol/ol.css",
+              "node_modules/ngx-lightbox/lightbox.css",
               "src/styles.css"
             ],
             "scripts": [
