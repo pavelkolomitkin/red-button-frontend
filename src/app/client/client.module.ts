@@ -35,6 +35,10 @@ import { CommonTagItemComponent } from './components/common-tag-item/common-tag-
 import {ComplaintPictureItemComponent} from './components/picture/complaint-picture-item/complaint-picture-item.component';
 import { VideoItemComponent } from './components/video/video-item/video-item.component';
 import { CommonLayoutComponent } from './components/common-layout/common-layout.component';
+import { MapViewComponent } from './components/complaint-details-page/map-view/map-view.component';
+import { PictureListComponent } from './components/complaint-details-page/picture-list/picture-list.component';
+import { VideoListComponent } from './components/complaint-details-page/video-list/video-list.component';
+import { ComplaintDetailsBalloonComponent } from './components/complaint-details-page/complaint-details-balloon/complaint-details-balloon.component';
 
 
 @NgModule({
@@ -60,7 +64,11 @@ import { CommonLayoutComponent } from './components/common-layout/common-layout.
     CommonTagItemComponent,
     ComplaintPictureItemComponent,
     VideoItemComponent,
-    CommonLayoutComponent
+    CommonLayoutComponent,
+    MapViewComponent,
+    PictureListComponent,
+    VideoListComponent,
+    ComplaintDetailsBalloonComponent
   ],
     imports: [
         CommonModule,
@@ -82,6 +90,6 @@ import { CommonLayoutComponent } from './components/common-layout/common-layout.
       StoreModule,
       EffectsModule
   ],
-  entryComponents: [MapSelectedLocationComponent]
+  entryComponents: [MapSelectedLocationComponent, ComplaintDetailsBalloonComponent]
 })
 export class ClientModule { }

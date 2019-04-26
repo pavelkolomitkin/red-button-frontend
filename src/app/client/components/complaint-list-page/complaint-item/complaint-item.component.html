@@ -1,6 +1,6 @@
 <div class="complaint-item box box-solid">
   <div class="box-header with-border">
-    <h4>{{ complaint.region.title }} <small>({{ complaint.region.federalDistrict.title }})</small></h4>
+    <h4><a [routerLink]="'/client/complaint/' + complaint.id">{{ complaint.region.title }}</a>&nbsp;<small>({{ complaint.region.federalDistrict.title }})</small></h4>
 
     <div class="box-tools pull-right">
       <a routerLink="/client/complaint/{{complaint.id}}/edit" type="button" class="btn btn-box-tool"><i class="fa fa-edit"></i></a>

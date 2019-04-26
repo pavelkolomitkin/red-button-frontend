@@ -1,3 +1,29 @@
-<p>
-  complaint-details-page works!
-</p>
+<app-client-common-layout>
+    <div class="box box-primary" *ngIf="!!complaint">
+        <div class="box-header with-border">
+            <h3 class="box-title">{{ complaint.region.title }} <span class="text-muted">({{ complaint.region.federalDistrict.title }})</span></h3>
+        </div>
+        <div class="box-body">
+            <div>
+                <app-map-view [complaint]="complaint"></app-map-view>
+            </div>
+            <p>
+                <span class="text">{{ complaint.message }}</span>
+            </p>
+            <p>
+                <app-picture-list [list]="complaint.pictures"></app-picture-list>
+            </p>
+            <p>
+                <app-video-list [list]="complaint.videos"></app-video-list>
+            </p>
+        </div>
+
+        <div class="box-footer">
+            <div class="inline">
+                <app-common-tag-item *ngFor="let tag of complaint.tags" [tag]="tag"></app-common-tag-item>
+            </div>
+
+            <small class="pull-right text-muted">{{ complaint.createdAt | amFromUnix }}</small>
+        </div>
+    </div>
+</app-client-common-layout>

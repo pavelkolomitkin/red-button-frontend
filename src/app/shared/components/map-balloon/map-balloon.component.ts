@@ -14,7 +14,7 @@ export class MapBalloonComponent implements OnInit {
 
   @Output('onToggleCollapse') toggleCollapse: EventEmitter<boolean> = new EventEmitter();
 
-  isCollapsed: boolean = false;
+  @Input() isCollapsed: boolean = false;
 
   constructor() { }
 
