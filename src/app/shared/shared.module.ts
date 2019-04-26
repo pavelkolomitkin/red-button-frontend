@@ -11,6 +11,7 @@ import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {PreventEnterSubmitFormDirective} from './directives/prevent-enter-submit-form.directive';
 import {PageHeaderDirective} from './directives/page-header.directive';
 import {LightboxModule} from 'ngx-lightbox';
+import { VideoFrameComponent } from './components/video-frame/video-frame.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {LightboxModule} from 'ngx-lightbox';
     MapBalloonComponent,
     UploadItemComponent,
     PreventEnterSubmitFormDirective,
-    PageHeaderDirective
+    PageHeaderDirective,
+    VideoFrameComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import {LightboxModule} from 'ngx-lightbox';
         UploadItemComponent,
         PreventEnterSubmitFormDirective,
         PageHeaderDirective,
-        LightboxModule
+        LightboxModule,
+        VideoFrameComponent
     ],
   entryComponents: [MapComponent]
 })

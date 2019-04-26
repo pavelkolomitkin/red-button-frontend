@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Video} from '../../../data/model/video.model';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-video-list',
@@ -10,9 +11,28 @@ export class VideoListComponent implements OnInit {
 
   @Input() list: Array<Video> = [];
 
-  constructor() { }
+  @ViewChild('modalWindow') modalWindowTemplate: TemplateRef<any>;
+  modalWindow: NgbModalRef = null;
+
+  selectedVideo: Video;
+
+  constructor(private modal: NgbModal) { }
 
   ngOnInit() {
+  }
+
+  onItemClickHandler(video: Video)
+  {
+    this.selectedVideo = video;
+
+    this.modalWindow = this.modal.open(this.modalWindowTemplate, {centered: true});
+    this.modalWindow.result
+        .then((result) => {
+
+          this.modalWindow = null;
+        }, () => {
+          this.modalWindow = null;
+        });
   }
 
 }

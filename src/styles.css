@@ -15,7 +15,13 @@ body
 
 .modal-dialog
 {
-    margin: 70px auto !important;
+    margin: auto auto !important;
+    /*transform: none !important;*/
+    -webkit-transform: translate(0,0) !important;
+    -moz-transform: translate(0,0) !important;
+    -ms-transform: translate(0,0) !important;
+    -o-transform: translate(0,0) !important;
+    transform: translate(0,0) !important;
 }
 
 
