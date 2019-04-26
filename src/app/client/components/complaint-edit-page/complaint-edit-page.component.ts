@@ -7,6 +7,8 @@ import {filter} from 'rxjs/operators';
 import {ComplaintGetReset, ComplaintGetStart, ComplaintUpdateReset, ComplaintUpdateStart} from '../../data/complaint.actions';
 import {ActivatedRoute, Router} from '@angular/router';
 import User from '../../../core/data/model/user.model';
+import {GlobalNotifySuccessMessage} from '../../../core/data/actions';
+import {NotifyMessage} from '../../../core/data/model/notify-message.model';
 
 @Component({
   selector: 'app-complaint-edit-page',
@@ -66,6 +68,8 @@ export class ComplaintEditPageComponent implements OnInit, OnDestroy {
     this.updateSuccessSubscription = this.store.pipe(select(state => state.clientComplaint.updatedComplaint),
         filter(result => result !== null)).subscribe(
         (complaint: Complaint) => {
+
+            this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage('A new complaint has edited')));
           this.router.navigateByUrl('/client/complaint/' + complaint.id.toString());
         }
     );

@@ -1,10 +1,11 @@
-<ng-container *ngIf="user !== null;else bareLayout">
+<ng-container *ngIf="user !== null">
     <app-common-layout>
         <router-outlet></router-outlet>
     </app-common-layout>
 </ng-container>
-<ng-template #bareLayout>
+<ng-container *ngIf="user === null">
     <router-outlet></router-outlet>
-</ng-template>
+</ng-container>
 <app-confirmation></app-confirmation>
 <app-global-progress></app-global-progress>
+<app-message-notifier></app-message-notifier>

@@ -6,6 +6,8 @@ import {ComplaintCreateReset, ComplaintCreateStart} from '../../data/complaint.a
 import {filter} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
+import {GlobalNotifySuccessMessage} from '../../../core/data/actions';
+import {NotifyMessage} from '../../../core/data/model/notify-message.model';
 
 @Component({
   selector: 'app-complaint-create-page',
@@ -29,6 +31,7 @@ export class ComplaintCreatePageComponent implements OnInit, OnDestroy {
         filter(result => result !== null)
     ).subscribe((complaint: Complaint) => {
 
+      this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage('A new complaint has created')));
       this.router.navigateByUrl('/client/complaint/' + complaint.id.toString());
 
     });

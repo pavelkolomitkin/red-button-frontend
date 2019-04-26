@@ -36,6 +36,7 @@
               "node_modules/admin-lte/plugins/iCheck/square/blue.css",
               "node_modules/ol/ol.css",
               "node_modules/ngx-lightbox/lightbox.css",
+              "node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
             ],
             "scripts": [

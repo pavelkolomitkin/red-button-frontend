@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {Store} from "@ngrx/store";
 import {State} from "../../../app.state";
 import {tap} from "rxjs/operators";
-import {Router} from "@angular/router";
 import {GlobalNotifyErrorMessage} from "../../data/actions";
 import {NotifyMessage} from "../../data/model/notify-message.model";
 import {UserLogout} from '../../../security/data/actions';
@@ -15,8 +14,7 @@ export class ErrorResponseHandlerInterceptor implements HttpInterceptor
   static UNAUTHORIZE_ERROR_CODE = 401;
 
   constructor(
-    private store: Store<State>,
-    private router: Router
+    private store: Store<State>
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

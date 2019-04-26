@@ -42,3 +42,7 @@ button.dropdown-item
 {
     font-size: 1.2em !important;
 }
+
+.toast {
+    opacity: 1 !important;
+}

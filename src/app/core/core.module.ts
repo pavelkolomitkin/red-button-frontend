@@ -45,6 +45,8 @@ import {ClientDeviceEffects} from './data/effects/client-device.effects';
 import { ConfirmationWindowComponent } from './components/confirmation-window/confirmation-window.component';
 import { ControlItemComponent } from './components/confirmation-window/control-item/control-item.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import {MessageNotifierComponent} from './components/message-notifier/message-notifier.component';
+import {ToastrModule} from 'ngx-toastr';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -66,6 +68,7 @@ const httpInterceptorProviders = [
     ConfirmationWindowComponent,
     ControlItemComponent,
     ConfirmationComponent,
+      MessageNotifierComponent
   ],
   imports: [
     CommonModule,
@@ -73,6 +76,7 @@ const httpInterceptorProviders = [
     HttpClientModule,
     SharedModule,
     NgxPermissionsModule.forRoot(),
+    ToastrModule.forRoot(),
     StoreModule.forRoot({
       core: coreReducer,
       security: securityReducer,
@@ -116,6 +120,8 @@ const httpInterceptorProviders = [
         EffectsModule,
         NgxPermissionsModule,
         ConfirmationComponent,
+        MessageNotifierComponent,
+        ToastrModule
     ]
 })
 export class CoreModule { }
