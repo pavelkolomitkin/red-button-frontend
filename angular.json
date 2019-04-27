@@ -34,11 +34,15 @@
               "node_modules/admin-lte/bower_components/bootstrap-daterangepicker/daterangepicker.css",
               "node_modules/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css",
               "node_modules/admin-lte/plugins/iCheck/square/blue.css",
+              "node_modules/ol/ol.css",
+              "node_modules/ngx-lightbox/lightbox.css",
+              "node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
             ],
             "scripts": [
               "node_modules/admin-lte/bower_components/jquery/dist/jquery.min.js",
               "node_modules/admin-lte/bower_components/jquery-ui/jquery-ui.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/admin-lte/bower_components/raphael/raphael.min.js",
               "node_modules/admin-lte/bower_components/morris.js/morris.min.js",

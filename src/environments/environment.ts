@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  baseApiUrl: 'http://localhost:7777/api'
+  baseApiUrl: 'http://localhost:7777/api',
+  defaultGeoPosition: {
+    latitude: 55.75184939,
+    longitude: 37.62817383
+  }
 };
 
 /*

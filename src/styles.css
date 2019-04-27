@@ -2,3 +2,47 @@ body
 {
     background-color: #d2d6de;
 }
+
+.modal.fade
+{
+    opacity: 1 !important;
+}
+
+.modal-backdrop.fade
+{
+    transition: none !important;
+}
+
+.modal-dialog
+{
+    margin: auto auto !important;
+    /*transform: none !important;*/
+    -webkit-transform: translate(0,0) !important;
+    -moz-transform: translate(0,0) !important;
+    -ms-transform: translate(0,0) !important;
+    -o-transform: translate(0,0) !important;
+    transform: translate(0,0) !important;
+}
+
+
+button.dropdown-item
+{
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+}
+
+.box.box-solid>.box-header .btn:hover, .box.box-solid>.box-header a:hover
+{
+    background: none !important;
+}
+
+.btn.btn-box-tool
+{
+    font-size: 1.2em !important;
+}
+
+.toast {
+    opacity: 1 !important;
+}

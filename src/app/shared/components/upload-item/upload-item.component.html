@@ -1,0 +1,18 @@
+<div class="upload-item">
+  <div class="preview-container">
+    <ng-content></ng-content>
+  </div>
+  <div class="progress progress-sm active" *ngIf="!uploadItem.errors">
+    <div
+            class="progress-bar
+      progress-bar-striped progress-bar-animated progress-bar-green"
+            role="progressbar"
+            [attr.aria-valuenow]="uploadItem.percentageProgress"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [ngStyle]="{width: uploadItem.percentageProgress + '%'}"></div>
+  </div>
+  <div class="uploading-errors" *ngIf="uploadItem.errors !== null">
+    <div class="uploading-error text-danger">Can't upload this picture. Try some another.</div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="geo-location-selector-container" [ngClass]="isVisible ? 'visible' : ''">
+  <template #mapContainer></template>
+  <div class="controls">
+    <div class="control btn" (click)="onCloseControlClickHandler($event)">
+      <i class="fa fa-close"></i>
+    </div>
+  </div>
+</div>

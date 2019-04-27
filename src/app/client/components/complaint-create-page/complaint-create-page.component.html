@@ -1,0 +1,14 @@
+<app-client-common-layout>
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Describe the problem</h3>
+    </div>
+
+    <app-complaint-form
+            [complaint]="complaint"
+            [errors]="errors"
+            (onSubmit)="onSubmitForm($event)"
+    ></app-complaint-form>
+
+  </div>
+</app-client-common-layout>

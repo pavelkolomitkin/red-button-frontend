@@ -1,18 +1,40 @@
 import * as actions from './actions';
 import {NotifyMessage} from "./model/notify-message.model";
+import {GeoLocation} from './model/geo-location.model';
+import {ActionConfirmation} from './model/action-confirmation.model';
+import {BreadCrumb} from './model/bread-crumb.model';
 
 export interface State {
   globalProgressLoaders: number;
 
   lastSuccessMessage: NotifyMessage;
   lastErrorMessage: NotifyMessage;
+
+  deviceGeoLocation: GeoLocation;
+
+  lastInitConfirmation: ActionConfirmation;
+  lastRespondedConfirmation: ActionConfirmation;
+
+  pageTitle: string;
+  pageSubTitle: string;
+
+  breadCrumbs: Array<BreadCrumb>;
+
 }
 
 const initialState: State = {
   globalProgressLoaders: 0,
 
   lastSuccessMessage: null,
-  lastErrorMessage: null
+  lastErrorMessage: null,
+  deviceGeoLocation: null,
+  lastInitConfirmation: null,
+  lastRespondedConfirmation: null,
+
+  pageTitle: '',
+  pageSubTitle: '',
+
+  breadCrumbs: []
 };
 
 export function reducer(state = initialState, action: actions.CoreActions): State {
@@ -56,6 +78,50 @@ export function reducer(state = initialState, action: actions.CoreActions): Stat
       return {
         ...state,
         lastErrorMessage: action.message
+      };
+
+    case actions.GLOBAL_DEVICE_GEO_LOCATION_DETECT_DONE:
+
+      return {
+        ...state,
+        deviceGeoLocation: action.location
+      };
+
+    case actions.GLOBAL_CONFIRMATION_INIT:
+
+      return {
+        ...state,
+        lastInitConfirmation: action.confirmation
+      };
+
+    case actions.GLOBAL_CONFIRMATION_RESPONSE:
+
+      return {
+        ...state,
+        lastRespondedConfirmation: action.confirmation
+      };
+
+    case actions.GLOBAL_CONFIRMATION_RESET:
+
+      return {
+        ...state,
+        lastInitConfirmation: null,
+        lastRespondedConfirmation: null
+      };
+
+    case actions.GLOBAL_PAGE_TITLE:
+
+      return {
+        ...state,
+        pageTitle: action.title,
+        pageSubTitle: action.subTitle
+      };
+
+    case actions.GLOBAL_BREAD_CRUMBS:
+
+      return {
+        ...state,
+        breadCrumbs: [...action.items]
       };
 
     default:

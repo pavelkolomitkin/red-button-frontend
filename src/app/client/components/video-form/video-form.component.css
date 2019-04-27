@@ -1,0 +1,13 @@
+.url-form-field
+{
+    position: relative;
+}
+
+.url-form-field .load-progress
+{
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 0;
+    right: 0;
+}

@@ -1,0 +1,30 @@
+<div class="control-container">
+  <span class="btn btn-success" (click)="onAddVideoClickHandler($event)"><i class="fa fa-plus"></i> Add video</span>
+</div>
+
+<div class="row">
+  <div class="col-md-4 col-sm-4 col-lg-2 col-xl-2 col-4" *ngFor="let video of list">
+    <app-video-item-form-field
+            [video]="video"
+            (onDelete)="onVideoDeleteHandler($event)"></app-video-item-form-field>
+  </div>
+</div>
+
+<ng-template #addVideoModal let-modal>
+  <app-video-form (onConfirmVideo)="onConfirmVideoHandler($event)"></app-video-form>
+</ng-template>
+
+<ng-template #removeAlertModal let-modal>
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="modal-basic-title">Remove video?</h4>
+  </div>
+  <div class="modal-body">
+    <b>Do you really want to remove the video?</b>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close()">Remove</button>
+  </div>
+</ng-template>
