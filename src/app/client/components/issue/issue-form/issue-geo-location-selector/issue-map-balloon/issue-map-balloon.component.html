@@ -5,7 +5,7 @@
   <div class="balloon-title">
 
     <ng-container *ngIf="currentState === 'STATE_LOADING'"></ng-container>
-    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">Confirm the location</ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">Issue Location</ng-container>
     <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'">Cannot identify the region!</ng-container>
 
   </div>
@@ -32,11 +32,11 @@
   </div>
 
   <div class="balloon-footer">
-    <ng-container *ngIf="currentState === 'STATE_LOADING'"></ng-container>
     <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">
-      <span class="btn btn-success" (click)="onConfirmAddressClick($event)">Confirm</span>
+      <span class="btn btn-danger" (click)="onCancelClickHandler($event)">
+        <i class="fa fa-remove"></i> Cancel
+      </span>
     </ng-container>
-    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'"></ng-container>
   </div>
 
 </app-map-balloon>

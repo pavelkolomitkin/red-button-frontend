@@ -8,21 +8,21 @@ import {Subscription} from 'rxjs';
   templateUrl: './issue-map-balloon.component.html',
   styleUrls: ['./issue-map-balloon.component.css']
 })
-export class IssueMapBalloonComponent implements OnInit, OnDestroy {
+export class IssueMapBalloonComponent implements OnInit {
 
   static STATE_LOADING = 'STATE_LOADING';
   static STATE_LOCATION_DETECTED_SUCCESS = 'STATE_LOCATION_DETECTED_SUCCESS';
   static STATE_LOCATION_DETECTED_ERROR = 'STATE_LOCATION_DETECTED_ERROR';
 
-  @Output('onAddressSelected') addressSelectEvent: EventEmitter<Issue> = new EventEmitter();
+  @Output('onLocationUpdateSuccess') locationUpdateSuccessEvent: EventEmitter<Issue> = new EventEmitter();
+  @Output('onLocationUpdateError') locationUpdateErrorEvent: EventEmitter<Issue> = new EventEmitter();
+  @Output('onLocationCancel') locationCancelEvent: EventEmitter<Issue> = new EventEmitter();
 
   @Input() needPositionReload: boolean = false;
 
   @Input() issue: Issue;
 
   currentState: string = IssueMapBalloonComponent.STATE_LOADING;
-
-  geoLocationSubscription: Subscription;
 
   constructor(private service: GeoLocationService)
   {
@@ -33,7 +33,9 @@ export class IssueMapBalloonComponent implements OnInit, OnDestroy {
   {
     if (this.needPositionReload)
     {
-      this.geoLocationSubscription = this.service.getAddressByCoordinates(this.issue.location).subscribe(
+      this.service.getAddressByCoordinates(this.issue.location)
+          .toPromise()
+          .then(
           ({region, addition}) => {
 
             this.issue.region = region;
@@ -41,25 +43,25 @@ export class IssueMapBalloonComponent implements OnInit, OnDestroy {
 
             this.currentState = IssueMapBalloonComponent.STATE_LOCATION_DETECTED_SUCCESS;
 
-          },
-          (errors) => {
+            this.locationUpdateSuccessEvent.emit(this.issue);
+
+          })
+          .catch((errors) => {
 
             this.currentState = IssueMapBalloonComponent.STATE_LOCATION_DETECTED_ERROR;
+
+            this.issue.region = null;
+            this.issue.address = null;
+
+            this.locationUpdateErrorEvent.emit(this.issue);
 
           });
     }
   }
 
-  ngOnDestroy(): void {
-
-    if (!this.geoLocationSubscription)
-    {
-      this.geoLocationSubscription.unsubscribe();
-    }
+  onCancelClickHandler = () => {
+    this.issue.region = null;
+    this.issue.address = null;
+    this.locationCancelEvent.emit(this.issue);
   }
-
-  onConfirmAddressClick(event) {
-    this.addressSelectEvent.emit(this.issue);
-  }
-
 }

@@ -9,6 +9,7 @@ import {ComplaintService} from '../../../../services/complaint.service';
 import {Complaint} from '../../../../data/model/complaint.model';
 import {MapViewBox} from '../../../../../shared/data/model/map-view-box.model';
 import {ComplaintMapBalloonComponent} from './complaint-map-balloon/complaint-map-balloon.component';
+import {IssueMapBalloonComponent} from './issue-map-balloon/issue-map-balloon.component';
 
 @Component({
   selector: 'app-issue-geo-location-selector',
@@ -27,6 +28,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   internalIssue: Issue;
 
+  issueBalloon: ComponentRef<IssueMapBalloonComponent>;
   complaintBalloons: Array<ComponentRef<ComplaintMapBalloonComponent>> = [];
 
   isSelectingLocation: boolean = false;
@@ -82,58 +84,92 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   }
 
-  updateMapState()
-  {
-    const { location, region, address } = this.issue;
-    if (!!location && !!region && !!address)
-    {
-      // center map with issue location
-      this.map.setCenter(location);
-
-      // add issue balloon to the map
-      // add complaint confirmation balloons for attached ones
-
-      // request complaints which are nearby and could be attached
-    }
-    else
-    {
-      // center on device location
-      this.map.setCenter(this.deviceLocation);
-
-      const viewBox = this.map.getViewBox();
-
-      // request complaints which are in the visible box
-      this.complaintService.search({
-        topLeftLatitude: viewBox.topLeft.latitude,
-        topLeftLongitude: viewBox.topLeft.longitude,
-        bottomRightLatitude: viewBox.bottomRight.latitude,
-        bottomRightLongitude: viewBox.bottomRight.longitude
-      }).subscribe((complaints: Array<Complaint>) => {
-
-        //
-
-      });
-    }
-  }
-
-  setDefaultMapZoom()
-  {
-
-  }
-
   onLocationClickHandler(location: GeoLocation)
   {
     if (this.isSelectingLocation)
     {
-
+      this.addIssueBalloon(location);
     }
   }
 
-  onViewBoxChangeHandler(box: MapViewBox)
+
+  addIssueBalloon(location: GeoLocation)
   {
+    this.removeAllComplaintBalloons();
+    this.removeIssueBalloon();
+
+    this.issueBalloon = this.map.addBalloon(IssueMapBalloonComponent, location);
+
+    const { instance } = this.issueBalloon;
+
+    instance.locationUpdateSuccessEvent.subscribe((issue: Issue) => {
+
+      this.initUnAttachedComplaintAroundIssue();
+
+    });
+
+    instance.locationUpdateErrorEvent.subscribe((issue: Issue) => {
+      this.removeAllComplaintBalloons();
+    });
+
+    instance.locationCancelEvent.subscribe((issue: Issue) => {
+
+      this.removeIssueBalloon();
+      this.updateComplaintsWithViewBox();
+    });
+
+    this.internalIssue.location = location;
+
+    instance.issue = this.internalIssue;
+    instance.needPositionReload = true;
+  }
+
+  initUnAttachedComplaintAroundIssue = () => {
+
+    const box = this.map.getViewBox();
+
+    if (box.zoom >= IssueGeoLocationSelectorComponent.LOADING_DATA_ZOOM)
+    {
+      this.complaintService.search({
+        centerLatitude: this.internalIssue.location.latitude,
+        centerLongitude: this.internalIssue.location.longitude
+      })
+          .toPromise()
+          .then((complaints: Array<Complaint>) => {
+
+            this.updateComplaintBalloons(complaints);
+
+          })
+          .catch(() => {
+            this.removeAllComplaintBalloons();
+          })
+      ;
+    }
+    else
+    {
+      this.removeAllComplaintBalloons();
+    }
+  };
+
+  removeIssueBalloon()
+  {
+    if (!!this.issueBalloon)
+    {
+      this.map.removeBalloon(this.issueBalloon);
+      this.issueBalloon = null;
+    }
+  }
+
+  updateComplaintsWithViewBox = () => {
+
+    const box = this.map.getViewBox();
     console.log('Box -->');
     console.log(box);
 
+    if (!!this.internalIssue.address && !!this.internalIssue.region)
+    {
+      return;
+    }
 
     if (box.zoom >= IssueGeoLocationSelectorComponent.LOADING_DATA_ZOOM)
     {
@@ -143,20 +179,26 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
         bottomRightLatitude: box.bottomRight.latitude,
         bottomRightLongitude: box.bottomRight.longitude
       })
-        .toPromise()
-        .then((complaints) => {
+          .toPromise()
+          .then((complaints) => {
 
-          this.updateComplaintBalloons(complaints);
+            this.updateComplaintBalloons(complaints);
 
-        });
+          })
+          .catch(() => {
+            this.removeAllComplaintBalloons();
+          });
     }
     else
     {
       // remove all searched data from map
       this.removeAllComplaintBalloons();
     }
+  };
 
-
+  onViewBoxChangeHandler(box: MapViewBox)
+  {
+    this.updateComplaintsWithViewBox();
   }
 
   updateComplaintBalloons = (updatedItems: Array<Complaint>) =>
@@ -226,9 +268,4 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
     this.complaintBalloons = [];
   };
-
-  addIssueBalloon(issue: Issue)
-  {
-
-  }
 }
