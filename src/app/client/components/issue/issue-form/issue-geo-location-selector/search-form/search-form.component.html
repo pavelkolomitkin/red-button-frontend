@@ -2,10 +2,20 @@
 
   <div class="form-group">
     <label>Service Type</label>
-    <select class="form-control">
-      <option>All</option>
+    <select
+            class="form-control"
+            ngModel
+            [compareWith]="compareServiceTypes"
+            [required]="false"
+            name="selectedServiceType"
+            id="selectedServiceType"
+            (ngModelChange)="onServiceTypeChangeHandler($event)"
+    >
+      <option value="" [selected]="true">All</option>
+      <option *ngFor="let serviceType of serviceTypes | async" [ngValue]="serviceType">{{ serviceType.title }}</option>
     </select>
   </div>
+
   <div class="form-group">
     <label>Tags</label>
     <div>
