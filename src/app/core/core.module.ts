@@ -17,6 +17,7 @@ import { reducer as coreReducer } from './data/reducer';
 import { reducer as securityReducer } from '../security/data/reducer';
 import { reducer as geoLocationReducer } from './data/geo-location.reducer';
 import { reducer as serviceTypeReducer } from './data/service-type.reducer';
+import { reducer as mapReducer } from '../shared/data/map.reducer';
 import { RegisterEffects } from '../security/data/effects/register.effects';
 import { AuthEffects } from '../security/data/effects/auth.effects';
 import { AuthUserGuard } from '../security/services/guards/AuthUserGuard';
@@ -81,7 +82,8 @@ const httpInterceptorProviders = [
       core: coreReducer,
       security: securityReducer,
       geoLocation: geoLocationReducer,
-      serviceType: serviceTypeReducer
+      serviceType: serviceTypeReducer,
+      map: mapReducer
     }),
     EffectsModule.forRoot([
       RegisterEffects, AuthEffects, ServiceTypeEffects, ClientDeviceEffects

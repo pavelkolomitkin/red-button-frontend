@@ -97,8 +97,8 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
   }
 
   onRequestSignatureHandler = (complaint: Complaint) => {
-    console.log('Request the signature -->');
-    console.log(complaint);
+    // console.log('Request the signature -->');
+    // console.log(complaint);
 
     const confirmation: ComplaintConfirmation = {
       complaint: complaint,
@@ -249,8 +249,8 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
   updateComplaintsWithViewBox = () => {
 
     const box = this.map.getViewBox();
-    console.log('Box -->');
-    console.log(box);
+    // console.log('Box -->');
+    // console.log(box);
 
     if (!!this.internalIssue.address && !!this.internalIssue.region)
     {

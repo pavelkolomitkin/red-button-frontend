@@ -1,6 +1,6 @@
 import {
   Component,
-  ComponentFactoryResolver, ComponentRef,
+  ComponentFactoryResolver, ComponentRef, ElementRef,
   EventEmitter,
   Input,
   OnDestroy,
@@ -16,6 +16,10 @@ import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import {GeoLocation} from '../../../core/data/model/geo-location.model';
 import {MapViewBox} from '../../data/model/map-view-box.model';
+import {select, Store} from '@ngrx/store';
+import {State} from '../../../app.state';
+import {filter} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-map',
@@ -37,7 +41,12 @@ export class MapComponent implements OnInit, OnDestroy {
 
   @ViewChild('mapContainer', { read: ViewContainerRef }) mapContainerRef: ViewContainerRef;
 
-  constructor(private componentResolver: ComponentFactoryResolver) { }
+  panElementSubscription: Subscription;
+
+  constructor(private componentResolver: ComponentFactoryResolver, private store: Store<State>) {
+
+
+  }
 
   ngOnInit() {
 
@@ -50,6 +59,7 @@ export class MapComponent implements OnInit, OnDestroy {
             source: new OSM()
           })
       ],
+      overlays: [],
       view: new View({
         center: fromLonLat([longitude, latitude]),
         zoom: this.defaultZoom
@@ -60,6 +70,11 @@ export class MapComponent implements OnInit, OnDestroy {
     this.map.on('singleclick', this.onMapClickHandler);
     this.map.on('moveend', this.onManMoveEndHandler);
 
+    this.panElementSubscription = this.store.pipe(select(state => state.map.domElement), filter(result => !!result))
+        .subscribe((element: any) => {
+          this.panToBalloon(element);
+        });
+
     this.ready.emit();
   }
 
@@ -67,6 +82,8 @@ export class MapComponent implements OnInit, OnDestroy {
 
     this.map.un('singleclick');
     this.map.un('moveend');
+
+    this.panElementSubscription.unsubscribe();
 
   }
 
@@ -139,6 +156,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
     const overlay: Overlay = this.createOverlay(result);
     overlay.setPosition(position);
+
     this.map.addOverlay(overlay);
 
     return result;
@@ -157,6 +175,22 @@ export class MapComponent implements OnInit, OnDestroy {
 
     return result;
   }
+
+  panToBalloon = (element: any) => {
+
+    const overlays:Array<any> = this.map.getOverlays().getArray();
+
+    for (let index in overlays)
+    {
+      let overlay = overlays[index];
+
+      if (overlay.options.element === element)
+      {
+        overlay.setPosition([...overlay.values_.position]);
+        break;
+      }
+    }
+  };
 
   createOverlay<C>(component: ComponentRef<C>): Overlay
   {
