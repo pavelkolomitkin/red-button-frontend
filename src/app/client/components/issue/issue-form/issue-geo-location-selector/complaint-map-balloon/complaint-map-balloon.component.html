@@ -38,7 +38,8 @@
       </ng-container>
     </p>
     <div>
-      <small class="text-muted">{{ complaint.createdAt | amFromUnix }}</small>
+      <small class="text-primary pull-left" *ngIf="!!complaint.serviceType">{{ complaint.serviceType.title }}</small>
+      <small class="pull-right text-muted">{{ complaint.createdAt | amFromUnix }}</small>
     </div>
   </div>
 

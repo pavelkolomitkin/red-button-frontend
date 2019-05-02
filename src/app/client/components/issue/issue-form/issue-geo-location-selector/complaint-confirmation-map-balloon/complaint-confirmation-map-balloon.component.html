@@ -41,7 +41,8 @@
       </ng-container>
     </p>
     <div>
-      <small class="text-muted">{{ confirmation.complaint.createdAt | amFromUnix }}</small>
+      <small class="text-primary pull-left" *ngIf="!!confirmation.complaint.serviceType">{{ confirmation.complaint.serviceType.title }}</small>
+      <small class="text-muted pull-right">{{ confirmation.complaint.createdAt | amFromUnix }}</small>
     </div>
   </div>
 
