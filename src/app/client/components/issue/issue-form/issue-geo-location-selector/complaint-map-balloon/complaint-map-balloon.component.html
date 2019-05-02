@@ -43,7 +43,7 @@
   </div>
 
   <div class="balloon-footer">
-    <span class="btn btn-primary" (click)="onRequestButtonClickHandler($event)">
+    <span class="btn btn-primary" (click)="onRequestButtonClickHandler($event)" *ngIf="canRequestSignature">
       <i class="fa fa-plus"></i> Request a signature
     </span>
   </div>

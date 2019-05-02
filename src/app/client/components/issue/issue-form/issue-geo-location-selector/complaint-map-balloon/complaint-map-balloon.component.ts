@@ -7,10 +7,12 @@ import {Complaint} from '../../../../../data/model/complaint.model';
   styleUrls: ['./complaint-map-balloon.component.css']
 })
 export class ComplaintMapBalloonComponent implements OnInit {
-
-  @Output('onChoose') chooseEvent: EventEmitter<Complaint> = new EventEmitter();
+  
+  @Output('onRequestSignature') requestSignatureEvent: EventEmitter<Complaint> = new EventEmitter();
 
   @Input() complaint: Complaint;
+
+  @Input() canRequestSignature: boolean = false;
 
   constructor() { }
 
@@ -20,7 +22,7 @@ export class ComplaintMapBalloonComponent implements OnInit {
 
   onRequestButtonClickHandler(event)
   {
-    this.chooseEvent.emit(this.complaint);
+    this.requestSignatureEvent.emit(this.complaint);
   }
 
 }

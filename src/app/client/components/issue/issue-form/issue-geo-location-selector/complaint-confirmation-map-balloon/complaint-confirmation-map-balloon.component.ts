@@ -8,10 +8,7 @@ import {ComplaintConfirmation} from '../../../../../data/model/complaint-confirm
 })
 export class ComplaintConfirmationMapBalloonComponent implements OnInit {
 
-  @Output('onDelete') deleteEvent: EventEmitter<{
-    confirmation: ComplaintConfirmation,
-    balloon: ComplaintConfirmationMapBalloonComponent
-  }> = new EventEmitter();
+  @Output('onDelete') deleteEvent: EventEmitter<ComplaintConfirmation> = new EventEmitter();
 
   @Input() confirmation: ComplaintConfirmation;
 
@@ -23,10 +20,7 @@ export class ComplaintConfirmationMapBalloonComponent implements OnInit {
 
   onDeleteButtonClickHandler(event)
   {
-    this.deleteEvent.emit({
-      confirmation: this.confirmation,
-      balloon: this
-    });
+    this.deleteEvent.emit(this.confirmation);
   }
 
 }

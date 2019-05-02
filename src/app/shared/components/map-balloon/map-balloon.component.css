@@ -94,3 +94,13 @@
     margin-top: -5px;
     background-color: #fff;
 }
+
+.bg-issue
+{
+    background: #ff8700;
+}
+
+.bg-confirmation
+{
+    background: #1fc346;
+}

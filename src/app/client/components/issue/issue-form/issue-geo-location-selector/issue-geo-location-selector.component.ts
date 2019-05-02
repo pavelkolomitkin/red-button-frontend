@@ -10,6 +10,9 @@ import {Complaint} from '../../../../data/model/complaint.model';
 import {MapViewBox} from '../../../../../shared/data/model/map-view-box.model';
 import {ComplaintMapBalloonComponent} from './complaint-map-balloon/complaint-map-balloon.component';
 import {IssueMapBalloonComponent} from './issue-map-balloon/issue-map-balloon.component';
+import {ComplaintConfirmation} from '../../../../data/model/complaint-confirmation.model';
+import {ComplaintConfirmationStatus} from '../../../../data/model/complaint-confirmation-status.model';
+import {ComplaintConfirmationMapBalloonComponent} from './complaint-confirmation-map-balloon/complaint-confirmation-map-balloon.component';
 
 @Component({
   selector: 'app-issue-geo-location-selector',
@@ -30,6 +33,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   issueBalloon: ComponentRef<IssueMapBalloonComponent>;
   complaintBalloons: Array<ComponentRef<ComplaintMapBalloonComponent>> = [];
+  confirmationBalloons : Array<ComponentRef<ComplaintConfirmationMapBalloonComponent>> = [];
 
   isSelectingLocation: boolean = false;
 
@@ -71,7 +75,6 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
       this.map.setCenter(location);
       this.map.setZoom(IssueGeoLocationSelectorComponent.LOADING_DATA_ZOOM);
 
-
     }
 
     // install the balloon of selected location of certain issue if it we have it
@@ -89,8 +92,89 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
     if (this.isSelectingLocation)
     {
       this.addIssueBalloon(location);
+      this.isSelectingLocation = false;
     }
   }
+
+  onRequestSignatureHandler = (complaint: Complaint) => {
+    console.log('Request the signature -->');
+    console.log(complaint);
+
+    const confirmation: ComplaintConfirmation = {
+      complaint: complaint,
+      status: {
+        code: ComplaintConfirmationStatus.STATUS_PENDING
+      },
+    };
+
+    this.internalIssue.complaintConfirmations.push(confirmation);
+
+    this.updateConfirmationBalloons();
+  };
+
+  deleteConfirmationHandler = (confirmation: ComplaintConfirmation) => {
+
+    this.removeConfirmationBalloon(confirmation);
+    this.initUnAttachedComplaintAroundIssue();
+
+  };
+
+  updateConfirmationBalloons = () => {
+
+    this.internalIssue.complaintConfirmations.forEach((confirmation: ComplaintConfirmation) => {
+
+      this.addConfirmationBalloon(confirmation);
+
+    });
+
+  };
+
+  addConfirmationBalloon = (confirmation: ComplaintConfirmation) => {
+
+    const index = this.confirmationBalloons.findIndex(component => component.instance.confirmation.complaint.id === confirmation.complaint.id);
+
+    if (index === -1)
+    {
+      const componentRef = this.map.addBalloon(ComplaintConfirmationMapBalloonComponent, confirmation.complaint.location);
+
+      const { instance } = componentRef;
+      instance.confirmation = confirmation;
+
+      instance.deleteEvent.subscribe(this.deleteConfirmationHandler);
+
+      this.confirmationBalloons.push(componentRef);
+
+      this.removeComplaintBalloon(confirmation.complaint);
+    }
+
+  };
+
+  removeConfirmationBalloon = (confirmation: ComplaintConfirmation) => {
+
+    const index = this.confirmationBalloons.findIndex(component => component.instance.confirmation.complaint.id === confirmation.complaint.id);
+    if (index !== -1)
+    {
+      const componentRef = this.confirmationBalloons[index];
+
+      componentRef.instance.deleteEvent.unsubscribe();
+
+      this.map.removeBalloon(componentRef);
+      this.confirmationBalloons.splice(index, 1);
+    }
+  };
+
+  removeAllConfirmationBalloons = () => {
+
+    this.confirmationBalloons.forEach((componentRef: ComponentRef<ComplaintConfirmationMapBalloonComponent>) => {
+
+      this.map.removeBalloon(componentRef);
+
+    });
+
+    this.internalIssue.complaintConfirmations = [];
+    this.confirmationBalloons = [];
+
+  };
 
 
   addIssueBalloon(location: GeoLocation)
@@ -101,7 +185,6 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
     this.issueBalloon = this.map.addBalloon(IssueMapBalloonComponent, location);
 
     const { instance } = this.issueBalloon;
-
     instance.locationUpdateSuccessEvent.subscribe((issue: Issue) => {
 
       this.initUnAttachedComplaintAroundIssue();
@@ -115,6 +198,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
     instance.locationCancelEvent.subscribe((issue: Issue) => {
 
       this.removeIssueBalloon();
+      this.removeAllComplaintBalloons();
       this.updateComplaintsWithViewBox();
     });
 
@@ -137,7 +221,8 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
           .toPromise()
           .then((complaints: Array<Complaint>) => {
 
-            this.updateComplaintBalloons(complaints);
+            this.removeAllComplaintBalloons();
+            this.updateComplaintBalloons(complaints, true);
 
           })
           .catch(() => {
@@ -156,6 +241,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
     if (!!this.issueBalloon)
     {
       this.map.removeBalloon(this.issueBalloon);
+      this.removeAllConfirmationBalloons();
       this.issueBalloon = null;
     }
   }
@@ -201,33 +287,23 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
     this.updateComplaintsWithViewBox();
   }
 
-  updateComplaintBalloons = (updatedItems: Array<Complaint>) =>
+  updateComplaintBalloons = (updatedItems: Array<Complaint>, canRequestSignature: boolean = false) =>
   {
-
     const oldItems: Array<Complaint> = this.complaintBalloons.map(component => component.instance.complaint);
-
-    //const newItems: Array<Complaint> = [];
 
     updatedItems.forEach((item) => {
 
       if (oldItems.findIndex(complaint => complaint.id === item.id) === -1)
       {
-        // add to new items
-        //newItems.push(item);
-
-        this.addComplaintBalloon(item);
+        this.addComplaintBalloon(item, canRequestSignature);
       }
 
     });
-
-
-    //const removingItems: Array<Complaint> = [];
 
     oldItems.forEach((oldItem: Complaint) => {
 
       if (updatedItems.findIndex(item => item.id === oldItem.id) === -1)
       {
-        //removingItems.push(oldItem);
         this.removeComplaintBalloon(oldItem);
       }
 
@@ -235,14 +311,29 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   };
 
-  addComplaintBalloon = (complaint: Complaint) =>
+  addComplaintBalloon = (complaint: Complaint, canRequestSignature: boolean = false) =>
   {
+    const confirmationIndex = this.confirmationBalloons.findIndex(item => item.instance.confirmation.complaint.id === complaint.id);
+    if (confirmationIndex !== -1)
+    {
+      return;
+    }
+
     const index = this.complaintBalloons.findIndex(item => item.instance.complaint.id === complaint.id);
 
     if (index === -1)
     {
       const componentRef = this.map.addBalloon(ComplaintMapBalloonComponent, complaint.location);
-      componentRef.instance.complaint = complaint;
+
+      const { instance } = componentRef;
+
+      instance.complaint = complaint;
+
+      instance.canRequestSignature = canRequestSignature;
+      if (canRequestSignature)
+      {
+        instance.requestSignatureEvent.subscribe(this.onRequestSignatureHandler);
+      }
 
       this.complaintBalloons.push(componentRef);
     }
@@ -255,6 +346,11 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
     {
       const item: ComponentRef<ComplaintMapBalloonComponent> = this.complaintBalloons[index];
       this.map.removeBalloon(item);
+
+      if (item.instance.canRequestSignature)
+      {
+        item.instance.requestSignatureEvent.unsubscribe();
+      }
 
       this.complaintBalloons.splice(index, 1);
     }

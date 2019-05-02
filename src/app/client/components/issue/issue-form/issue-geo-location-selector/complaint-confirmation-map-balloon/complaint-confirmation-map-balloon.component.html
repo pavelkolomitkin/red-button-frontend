@@ -1,7 +1,4 @@
-<app-map-balloon [colorStyle]="
-  confirmation.status.code === 'confirmed' ? 'success' :
-    confirmation.status.code === 'rejected' ? 'danger' : 'default'
-">
+<app-map-balloon [colorStyle]="'confirmation'" [isCollapsed]="true">
 
   <div class="balloon-title">
     Signature
@@ -14,17 +11,38 @@
     <p class="text-primary">{{ confirmation.complaint.client.fullName }}</p>
     <p class="text-muted">{{
       confirmation.complaint.message.length > 150 ?
-      (confirmation.complaint.message | slice:0:150) + '...'
-      : confirmation.complaint.message }}
-      <a [routerLink]="'/client/complaint/' + confirmation.complaint.id.toString()">More...</a>
+              (confirmation.complaint.message | slice:0:150) + '...'
+              : confirmation.complaint.message }}
+      <a [routerLink]="'/client/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">More...</a>
     </p>
     <p>
-      <span class="small" *ngIf="confirmation.complaint.pictures.length > 0">{{ confirmation.complaint.pictures.length.toString() + ' picture(s)' }}&nbsp;</span>
-      <span class="small" *ngIf="confirmation.complaint.videos.length > 0">{{ confirmation.complaint.videos.length.toString() + ' video' }}</span>
+      <ng-container *ngIf="confirmation.complaint.pictures.length > 0">
+        <div>
+          <app-complaint-picture-item
+                  *ngFor="let picture of confirmation.complaint.pictures | slice:0:5"
+                  [picture]="picture" [size]="'previewExtraSmall'">
+          </app-complaint-picture-item>
+        </div>
+        <div>
+          <span class="small" *ngIf="confirmation.complaint.pictures.length > 0">{{ confirmation.complaint.pictures.length.toString() + ' picture(s)' }}&nbsp;</span>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="confirmation.complaint.videos.length > 0">
+
+        <div>
+          <app-video-item *ngFor="let video of confirmation.complaint.videos | slice:0:5" [video]="video" [size]="'extra-small'"></app-video-item>
+        </div>
+
+        <div>
+          <span class="small" *ngIf="confirmation.complaint.videos.length > 0">{{ confirmation.complaint.videos.length.toString() + ' video' }}</span>
+        </div>
+
+      </ng-container>
     </p>
-    <p>
+    <div>
       <small class="text-muted">{{ confirmation.complaint.createdAt | amFromUnix }}</small>
-    </p>
+    </div>
   </div>
 
   <div class="balloon-footer">
