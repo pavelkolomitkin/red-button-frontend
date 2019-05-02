@@ -31,6 +31,12 @@
           <span>Complaints</span>
         </a>
       </li>
+      <li *ngxPermissionsOnly="['ROLE_CLIENT_USER']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink="/client/issue/list">
+          <i class="fa fa-folder"></i>
+          <span>Issues</span>
+        </a>
+      </li>
 
 <!--      <li class="treeview">-->
 <!--        <a href="#">-->

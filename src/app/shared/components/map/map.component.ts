@@ -11,10 +11,11 @@ import {
 } from '@angular/core';
 import {Map, View} from 'ol';
 import Overlay from 'ol/Overlay';
-import {fromLonLat, toLonLat } from 'ol/proj.js';
+import {fromLonLat, toLonLat, transformExtent } from 'ol/proj.js';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import {GeoLocation} from '../../../core/data/model/geo-location.model';
+import {MapViewBox} from '../../data/model/map-view-box.model';
 
 @Component({
   selector: 'app-map',
@@ -28,6 +29,7 @@ export class MapComponent implements OnInit, OnDestroy {
   // output fields
   @Output('onLocationClick') locationClick: EventEmitter<GeoLocation> = new EventEmitter();
   @Output('onReady') ready: EventEmitter<any> = new EventEmitter();
+  @Output('onViewBoxChange') viewBoxChangeEvent: EventEmitter<MapViewBox> = new EventEmitter();
 
   // input fields
   @Input() defaultCenter: GeoLocation;
@@ -56,6 +58,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
 
     this.map.on('singleclick', this.onMapClickHandler);
+    this.map.on('moveend', this.onManMoveEndHandler);
 
     this.ready.emit();
   }
@@ -63,6 +66,7 @@ export class MapComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
     this.map.un('singleclick');
+    this.map.un('moveend');
 
   }
 
@@ -78,6 +82,32 @@ export class MapComponent implements OnInit, OnDestroy {
     this.map.getView().setZoom(value);
   }
 
+  getZoom()
+  {
+    return this.map.getView().getZoom();
+  }
+
+  getViewBox(): MapViewBox
+  {
+    let extent = this.map.getView().calculateExtent(this.map.getSize());
+
+    extent = transformExtent(extent,'EPSG:3857', 'EPSG:4326');
+
+    const result = {
+      topLeft: {
+        latitude: extent[3],
+        longitude: extent[0]
+      },
+      bottomRight: {
+        latitude: extent[1],
+        longitude: extent[2]
+      },
+      zoom: this.getZoom()
+    };
+
+    return result;
+  }
+
   //=====================// VIEW APP =============================
 
 
@@ -91,7 +121,14 @@ export class MapComponent implements OnInit, OnDestroy {
     };
 
     this.locationClick.emit(location);
-  }
+  };
+
+  onManMoveEndHandler = (event) => {
+
+    const box = this.getViewBox();
+
+    this.viewBoxChangeEvent.emit(box);
+  };
 
   addBalloon<C>(component: Type<C>, location: GeoLocation): ComponentRef<C>
   {

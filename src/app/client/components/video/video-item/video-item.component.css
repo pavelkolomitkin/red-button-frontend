@@ -31,6 +31,16 @@ img
     width: 70px;
 }
 
+.video-item .extra-small
+{
+    width: 25px;
+}
+
+.video-item .extra-small .icon
+{
+    transform: translateX(-50%) translateY(-50%);
+}
+
 .video-item .medium
 {
     width: 150px;

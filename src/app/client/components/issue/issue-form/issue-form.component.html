@@ -1,0 +1,15 @@
+<form (ngSubmit)="onSubmitHandler($event)" #form="ngForm">
+
+  <div class="box-body">
+    <div class="form-group">
+      <label>Select Geo Location and signatures from other people</label>
+      <app-issue-geo-location-selector-field [issue]="issue"></app-issue-geo-location-selector-field>
+      <app-form-field-error-list [field]="'location'" [errors]="errors"></app-form-field-error-list>
+    </div>
+
+  </div>
+
+  <div class="box-footer">
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
+  </div>
+</form>

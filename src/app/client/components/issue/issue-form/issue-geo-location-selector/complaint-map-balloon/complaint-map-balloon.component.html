@@ -1,0 +1,51 @@
+<app-map-balloon [isCollapsed]="true">
+
+  <div class="balloon-title">
+    Complaint
+  </div>
+
+  <div class="balloon-content">
+    <p class="text-primary">{{ complaint.client.fullName }}</p>
+    <p class="text-muted">{{
+      complaint.message.length > 150 ?
+              (complaint.message | slice:0:150) + '...'
+              : complaint.message }}
+      <a [routerLink]="'/client/complaint/' + complaint.id.toString()" [target]="'_blank'">More...</a>
+    </p>
+    <p>
+      <ng-container *ngIf="complaint.pictures.length > 0">
+        <div>
+          <app-complaint-picture-item
+                  *ngFor="let picture of complaint.pictures | slice:0:5"
+                  [picture]="picture" [size]="'previewExtraSmall'">
+          </app-complaint-picture-item>
+        </div>
+        <div>
+          <span class="small" *ngIf="complaint.pictures.length > 0">{{ complaint.pictures.length.toString() + ' picture(s)' }}&nbsp;</span>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="complaint.videos.length > 0">
+
+        <div>
+          <app-video-item *ngFor="let video of complaint.videos | slice:0:5" [video]="video" [size]="'extra-small'"></app-video-item>
+        </div>
+
+        <div>
+          <span class="small" *ngIf="complaint.videos.length > 0">{{ complaint.videos.length.toString() + ' video' }}</span>
+        </div>
+
+      </ng-container>
+    </p>
+    <div>
+      <small class="text-muted">{{ complaint.createdAt | amFromUnix }}</small>
+    </div>
+  </div>
+
+  <div class="balloon-footer">
+    <span class="btn btn-primary" (click)="onRequestButtonClickHandler($event)">
+      <i class="fa fa-plus"></i> Request a signature
+    </span>
+  </div>
+
+</app-map-balloon>

@@ -1,0 +1,13 @@
+<div *ngIf="!!issue.region" class="address-info-container">
+  <span class="text text-primary">{{ issue.region.title }}</span><span class="text-muted">({{ issue.region.federalDistrict.title }})</span>
+  <br />
+  <span class="text-muted">{{ issue.address.displayName }}</span>
+</div>
+<div>
+  <span class="btn btn-primary" (click)="onChooseButtonClickHandler($event)">Choose a location</span>
+</div>
+<app-issue-geo-location-selector
+        *ngIf="isSelectorOpen"
+        (onClose)="onSelectorCloseHandler($event)"
+        [issue]="issue"
+></app-issue-geo-location-selector>

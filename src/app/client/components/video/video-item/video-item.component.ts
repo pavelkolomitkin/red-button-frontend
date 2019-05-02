@@ -11,7 +11,7 @@ export class VideoItemComponent implements OnInit {
   @Input() video: Video;
 
   /**
-   * using values: 'small', 'medium'
+   * using values: 'extra-small', 'small', 'medium'
    */
   @Input() size: string = 'small';
 

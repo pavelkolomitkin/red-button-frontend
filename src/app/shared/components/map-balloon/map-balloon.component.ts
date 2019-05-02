@@ -21,7 +21,6 @@ export class MapBalloonComponent implements OnInit {
   ngOnInit() {
   }
 
-
   onCloseClickHandler(event)
   {
     this.isCollapsed = !this.isCollapsed;

@@ -1,0 +1,29 @@
+<div class="issue-geo-location-selector">
+  <app-map #map
+          (onLocationClick)="onLocationClickHandler($event)"
+          (onReady)="onMapReadyHandler($event)"
+           (onViewBoxChange)="onViewBoxChangeHandler($event)"
+           [defaultCenter]="deviceLocation"
+           [defaultZoom]="10"
+  ></app-map>
+  <div class="control-panel">
+    <div class="control-container box-solid">
+      <div class="box-body">
+        <div class="controls">
+          <button
+                  class="btn btn-primary"
+                  [attr.aria-pressed]="isSelectingLocation"
+                  [attr.data-toggle]="'button'"
+                  [attr.autocomplete]="'off'"
+                  (click)="isSelectingLocation = !isSelectingLocation"
+          >
+            <i class="fa fa-mouse-pointer"></i>Select location
+          </button>
+        </div>
+        <div>
+          <app-search-form></app-search-form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

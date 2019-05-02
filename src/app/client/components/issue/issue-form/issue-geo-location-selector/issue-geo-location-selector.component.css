@@ -1,0 +1,39 @@
+.issue-geo-location-selector
+{
+    position: fixed;
+    background: #ffffff;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 99900;
+}
+
+.issue-geo-location-selector .control-panel
+{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    max-width: 200px;
+    min-width: 200px;
+    z-index: 99901;
+
+    background: #ffffff6b;
+    border-left: 1px solid #cccccc38;
+}
+
+.issue-geo-location-selector.closed .control-panel
+{
+    width: 20px !important;
+}
+
+.issue-geo-location-selector .control-panel .control-container
+{
+
+}
+
+.issue-geo-location-selector.closed .control-panel .control-container
+{
+    display: none;
+}

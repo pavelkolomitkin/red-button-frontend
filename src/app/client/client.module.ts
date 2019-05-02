@@ -39,6 +39,16 @@ import { MapViewComponent } from './components/complaint-details-page/map-view/m
 import { PictureListComponent } from './components/complaint-details-page/picture-list/picture-list.component';
 import { VideoListComponent } from './components/complaint-details-page/video-list/video-list.component';
 import { ComplaintDetailsBalloonComponent } from './components/complaint-details-page/complaint-details-balloon/complaint-details-balloon.component';
+import { CreateIssuePageComponent } from './components/issue/create-issue-page/create-issue-page.component';
+import { IssueFormComponent } from './components/issue/issue-form/issue-form.component';
+import { IssueListPageComponent } from './components/issue/issue-list-page/issue-list-page.component';
+import { IssueGeoLocationSelectorComponent } from './components/issue/issue-form/issue-geo-location-selector/issue-geo-location-selector.component';
+import { IssueGeoLocationSelectorFieldComponent } from './components/issue/issue-form/issue-geo-location-selector-field/issue-geo-location-selector-field.component';
+import { IssueCompanySelectorFieldComponent } from './components/issue/issue-form/issue-company-selector-field/issue-company-selector-field.component';
+import { SearchFormComponent } from './components/issue/issue-form/issue-geo-location-selector/search-form/search-form.component';
+import { IssueMapBalloonComponent } from './components/issue/issue-form/issue-geo-location-selector/issue-map-balloon/issue-map-balloon.component';
+import { ComplaintConfirmationMapBalloonComponent } from './components/issue/issue-form/issue-geo-location-selector/complaint-confirmation-map-balloon/complaint-confirmation-map-balloon.component';
+import { ComplaintMapBalloonComponent } from './components/issue/issue-form/issue-geo-location-selector/complaint-map-balloon/complaint-map-balloon.component';
 
 
 @NgModule({
@@ -68,7 +78,17 @@ import { ComplaintDetailsBalloonComponent } from './components/complaint-details
     MapViewComponent,
     PictureListComponent,
     VideoListComponent,
-    ComplaintDetailsBalloonComponent
+    ComplaintDetailsBalloonComponent,
+    CreateIssuePageComponent,
+    IssueFormComponent,
+    IssueListPageComponent,
+    IssueGeoLocationSelectorComponent,
+    IssueGeoLocationSelectorFieldComponent,
+    IssueCompanySelectorFieldComponent,
+    SearchFormComponent,
+    IssueMapBalloonComponent,
+    ComplaintConfirmationMapBalloonComponent,
+    ComplaintMapBalloonComponent
   ],
     imports: [
         CommonModule,
@@ -91,6 +111,12 @@ import { ComplaintDetailsBalloonComponent } from './components/complaint-details
       EffectsModule,
       SharedModule
   ],
-  entryComponents: [MapSelectedLocationComponent, ComplaintDetailsBalloonComponent]
+  entryComponents: [
+      MapSelectedLocationComponent,
+      ComplaintDetailsBalloonComponent,
+      ComplaintMapBalloonComponent,
+      IssueMapBalloonComponent,
+      ComplaintConfirmationMapBalloonComponent
+  ]
 })
 export class ClientModule { }

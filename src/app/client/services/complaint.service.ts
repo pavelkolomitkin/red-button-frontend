@@ -2,12 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Complaint} from '../data/model/complaint.model';
 import {catchError, map} from 'rxjs/operators';
-import {of} from 'rxjs';
+import {BaseService} from '../../core/services/base.service';
 
 @Injectable()
-export class ComplaintService {
-
-    constructor(private http: HttpClient) {}
+export class ComplaintService extends BaseService {
 
     transformEntity = (complaint) => {
 
@@ -22,14 +20,25 @@ export class ComplaintService {
         return result;
     }
 
+    search(params: Object)
+    {
+        let parameters: HttpParams = this.getHttpParamsFromObject(params);
+
+        return this
+            .http
+            .get<{ complaints: Array<Complaint> }>('/client/complaint/geo/search', { params: parameters })
+            .pipe(
+                map(({ complaints }) => {
+                    return complaints.map(item => this.transformEntity(item))
+                })
+            );
+    }
+
     getUserComplaints(params: Object, page: number = 1)
     {
-        let parameters: HttpParams = new HttpParams().set('page', page.toString());
-        
-        for (let [name, value] of Object.entries(params))
-        {
-            parameters = parameters.append(name, value.toString());
-        }
+        let parameters: HttpParams = this.getHttpParamsFromObject(Object.assign(params, {
+            page: page
+        }));
 
         return this
             .http

@@ -7,11 +7,13 @@
     left: -50px;
     max-width: 350px;
     min-width: 350px;
+
+    z-index: 10000;
 }
 
 .map-balloon.collapsed
 {
-
+    z-index: 500;
 }
 
 .map-balloon .box

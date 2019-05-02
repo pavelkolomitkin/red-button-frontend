@@ -1,0 +1,36 @@
+<app-map-balloon [colorStyle]="
+  confirmation.status.code === 'confirmed' ? 'success' :
+    confirmation.status.code === 'rejected' ? 'danger' : 'default'
+">
+
+  <div class="balloon-title">
+    Signature
+    <i class="fa fa-check-circle" *ngIf="confirmation.status.code === 'confirmed'"></i>
+    <i class="fa fa-ban" *ngIf="confirmation.status.code === 'rejected'"></i>
+    <i class="fa fa-clock-o" *ngIf="confirmation.status.code === 'pending'"></i>
+  </div>
+
+  <div class="balloon-content">
+    <p class="text-primary">{{ confirmation.complaint.client.fullName }}</p>
+    <p class="text-muted">{{
+      confirmation.complaint.message.length > 150 ?
+      (confirmation.complaint.message | slice:0:150) + '...'
+      : confirmation.complaint.message }}
+      <a [routerLink]="'/client/complaint/' + confirmation.complaint.id.toString()">More...</a>
+    </p>
+    <p>
+      <span class="small" *ngIf="confirmation.complaint.pictures.length > 0">{{ confirmation.complaint.pictures.length.toString() + ' picture(s)' }}&nbsp;</span>
+      <span class="small" *ngIf="confirmation.complaint.videos.length > 0">{{ confirmation.complaint.videos.length.toString() + ' video' }}</span>
+    </p>
+    <p>
+      <small class="text-muted">{{ confirmation.complaint.createdAt | amFromUnix }}</small>
+    </p>
+  </div>
+
+  <div class="balloon-footer">
+    <span class="btn btn-danger" (click)="onDeleteButtonClickHandler($event)">
+      <i class="fa fa-trash"></i> Delete
+    </span>
+  </div>
+
+</app-map-balloon>
