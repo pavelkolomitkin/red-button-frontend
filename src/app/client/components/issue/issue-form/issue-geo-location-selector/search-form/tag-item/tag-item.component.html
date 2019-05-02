@@ -1,0 +1,3 @@
+<div class="label tag" [ngClass]="isSelected ? 'label-primary selected' : 'label-default'" (click)="onToggleSelectHandler($event)">
+  {{ tag.title }}({{ complaintNumber }})
+</div>

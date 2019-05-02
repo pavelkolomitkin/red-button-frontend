@@ -21,7 +21,10 @@
           </button>
         </div>
         <div>
-          <app-search-form (onChange)="onSearchFormChangeHandler($event)"></app-search-form>
+          <app-search-form
+                  #searchForm
+                  (onChange)="onSearchFormChangeHandler($event)"
+          ></app-search-form>
         </div>
       </div>
     </div>

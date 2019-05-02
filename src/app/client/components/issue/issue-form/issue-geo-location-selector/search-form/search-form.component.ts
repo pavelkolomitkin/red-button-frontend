@@ -2,7 +2,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ServiceTypeService} from '../../../../../../core/services/service-type.service';
 import {Observable} from 'rxjs';
 import {ServiceType} from '../../../../../../core/data/model/service-type.model';
-import {Tag} from '@angular/compiler/src/i18n/serializers/xml_helper';
+import {ComplaintService} from '../../../../../services/complaint.service';
+import {ComplaintTag} from '../../../../../data/model/complaint-tag.model';
 
 @Component({
   selector: 'app-search-form',
@@ -11,21 +12,24 @@ import {Tag} from '@angular/compiler/src/i18n/serializers/xml_helper';
 })
 export class SearchFormComponent implements OnInit {
 
-  @Output('onChange') changeEvent: EventEmitter<{ serviceType ?: ServiceType, tags:Array<Tag> }> = new EventEmitter();
+  @Output('onChange') changeEvent: EventEmitter<{ serviceType ?: ServiceType, tags:Array<ComplaintTag> }> = new EventEmitter();
 
   serviceTypes: Observable<ServiceType[]>;
+  tagItems: Array<any>;
 
   selectedServiceType: ServiceType;
-  selectedTags: Array<Tag> = [];
+  selectedTags: Array<ComplaintTag> = [];
 
-  constructor(private serviceTypeService: ServiceTypeService) {
+  constructor(
+      private serviceTypeService: ServiceTypeService,
+      private complaintService: ComplaintService
+  ) {
 
-    this.serviceTypes = this.serviceTypeService.getAll();
 
   }
 
   ngOnInit() {
-
+    this.serviceTypes = this.serviceTypeService.getAll();
   }
 
   compareServiceTypes(a: ServiceType, b: ServiceType)
@@ -38,10 +42,8 @@ export class SearchFormComponent implements OnInit {
     return a.id === b.id;
   }
 
-  onServiceTypeChangeHandler(serviceType: any)
+  emitChanges()
   {
-    this.selectedServiceType = serviceType === '' ?  null : serviceType;
-
     this.changeEvent.emit(
         {
           serviceType: this.selectedServiceType,
@@ -50,4 +52,70 @@ export class SearchFormComponent implements OnInit {
     );
   }
 
+  onServiceTypeChangeHandler(serviceType: any)
+  {
+    this.selectedServiceType = serviceType === '' ?  null : serviceType;
+    this.emitChanges();
+  }
+
+  setGeoParameters(criteria: any)
+  {
+    const params = Object.assign(criteria, {});
+    if (!!this.selectedServiceType)
+    {
+      params.serviceTypeId = this.selectedServiceType.id;
+    }
+
+    this.complaintService.tagSearch(params).toPromise().then(
+        (items: Array<any>) => {
+
+          const newSelectedItems: Array<ComplaintTag> = [];
+
+          this.selectedTags.forEach((selectedItem, index) => {
+
+            const found = items.find(newItem => newItem.tag.id === selectedItem.id);
+            if (!!found)
+            {
+              newSelectedItems.push(found.tag);
+            }
+
+          });
+
+          this.selectedTags = newSelectedItems;
+
+          this.tagItems = items;
+        }
+    );
+  }
+
+  isTagSelected = (tag: ComplaintTag) => {
+    return (this.selectedTags.findIndex(item => item.id === tag.id) !== -1);
+  };
+
+
+  onTagSelectHandler(tag: ComplaintTag)
+  {
+    console.log('Tag selected -->');
+    console.log(tag);
+    const index = this.selectedTags.findIndex(item => item.id === tag.id);
+
+    if (index === -1)
+    {
+      this.selectedTags.push(tag);
+      this.emitChanges();
+    }
+  }
+
+  onTagUnSelectHandler(tag: ComplaintTag)
+  {
+    console.log('Tag unSelected -->');
+    console.log(tag);
+
+    const index = this.selectedTags.findIndex(item => item.id === tag.id);
+    if (index !== -1)
+    {
+      this.selectedTags.splice(index, 1);
+      this.emitChanges();
+    }
+  }
 }

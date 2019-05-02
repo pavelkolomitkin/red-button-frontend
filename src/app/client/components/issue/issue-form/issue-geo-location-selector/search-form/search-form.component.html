@@ -18,11 +18,16 @@
 
   <div class="form-group">
     <label>Tags</label>
-    <div>
-      <span class="bg-primary">tag1</span>
-      <span class="bg-primary">tag1</span>
-      <span class="bg-primary">tag1</span>
-      <span class="bg-primary">tag1</span>
+
+    <div class="tag-list">
+      <app-search-tag-item
+              *ngFor="let item of tagItems"
+              [tag]="item.tag"
+              [complaintNumber]="item.complaintNumber"
+              [isSelected]="isTagSelected(item.tag)"
+              (onSelect)="onTagSelectHandler($event)"
+              (onUnselect)="onTagUnSelectHandler($event)"
+      ></app-search-tag-item>
     </div>
   </div>
 

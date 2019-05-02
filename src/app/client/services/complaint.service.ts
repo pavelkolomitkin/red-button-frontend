@@ -20,9 +20,27 @@ export class ComplaintService extends BaseService {
         return result;
     }
 
-    search(params: Object)
+    tagSearch(params: Object)
     {
         let parameters: HttpParams = this.getHttpParamsFromObject(params);
+
+        return this
+            .http
+            .get<{ tags: Array<{}> }>('/client/complaint/geo-tag/search', { params: parameters })
+            .pipe(
+                map(result => result.tags)
+            )
+            ;
+    }
+
+    search(params: any)
+    {
+
+        let criteria = Object.assign(params, {
+            tags: !!params.tags ? params.tags.map(item => item.id) : []
+        });
+
+        let parameters: HttpParams = this.getHttpParamsFromObject(criteria);
 
         return this
             .http

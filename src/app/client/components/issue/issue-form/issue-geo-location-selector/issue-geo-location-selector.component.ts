@@ -13,6 +13,7 @@ import {IssueMapBalloonComponent} from './issue-map-balloon/issue-map-balloon.co
 import {ComplaintConfirmation} from '../../../../data/model/complaint-confirmation.model';
 import {ComplaintConfirmationStatus} from '../../../../data/model/complaint-confirmation-status.model';
 import {ComplaintConfirmationMapBalloonComponent} from './complaint-confirmation-map-balloon/complaint-confirmation-map-balloon.component';
+import {SearchFormComponent} from './search-form/search-form.component';
 
 @Component({
   selector: 'app-issue-geo-location-selector',
@@ -28,6 +29,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
   @Input() issue: Issue;
 
   @ViewChild('map') map: MapComponent;
+  @ViewChild('searchForm') searchForm: SearchFormComponent;
 
   internalIssue: Issue;
 
@@ -292,20 +294,19 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
     const box = this.map.getViewBox();
 
-    if (!!this.internalIssue.address && !!this.internalIssue.region)
-    {
-      return;
-    }
-
     if (box.zoom >= IssueGeoLocationSelectorComponent.LOADING_DATA_ZOOM)
     {
-      let searchParams = this.getSearchFormParameters();
-      searchParams = Object.assign(searchParams, {
+      const geoParams = {
         topLeftLatitude: box.topLeft.latitude,
         topLeftLongitude: box.topLeft.longitude,
         bottomRightLatitude: box.bottomRight.latitude,
         bottomRightLongitude: box.bottomRight.longitude
-      });
+      };
+
+      this.searchForm.setGeoParameters(geoParams);
+
+      let searchParams = this.getSearchFormParameters();
+      searchParams = Object.assign(searchParams, geoParams);
 
       this.complaintService.search(searchParams)
           .toPromise()
@@ -327,6 +328,10 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   onViewBoxChangeHandler(box: MapViewBox)
   {
+    if (this.isSearchAround())
+    {
+      return;
+    }
     this.updateComplaintsWithViewBox();
   }
 
