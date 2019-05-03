@@ -38,7 +38,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
   @ViewChild('mapContainer', { read: ViewContainerRef }) mapContainerRef: ViewContainerRef;
 
-  panElementSubscription: Subscription;
 
   constructor(private componentResolver: ComponentFactoryResolver) {
 
@@ -74,9 +73,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
     this.map.un('singleclick');
     this.map.un('moveend');
-
-    this.panElementSubscription.unsubscribe();
-
   }
 
   //======================= VIEW APP =============================
