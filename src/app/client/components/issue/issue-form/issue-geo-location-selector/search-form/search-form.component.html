@@ -20,14 +20,19 @@
     <label>Tags</label>
 
     <div class="tag-list">
-      <app-search-tag-item
-              *ngFor="let item of tagItems"
-              [tag]="item.tag"
-              [complaintNumber]="item.complaintNumber"
-              [isSelected]="isTagSelected(item.tag)"
-              (onSelect)="onTagSelectHandler($event)"
-              (onUnselect)="onTagUnSelectHandler($event)"
-      ></app-search-tag-item>
+      <ng-container *ngIf="tagItems.length > 0; else noTags;">
+        <app-search-tag-item
+                *ngFor="let item of tagItems"
+                [tag]="item.tag"
+                [complaintNumber]="item.complaintNumber"
+                [isSelected]="isTagSelected(item.tag)"
+                (onSelect)="onTagSelectHandler($event)"
+                (onUnselect)="onTagUnSelectHandler($event)"
+        ></app-search-tag-item>
+      </ng-container>
+      <ng-template #noTags>
+        <span class="text-muted">None</span>
+      </ng-template>
     </div>
   </div>
 

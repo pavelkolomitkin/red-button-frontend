@@ -1,6 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Region} from '../../../../../core/data/model/region.model';
-import {GeoLocation} from '../../../../../core/data/model/geo-location.model';
+import {Component, Input, OnInit} from '@angular/core';
 import {Issue} from '../../../../data/model/issue.model';
 
 @Component({
@@ -24,7 +22,13 @@ export class IssueGeoLocationSelectorFieldComponent implements OnInit {
     this.isSelectorOpen = true;
   }
 
-  onSelectorCloseHandler(event)
+  onSelectAddressHandler(updatedIssue: Issue)
+  {
+    this.issue = updatedIssue;
+    this.isSelectorOpen = false;
+  }
+
+  onCancelSelectHandler(event)
   {
     this.isSelectorOpen = false;
   }

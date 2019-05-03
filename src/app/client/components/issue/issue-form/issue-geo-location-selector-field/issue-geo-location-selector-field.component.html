@@ -8,6 +8,7 @@
 </div>
 <app-issue-geo-location-selector
         *ngIf="isSelectorOpen"
-        (onClose)="onSelectorCloseHandler($event)"
+        (onSelect)="onSelectAddressHandler($event)"
+        (onCancel)="onCancelSelectHandler($event)"
         [issue]="issue"
 ></app-issue-geo-location-selector>

@@ -10,15 +10,27 @@
     <div class="control-container box-solid">
       <div class="box-body">
         <div class="controls">
-          <button
-                  class="btn btn-primary"
-                  [attr.aria-pressed]="isSelectingLocation"
-                  [attr.data-toggle]="'button'"
-                  [attr.autocomplete]="'off'"
-                  (click)="isSelectingLocation = !isSelectingLocation"
-          >
-            <i class="fa fa-mouse-pointer"></i>Select location
-          </button>
+          <ng-container *ngIf="!isAddressSelected()">
+            <button
+                    class="btn btn-primary"
+                    [attr.aria-pressed]="isSelectingLocation"
+                    [attr.data-toggle]="'button'"
+                    [attr.autocomplete]="'off'"
+                    (click)="isSelectingLocation = !isSelectingLocation"
+            >
+              <i class="fa fa-mouse-pointer"></i>Select location
+            </button>
+          </ng-container>
+          <ng-container *ngIf="isAddressSelected()">
+            <button
+                    type="button"
+                    class="btn btn-success"
+                    [disabled]="!isAddressSelected()"
+                    (click)="onConfirmButtonClickHandler($event)"
+            >
+              <i class="fa fa-check"></i>Confirm
+            </button>
+          </ng-container>
         </div>
         <div>
           <app-search-form
@@ -28,5 +40,6 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>

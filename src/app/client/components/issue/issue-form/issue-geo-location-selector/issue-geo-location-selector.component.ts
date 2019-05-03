@@ -1,4 +1,4 @@
-import {Component, ComponentRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ComponentRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Issue} from '../../../../data/model/issue.model';
 import {GeoLocation} from '../../../../../core/data/model/geo-location.model';
 import {MapComponent} from '../../../../../shared/components/map/map.component';
@@ -26,7 +26,8 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   static LOADING_DATA_ZOOM = 10;
 
-  @Output('onClose') closeEvent: EventEmitter<void> = new EventEmitter();
+  @Output('onSelect') selectEvent: EventEmitter<Issue> = new EventEmitter();
+  @Output('onCancel') cancelEvent: EventEmitter<void> = new EventEmitter();
 
   @Input() issue: Issue;
 
@@ -82,12 +83,16 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
           // take center location as selected location
         // 2. if we haven't a selected location
           // take center location as device location
-    const { location, address, region } = this.internalIssue;
-    if (!!location && !!address && !!region)
+
+    if (this.isAddressSelected())
     {
+      debugger;
+      const { location, address, region } = this.internalIssue;
+
       this.map.setCenter(location);
       this.map.setZoom(IssueGeoLocationSelectorComponent.LOADING_DATA_ZOOM);
 
+      this.addIssueBalloon(location);
     }
 
     // install the balloon of selected location of certain issue if it we have it
@@ -110,7 +115,18 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   }
 
-  isSearchAround()
+  onConfirmButtonClickHandler(event)
+  {
+    this.issue = Object.assign(this.internalIssue);
+    this.selectEvent.emit(this.issue);
+  }
+
+  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    this.cancelEvent.emit();
+    console.log('Close');
+  }
+
+  isAddressSelected()
   {
     return !!this.internalIssue.address && !!this.internalIssue.region;
   }
@@ -119,7 +135,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
   {
     this.searchCriteria = criteria;
 
-    if (this.isSearchAround())
+    if (this.isAddressSelected())
     {
       this.initUnAttachedComplaintAroundIssue();
     }
@@ -152,9 +168,14 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
   {
     if (this.isSelectingLocation)
     {
-      this.addIssueBalloon(location);
-      this.isSelectingLocation = false;
+      this.selectIssueLocation(location);
     }
+  }
+
+  selectIssueLocation(location: GeoLocation)
+  {
+    this.addIssueBalloon(location);
+    this.isSelectingLocation = false;
   }
 
   onRequestSignatureHandler = (complaint: Complaint) => {
@@ -266,7 +287,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
     this.internalIssue.location = location;
 
     instance.issue = this.internalIssue;
-    instance.needPositionReload = true;
+    instance.needPositionReload = !this.isAddressSelected();
   }
 
   removeIssueBalloon()
@@ -353,7 +374,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   onViewBoxChangeHandler(box: MapViewBox)
   {
-    if (this.isSearchAround())
+    if (this.isAddressSelected())
     {
       return;
     }

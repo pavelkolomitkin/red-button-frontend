@@ -57,6 +57,10 @@ export class IssueMapBalloonComponent implements OnInit {
 
           });
     }
+    else
+    {
+      this.currentState = IssueMapBalloonComponent.STATE_LOCATION_DETECTED_SUCCESS;
+    }
   }
 
   onCancelClickHandler = () => {

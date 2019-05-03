@@ -15,7 +15,7 @@ export class SearchFormComponent implements OnInit {
   @Output('onChange') changeEvent: EventEmitter<{ serviceType ?: ServiceType, tags:Array<ComplaintTag> }> = new EventEmitter();
 
   serviceTypes: Observable<ServiceType[]>;
-  tagItems: Array<any>;
+  tagItems: Array<any> = [];
 
   selectedServiceType: ServiceType;
   selectedTags: Array<ComplaintTag> = [];
