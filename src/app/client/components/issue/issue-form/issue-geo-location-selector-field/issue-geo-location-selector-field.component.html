@@ -2,9 +2,20 @@
   <span class="text text-primary">{{ issue.region.title }}</span><span class="text-muted">({{ issue.region.federalDistrict.title }})</span>
   <br />
   <span class="text-muted">{{ issue.address.displayName }}</span>
+  <br/>
+  <div *ngIf="issue.complaintConfirmations.length > 0">
+    <div><b>Signatures<span class="text-muted">({{ issue.complaintConfirmations.length }})</span></b></div>
+    <div>
+      <div
+              class="label complaint-signature"
+              *ngFor="let confirmation of issue.complaintConfirmations"
+              [ngClass]="confirmation.status.code === 'confirm' ? 'bg-green' : (confirmation.status.code === 'rejected' ? 'bg-red' : 'bg-gray')"
+      >{{ confirmation.complaint.client.fullName }}</div>
+    </div>
+  </div>
 </div>
 <div>
-  <span class="btn btn-primary" (click)="onChooseButtonClickHandler($event)">Choose a location</span>
+  <span class="btn btn-primary" (click)="onChooseButtonClickHandler($event)">Choose a location and gather signatures from other people</span>
 </div>
 <app-issue-geo-location-selector
         *ngIf="isSelectorOpen"

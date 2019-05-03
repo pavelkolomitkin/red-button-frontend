@@ -24,7 +24,6 @@ export class IssueGeoLocationSelectorFieldComponent implements OnInit {
 
   onSelectAddressHandler(updatedIssue: Issue)
   {
-    debugger
     this.issue = updatedIssue;
     this.isSelectorOpen = false;
   }

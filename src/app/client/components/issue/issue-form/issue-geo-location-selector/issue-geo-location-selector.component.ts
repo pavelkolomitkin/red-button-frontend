@@ -77,18 +77,9 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
   onMapReadyHandler(event)
   {
 
-    // init view
-      // init default zoom which allows to load items from server
-      // set map center
-        // 1. if we have a selected location already
-          // take center location as selected location
-        // 2. if we haven't a selected location
-          // take center location as device location
-
     if (this.isAddressSelected())
     {
-      debugger;
-      const { location, address, region } = this.internalIssue;
+      const { location } = this.internalIssue;
 
       this.addIssueBalloon(location);
       this.updateConfirmationBalloons();
@@ -99,24 +90,14 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
       this.map.setZoom(IssueGeoLocationSelectorComponent.EXISTING_ISSUE_ZOOM);
     }
 
-    // install the balloon of selected location of certain issue if it we have it
-      // 1. if we have a selected location for the issue
-        // set balloon of issue on the map
-      // 2. if we haven't a selected location for the issue
-        // do nothing
-
-    // install balloons of complaint confirmations which have already attached to the certain issue
-
     this.balloonSubscription = this.store.pipe(
         select(state => state.map.centeringBalloonLocation),
         filter(result => !!result))
         .subscribe((location: GeoLocation) => {
 
-          //debugger
           this.map.setCenter(location, true);
 
         });
-
   }
 
   onConfirmButtonClickHandler(event)
@@ -378,7 +359,6 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
     }
     else
     {
-      // remove all searched data from map
       this.removeAllComplaintBalloons();
     }
   };
