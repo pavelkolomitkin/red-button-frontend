@@ -265,11 +265,16 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
     if (box.zoom >= IssueGeoLocationSelectorComponent.LOADING_DATA_ZOOM)
     {
-      let searchParams = this.getSearchFormParameters();
-      searchParams = Object.assign(searchParams, {
+
+      const geoParams = {
         centerLatitude: this.internalIssue.location.latitude,
         centerLongitude: this.internalIssue.location.longitude
-      });
+      };
+
+      this.searchForm.setGeoParameters(geoParams);
+
+      let searchParams = this.getSearchFormParameters();
+      searchParams = Object.assign(searchParams, geoParams);
 
       this.complaintService.search(searchParams)
           .toPromise()
