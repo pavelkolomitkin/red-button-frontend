@@ -14,6 +14,8 @@ import {ComplaintConfirmation} from '../../../../data/model/complaint-confirmati
 import {ComplaintConfirmationStatus} from '../../../../data/model/complaint-confirmation-status.model';
 import {ComplaintConfirmationMapBalloonComponent} from './complaint-confirmation-map-balloon/complaint-confirmation-map-balloon.component';
 import {SearchFormComponent} from './search-form/search-form.component';
+import {filter, map} from 'rxjs/operators';
+import {MapBalloonCenteringReset} from '../../../../../shared/data/map.actions';
 
 @Component({
   selector: 'app-issue-geo-location-selector',
@@ -43,6 +45,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
   searchCriteria: any = null;
 
   deviceLocationSubscription: Subscription;
+  balloonSubscription: Subscription;
 
   constructor(
       private store: Store<State>,
@@ -52,6 +55,8 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
     this.deviceLocationSubscription = this.deviceLocationSubscription = this.store.pipe(select(state => state.core.deviceGeoLocation)).subscribe((location: GeoLocation) => {
       this.deviceLocation = location;
     });
+
+    this.store.dispatch(new MapBalloonCenteringReset());
   }
 
   ngOnInit() {
@@ -60,6 +65,11 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.deviceLocationSubscription.unsubscribe();
+
+    if (!!this.balloonSubscription)
+    {
+      this.balloonSubscription.unsubscribe();
+    }
   }
 
   onMapReadyHandler(event)
@@ -87,6 +97,16 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
         // do nothing
 
     // install balloons of complaint confirmations which have already attached to the certain issue
+
+    this.balloonSubscription = this.store.pipe(
+        select(state => state.map.centeringBalloonLocation),
+        filter(result => !!result))
+        .subscribe((location: GeoLocation) => {
+
+          //debugger
+          this.map.setCenter(location, true);
+
+        });
 
   }
 

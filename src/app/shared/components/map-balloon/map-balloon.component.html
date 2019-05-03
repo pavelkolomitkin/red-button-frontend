@@ -11,7 +11,7 @@
                 type="button"
                 class="btn btn-box-tool"
                 data-widget="remove"
-                (click)="onCloseClickHandler($event)"><i class="fa fa-times"></i>
+                (click)="onToggleCollapseHandler($event)"><i class="fa fa-times"></i>
         </button>
       </div>
 
@@ -32,7 +32,7 @@
         class="mark"
         *ngIf="isCollapsed"
         [ngClass]="colorStyle == 'default' ? 'bg-primary' : 'bg-' + colorStyle"
-        (click)="onCloseClickHandler($event)"
+        (click)="onToggleCollapseHandler($event)"
 >
 
 </div>

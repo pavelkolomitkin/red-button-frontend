@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Complaint} from '../../../../../data/model/complaint.model';
 
 @Component({
@@ -14,10 +14,7 @@ export class ComplaintMapBalloonComponent implements OnInit {
 
   @Input() canRequestSignature: boolean = false;
 
-  constructor() { }
-
   ngOnInit() {
-
   }
 
   onRequestButtonClickHandler(event)

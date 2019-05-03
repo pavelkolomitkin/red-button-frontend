@@ -1,4 +1,8 @@
-<app-map-balloon [colorStyle]="'confirmation'" [isCollapsed]="true">
+<app-map-balloon
+        [colorStyle]="'confirmation'"
+        [isCollapsed]="true"
+        [hasToCenteredOnOpen]="true"
+        [location]="confirmation.complaint.location">
 
   <div class="balloon-title">
     Signature

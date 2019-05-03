@@ -1,13 +1,13 @@
 import {
   Component,
-  ComponentFactoryResolver, ComponentRef, ElementRef,
+  ComponentFactoryResolver, ComponentRef,
   EventEmitter,
   Input,
   OnDestroy,
   OnInit,
   Output, Type,
   ViewChild,
-  ViewContainerRef, ViewRef
+  ViewContainerRef
 } from '@angular/core';
 import {Map, View} from 'ol';
 import Overlay from 'ol/Overlay';
@@ -16,9 +16,6 @@ import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import {GeoLocation} from '../../../core/data/model/geo-location.model';
 import {MapViewBox} from '../../data/model/map-view-box.model';
-import {select, Store} from '@ngrx/store';
-import {State} from '../../../app.state';
-import {filter} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -43,7 +40,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
   panElementSubscription: Subscription;
 
-  constructor(private componentResolver: ComponentFactoryResolver, private store: Store<State>) {
+  constructor(private componentResolver: ComponentFactoryResolver) {
 
 
   }
@@ -70,11 +67,6 @@ export class MapComponent implements OnInit, OnDestroy {
     this.map.on('singleclick', this.onMapClickHandler);
     this.map.on('moveend', this.onManMoveEndHandler);
 
-    this.panElementSubscription = this.store.pipe(select(state => state.map.domElement), filter(result => !!result))
-        .subscribe((element: any) => {
-          this.panToBalloon(element);
-        });
-
     this.ready.emit();
   }
 
@@ -89,9 +81,22 @@ export class MapComponent implements OnInit, OnDestroy {
 
   //======================= VIEW APP =============================
 
-  setCenter(location: GeoLocation)
+  setCenter(location: GeoLocation, withAnimation: boolean = false)
   {
-    this.map.getView().setCenter(fromLonLat([location.longitude, location.latitude]));
+
+    const center = fromLonLat([location.longitude, location.latitude]);
+
+    if (!withAnimation)
+    {
+      this.map.getView().setCenter(center);
+    }
+    else
+    {
+      this.map.getView().animate({
+        center: center,
+        duration: 500
+      });
+    }
   }
 
   setZoom(value: number)
@@ -175,22 +180,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
     return result;
   }
-
-  panToBalloon = (element: any) => {
-
-    const overlays:Array<any> = this.map.getOverlays().getArray();
-
-    for (let index in overlays)
-    {
-      let overlay = overlays[index];
-
-      if (overlay.options.element === element)
-      {
-        overlay.setPosition([...overlay.values_.position]);
-        break;
-      }
-    }
-  };
 
   createOverlay<C>(component: ComponentRef<C>): Overlay
   {

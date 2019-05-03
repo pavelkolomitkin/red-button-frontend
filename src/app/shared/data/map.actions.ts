@@ -1,14 +1,9 @@
 import { Action } from '@ngrx/store';
+import { GeoLocation } from '../../core/data/model/geo-location.model';
 
-export const MAP_PAN_COMPONENT = 'MAP_PAN_COMPONENT';
 export const MAP_BALLOON_OPEN = 'MAP_BALLOON_OPEN';
-
-export class MapPanComponent implements Action
-{
-    readonly type = MAP_PAN_COMPONENT;
-
-    constructor(public domElement: any) {}
-}
+export const MAP_BALLOON_CENTERING = 'MAP_BALLOON_CENTERING';
+export const MAP_BALLOON_CENTERING_RESET = 'MAP_BALLOON_CENTERING_RESET';
 
 export class MapBalloonOpen implements Action
 {
@@ -17,6 +12,19 @@ export class MapBalloonOpen implements Action
     constructor(public component: any) {}
 }
 
-export type MapActions = MapPanComponent
-    | MapBalloonOpen
+export class MapBalloonCentering implements Action
+{
+    readonly type = MAP_BALLOON_CENTERING;
+
+    constructor(public component: any, public center: GeoLocation) {}
+}
+
+export class MapBalloonCenteringReset implements Action
+{
+    readonly type = MAP_BALLOON_CENTERING_RESET;
+}
+
+export type MapActions = MapBalloonOpen
+    | MapBalloonCentering
+    | MapBalloonCenteringReset
     ;

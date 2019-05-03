@@ -1,24 +1,36 @@
 import * as actions from './map.actions';
+import {GeoLocation} from '../../core/data/model/geo-location.model';
 
 export interface State {
-    domElement: any;
     openedBalloon: any;
+    centeringBalloon: any;
+    centeringBalloonLocation: GeoLocation;
 }
 
 const initialState: State = {
-    domElement: null,
-    openedBalloon: null
+    openedBalloon: null,
+    centeringBalloon: null,
+    centeringBalloonLocation: null
 };
 
 export function reducer(state: State = initialState, action: actions.MapActions) {
 
     switch (action.type) {
 
-        case actions.MAP_PAN_COMPONENT:
+        case actions.MAP_BALLOON_CENTERING:
 
             return {
                 ...state,
-                domElement: action.domElement
+                centeringBalloon: action.component,
+                centeringBalloonLocation: action.center
+            };
+
+        case actions.MAP_BALLOON_CENTERING_RESET:
+
+            return {
+                ...state,
+                centeringBalloon: null,
+                centeringBalloonLocation: null
             };
 
         case actions.MAP_BALLOON_OPEN:

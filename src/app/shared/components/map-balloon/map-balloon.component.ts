@@ -12,9 +12,10 @@ import {
 } from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../app.state';
-import {MapBalloonOpen, MapPanComponent} from '../../data/map.actions';
+import {MapBalloonCentering, MapBalloonOpen} from '../../data/map.actions';
 import {Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
+import {GeoLocation} from '../../../core/data/model/geo-location.model';
 
 @Component({
   selector: 'app-map-balloon',
@@ -31,11 +32,13 @@ export class MapBalloonComponent implements OnInit, OnDestroy {
   @Output('onToggleCollapse') toggleCollapse: EventEmitter<boolean> = new EventEmitter();
 
   @Input() isCollapsed: boolean;
+  @Input() location: GeoLocation;
   @Input() populateCollapsing: boolean = true;
+  @Input() hasToCenteredOnOpen: boolean = false;
 
   openBalloonSubscription: Subscription;
 
-  constructor(private store: Store<State>, private elementRef: ElementRef) { }
+  constructor(protected store: Store<State>) { }
 
   ngOnInit() {
 
@@ -51,10 +54,13 @@ export class MapBalloonComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.openBalloonSubscription.unsubscribe();
+    if (!!this.openBalloonSubscription)
+    {
+      this.openBalloonSubscription.unsubscribe();
+    }
   }
 
-  onCloseClickHandler(event)
+  onToggleCollapseHandler(event)
   {
     this.isCollapsed = !this.isCollapsed;
 
@@ -63,6 +69,11 @@ export class MapBalloonComponent implements OnInit, OnDestroy {
     if (!this.isCollapsed)
     {
       this.store.dispatch(new MapBalloonOpen(this));
+
+      if (this.hasToCenteredOnOpen && this.location)
+      {
+        this.store.dispatch(new MapBalloonCentering(this, this.location))
+      }
     }
   }
 
