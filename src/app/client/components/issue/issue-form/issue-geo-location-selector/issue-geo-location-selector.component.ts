@@ -25,6 +25,7 @@ import {MapBalloonCenteringReset} from '../../../../../shared/data/map.actions';
 export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   static LOADING_DATA_ZOOM = 10;
+  static EXISTING_ISSUE_ZOOM = 15;
 
   @Output('onSelect') selectEvent: EventEmitter<Issue> = new EventEmitter();
   @Output('onCancel') cancelEvent: EventEmitter<void> = new EventEmitter();
@@ -89,10 +90,13 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
       debugger;
       const { location, address, region } = this.internalIssue;
 
-      this.map.setCenter(location);
-      this.map.setZoom(IssueGeoLocationSelectorComponent.LOADING_DATA_ZOOM);
-
       this.addIssueBalloon(location);
+      this.updateConfirmationBalloons();
+      this.initUnAttachedComplaintAroundIssue();
+
+
+      this.map.setCenter(location);
+      this.map.setZoom(IssueGeoLocationSelectorComponent.EXISTING_ISSUE_ZOOM);
     }
 
     // install the balloon of selected location of certain issue if it we have it
@@ -179,25 +183,32 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
   }
 
   onRequestSignatureHandler = (complaint: Complaint) => {
-    // console.log('Request the signature -->');
-    // console.log(complaint);
 
-    const confirmation: ComplaintConfirmation = {
-      complaint: complaint,
-      status: {
-        code: ComplaintConfirmationStatus.STATUS_PENDING
-      },
-    };
+    const index = this.internalIssue.complaintConfirmations.findIndex(item => item.complaint.id === complaint.id);
+    if (index === -1)
+    {
+      const confirmation: ComplaintConfirmation = {
+        complaint: complaint,
+        status: {
+          code: ComplaintConfirmationStatus.STATUS_PENDING
+        },
+      };
 
-    this.internalIssue.complaintConfirmations.push(confirmation);
-
-    this.updateConfirmationBalloons();
+      this.internalIssue.complaintConfirmations.push(confirmation);
+      this.addConfirmationBalloon(confirmation);
+    }
   };
 
   deleteConfirmationHandler = (confirmation: ComplaintConfirmation) => {
 
-    this.removeConfirmationBalloon(confirmation);
-    this.initUnAttachedComplaintAroundIssue();
+    const index = this.internalIssue.complaintConfirmations.findIndex(item => item.complaint.id === confirmation.complaint.id);
+    if (index !== -1)
+    {
+      this.internalIssue.complaintConfirmations.splice(index, 1);
+
+      this.removeConfirmationBalloon(confirmation);
+      this.initUnAttachedComplaintAroundIssue();
+    }
 
   };
 
