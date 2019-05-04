@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Issue} from '../../../../data/model/issue.model';
 
 @Component({
@@ -7,6 +7,8 @@ import {Issue} from '../../../../data/model/issue.model';
   styleUrls: ['./issue-geo-location-selector-field.component.css']
 })
 export class IssueGeoLocationSelectorFieldComponent implements OnInit {
+
+  @Output('onAddressUpdate') addressUpdateEvent: EventEmitter<void> = new EventEmitter();
 
   @Input() issue: Issue;
 
@@ -24,8 +26,12 @@ export class IssueGeoLocationSelectorFieldComponent implements OnInit {
 
   onSelectAddressHandler(updatedIssue: Issue)
   {
-    this.issue = updatedIssue;
+    this.issue.location = updatedIssue.location;
+    this.issue.region = updatedIssue.region;
+    this.issue.address = updatedIssue.address;
     this.isSelectorOpen = false;
+
+    this.addressUpdateEvent.emit();
   }
 
   onCancelSelectHandler(event)

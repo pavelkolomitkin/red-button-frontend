@@ -154,6 +154,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
     if (this.isSelectingLocation)
     {
       this.selectIssueLocation(location);
+      this.map.setCenter(location, true);
     }
   }
 

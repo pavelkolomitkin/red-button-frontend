@@ -4,7 +4,7 @@ import {Video} from './video.model';
 import {GeoLocation} from '../../../core/data/model/geo-location.model';
 import User from '../../../core/data/model/user.model';
 import {IssuePicture} from './issue-picture.model';
-import {Company} from './company.model';
+import {Company} from '../../../core/data/model/company.model';
 import {ComplaintConfirmation} from './complaint-confirmation.model';
 
 export class Issue

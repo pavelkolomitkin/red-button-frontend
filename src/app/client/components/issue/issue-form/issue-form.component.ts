@@ -21,4 +21,9 @@ export class IssueFormComponent implements OnInit {
   {
 
   }
+
+  onAddressUpdateHandler(event)
+  {
+    this.issue.company = null;
+  }
 }

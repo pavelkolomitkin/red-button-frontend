@@ -48,6 +48,7 @@ import { ControlItemComponent } from './components/confirmation-window/control-i
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import {MessageNotifierComponent} from './components/message-notifier/message-notifier.component';
 import {ToastrModule} from 'ngx-toastr';
+import {CompanyService} from './services/company.service';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -102,6 +103,7 @@ const httpInterceptorProviders = [
     ServiceTypeService,
     ComplaintService,
     ClientLocationService,
+    CompanyService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,

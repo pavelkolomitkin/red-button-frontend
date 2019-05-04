@@ -33,6 +33,12 @@ button.dropdown-item
     text-align: left;
 }
 
+.dropdown-menu .dropdown-item.active
+{
+    background: #3498db;
+    color: #fff;
+}
+
 .box.box-solid>.box-header .btn:hover, .box.box-solid>.box-header a:hover
 {
     background: none !important;

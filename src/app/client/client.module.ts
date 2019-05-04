@@ -50,6 +50,7 @@ import { IssueMapBalloonComponent } from './components/issue/issue-form/issue-ge
 import { ComplaintConfirmationMapBalloonComponent } from './components/issue/issue-form/issue-geo-location-selector/complaint-confirmation-map-balloon/complaint-confirmation-map-balloon.component';
 import { ComplaintMapBalloonComponent } from './components/issue/issue-form/issue-geo-location-selector/complaint-map-balloon/complaint-map-balloon.component';
 import {SearchTagItemComponent} from './components/issue/issue-form/issue-geo-location-selector/search-form/tag-item/tag-item.component';
+import { CompanySearchFormComponent } from './components/issue/issue-form/issue-company-selector-field/company-search-form/company-search-form.component';
 
 
 @NgModule({
@@ -90,7 +91,8 @@ import {SearchTagItemComponent} from './components/issue/issue-form/issue-geo-lo
     IssueMapBalloonComponent,
     ComplaintConfirmationMapBalloonComponent,
     ComplaintMapBalloonComponent,
-      SearchTagItemComponent
+      SearchTagItemComponent,
+      CompanySearchFormComponent
   ],
     imports: [
         CommonModule,
