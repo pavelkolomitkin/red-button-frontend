@@ -9,6 +9,7 @@ import {filter} from 'rxjs/operators';
 import {GeoLocation} from '../../../../../core/data/model/geo-location.model';
 import {Subscription} from 'rxjs';
 import {MapBalloonCenteringReset} from '../../../../../shared/data/map.actions';
+import {ComplaintConfirmation} from '../../../../data/model/complaint-confirmation.model';
 
 @Component({
   selector: 'app-issue-map-view',
@@ -41,7 +42,7 @@ export class IssueMapViewComponent implements OnInit, OnDestroy {
   @Input()
   set issue(value: Issue)
   {
-    if ((!this._issue) || (this._issue.id != value.id))
+    if ((!this._issue) || (this._issue != value))
     {
       this._issue = value;
       if (this.isMapInitialized)

@@ -9,6 +9,7 @@ import {filter} from 'rxjs/operators';
 import {GlobalConfirmationInit, GlobalPageTitle} from '../../../../core/data/actions';
 import {ActionConfirmation} from '../../../../core/data/model/action-confirmation.model';
 import {ConfirmationActionOption} from '../../../../core/data/model/confirmation-action-option.model';
+import {ComplaintConfirmation} from '../../../data/model/complaint-confirmation.model';
 
 @Component({
   selector: 'app-issue-details-page',
@@ -27,7 +28,6 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
   deleteSubscription: Subscription;
 
   isOwnIssue: boolean = false;
-
 
   constructor(
       private store: Store<State>,
@@ -51,6 +51,20 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
 
       this.store.dispatch(new GlobalPageTitle('Issue details', '#' + this.issue.id.toString()));
     });
+
+
+      this.store.pipe(
+          select(state => state.clientConfirmation.updatedConfirmation),
+          filter(result => !!result)
+      ).subscribe((confirmation: ComplaintConfirmation) => {
+
+        const index = this.issue.complaintConfirmations.findIndex(item => item.id === confirmation.id);
+        if (index !== -1)
+        {
+            this.issue.complaintConfirmations[index] = confirmation;
+            this.issue = {...this.issue};
+        }
+      });
 
     this.idSubscription = this.route.params.subscribe(
         (params) => {
@@ -102,5 +116,4 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(new GlobalConfirmationInit(confirmation));
   }
-
 }

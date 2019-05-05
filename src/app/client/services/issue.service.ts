@@ -12,7 +12,10 @@ export class IssueService extends BaseService
     static transformEntity = (issue) => {
 
         issue.complaintConfirmations = issue.complaintConfirmations.map((confirmation) => {
-
+            if (!confirmation)
+            {
+                return null;
+            }
             confirmation.complaint = ComplaintService.transformEntity(confirmation.complaint);
 
             return confirmation;

@@ -14,6 +14,7 @@ import {catchError, map, mergeMap, tap} from 'rxjs/operators';
 import {ProfileCommonInfo} from '../model/profile-common-info.model';
 import {COMPLAINT_CREATE_SUCCESS, COMPLAINT_DELETE_SUCCESS} from '../complaint.actions';
 import {ISSUE_CREATE_SUCCESS, ISSUE_DELETE_SUCCESS} from '../issue.actions';
+import {COMPLAINT_CONFIRMATION_CHANGE_STATUS_SUCCESS} from '../complaint-confirmation.actions';
 
 @Injectable()
 export class ProfileEffects
@@ -40,7 +41,8 @@ export class ProfileEffects
             COMPLAINT_CREATE_SUCCESS,
             COMPLAINT_DELETE_SUCCESS,
             ISSUE_CREATE_SUCCESS,
-            ISSUE_DELETE_SUCCESS
+            ISSUE_DELETE_SUCCESS,
+            COMPLAINT_CONFIRMATION_CHANGE_STATUS_SUCCESS
         ),
         tap(() => {
             this.store.dispatch(new ProfileGetCommonInfoStart());

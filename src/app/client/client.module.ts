@@ -68,6 +68,7 @@ import {ProfileEffects} from './data/effects/profile.effects';
 import {State} from '../app.state';
 import {ProfileGetCommonInfoStart} from './data/profile.actions';
 import {ComplaintConfirmationEffects} from './data/effects/complaint-confirmation.effects';
+import { ConfirmationControlComponent } from './components/issue/issue-details-page/confirmation-control/confirmation-control.component';
 
 
 @NgModule({
@@ -117,6 +118,7 @@ import {ComplaintConfirmationEffects} from './data/effects/complaint-confirmatio
       IssueViewBalloonComponent,
       ComplaintConfirmationViewBalloonComponent,
       IssueItemComponent,
+      ConfirmationControlComponent,
   ],
     imports: [
         CommonModule,
