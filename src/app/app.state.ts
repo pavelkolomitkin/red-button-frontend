@@ -10,6 +10,7 @@ import * as complaintReducer from './client/data/complaint.reducer';
 import * as issueReducer from './client/data/issue.reducer';
 import * as clientProfileReducer from './client/data/profile.reducer';
 import * as clientGeoLocationReducer from './client/data/geo-location.reducer';
+import * as clientComplaintConfirmationReducer from './client/data/complaint-confirmation.reducer';
 import * as mapReducer from './shared/data/map.reducer';
 
 export interface State
@@ -26,5 +27,6 @@ export interface State
   clientComplaint: complaintReducer.State;
   clientIssue: issueReducer.State;
   clientProfile: clientProfileReducer.State;
+  clientConfirmation: clientComplaintConfirmationReducer.State;
   map: mapReducer.State;
 }

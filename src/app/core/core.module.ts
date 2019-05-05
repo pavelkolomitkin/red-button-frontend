@@ -54,6 +54,7 @@ import {FileUploadService} from './services/file-upload.service';
 import {IssueService} from '../client/services/issue.service';
 import {ProfileService} from '../client/services/profile.service';
 import { SignatureRequestComponent } from './components/header/signature-request/signature-request.component';
+import {ComplaintConfirmationService} from '../client/services/complaint-comfirmation.service';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -114,6 +115,7 @@ const httpInterceptorProviders = [
       IssueService,
       FileUploadService,
       ProfileService,
+    ComplaintConfirmationService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,

@@ -17,6 +17,7 @@ import { reducer as complaintReducer } from './data/complaint.reducer';
 import { reducer as issueReducer } from './data/issue.reducer';
 import { reducer as geoLocationReducer } from './data/geo-location.reducer';
 import { reducer as profileReducer } from './data/profile.reducer';
+import { reducer as complaintConfirmationReducer } from './data/complaint-confirmation.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {VideoEffects} from './data/effects/video.effects';
 import {ComplaintTagEffects} from './data/effects/complaint-tag.effects';
@@ -66,6 +67,7 @@ import { IssueItemComponent } from './components/issue/issue-list-page/issue-ite
 import {ProfileEffects} from './data/effects/profile.effects';
 import {State} from '../app.state';
 import {ProfileGetCommonInfoStart} from './data/profile.actions';
+import {ComplaintConfirmationEffects} from './data/effects/complaint-confirmation.effects';
 
 
 @NgModule({
@@ -128,6 +130,7 @@ import {ProfileGetCommonInfoStart} from './data/profile.actions';
         StoreModule.forFeature('clientIssue', issueReducer),
         StoreModule.forFeature('clientGeoLocation', geoLocationReducer),
         StoreModule.forFeature('clientProfile', profileReducer),
+        StoreModule.forFeature('clientConfirmation', complaintConfirmationReducer),
         EffectsModule.forFeature([
             VideoEffects,
             ComplaintTagEffects,
@@ -135,7 +138,8 @@ import {ProfileGetCommonInfoStart} from './data/profile.actions';
             IssuePictureEffects,
             ComplaintEffects,
             IssueEffects,
-            ProfileEffects
+            ProfileEffects,
+            ComplaintConfirmationEffects
         ])
     ],
   exports: [
