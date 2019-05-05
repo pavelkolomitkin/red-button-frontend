@@ -12,7 +12,9 @@ import {StoreModule} from '@ngrx/store';
 import { reducer as videoReducer } from './data/video.reducer';
 import { reducer as complaintTagReducer } from './data/complaint-tag.reducer';
 import { reducer as complaintPictureReducer } from './data/complaint-picture.reducer';
+import { reducer as issuePictureReducer } from './data/issue-picture.reducer';
 import { reducer as complaintReducer } from './data/complaint.reducer';
+import { reducer as issueReducer } from './data/issue.reducer';
 import { reducer as geoLocationReducer } from './data/geo-location.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {VideoEffects} from './data/effects/video.effects';
@@ -24,7 +26,7 @@ import { ComplaintPicturesFieldComponent } from './components/complaint-pictures
 import { GeoLocationSelectorComponent } from './components/geo-location-selector/geo-location-selector.component';
 import { MapSelectedLocationComponent } from './components/map-selected-location/map-selected-location.component';
 import { UploadPicturePreviewComponent } from './components/upload-picture-preview/upload-picture-preview.component';
-import {UploadedComplaintPicturePreviewComponent} from './components/complaint-pictures-field/uploaded-complaint-picture-preview/uploaded-complaint-picture-preview.component';
+import {UploadedPicturePreviewComponent} from './components/uploaded-picture-preview/uploaded-picture-preview.component';
 import { VideoListFieldComponent } from './components/video-list-field/video-list-field.component';
 import { VideoItemFormFieldComponent } from './components/video-item-form-field/video-item-form-field.component';
 import { VideoFormComponent } from './components/video-form/video-form.component';
@@ -32,12 +34,12 @@ import { TagListFieldComponent } from './components/tag-list-field/tag-list-fiel
 import { TagItemComponent } from './components/tag-list-field/tag-item/tag-item.component';
 import { ComplaintItemComponent } from './components/complaint-list-page/complaint-item/complaint-item.component';
 import { CommonTagItemComponent } from './components/common-tag-item/common-tag-item.component';
-import {ComplaintPictureItemComponent} from './components/picture/complaint-picture-item/complaint-picture-item.component';
+import { PictureItemComponent } from './components/picture/picture-item/picture-item.component';
 import { VideoItemComponent } from './components/video/video-item/video-item.component';
 import { CommonLayoutComponent } from './components/common-layout/common-layout.component';
 import { MapViewComponent } from './components/complaint-details-page/map-view/map-view.component';
-import { PictureListComponent } from './components/complaint-details-page/picture-list/picture-list.component';
-import { VideoListComponent } from './components/complaint-details-page/video-list/video-list.component';
+import { PictureListComponent } from './components/picture/picture-list/picture-list.component';
+import { VideoListComponent } from './components/video/video-list/video-list.component';
 import { ComplaintDetailsBalloonComponent } from './components/complaint-details-page/complaint-details-balloon/complaint-details-balloon.component';
 import { CreateIssuePageComponent } from './components/issue/create-issue-page/create-issue-page.component';
 import { IssueFormComponent } from './components/issue/issue-form/issue-form.component';
@@ -51,6 +53,15 @@ import { ComplaintConfirmationMapBalloonComponent } from './components/issue/iss
 import { ComplaintMapBalloonComponent } from './components/issue/issue-form/issue-geo-location-selector/complaint-map-balloon/complaint-map-balloon.component';
 import {SearchTagItemComponent} from './components/issue/issue-form/issue-geo-location-selector/search-form/tag-item/tag-item.component';
 import { CompanySearchFormComponent } from './components/issue/issue-form/issue-company-selector-field/company-search-form/company-search-form.component';
+import { IssuePictureListFieldComponent } from './components/issue/issue-form/issue-picture-list-field/issue-picture-list-field.component';
+import {IssuePictureEffects} from './data/effects/issue-picture.effects';
+import {IssueEffects} from './data/effects/issue.effects';
+import { EditIssuePageComponent } from './components/issue/edit-issue-page/edit-issue-page.component';
+import { IssueDetailsPageComponent } from './components/issue/issue-details-page/issue-details-page.component';
+import { IssueMapViewComponent } from './components/issue/issue-details-page/issue-map-view/issue-map-view.component';
+import { IssueViewBalloonComponent } from './components/issue/issue-details-page/issue-map-view/issue-view-balloon/issue-view-balloon.component';
+import { ComplaintConfirmationViewBalloonComponent } from './components/issue/issue-details-page/issue-map-view/complaint-confirmation-view-balloon/complaint-confirmation-view-balloon.component';
+import { IssueItemComponent } from './components/issue/issue-list-page/issue-item/issue-item.component';
 
 
 @NgModule({
@@ -66,7 +77,7 @@ import { CompanySearchFormComponent } from './components/issue/issue-form/issue-
     GeoLocationSelectorComponent,
     MapSelectedLocationComponent,
     UploadPicturePreviewComponent,
-    UploadedComplaintPicturePreviewComponent,
+    UploadedPicturePreviewComponent,
     VideoListFieldComponent,
     VideoItemFormFieldComponent,
     VideoFormComponent,
@@ -74,7 +85,7 @@ import { CompanySearchFormComponent } from './components/issue/issue-form/issue-
     TagItemComponent,
     ComplaintItemComponent,
     CommonTagItemComponent,
-    ComplaintPictureItemComponent,
+    PictureItemComponent,
     VideoItemComponent,
     CommonLayoutComponent,
     MapViewComponent,
@@ -92,7 +103,14 @@ import { CompanySearchFormComponent } from './components/issue/issue-form/issue-
     ComplaintConfirmationMapBalloonComponent,
     ComplaintMapBalloonComponent,
       SearchTagItemComponent,
-      CompanySearchFormComponent
+      CompanySearchFormComponent,
+      IssuePictureListFieldComponent,
+      EditIssuePageComponent,
+      IssueDetailsPageComponent,
+      IssueMapViewComponent,
+      IssueViewBalloonComponent,
+      ComplaintConfirmationViewBalloonComponent,
+      IssueItemComponent,
   ],
     imports: [
         CommonModule,
@@ -101,13 +119,17 @@ import { CompanySearchFormComponent } from './components/issue/issue-form/issue-
         StoreModule.forFeature('clientVideo', videoReducer),
         StoreModule.forFeature('clientComplaintTag', complaintTagReducer),
         StoreModule.forFeature('clientComplaintPicture', complaintPictureReducer),
+        StoreModule.forFeature('clientIssuePicture', issuePictureReducer),
         StoreModule.forFeature('clientComplaint', complaintReducer),
+        StoreModule.forFeature('clientIssue', issueReducer),
         StoreModule.forFeature('clientGeoLocation', geoLocationReducer),
         EffectsModule.forFeature([
             VideoEffects,
             ComplaintTagEffects,
             ComplaintPictureEffects,
-            ComplaintEffects
+            IssuePictureEffects,
+            ComplaintEffects,
+            IssueEffects
         ])
     ],
   exports: [
@@ -120,7 +142,9 @@ import { CompanySearchFormComponent } from './components/issue/issue-form/issue-
       ComplaintDetailsBalloonComponent,
       ComplaintMapBalloonComponent,
       IssueMapBalloonComponent,
-      ComplaintConfirmationMapBalloonComponent
+      ComplaintConfirmationMapBalloonComponent,
+      IssueViewBalloonComponent,
+      ComplaintConfirmationViewBalloonComponent
   ]
 })
 export class ClientModule { }

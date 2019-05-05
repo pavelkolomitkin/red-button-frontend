@@ -11,7 +11,7 @@
       <span
               class="label complaint-signature"
               *ngFor="let confirmation of issue.complaintConfirmations"
-              [ngClass]="confirmation.status.code === 'confirm' ? 'bg-green' : (confirmation.status.code === 'rejected' ? 'bg-red' : 'bg-gray')"
+              [ngClass]="confirmation.status.code === 'confirmed' ? 'bg-green' : (confirmation.status.code === 'rejected' ? 'bg-red' : 'bg-gray')"
       >{{ confirmation.complaint.client.fullName }}</span>
     </p>
 

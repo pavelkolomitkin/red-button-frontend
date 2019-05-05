@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ComplaintPicture} from '../../../data/model/complaint-picture.model';
 import {Lightbox} from 'ngx-lightbox';
+import {PictureInterface} from '../../../../shared/data/model/picture-interface.model';
 
 @Component({
   selector: 'app-picture-list',
@@ -9,7 +9,7 @@ import {Lightbox} from 'ngx-lightbox';
 })
 export class PictureListComponent implements OnInit {
 
-  @Input() list: Array<ComplaintPicture> = [];
+  @Input() list: Array<PictureInterface> = [];
 
   lightBoxItems: Array<{ src: string, caption: string, thumb: string }>;
 

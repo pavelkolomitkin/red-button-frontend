@@ -47,7 +47,10 @@ export class VideoListFieldComponent implements OnInit {
   {
     this.addVideoWindow.close();
 
-    this.list.push(video);
+    if(this.list.findIndex(item => item.id === video.id) === -1)
+    {
+        this.list.push(video);
+    }
   }
 
   onAddVideoClickHandler(event)

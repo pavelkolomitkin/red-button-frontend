@@ -4,7 +4,11 @@
       <h3 class="box-title">Create Report</h3>
     </div>
 
-    <app-issue-form [issue]="issue"></app-issue-form>
+    <app-issue-form
+            [issue]="issue"
+            [errors]="errors"
+            (onSubmit)="onSubmitHandler($event)"
+    ></app-issue-form>
 
   </div>
 </app-client-common-layout>

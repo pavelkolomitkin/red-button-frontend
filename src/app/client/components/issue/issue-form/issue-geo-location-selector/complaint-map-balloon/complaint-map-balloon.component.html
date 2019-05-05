@@ -15,10 +15,10 @@
     <p>
       <ng-container *ngIf="complaint.pictures.length > 0">
         <div>
-          <app-complaint-picture-item
+          <app-picture-item
                   *ngFor="let picture of complaint.pictures | slice:0:5"
                   [picture]="picture" [size]="'previewExtraSmall'">
-          </app-complaint-picture-item>
+          </app-picture-item>
         </div>
         <div>
           <span class="small" *ngIf="complaint.pictures.length > 0">{{ complaint.pictures.length.toString() + ' picture(s)' }}&nbsp;</span>

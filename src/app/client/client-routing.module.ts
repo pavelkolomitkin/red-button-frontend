@@ -8,6 +8,8 @@ import {ComplaintDetailsPageComponent} from './components/complaint-details-page
 import {BreadCrumb} from '../core/data/model/bread-crumb.model';
 import {CreateIssuePageComponent} from './components/issue/create-issue-page/create-issue-page.component';
 import {IssueListPageComponent} from './components/issue/issue-list-page/issue-list-page.component';
+import {IssueDetailsPageComponent} from './components/issue/issue-details-page/issue-details-page.component';
+import {EditIssuePageComponent} from './components/issue/edit-issue-page/edit-issue-page.component';
 
 
 const routes: Routes = [
@@ -89,10 +91,38 @@ const routes: Routes = [
                     pageSubTitle: 'latest',
                     breadCrumbs: [
                         new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Add Issue', null, 'file-edit')
+                        new BreadCrumb('My Issues', null, 'file-edit')
                     ]
                 }
-            }
+            },
+
+            {
+                path: 'issue/:id',
+                component: IssueDetailsPageComponent,
+                data: {
+                    pageTitle: 'Issue',
+                    pageSubTitle: '',
+                    breadCrumbs: [
+                        new BreadCrumb('Home', '/', 'home'),
+                        new BreadCrumb('Issue', null, 'file-text-o')
+                    ]
+                }
+            },
+
+            {
+                path: 'issue/:id/edit',
+                component: EditIssuePageComponent,
+                data: {
+                    pageTitle: 'Edit Issue',
+                    pageSubTitle: '',
+                    breadCrumbs: [
+                        new BreadCrumb('Home', '/', 'home'),
+                        new BreadCrumb('Edit Issue', null, 'file-edit')
+                    ]
+                }
+            },
+
+
         ]
     }
 ];

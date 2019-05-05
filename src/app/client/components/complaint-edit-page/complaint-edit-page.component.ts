@@ -6,7 +6,6 @@ import {State} from '../../../app.state';
 import {filter} from 'rxjs/operators';
 import {ComplaintGetReset, ComplaintGetStart, ComplaintUpdateReset, ComplaintUpdateStart} from '../../data/complaint.actions';
 import {ActivatedRoute, Router} from '@angular/router';
-import User from '../../../core/data/model/user.model';
 import {GlobalNotifySuccessMessage} from '../../../core/data/actions';
 import {NotifyMessage} from '../../../core/data/model/notify-message.model';
 
@@ -69,7 +68,7 @@ export class ComplaintEditPageComponent implements OnInit, OnDestroy {
         filter(result => result !== null)).subscribe(
         (complaint: Complaint) => {
 
-            this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage('A new complaint has edited')));
+            this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage('The complaint has edited')));
           this.router.navigateByUrl('/client/complaint/' + complaint.id.toString());
         }
     );
@@ -84,7 +83,6 @@ export class ComplaintEditPageComponent implements OnInit, OnDestroy {
     this.updateSuccessSubscription.unsubscribe();
     this.errorGetDetailsSubscription.unsubscribe();
   }
-
 
   onSubmitForm(complaint: Complaint)
   {

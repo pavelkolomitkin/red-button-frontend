@@ -41,7 +41,11 @@
       <app-form-field-error-list [field]="'message'" [errors]="errors"></app-form-field-error-list>
     </div>
 
-
+    <div class="form-group">
+      <label>Pictures</label>
+      <app-issue-picture-list-field [pictures]="issue.pictures"></app-issue-picture-list-field>
+      <app-form-field-error-list [field]="'pictures'" [errors]="errors"></app-form-field-error-list>
+    </div>
 
     <div class="form-group">
       <label>Video Links(use youtube to point videos)</label>

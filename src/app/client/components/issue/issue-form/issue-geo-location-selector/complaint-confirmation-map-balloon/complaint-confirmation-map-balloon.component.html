@@ -1,5 +1,5 @@
 <app-map-balloon
-        [colorStyle]="'confirmation'"
+        [colorStyle]="'confirmation-' + confirmation.status.code"
         [isCollapsed]="true"
         [hasToCenteredOnOpen]="true"
         [location]="confirmation.complaint.location">
@@ -22,10 +22,10 @@
     <p>
       <ng-container *ngIf="confirmation.complaint.pictures.length > 0">
         <div>
-          <app-complaint-picture-item
+          <app-picture-item
                   *ngFor="let picture of confirmation.complaint.pictures | slice:0:5"
                   [picture]="picture" [size]="'previewExtraSmall'">
-          </app-complaint-picture-item>
+          </app-picture-item>
         </div>
         <div>
           <span class="small" *ngIf="confirmation.complaint.pictures.length > 0">{{ confirmation.complaint.pictures.length.toString() + ' picture(s)' }}&nbsp;</span>

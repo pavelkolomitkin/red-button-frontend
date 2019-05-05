@@ -1,6 +1,7 @@
 <app-map-balloon [colorStyle]="
     currentState === 'STATE_LOCATION_DETECTED_SUCCESS' ? 'success' :
-    currentState === 'STATE_LOCATION_DETECTED_ERROR' ? 'danger' : 'default'">
+    currentState === 'STATE_LOCATION_DETECTED_ERROR' ? 'danger' : 'default'"
+    [isCollapsed]="false">
 
   <div class="balloon-title">
     <ng-container *ngIf="currentState === 'STATE_LOADING'"></ng-container>

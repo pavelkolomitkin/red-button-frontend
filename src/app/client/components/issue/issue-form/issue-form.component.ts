@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Issue} from '../../../data/model/issue.model';
 import {ServiceType} from '../../../../core/data/model/service-type.model';
 import {Observable} from 'rxjs';
@@ -13,9 +13,11 @@ import {ServiceTypeListLoadStart} from '../../../../core/data/service-type.actio
 })
 export class IssueFormComponent implements OnInit {
 
+  @Output('onSubmit') submitEvent: EventEmitter<Issue> = new EventEmitter();
+
   @Input() issue: Issue;
 
-  @Input() errors = {};
+  @Input() errors;
 
   serviceTypes: Observable<Array<ServiceType>>;
 
@@ -29,12 +31,12 @@ export class IssueFormComponent implements OnInit {
 
   onSubmitHandler(event)
   {
-
+    this.submitEvent.emit(this.issue);
   }
 
   onAddressUpdateHandler(event)
   {
-    this.issue.company = null;
+
   }
 
   compareServiceTypes(a: ServiceType, b: ServiceType)

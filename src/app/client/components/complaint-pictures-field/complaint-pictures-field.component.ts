@@ -10,6 +10,7 @@ import {Observable, Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {Complaint} from '../../data/model/complaint.model';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-complaint-pictures-field',
@@ -18,11 +19,9 @@ import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ComplaintPicturesFieldComponent implements OnInit, OnDestroy {
 
-  static MAX_UPLOAD_FILE_SIZE = 5242880;
+  static MAX_UPLOAD_FILE_SIZE = environment.maxUploadPictureSize;
 
-  static ALLOWED_MIME_TYPES = [
-    'image/jpeg', 'image/png'
-  ];
+  static ALLOWED_MIME_TYPES = environment.uploadPictureAllowedMimeTypes;
 
   @Input() complaint: Complaint;
 

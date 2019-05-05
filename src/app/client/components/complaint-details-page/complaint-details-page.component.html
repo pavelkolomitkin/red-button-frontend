@@ -3,7 +3,7 @@
         <div class="box-header with-border">
             <h3 class="box-title">{{ complaint.region.title }} <span class="text-muted">({{ complaint.region.federalDistrict.title }})</span></h3>
 
-            <div class="box-tools pull-right">
+            <div class="box-tools pull-right" *ngIf="isOwnComplaint">
                 <a routerLink="/client/complaint/{{complaint.id}}/edit" type="button" class="btn btn-box-tool"><i class="fa fa-edit"></i></a>
                 <button type="button" class="btn btn-box-tool" (click)="onDeleteClickHandler($event)"><i class="fa fa-trash"></i></button>
             </div>

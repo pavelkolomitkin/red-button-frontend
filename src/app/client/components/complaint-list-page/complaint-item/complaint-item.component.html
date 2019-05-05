@@ -14,11 +14,11 @@
     </p>
     <p class="text-muted">{{ complaint.message }}</p>
     <p *ngIf="complaint.pictures.length > 0">
-      <app-complaint-picture-item
+      <app-picture-item
               *ngFor="let picture of complaint.pictures"
               [picture]="picture"
               [size]="'previewSmall'"
-      ></app-complaint-picture-item>
+      ></app-picture-item>
     </p>
     <p *ngIf="complaint.videos.length > 0">
       <app-video-item

@@ -1,0 +1,43 @@
+<div class="complaint-item box box-solid">
+  <div class="box-header with-border">
+    <h4><a [routerLink]="'/client/issue/' + issue.id">{{ issue.region.title }}</a>&nbsp;<small>({{ issue.region.federalDistrict.title }})</small></h4>
+
+    <div class="box-tools pull-right">
+      <a routerLink="/client/complaint/{{issue.id}}/edit" type="button" class="btn btn-box-tool"><i class="fa fa-edit"></i></a>
+      <button type="button" class="btn btn-box-tool" (click)="onDeleteClickHandler($event)"><i class="fa fa-trash"></i></button>
+    </div>
+  </div>
+
+  <div class="box-body">
+    <p *ngIf="!!issue.serviceType">
+      <span class="text-primary">{{ issue.serviceType.title }}</span>
+    </p>
+    <p class="text-muted">{{ issue.message }}</p>
+    <p *ngIf="issue.pictures.length > 0">
+      <app-picture-item
+              *ngFor="let picture of issue.pictures"
+              [picture]="picture"
+              [size]="'previewSmall'"
+      ></app-picture-item>
+    </p>
+    <p *ngIf="issue.videos.length > 0">
+      <app-video-item
+              *ngFor="let video of issue.videos"
+              [video]="video"
+              [size]="'small'"
+      ></app-video-item>
+    </p>
+    <p *ngIf="issue.complaintConfirmations.length > 0">
+      <span
+          class="label complaint-signature"
+          *ngFor="let confirmation of issue.complaintConfirmations"
+          [ngClass]="confirmation.status.code === 'confirmed' ? 'bg-green' : (confirmation.status.code === 'rejected' ? 'bg-red' : 'bg-gray')"
+          [attr.title]="confirmation.status.title"
+      >{{ confirmation.complaint.client.fullName }}</span>
+    </p>
+  </div>
+
+  <div class="box-footer">
+    <small class="pull-right text-muted">{{ issue.createdAt | amFromUnix }}</small>
+  </div>
+</div>

@@ -49,6 +49,9 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
 import {MessageNotifierComponent} from './components/message-notifier/message-notifier.component';
 import {ToastrModule} from 'ngx-toastr';
 import {CompanyService} from './services/company.service';
+import {IssuePictureService} from '../client/services/issue-picture.service';
+import {FileUploadService} from './services/file-upload.service';
+import {IssueService} from '../client/services/issue.service';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -100,10 +103,13 @@ const httpInterceptorProviders = [
     VideoService,
     ComplaintTagService,
     ComplaintPictureService,
+    IssuePictureService,
     ServiceTypeService,
     ComplaintService,
     ClientLocationService,
     CompanyService,
+      IssueService,
+      FileUploadService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,

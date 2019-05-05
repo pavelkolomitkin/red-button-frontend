@@ -26,6 +26,8 @@ export class ComplaintDetailsPageComponent implements OnInit, OnDestroy {
   deleteConfirmationSubscription: Subscription;
   deleteSubscription: Subscription;
 
+  isOwnComplaint: boolean = false;
+
 
   constructor(
       private store: Store<State>,
@@ -42,17 +44,13 @@ export class ComplaintDetailsPageComponent implements OnInit, OnDestroy {
         this.store.pipe(select(state => state.clientComplaint.complaintDetails), filter(result => !!result)),
         this.store.pipe(select(state => state.security.authorizedUser), filter(result => !!result))
     ).subscribe(([complaint, user]) => {
-      if (complaint.client.id !== user.id)
-      {
-        this.router.navigateByUrl('/404');
-      }
-      else
-      {
+
+        this.isOwnComplaint = complaint.client.id === user.id;
+
         this.complaint = complaint;
 
         this.store.dispatch(new GlobalPageTitle('Complaint details', '#' + this.complaint.id.toString()));
         // TODO: add bread crumbs
-      }
     });
 
     this.idSubscription = this.route.params.subscribe(

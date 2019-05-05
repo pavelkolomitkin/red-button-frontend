@@ -11,10 +11,10 @@
 <div class="complaint-completed-pictures row">
 
   <div class="col-md-4 col-sm-4 col-lg-2 col-xl-2 col-4" *ngFor="let picture of complaint.pictures">
-    <app-uploaded-complaint-picture-preview
+    <app-uploaded-picture-preview
             [picture]="picture"
             (onDelete)="onPictureDeleteHandler($event)">
-    </app-uploaded-complaint-picture-preview>
+    </app-uploaded-picture-preview>
   </div>
 
 </div>

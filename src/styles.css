@@ -52,3 +52,11 @@ button.dropdown-item
 .toast {
     opacity: 1 !important;
 }
+
+.complaint-signature
+{
+    font-size: 0.9em;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+}

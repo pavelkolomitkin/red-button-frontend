@@ -7,7 +7,7 @@ import {BaseService} from '../../core/services/base.service';
 @Injectable()
 export class ComplaintService extends BaseService {
 
-    transformEntity = (complaint) => {
+    static transformEntity = (complaint) => {
 
         const result = {
             ...complaint,
@@ -47,7 +47,7 @@ export class ComplaintService extends BaseService {
             .get<{ complaints: Array<Complaint> }>('/client/complaint/geo/search', { params: parameters })
             .pipe(
                 map(({ complaints }) => {
-                    return complaints.map(item => this.transformEntity(item))
+                    return complaints.map(item => ComplaintService.transformEntity(item))
                 })
             );
     }
@@ -67,7 +67,7 @@ export class ComplaintService extends BaseService {
             .pipe(
                 map(({ complaints, total }) => {
                     return {
-                        complaints: complaints.map(item => this.transformEntity(item)),
+                        complaints: complaints.map(item => ComplaintService.transformEntity(item)),
                         total: total
                     };
                 })
@@ -88,7 +88,7 @@ export class ComplaintService extends BaseService {
 
         return this.http.post<{ complaint: Complaint }>('/client/complaint', body).pipe(
             map(result => result.complaint),
-            map(complaint => this.transformEntity(complaint))
+            map(complaint => ComplaintService.transformEntity(complaint))
         );
     }
 
@@ -106,7 +106,7 @@ export class ComplaintService extends BaseService {
 
         return this.http.put<{ complaint: Complaint }>('/client/complaint/' + complaint.id, body).pipe(
             map(result => result.complaint),
-            map(complaint => this.transformEntity(complaint))
+            map(complaint => ComplaintService.transformEntity(complaint))
         );
     }
 
@@ -114,7 +114,7 @@ export class ComplaintService extends BaseService {
     {
         return this.http.get<{ complaint: Complaint }>('/client/complaint/' + id).pipe(
             map(result => result.complaint),
-            map(complaint => this.transformEntity(complaint)),
+            map(complaint => ComplaintService.transformEntity(complaint)),
             catchError((response) => {
                 throw {
                     error: 'Not found'

@@ -1,3 +1,18 @@
-<p>
-  issue-list-page works!
-</p>
+<app-client-common-layout>
+  <div>
+
+    <div infiniteScroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="50"
+         [infiniteScrollDisabled]="infinityScrollDisabled"
+         (scrolled)="onScroll()"
+    >
+
+      <div *ngFor="let issue of list">
+        <app-issue-item [issue]="issue" (onDelete)="onDeleteHandler($event)"></app-issue-item>
+      </div>
+
+    </div>
+
+  </div>
+</app-client-common-layout>
