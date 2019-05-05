@@ -16,12 +16,9 @@ export class ClientDeviceEffects
     userInitializeSuccess: Observable<Action> = this.actions.pipe(
         ofType(USER_INITIALIZE_SUCCESS),
         tap((action: UserInitializeSuccess) => {
-            const roles = action.user.roles;
 
-            if (roles.includes('ROLE_CLIENT_USER'))
-            {
-                this.store.dispatch(new GlobalDeviceGeoLocationDetectStart());
-            }
+            this.store.dispatch(new GlobalDeviceGeoLocationDetectStart());
+
         })
     );
 

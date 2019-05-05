@@ -3,6 +3,8 @@ import {select, Store} from '@ngrx/store';
 import {State} from '../../../app.state';
 import {Observable} from 'rxjs';
 import User from '../../data/model/user.model';
+import {ProfileCommonInfo} from '../../../client/data/model/profile-common-info.model';
+import {filter} from 'rxjs/operators';
 
 declare var $: any;
 
@@ -16,8 +18,20 @@ export class MainMenuComponent implements OnInit, AfterViewInit {
   user: Observable<User>;
   @ViewChild('treeMenu') menuContainer: ElementRef;
 
-  constructor(private store:Store<State>) {
+
+  clientCommonInfo: Observable<ProfileCommonInfo>;
+
+  constructor(private store:Store<State>)
+  {
     this.user = this.store.pipe(select(state => state.security.authorizedUser));
+
+
+    this.clientCommonInfo = this.store.pipe(
+        select(state => state.clientProfile),
+        filter(result => !!result),
+        select(result => result.commonInfo)
+    );
+
   }
 
   ngOnInit() {

@@ -8,7 +8,7 @@ import { ComplaintCreatePageComponent } from './components/complaint-create-page
 import { ComplaintEditPageComponent } from './components/complaint-edit-page/complaint-edit-page.component';
 import { ComplaintFormComponent } from './components/complaint-form/complaint-form.component';
 import { SharedModule } from '../shared/shared.module';
-import {StoreModule} from '@ngrx/store';
+import {Store, StoreModule} from '@ngrx/store';
 import { reducer as videoReducer } from './data/video.reducer';
 import { reducer as complaintTagReducer } from './data/complaint-tag.reducer';
 import { reducer as complaintPictureReducer } from './data/complaint-picture.reducer';
@@ -16,6 +16,7 @@ import { reducer as issuePictureReducer } from './data/issue-picture.reducer';
 import { reducer as complaintReducer } from './data/complaint.reducer';
 import { reducer as issueReducer } from './data/issue.reducer';
 import { reducer as geoLocationReducer } from './data/geo-location.reducer';
+import { reducer as profileReducer } from './data/profile.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {VideoEffects} from './data/effects/video.effects';
 import {ComplaintTagEffects} from './data/effects/complaint-tag.effects';
@@ -62,6 +63,9 @@ import { IssueMapViewComponent } from './components/issue/issue-details-page/iss
 import { IssueViewBalloonComponent } from './components/issue/issue-details-page/issue-map-view/issue-view-balloon/issue-view-balloon.component';
 import { ComplaintConfirmationViewBalloonComponent } from './components/issue/issue-details-page/issue-map-view/complaint-confirmation-view-balloon/complaint-confirmation-view-balloon.component';
 import { IssueItemComponent } from './components/issue/issue-list-page/issue-item/issue-item.component';
+import {ProfileEffects} from './data/effects/profile.effects';
+import {State} from '../app.state';
+import {ProfileGetCommonInfoStart} from './data/profile.actions';
 
 
 @NgModule({
@@ -123,13 +127,15 @@ import { IssueItemComponent } from './components/issue/issue-list-page/issue-ite
         StoreModule.forFeature('clientComplaint', complaintReducer),
         StoreModule.forFeature('clientIssue', issueReducer),
         StoreModule.forFeature('clientGeoLocation', geoLocationReducer),
+        StoreModule.forFeature('clientProfile', profileReducer),
         EffectsModule.forFeature([
             VideoEffects,
             ComplaintTagEffects,
             ComplaintPictureEffects,
             IssuePictureEffects,
             ComplaintEffects,
-            IssueEffects
+            IssueEffects,
+            ProfileEffects
         ])
     ],
   exports: [
@@ -147,4 +153,10 @@ import { IssueItemComponent } from './components/issue/issue-list-page/issue-ite
       ComplaintConfirmationViewBalloonComponent
   ]
 })
-export class ClientModule { }
+export class ClientModule {
+    constructor(private store: Store<State>)
+    {
+        console.log('Client module is loading...');
+        this.store.dispatch(new ProfileGetCommonInfoStart());
+    }
+}

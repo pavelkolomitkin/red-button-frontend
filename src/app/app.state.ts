@@ -8,6 +8,7 @@ import * as clientIssuePictureReducer from './client/data/issue-picture.reducer'
 import * as serviceTypeReducer from './core/data/service-type.reducer';
 import * as complaintReducer from './client/data/complaint.reducer';
 import * as issueReducer from './client/data/issue.reducer';
+import * as clientProfileReducer from './client/data/profile.reducer';
 import * as clientGeoLocationReducer from './client/data/geo-location.reducer';
 import * as mapReducer from './shared/data/map.reducer';
 
@@ -24,5 +25,6 @@ export interface State
   serviceType: serviceTypeReducer.State;
   clientComplaint: complaintReducer.State;
   clientIssue: issueReducer.State;
+  clientProfile: clientProfileReducer.State;
   map: mapReducer.State;
 }
