@@ -1,7 +1,9 @@
+import {ComplaintConfirmation} from './complaint-confirmation.model';
 
-export interface ProfileCommonInfo
+export class ProfileCommonInfo
 {
     complaintNumber ?: number;
     issueNumber ?: number;
-    newConfirmationNumber ?: number;
+    confirmationNumber ?: number;
+    confirmations: Array<ComplaintConfirmation> = [];
 }

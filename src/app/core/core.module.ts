@@ -53,6 +53,7 @@ import {IssuePictureService} from '../client/services/issue-picture.service';
 import {FileUploadService} from './services/file-upload.service';
 import {IssueService} from '../client/services/issue.service';
 import {ProfileService} from '../client/services/profile.service';
+import { SignatureRequestComponent } from './components/header/signature-request/signature-request.component';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -74,7 +75,8 @@ const httpInterceptorProviders = [
     ConfirmationWindowComponent,
     ControlItemComponent,
     ConfirmationComponent,
-      MessageNotifierComponent
+      MessageNotifierComponent,
+      SignatureRequestComponent
   ],
   imports: [
     CommonModule,

@@ -7,7 +7,7 @@ export interface State {
 }
 
 const initialState: State = {
-    commonInfo: {},
+    commonInfo: null,
     commonInfoErrors: {}
 };
 
@@ -28,7 +28,7 @@ export function reducer(state: State = initialState, action: actions.ProfileActi
             return {
                 ...state,
                 commonInfoErrors: action.errors,
-                commonInfo: {}
+                commonInfo: null
             };
 
         default:

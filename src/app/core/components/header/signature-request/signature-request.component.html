@@ -1,0 +1,4 @@
+<a [routerLink]="'/client/issue/' + confirmation.issue.id.toString()" class="signature-request-item">
+  <h5 class="header">{{ confirmation.issue.client.fullName }} <small>requests your signature</small></h5>
+  <div class="text-primary" *ngIf="!!confirmation.issue.serviceType">{{ confirmation.issue.serviceType.title }}</div>
+</a>

@@ -177,6 +177,11 @@ export class MapComponent implements OnInit, OnDestroy {
     return result;
   }
 
+  removeAllBalloons()
+  {
+    this.mapContainerRef.clear();
+  }
+
   createOverlay<C>(component: ComponentRef<C>): Overlay
   {
     const result = new Overlay({

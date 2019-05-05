@@ -17,12 +17,12 @@ import {MapBalloonCenteringReset} from '../../../../../shared/data/map.actions';
 })
 export class IssueMapViewComponent implements OnInit, OnDestroy {
 
-  @Input() issue: Issue;
+  _issue: Issue;
 
   @ViewChild('map') map: MapComponent;
 
-
   balloonSubscription: Subscription;
+  isMapInitialized: boolean = false;
 
   constructor(private store: Store<State>) {}
 
@@ -38,10 +38,52 @@ export class IssueMapViewComponent implements OnInit, OnDestroy {
     }
   }
 
+  @Input()
+  set issue(value: Issue)
+  {
+    if ((!this._issue) || (this._issue.id != value.id))
+    {
+      this._issue = value;
+      if (this.isMapInitialized)
+      {
+        this.initializeBalloons();
+      }
+    }
+  }
+
+  private initializeBalloons()
+  {
+    this.clearMap();
+    this.store.dispatch(new MapBalloonCenteringReset());
+
+    // add issue balloon
+    const issueComponent = this.map.addBalloon(IssueViewBalloonComponent, this._issue.location);
+    issueComponent.instance.issue = this._issue;
+    // center map on the issue balloon
+    this.map.setCenter(this._issue.location);
+    this.map.setZoom(15);
+
+
+    // add complaint confirmation balloons(consider the confirmation status as well)
+    for (let confirmation of this._issue.complaintConfirmations)
+    {
+      let confirmationComponent = this.map.addBalloon(ComplaintConfirmationViewBalloonComponent, confirmation.complaint.location);
+      confirmationComponent.instance.confirmation = confirmation;
+    }
+  }
+
+  private clearMap()
+  {
+    this.map.removeAllBalloons();
+  }
+
 
   onMapReadyHandler(event)
   {
-    this.store.dispatch(new MapBalloonCenteringReset());
+    this.isMapInitialized = true;
+
+    this.initializeBalloons();
+
     this.balloonSubscription = this.store.pipe(
         select(state => state.map.centeringBalloonLocation),
         filter(result => !!result))
@@ -50,21 +92,5 @@ export class IssueMapViewComponent implements OnInit, OnDestroy {
           this.map.setCenter(location, true);
 
         });
-
-    // add issue balloon
-    const issueComponent = this.map.addBalloon(IssueViewBalloonComponent, this.issue.location);
-    issueComponent.instance.issue = this.issue;
-    // center map on the issue balloon
-    this.map.setCenter(this.issue.location);
-    this.map.setZoom(15);
-
-
-    // add complaint confirmation balloons(consider the confirmation status as well)
-    for (let confirmation of this.issue.complaintConfirmations)
-    {
-      let confirmationComponent = this.map.addBalloon(ComplaintConfirmationViewBalloonComponent, confirmation.complaint.location);
-      confirmationComponent.instance.confirmation = confirmation;
-    }
-
   }
 }

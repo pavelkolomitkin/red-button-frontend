@@ -1,7 +1,7 @@
 <div>
   <div class="map-container">
     <app-map #map
-             [defaultCenter]="issue.location"
+             [defaultCenter]="_issue.location"
              (onReady)="onMapReadyHandler($event)"
     ></app-map>
   </div>
