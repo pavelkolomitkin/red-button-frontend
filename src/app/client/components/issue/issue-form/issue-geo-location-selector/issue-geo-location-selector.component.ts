@@ -111,7 +111,11 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     this.cancelEvent.emit();
-    console.log('Close');
+  }
+
+  onCancelButtonClickHandler(event)
+  {
+    this.cancelEvent.emit();
   }
 
   isAddressSelected()

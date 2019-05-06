@@ -33,6 +33,12 @@
 
 }
 
+.issue-geo-location-selector .control-panel .control-container .btn
+{
+    width: 100%;
+}
+
+
 .issue-geo-location-selector.closed .control-panel .control-container
 {
     display: none;

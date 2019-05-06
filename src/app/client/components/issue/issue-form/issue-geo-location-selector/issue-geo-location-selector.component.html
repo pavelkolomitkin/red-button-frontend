@@ -11,26 +11,35 @@
       <div class="box-body">
         <div class="controls">
           <ng-container *ngIf="!isAddressSelected()">
-            <button
-                    class="btn btn-primary"
-                    [attr.aria-pressed]="isSelectingLocation"
-                    [attr.data-toggle]="'button'"
-                    [attr.autocomplete]="'off'"
-                    (click)="isSelectingLocation = !isSelectingLocation"
-            >
-              <i class="fa fa-mouse-pointer"></i>Select location
-            </button>
+            <p>
+              <button
+                      class="btn btn-primary"
+                      [attr.aria-pressed]="isSelectingLocation"
+                      [attr.data-toggle]="'button'"
+                      [attr.autocomplete]="'off'"
+                      (click)="isSelectingLocation = !isSelectingLocation"
+              >
+                <i class="fa fa-mouse-pointer"></i> Select location
+              </button>
+            </p>
           </ng-container>
           <ng-container *ngIf="isAddressSelected()">
-            <button
-                    type="button"
-                    class="btn btn-success"
-                    [disabled]="!isAddressSelected()"
-                    (click)="onConfirmButtonClickHandler($event)"
-            >
-              <i class="fa fa-check"></i>Confirm
-            </button>
+            <p>
+              <button
+                      type="button"
+                      class="btn btn-success"
+                      [disabled]="!isAddressSelected()"
+                      (click)="onConfirmButtonClickHandler($event)"
+              >
+                <i class="fa fa-check"></i>Confirm
+              </button>
+            </p>
           </ng-container>
+          <p>
+            <span class="btn btn-default" (click)="onCancelButtonClickHandler($event)">
+                <i class="fa fa-close"></i> Cancel
+              </span>
+            </p>
         </div>
         <div>
           <app-search-form
