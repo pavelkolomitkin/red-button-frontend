@@ -44,9 +44,15 @@
   </div>
 
   <div class="balloon-footer">
-    <span class="btn btn-primary" (click)="onRequestButtonClickHandler($event)" *ngIf="canRequestSignature">
-      <i class="fa fa-plus"></i> Request a signature
-    </span>
+    <ng-container *ngIf="withRequestSignatureControl">
+      <span class="btn btn-primary" (click)="onRequestButtonClickHandler($event)" *ngIf="!!isRequestingSignatureAvailable && isRequestingSignatureAvailable(complaint)">
+        <i class="fa fa-plus"></i> Request a signature
+      </span>
+      <span class="btn btn-default disabled" *ngIf="!!isRequestingSignatureAvailable && !isRequestingSignatureAvailable(complaint)" title="You have already requested signature from this user!">
+        <i class="fa fa-warning"></i> Request a signature
+      </span>
+    </ng-container>
+
   </div>
 
 </app-map-balloon>

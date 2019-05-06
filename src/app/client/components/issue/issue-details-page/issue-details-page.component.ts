@@ -10,6 +10,7 @@ import {GlobalConfirmationInit, GlobalPageTitle} from '../../../../core/data/act
 import {ActionConfirmation} from '../../../../core/data/model/action-confirmation.model';
 import {ConfirmationActionOption} from '../../../../core/data/model/confirmation-action-option.model';
 import {ComplaintConfirmation} from '../../../data/model/complaint-confirmation.model';
+import {ComplaintConfirmationChangeStatusReset} from '../../../data/complaint-confirmation.actions';
 
 @Component({
   selector: 'app-issue-details-page',
@@ -39,6 +40,7 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(new IssueGetReset());
     this.store.dispatch(new IssueDeleteReset());
+    this.store.dispatch(new ComplaintConfirmationChangeStatusReset());
 
     this.detailsSubscription = combineLatest(
         this.store.pipe(select(state => state.clientIssue.issueDetails), filter(result => !!result)),

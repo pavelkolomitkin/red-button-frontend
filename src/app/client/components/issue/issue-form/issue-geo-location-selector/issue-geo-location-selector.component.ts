@@ -373,7 +373,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
     this.updateComplaintsWithViewBox();
   }
 
-  updateComplaintBalloons = (updatedItems: Array<Complaint>, canRequestSignature: boolean = false) =>
+  updateComplaintBalloons = (updatedItems: Array<Complaint>, withRequestSignatureControl: boolean = false) =>
   {
     const oldItems: Array<Complaint> = this.complaintBalloons.map(component => component.instance.complaint);
 
@@ -381,7 +381,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
       if (oldItems.findIndex(complaint => complaint.id === item.id) === -1)
       {
-        this.addComplaintBalloon(item, canRequestSignature);
+        this.addComplaintBalloon(item, withRequestSignatureControl);
       }
 
     });
@@ -397,7 +397,13 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   };
 
-  addComplaintBalloon = (complaint: Complaint, canRequestSignature: boolean = false) =>
+  isSignatureCanBeRequested = (complaint: Complaint) => {
+
+    return (this.internalIssue.complaintConfirmations.findIndex(item => item.complaint.client.id === complaint.client.id) === -1);
+
+  }
+
+  addComplaintBalloon = (complaint: Complaint, withRequestSignatureControl: boolean = false) =>
   {
     const confirmationIndex = this.confirmationBalloons.findIndex(item => item.instance.confirmation.complaint.id === complaint.id);
     if (confirmationIndex !== -1)
@@ -414,9 +420,10 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
       const { instance } = componentRef;
 
       instance.complaint = complaint;
+      instance.withRequestSignatureControl = withRequestSignatureControl;
+      instance.isRequestingSignatureAvailable = this.isSignatureCanBeRequested;
 
-      instance.canRequestSignature = canRequestSignature;
-      if (canRequestSignature)
+      if (withRequestSignatureControl)
       {
         instance.requestSignatureEvent.subscribe(this.onRequestSignatureHandler);
       }
@@ -433,7 +440,8 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
       const item: ComponentRef<ComplaintMapBalloonComponent> = this.complaintBalloons[index];
       this.map.removeBalloon(item);
 
-      if (item.instance.canRequestSignature)
+      item.instance.isRequestingSignatureAvailable = null;
+      if (item.instance.withRequestSignatureControl)
       {
         item.instance.requestSignatureEvent.unsubscribe();
       }

@@ -16,6 +16,14 @@ export function reducer(state: State = initialState, action: actions.ComplaintCo
 
     switch (action.type) {
 
+        case actions.COMPLAINT_CONFIRMATION_CHANGE_STATUS_RESET:
+
+            return {
+                ...state,
+                updatedConfirmation: null,
+                updateConfirmationErrors: {}
+            };
+
         case actions.COMPLAINT_CONFIRMATION_CHANGE_STATUS_SUCCESS:
 
             return {

@@ -12,7 +12,8 @@ export class ComplaintMapBalloonComponent implements OnInit {
 
   @Input() complaint: Complaint;
 
-  @Input() canRequestSignature: boolean = false;
+  @Input() withRequestSignatureControl: boolean = false;
+  @Input() isRequestingSignatureAvailable: Function = null;
 
   ngOnInit() {
   }

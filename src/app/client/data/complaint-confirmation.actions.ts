@@ -1,10 +1,15 @@
 import { Action } from '@ngrx/store';
 import {ComplaintConfirmation} from './model/complaint-confirmation.model';
 
+export const COMPLAINT_CONFIRMATION_CHANGE_STATUS_RESET = 'COMPLAINT_CONFIRMATION_CHANGE_STATUS_RESET';
 export const COMPLAINT_CONFIRMATION_CHANGE_STATUS_START = 'COMPLAINT_CONFIRMATION_CHANGE_STATUS_START';
 export const COMPLAINT_CONFIRMATION_CHANGE_STATUS_SUCCESS = 'COMPLAINT_CONFIRMATION_CHANGE_STATUS_SUCCESS';
 export const COMPLAINT_CONFIRMATION_CHANGE_STATUS_ERROR = 'COMPLAINT_CONFIRMATION_CHANGE_STATUS_ERROR';
 
+export class ComplaintConfirmationChangeStatusReset implements Action
+{
+    readonly type = COMPLAINT_CONFIRMATION_CHANGE_STATUS_RESET;
+}
 
 export class ComplaintConfirmationChangeStatusStart implements Action
 {
@@ -28,7 +33,8 @@ export class ComplaintConfirmationChangeStatusError implements Action
 }
 
 
-export type ComplaintConfirmationActions = ComplaintConfirmationChangeStatusStart
+export type ComplaintConfirmationActions = ComplaintConfirmationChangeStatusReset
+    | ComplaintConfirmationChangeStatusStart
     | ComplaintConfirmationChangeStatusSuccess
     | ComplaintConfirmationChangeStatusError
     ;
