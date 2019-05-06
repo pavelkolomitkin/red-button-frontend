@@ -32,7 +32,7 @@ export class ConfirmLeavePageGuardService implements CanDeactivate<any>
         if (this.needToConfirm)
         {
             let message = ConfirmLeavePageGuardService.DEFAULT_PROMPT_MESSAGE;
-            if ((component as LeavePageConfirmationInterface) && (!!component.getPromptMessage()))
+            if (!!(component as LeavePageConfirmationInterface).getPromptMessage && (!!component.getPromptMessage()))
             {
                 message = component.getPromptMessage()
             }

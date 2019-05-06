@@ -44,6 +44,7 @@ const routes: Routes = [
             {
                 path: 'complaint/create',
                 component: ComplaintCreatePageComponent,
+                canDeactivate: [ConfirmLeavePageGuardService],
                 data: {
                     pageTitle: 'New Complaint',
                     pageSubTitle: '',
@@ -56,6 +57,7 @@ const routes: Routes = [
             {
                 path: 'complaint/:id/edit',
                 component: ComplaintEditPageComponent,
+                canDeactivate: [ConfirmLeavePageGuardService],
                 data: {
                     pageTitle: 'Edit Complaint',
                     pageSubTitle: '',

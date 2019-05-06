@@ -6,6 +6,7 @@ import {ServiceType} from '../../../../core/data/model/service-type.model';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../app.state';
 import {ServiceTypeListLoadStart} from '../../../../core/data/service-type.actions';
+import {GlobalConfirmLeavePageInit, GlobalConfirmLeavePageReset} from '../../../../core/data/actions';
 
 @Component({
   selector: 'app-complaint-form',
@@ -27,6 +28,8 @@ export class ComplaintFormComponent implements OnInit {
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
+    this.store.dispatch(new GlobalConfirmLeavePageReset());
+
     this.serviceTypes = this.store.pipe(select(state => state.serviceType.list));
 
     this.store.dispatch(new ServiceTypeListLoadStart());
@@ -45,6 +48,7 @@ export class ComplaintFormComponent implements OnInit {
 
   onSubmitHandler(event)
   {
+    this.store.dispatch(new GlobalConfirmLeavePageReset());
     this.submitForm.emit(this.complaint);
   }
 
@@ -58,5 +62,10 @@ export class ComplaintFormComponent implements OnInit {
   isValid(): boolean
   {
     return this.form.valid && !!this.complaint.region;
+  }
+
+  onFieldValueChangeHandler(event)
+  {
+    this.store.dispatch(new GlobalConfirmLeavePageInit());
   }
 }

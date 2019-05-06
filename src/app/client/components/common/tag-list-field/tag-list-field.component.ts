@@ -1,9 +1,9 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ComplaintTagService} from '../../../services/complaint-tag.service';
 import {ComplaintTag} from '../../../data/model/complaint-tag.model';
 import {NgbTypeaheadSelectItemEvent} from '@ng-bootstrap/ng-bootstrap';
 import {Observable, of} from 'rxjs';
-import {debounceTime, map, mergeMap} from 'rxjs/operators';
+import {debounceTime, map, mergeMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-tag-list-field',
@@ -11,6 +11,8 @@ import {debounceTime, map, mergeMap} from 'rxjs/operators';
   styleUrls: ['./tag-list-field.component.css']
 })
 export class TagListFieldComponent implements OnInit {
+
+  @Output('onChange') changeEvent: EventEmitter<Array<ComplaintTag>> = new EventEmitter();
 
   public model: any;
 
@@ -45,11 +47,18 @@ export class TagListFieldComponent implements OnInit {
   onItemSelectHandler(event: NgbTypeaheadSelectItemEvent)
   {
     this.addTag(event.item.title);
+
+    this.inputElement.nativeElement.value = '';
+
+    event.preventDefault();
   }
 
   onEnterHandler(event)
   {
     this.addTag(event.target.value);
+
+    event.stopPropagation();
+    event.preventDefault();
 
     event.target.value = '';
   }
@@ -69,6 +78,7 @@ export class TagListFieldComponent implements OnInit {
     }
 
     this.tags.push({ title: newTag });
+    this.changeEvent.emit(this.tags);
   }
 
   formatter = (x: {title: string}) =>
@@ -82,6 +92,7 @@ export class TagListFieldComponent implements OnInit {
     if (tagIndex !== -1)
     {
       this.tags.splice(tagIndex, 1);
+      this.changeEvent.emit(this.tags);
     }
   }
 }
