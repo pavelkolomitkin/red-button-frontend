@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ProfilePageComponent} from './components/profile-page/profile-page.component';
-import {ComplaintListPageComponent} from './components/complaint-list-page/complaint-list-page.component';
-import {ComplaintCreatePageComponent} from './components/complaint-create-page/complaint-create-page.component';
-import {ComplaintEditPageComponent} from './components/complaint-edit-page/complaint-edit-page.component';
-import {ComplaintDetailsPageComponent} from './components/complaint-details-page/complaint-details-page.component';
+import {ComplaintListPageComponent} from './components/complaint/complaint-list-page/complaint-list-page.component';
+import {ComplaintCreatePageComponent} from './components/complaint/complaint-create-page/complaint-create-page.component';
+import {ComplaintEditPageComponent} from './components/complaint/complaint-edit-page/complaint-edit-page.component';
+import {ComplaintDetailsPageComponent} from './components/complaint/complaint-details-page/complaint-details-page.component';
 import {BreadCrumb} from '../core/data/model/bread-crumb.model';
 import {CreateIssuePageComponent} from './components/issue/create-issue-page/create-issue-page.component';
 import {IssueListPageComponent} from './components/issue/issue-list-page/issue-list-page.component';

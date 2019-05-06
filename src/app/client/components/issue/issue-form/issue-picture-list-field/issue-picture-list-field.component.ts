@@ -1,7 +1,7 @@
 import {Component, OnInit } from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {UploadPictureListFormFieldComponent} from '../../../upload-picture-list-form-field/upload-picture-list-form-field.component';
+import {UploadPictureListFormFieldComponent} from '../../../common/upload-picture-list-form-field/upload-picture-list-form-field.component';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../../app.state';
 import {UploadItem} from '../../../../../shared/data/model/upload-item.model';
