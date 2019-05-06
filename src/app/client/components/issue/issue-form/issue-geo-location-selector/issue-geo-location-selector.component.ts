@@ -4,7 +4,7 @@ import {GeoLocation} from '../../../../../core/data/model/geo-location.model';
 import {MapComponent} from '../../../../../shared/components/map/map.component';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../../app.state';
-import {Subscription} from 'rxjs';
+import {from, Observable, of, Subject, Subscription} from 'rxjs';
 import {ComplaintService} from '../../../../services/complaint.service';
 import {Complaint} from '../../../../data/model/complaint.model';
 import {MapViewBox} from '../../../../../shared/data/model/map-view-box.model';
@@ -14,7 +14,7 @@ import {ComplaintConfirmation} from '../../../../data/model/complaint-confirmati
 import {ComplaintConfirmationStatus} from '../../../../data/model/complaint-confirmation-status.model';
 import {ComplaintConfirmationMapBalloonComponent} from './complaint-confirmation-map-balloon/complaint-confirmation-map-balloon.component';
 import {SearchFormComponent} from './search-form/search-form.component';
-import {filter, map} from 'rxjs/operators';
+import {debounceTime, filter, map, tap} from 'rxjs/operators';
 import {MapBalloonCenteringReset} from '../../../../../shared/data/map.actions';
 
 @Component({
@@ -26,6 +26,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   static LOADING_DATA_ZOOM = 10;
   static EXISTING_ISSUE_ZOOM = 15;
+  static VIEW_BOX_TIME_INTERVAL_UPDATING = 500;
 
   @Output('onSelect') selectEvent: EventEmitter<Issue> = new EventEmitter();
   @Output('onCancel') cancelEvent: EventEmitter<void> = new EventEmitter();
@@ -45,6 +46,8 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
   deviceLocation: GeoLocation;
 
   searchCriteria: any = null;
+  viewBoxDelayDescriptor: number = null;
+
 
   deviceLocationSubscription: Subscription;
   balloonSubscription: Subscription;
@@ -331,37 +334,36 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   updateComplaintsWithViewBox = () => {
 
-    const box = this.map.getViewBox();
+      const box = this.map.getViewBox();
+      if (box.zoom >= IssueGeoLocationSelectorComponent.LOADING_DATA_ZOOM)
+      {
+        const geoParams = {
+          topLeftLatitude: box.topLeft.latitude,
+          topLeftLongitude: box.topLeft.longitude,
+          bottomRightLatitude: box.bottomRight.latitude,
+          bottomRightLongitude: box.bottomRight.longitude
+        };
 
-    if (box.zoom >= IssueGeoLocationSelectorComponent.LOADING_DATA_ZOOM)
-    {
-      const geoParams = {
-        topLeftLatitude: box.topLeft.latitude,
-        topLeftLongitude: box.topLeft.longitude,
-        bottomRightLatitude: box.bottomRight.latitude,
-        bottomRightLongitude: box.bottomRight.longitude
-      };
+        this.searchForm.setGeoParameters(geoParams);
 
-      this.searchForm.setGeoParameters(geoParams);
+        let searchParams = this.getSearchFormParameters();
+        searchParams = Object.assign(searchParams, geoParams);
 
-      let searchParams = this.getSearchFormParameters();
-      searchParams = Object.assign(searchParams, geoParams);
+        this.complaintService.search(searchParams)
+            .toPromise()
+            .then((complaints) => {
 
-      this.complaintService.search(searchParams)
-          .toPromise()
-          .then((complaints) => {
+              this.updateComplaintBalloons(complaints);
 
-            this.updateComplaintBalloons(complaints);
-
-          })
-          .catch(() => {
-            this.removeAllComplaintBalloons();
-          });
-    }
-    else
-    {
-      this.removeAllComplaintBalloons();
-    }
+            })
+            .catch(() => {
+              this.removeAllComplaintBalloons();
+            });
+      }
+      else
+      {
+        this.removeAllComplaintBalloons();
+      }
   };
 
   onViewBoxChangeHandler(box: MapViewBox)
@@ -370,7 +372,15 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
     {
       return;
     }
-    this.updateComplaintsWithViewBox();
+
+    if (!!this.viewBoxDelayDescriptor)
+    {
+      clearTimeout(this.viewBoxDelayDescriptor);
+      this.viewBoxDelayDescriptor = null;
+    }
+    this.viewBoxDelayDescriptor = setTimeout(() => {
+      this.updateComplaintsWithViewBox();
+    }, IssueGeoLocationSelectorComponent.VIEW_BOX_TIME_INTERVAL_UPDATING);
   }
 
   updateComplaintBalloons = (updatedItems: Array<Complaint>, withRequestSignatureControl: boolean = false) =>

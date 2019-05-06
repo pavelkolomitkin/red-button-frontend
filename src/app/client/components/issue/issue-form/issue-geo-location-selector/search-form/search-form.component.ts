@@ -12,10 +12,13 @@ import {ComplaintTag} from '../../../../../data/model/complaint-tag.model';
 })
 export class SearchFormComponent implements OnInit {
 
+  static CHANGE_EVENT_DELAY = 500;
+
   @Output('onChange') changeEvent: EventEmitter<{ serviceType ?: ServiceType, tags:Array<ComplaintTag> }> = new EventEmitter();
 
   serviceTypes: Observable<ServiceType[]>;
   tagItems: Array<any> = [];
+  tagChangeEventTimeout = null;
 
   selectedServiceType: ServiceType;
   selectedTags: Array<ComplaintTag> = [];
@@ -95,27 +98,35 @@ export class SearchFormComponent implements OnInit {
 
   onTagSelectHandler(tag: ComplaintTag)
   {
-    console.log('Tag selected -->');
-    console.log(tag);
     const index = this.selectedTags.findIndex(item => item.id === tag.id);
 
     if (index === -1)
     {
       this.selectedTags.push(tag);
-      this.emitChanges();
+
+      if (!!this.tagChangeEventTimeout)
+      {
+        clearTimeout(this.tagChangeEventTimeout);
+      }
+      this.tagChangeEventTimeout = setTimeout(() => {
+        this.emitChanges();
+      }, SearchFormComponent.CHANGE_EVENT_DELAY);
     }
   }
 
   onTagUnSelectHandler(tag: ComplaintTag)
   {
-    console.log('Tag unSelected -->');
-    console.log(tag);
-
     const index = this.selectedTags.findIndex(item => item.id === tag.id);
     if (index !== -1)
     {
       this.selectedTags.splice(index, 1);
-      this.emitChanges();
+      if (!!this.tagChangeEventTimeout)
+      {
+        clearTimeout(this.tagChangeEventTimeout);
+      }
+      this.tagChangeEventTimeout = setTimeout(() => {
+        this.emitChanges();
+      }, SearchFormComponent.CHANGE_EVENT_DELAY);
     }
   }
 }
