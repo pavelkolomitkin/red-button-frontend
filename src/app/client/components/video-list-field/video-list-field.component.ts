@@ -1,6 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {Video} from '../../data/model/video.model';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {Store} from '@ngrx/store';
+import {State} from '../../../app.state';
+import {GlobalConfirmLeavePageInit} from '../../../core/data/actions';
 
 @Component({
   selector: 'app-video-list-field',
@@ -8,6 +11,8 @@ import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./video-list-field.component.css']
 })
 export class VideoListFieldComponent implements OnInit {
+
+  @Output('onChange') changeEvent: EventEmitter<Array<Video>> = new EventEmitter();
 
   @Input() list: Array<Video> = [];
 
@@ -33,6 +38,7 @@ export class VideoListFieldComponent implements OnInit {
               if (videoIndex !== -1)
               {
                 this.list.splice(videoIndex, 1);
+                this.changeEvent.emit(this.list);
               }
 
               this.removeVideoModalWindow = null;
@@ -50,6 +56,7 @@ export class VideoListFieldComponent implements OnInit {
     if(this.list.findIndex(item => item.id === video.id) === -1)
     {
         this.list.push(video);
+        this.changeEvent.emit(this.list);
     }
   }
 

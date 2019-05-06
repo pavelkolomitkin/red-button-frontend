@@ -12,7 +12,7 @@ import {Observable} from "rxjs";
 import {NgxPermissionsService} from 'ngx-permissions';
 
 @Injectable()
-export class AuthUserGuard implements CanActivate {
+export class AuthUserGuardService implements CanActivate {
 
   static routePermissionRules: { [s: string]: Array<string> } = {
       admin: [ 'ROLE_ADMIN_USER' ],
@@ -36,7 +36,7 @@ export class AuthUserGuard implements CanActivate {
 
           if (route.url.length > 0) {
               const urlPrefix = route.url[0].toString();
-              const routeRoles = AuthUserGuard.routePermissionRules[urlPrefix];
+              const routeRoles = AuthUserGuardService.routePermissionRules[urlPrefix];
 
               const permissions = this.permissionService.getPermissions();
               for (let role in permissions) {

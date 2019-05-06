@@ -1,7 +1,11 @@
-import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {Issue} from '../../../../data/model/issue.model';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {Company} from '../../../../../core/data/model/company.model';
+import {Store} from '@ngrx/store';
+import {State} from '../../../../../app.state';
+import {GlobalConfirmationInit, GlobalConfirmLeavePageInit} from '../../../../../core/data/actions';
+import {Region} from '../../../../../core/data/model/region.model';
 
 @Component({
   selector: 'app-issue-company-selector-field',
@@ -10,7 +14,10 @@ import {Company} from '../../../../../core/data/model/company.model';
 })
 export class IssueCompanySelectorFieldComponent implements OnInit {
 
-  @Input() issue: Issue;
+  @Output('onSelect') selectEvent: EventEmitter<Company> = new EventEmitter<Company>();
+
+  @Input() company: Company;
+  @Input() region: Region;
 
   @ViewChild('searchCompanyModal') searchCompanyWindowTemplate: TemplateRef<any>;
   searchCompanyWindow: NgbModalRef = null;
@@ -33,7 +40,7 @@ export class IssueCompanySelectorFieldComponent implements OnInit {
 
   onCompanySelectHandler(company: Company)
   {
-    this.issue.company = company;
+    this.selectEvent.emit(company);
     this.searchCompanyWindow.close();
   }
 

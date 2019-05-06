@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Issue} from '../../../data/model/issue.model';
 import {Observable, Subscription} from 'rxjs';
 import {State} from '../../../../app.state';
@@ -8,13 +8,17 @@ import {filter} from 'rxjs/operators';
 import {GlobalNotifySuccessMessage} from '../../../../core/data/actions';
 import {NotifyMessage} from '../../../../core/data/model/notify-message.model';
 import {ActivatedRoute, Router} from '@angular/router';
+import {LeavePageConfirmationInterface} from '../../../../core/data/model/leave-page-confirmation.interface';
+import {IssueFormComponent} from '../issue-form/issue-form.component';
 
 @Component({
   selector: 'app-create-issue-page',
   templateUrl: './create-issue-page.component.html',
   styleUrls: ['./create-issue-page.component.css']
 })
-export class CreateIssuePageComponent implements OnInit, OnDestroy {
+export class CreateIssuePageComponent implements OnInit, OnDestroy, LeavePageConfirmationInterface {
+
+  @ViewChild('form') form: IssueFormComponent;
 
   issue: Issue = new Issue();
 
@@ -57,4 +61,7 @@ export class CreateIssuePageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new IssueCreateStart(issue));
   }
 
+  getPromptMessage(): string {
+    return 'Are you sure you want to leave?';
+  }
 }

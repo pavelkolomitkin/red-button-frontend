@@ -3,7 +3,7 @@
     <h4><a [routerLink]="'/client/issue/' + issue.id">{{ issue.region.title }}</a>&nbsp;<small>({{ issue.region.federalDistrict.title }})</small></h4>
 
     <div class="box-tools pull-right">
-      <a routerLink="/client/complaint/{{issue.id}}/edit" type="button" class="btn btn-box-tool"><i class="fa fa-edit"></i></a>
+      <a routerLink="/client/issue/{{issue.id}}/edit" type="button" class="btn btn-box-tool"><i class="fa fa-edit"></i></a>
       <button type="button" class="btn btn-box-tool" (click)="onDeleteClickHandler($event)"><i class="fa fa-trash"></i></button>
     </div>
   </div>

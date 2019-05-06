@@ -1,9 +1,9 @@
-import {ElementRef, Input, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {Observable, OperatorFunction, Subscription} from 'rxjs';
 import {UploadItem} from '../../../shared/data/model/upload-item.model';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import {State} from '../../../app.state';
 import {GlobalNotifyErrorMessage} from '../../../core/data/actions';
 import {NotifyMessage} from '../../../core/data/model/notify-message.model';
@@ -12,6 +12,9 @@ import {filter} from 'rxjs/operators';
 
 export abstract class UploadPictureListFormFieldComponent implements OnInit, OnDestroy
 {
+    @Output('onChange') changeEvent: EventEmitter<Array<PictureInterface>> = new EventEmitter();
+    @Output('onSelectError') selectErrorEvent: EventEmitter<string> = new EventEmitter();
+
     @Input() pictures: Array<PictureInterface> = [];
 
     @ViewChild('fileSelector') fileSelector: ElementRef;
@@ -104,8 +107,11 @@ export abstract class UploadPictureListFormFieldComponent implements OnInit, OnD
                     (+new Date()).toString() + file.name, file
                 );
                 this.onFileSelectSuccess(uploadablePicture);
+
+                this.changeEvent.emit(this.pictures);
             }
             catch (error) {
+                this.selectErrorEvent.emit(error);
                 this.store.dispatch(new GlobalNotifyErrorMessage(new NotifyMessage(error)));
             }
         }
@@ -128,6 +134,8 @@ export abstract class UploadPictureListFormFieldComponent implements OnInit, OnD
                 if (removingItemIndex !== -1)
                 {
                     this.pictures.splice(removingItemIndex, 1);
+
+                    this.changeEvent.emit(this.pictures);
                 }
 
                 this.removePictureModalWindow = null;

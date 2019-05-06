@@ -4,7 +4,7 @@
       <h3 class="box-title">Edit Report</h3>
     </div>
 
-    <app-issue-form
+    <app-issue-form #form
             [issue]="issue"
             [errors]="errors"
             (onSubmit)="onSubmitHandler($event)"

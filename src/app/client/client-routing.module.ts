@@ -10,6 +10,7 @@ import {CreateIssuePageComponent} from './components/issue/create-issue-page/cre
 import {IssueListPageComponent} from './components/issue/issue-list-page/issue-list-page.component';
 import {IssueDetailsPageComponent} from './components/issue/issue-details-page/issue-details-page.component';
 import {EditIssuePageComponent} from './components/issue/edit-issue-page/edit-issue-page.component';
+import {ConfirmLeavePageGuardService} from '../core/services/guards/confirm-leave-page-guard.service';
 
 
 const routes: Routes = [
@@ -73,12 +74,27 @@ const routes: Routes = [
             {
                 path: 'issue/create',
                 component: CreateIssuePageComponent,
+                canDeactivate: [ConfirmLeavePageGuardService],
                 data: {
                     pageTitle: 'New Issue',
                     pageSubTitle: '',
                     breadCrumbs: [
                         new BreadCrumb('Home', '/', 'home'),
                         new BreadCrumb('Add Issue', null, 'file-text-o')
+                    ]
+                }
+            },
+
+            {
+                path: 'issue/:id/edit',
+                component: EditIssuePageComponent,
+                canDeactivate: [ConfirmLeavePageGuardService],
+                data: {
+                    pageTitle: 'Edit Issue',
+                    pageSubTitle: '',
+                    breadCrumbs: [
+                        new BreadCrumb('Home', '/', 'home'),
+                        new BreadCrumb('Edit Issue', null, 'file-edit')
                     ]
                 }
             },
@@ -105,19 +121,6 @@ const routes: Routes = [
                     breadCrumbs: [
                         new BreadCrumb('Home', '/', 'home'),
                         new BreadCrumb('Issue', null, 'file-text-o')
-                    ]
-                }
-            },
-
-            {
-                path: 'issue/:id/edit',
-                component: EditIssuePageComponent,
-                data: {
-                    pageTitle: 'Edit Issue',
-                    pageSubTitle: '',
-                    breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Edit Issue', null, 'file-edit')
                     ]
                 }
             },

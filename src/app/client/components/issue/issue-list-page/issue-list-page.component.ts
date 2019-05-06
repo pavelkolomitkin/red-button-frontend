@@ -8,8 +8,6 @@ import {GlobalConfirmationInit, GlobalConfirmationReset} from '../../../../core/
 import {filter} from 'rxjs/operators';
 import {ActionConfirmation} from '../../../../core/data/model/action-confirmation.model';
 import {ConfirmationActionOption} from '../../../../core/data/model/confirmation-action-option.model';
-import {Complaint} from '../../../data/model/complaint.model';
-import {ComplaintDeleteStart, ComplaintUserListLoadStart} from '../../../data/complaint.actions';
 
 @Component({
   selector: 'app-issue-list-page',

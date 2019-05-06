@@ -1,6 +1,6 @@
 <div>
-  <p *ngIf="!!issue.company; else noSelectedCompany">
-    <span class="text-primary">{{ issue.company.fullName }}</span>
+  <p *ngIf="!!company; else noSelectedCompany">
+    <span class="text-primary">{{ company.fullName }}</span>
   </p>
   <ng-template #noSelectedCompany>
     <p class="text text-muted">(None)</p>
@@ -9,13 +9,13 @@
     <button
             type="button"
             class="btn btn-primary"
-            [disabled]="!issue.region"
-            [attr.title]="!issue.region ? 'Choose a location first' : ''"
+            [disabled]="!region"
+            [attr.title]="!region ? 'Choose a location first' : ''"
             (click)="onChooseButtonClickHandler($event)"
     >Choose a company</button>
   </div>
 </div>
 
 <ng-template #searchCompanyModal let-modal>
-  <app-company-search-form (onCompanySelect)="onCompanySelectHandler($event)" [region]="issue.region"></app-company-search-form>
+  <app-company-search-form (onCompanySelect)="onCompanySelectHandler($event)" [region]="region"></app-company-search-form>
 </ng-template>

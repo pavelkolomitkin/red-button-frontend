@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Issue} from '../../../data/model/issue.model';
 import {IssueCreateStart, IssueGetReset, IssueGetStart, IssueUpdateReset, IssueUpdateStart} from '../../../data/issue.actions';
 import {select, Store} from '@ngrx/store';
@@ -8,13 +8,17 @@ import {combineLatest, Observable, Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {GlobalNotifySuccessMessage, GlobalPageTitle} from '../../../../core/data/actions';
 import {NotifyMessage} from '../../../../core/data/model/notify-message.model';
+import {LeavePageConfirmationInterface} from '../../../../core/data/model/leave-page-confirmation.interface';
+import {IssueFormComponent} from '../issue-form/issue-form.component';
 
 @Component({
   selector: 'app-edit-issue-page',
   templateUrl: './edit-issue-page.component.html',
   styleUrls: ['./edit-issue-page.component.css']
 })
-export class EditIssuePageComponent implements OnInit, OnDestroy {
+export class EditIssuePageComponent implements OnInit, OnDestroy, LeavePageConfirmationInterface {
+
+  @ViewChild('form') form: IssueFormComponent;
 
   issue: Issue;
 
@@ -91,6 +95,15 @@ export class EditIssuePageComponent implements OnInit, OnDestroy {
   onSubmitHandler(issue: Issue)
   {
     this.store.dispatch(new IssueUpdateStart(issue));
+  }
+
+  needToConfirm(): boolean
+  {
+    return this.form.form.dirty;
+  }
+
+  getPromptMessage(): string {
+    return 'Are you sure you want to leave?';
   }
 
 }

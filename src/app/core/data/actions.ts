@@ -20,6 +20,9 @@ export const GLOBAL_CONFIRMATION_INIT = 'GLOBAL_CONFIRMATION_INIT';
 export const GLOBAL_CONFIRMATION_RESPONSE = 'GLOBAL_CONFIRMATION_RESPONSE';
 export const GLOBAL_CONFIRMATION_RESET = 'GLOBAL_CONFIRMATION_RESET';
 
+export const GLOBAL_CONFIRM_LEAVE_PAGE_INIT = 'GLOBAL_CONFIRM_LEAVE_PAGE_INIT';
+export const GLOBAL_CONFIRM_LEAVE_PAGE_RESET = 'GLOBAL_CONFIRM_LEAVE_PAGE_RESET';
+
 
 export class GlobalPageTitle implements Action
 {
@@ -93,6 +96,16 @@ export class GlobalConfirmationReset implements Action
   readonly type = GLOBAL_CONFIRMATION_RESET;
 }
 
+export class GlobalConfirmLeavePageInit implements Action
+{
+  readonly type = GLOBAL_CONFIRM_LEAVE_PAGE_INIT;
+}
+
+export class GlobalConfirmLeavePageReset implements Action
+{
+  readonly type = GLOBAL_CONFIRM_LEAVE_PAGE_RESET;
+}
+
 export type CoreActions =
     GlobalProgressShow
     | GlobalProgressHide
@@ -109,4 +122,7 @@ export type CoreActions =
     | GlobalConfirmationInit
     | GlobalConfirmationResponse
     | GlobalConfirmationReset
+
+    | GlobalConfirmLeavePageInit
+    | GlobalConfirmLeavePageReset
   ;

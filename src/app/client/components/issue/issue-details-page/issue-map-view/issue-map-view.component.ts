@@ -9,7 +9,6 @@ import {filter} from 'rxjs/operators';
 import {GeoLocation} from '../../../../../core/data/model/geo-location.model';
 import {Subscription} from 'rxjs';
 import {MapBalloonCenteringReset} from '../../../../../shared/data/map.actions';
-import {ComplaintConfirmation} from '../../../../data/model/complaint-confirmation.model';
 
 @Component({
   selector: 'app-issue-map-view',
@@ -63,7 +62,6 @@ export class IssueMapViewComponent implements OnInit, OnDestroy {
     // center map on the issue balloon
     this.map.setCenter(this._issue.location);
     this.map.setZoom(15);
-
 
     // add complaint confirmation balloons(consider the confirmation status as well)
     for (let confirmation of this._issue.complaintConfirmations)

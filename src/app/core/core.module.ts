@@ -20,7 +20,7 @@ import { reducer as serviceTypeReducer } from './data/service-type.reducer';
 import { reducer as mapReducer } from '../shared/data/map.reducer';
 import { RegisterEffects } from '../security/data/effects/register.effects';
 import { AuthEffects } from '../security/data/effects/auth.effects';
-import { AuthUserGuard } from '../security/services/guards/AuthUserGuard';
+import { AuthUserGuardService } from '../security/services/guards/auth-user-guard.service';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { GlobalProgressComponent } from './components/global-progress/global-progress.component';
@@ -55,6 +55,7 @@ import {IssueService} from '../client/services/issue.service';
 import {ProfileService} from '../client/services/profile.service';
 import { SignatureRequestComponent } from './components/header/signature-request/signature-request.component';
 import {ComplaintConfirmationService} from '../client/services/complaint-comfirmation.service';
+import {ConfirmLeavePageGuardService} from './services/guards/confirm-leave-page-guard.service';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -98,7 +99,7 @@ const httpInterceptorProviders = [
     ])
   ],
   providers: [
-    AuthUserGuard,
+    AuthUserGuardService,
     DefaultRedirectGuard,
     httpInterceptorProviders,
     SecurityService,
@@ -116,6 +117,7 @@ const httpInterceptorProviders = [
       FileUploadService,
       ProfileService,
     ComplaintConfirmationService,
+    ConfirmLeavePageGuardService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,
