@@ -162,7 +162,6 @@ import { ConfirmationControlComponent } from './components/issue/issue-details-p
 export class ClientModule {
     constructor(private store: Store<State>)
     {
-        console.log('Client module is loading...');
         this.store.dispatch(new ProfileGetCommonInfoStart());
     }
 }

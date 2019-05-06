@@ -1,119 +1,39 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UploadItem} from '../../../../shared/data/model/upload-item.model';
-import {ComplaintPicture} from '../../../data/model/complaint-picture.model';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../app.state';
 import {ComplaintPictureUploadReset, ComplaintPictureUploadSelect} from '../../../data/complaint-picture.actions';
-import {GlobalNotifyErrorMessage} from '../../../../core/data/actions';
-import {NotifyMessage} from '../../../../core/data/model/notify-message.model';
-import {Observable, Subscription} from 'rxjs';
-import {filter} from 'rxjs/operators';
-import {Complaint} from '../../../data/model/complaint.model';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {environment} from '../../../../../environments/environment';
+import {OperatorFunction} from 'rxjs';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {UploadPictureListFormFieldComponent} from '../../common/upload-picture-list-form-field/upload-picture-list-form-field.component';
+import {PictureInterface} from '../../../../shared/data/model/picture-interface.model';
 
 @Component({
   selector: 'app-complaint-pictures-field',
   templateUrl: './complaint-pictures-field.component.html',
   styleUrls: ['./complaint-pictures-field.component.css']
 })
-export class ComplaintPicturesFieldComponent implements OnInit, OnDestroy {
+export class ComplaintPicturesFieldComponent extends UploadPictureListFormFieldComponent implements OnInit
+{
+  constructor(store: Store<State>, modal: NgbModal) {
 
-  static MAX_UPLOAD_FILE_SIZE = environment.maxUploadPictureSize;
+    store.dispatch(new ComplaintPictureUploadReset());
 
-  static ALLOWED_MIME_TYPES = environment.uploadPictureAllowedMimeTypes;
-
-  @Input() complaint: Complaint;
-
-  @ViewChild('fileSelector') fileSelector: ElementRef;
-  @ViewChild('removeAlertModal') removePictureModalWindowTemplate: TemplateRef<any>;
-  removePictureModalWindow: NgbModalRef = null;
-
-  uploadingFiles: Observable<Array<UploadItem<ComplaintPicture>>>;
-
-  uploadSubscription: Subscription;
-
-  constructor(private store: Store<State>, private modal: NgbModal) {
-
-    this.store.dispatch(new ComplaintPictureUploadReset());
-
-    this.uploadingFiles = this.store.pipe(select(state => state.clientComplaintPicture.uploadingFileSet));
-
-    this.uploadSubscription = this.store.pipe(
-        select(state => state.clientComplaintPicture.lastUploadCompletedItem),
-        filter(result => (result !== null))
-    ).subscribe((item: UploadItem<ComplaintPicture>) => {
-
-      this.complaint.pictures.push(item.uploaded);
-
-    });
-
+    super(store, modal);
   }
 
-  ngOnInit() {
-  }
-
-  ngOnDestroy(): void {
-    if (!!this.uploadSubscription)
-    {
-      this.uploadSubscription.unsubscribe();
-    }
-  }
-
-
-  validateFile(file: File)
+  protected getUploadingItemsSelect(): OperatorFunction<State, any>
   {
-    if (!ComplaintPicturesFieldComponent.ALLOWED_MIME_TYPES.includes(file.type))
-    {
-      throw 'You can upload only images';
-    }
-    if (file.size > ComplaintPicturesFieldComponent.MAX_UPLOAD_FILE_SIZE)
-    {
-      throw 'File is too large! 5M is maximum';
-    }
+    return select(state => state.clientComplaintPicture.uploadingFileSet);
   }
 
-  onFilesSelectHandler(files: Array<File>)
+  protected getLastUploadItemsSelect(): OperatorFunction<State, any>
   {
-    for (let file of files)
-    {
-      try {
-        this.validateFile(file);
-
-        const uploadablePicture = new UploadItem<ComplaintPicture>(
-            (+new Date()).toString() + file.name, file
-        );
-
-        this.store.dispatch(new ComplaintPictureUploadSelect(uploadablePicture));
-      }
-      catch (error) {
-        this.store.dispatch(new GlobalNotifyErrorMessage(new NotifyMessage(error)));
-      }
-    }
-
-    this.resetFileSelector();
+    return select(state => state.clientComplaintPicture.lastUploadCompletedItem);
   }
 
-  resetFileSelector()
+  protected onFileSelectSuccess(item: UploadItem<PictureInterface>)
   {
-    this.fileSelector.nativeElement.value = "";
-  }
-
-  onPictureDeleteHandler(picture: ComplaintPicture)
-  {
-
-    this.removePictureModalWindow = this.modal.open(this.removePictureModalWindowTemplate, {centered: true});
-    this.removePictureModalWindow.result
-        .then((result) => {
-          const removingItemIndex = this.complaint.pictures.findIndex(item => picture.id === item.id);
-          if (removingItemIndex !== -1)
-          {
-            this.complaint.pictures.splice(removingItemIndex, 1);
-          }
-
-          this.removePictureModalWindow = null;
-        }, () => {
-          this.removePictureModalWindow = null;
-        });
+    this.store.dispatch(new ComplaintPictureUploadSelect(item));
   }
 }
