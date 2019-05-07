@@ -20,6 +20,8 @@ export class ComplaintListPageComponent implements OnInit, OnDestroy {
 
   list: Array<Complaint> = [];
   currentPage = 1;
+  total: number = null;
+
   infinityScrollDisabled: boolean = false;
 
   isEmpty: boolean = false;
@@ -55,6 +57,8 @@ export class ComplaintListPageComponent implements OnInit, OnDestroy {
 
           this.isEmpty = (this.currentPage === 1) && (userComplaintTotal === 0);
           this.infinityScrollDisabled = this.list.length === 0;
+
+          this.total = userComplaintTotal;
         }
     );
 
@@ -76,11 +80,9 @@ export class ComplaintListPageComponent implements OnInit, OnDestroy {
         select(state => state.clientComplaint.deletedComplaint),
         filter(result => result !== null))
         .subscribe((complaint: Complaint) => {
-          const index = this.list.findIndex(item => item.id === complaint.id);
-          if (index !== -1)
-          {
-            this.list.splice(index, 1);
-          }
+
+            this.currentPage = 1;
+            this.loadList();
         });
 
     //debugger

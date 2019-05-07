@@ -19,6 +19,7 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
   static DELETE_ISSUE_CONFIRMATION_ID = 'DELETE_ISSUE_CONFIRMATION_ID';
 
   list: Array<Issue> = [];
+  total: number = null;
 
   currentPage = 1;
   infinityScrollDisabled: boolean = false;
@@ -53,6 +54,7 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
 
           // this.isEmpty = (this.currentPage === 1) && (userComplaintTotal === 0);
           this.infinityScrollDisabled = this.list.length === 0;
+          this.total = userIssueTotal;
         }
     );
 
@@ -74,11 +76,9 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
         select(state => state.clientIssue.deletedIssue),
         filter(result => result !== null))
         .subscribe((issue: Issue) => {
-          const index = this.list.findIndex(item => item.id === issue.id);
-          if (index !== -1)
-          {
-            this.list.splice(index, 1);
-          }
+
+            this.currentPage = 1;
+            this.loadList();
         });
 
 

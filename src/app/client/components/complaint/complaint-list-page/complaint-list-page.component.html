@@ -1,18 +1,19 @@
 <app-client-common-layout>
-<div>
+  <div>
 
-  <div infiniteScroll
-       [infiniteScrollDistance]="2"
-       [infiniteScrollThrottle]="50"
-       [infiniteScrollDisabled]="infinityScrollDisabled"
-       (scrolled)="onScroll()"
-    >
+    <div infiniteScroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="50"
+         [infiniteScrollDisabled]="infinityScrollDisabled"
+         (scrolled)="onScroll()"
+      >
 
-    <div *ngFor="let complaint of list">
-      <app-complaint-item [complaint]="complaint" (onDelete)="onDeleteHandler($event)"></app-complaint-item>
+      <div *ngFor="let complaint of list">
+        <app-complaint-item [complaint]="complaint" (onDelete)="onDeleteHandler($event)"></app-complaint-item>
+      </div>
+
     </div>
+    <p class="alert alert-info" *ngIf="total === 0">You have no complaints! <a routerLink="/client/complaint/create">Create a new one</a></p>
 
   </div>
-
-</div>
 </app-client-common-layout>

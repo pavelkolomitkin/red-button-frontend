@@ -22,7 +22,7 @@ export interface State {
 
 const initialState: State = {
     userComplaintList: [],
-    userComplaintTotal: 0,
+    userComplaintTotal: null,
     userComplaintListLoadErrors: {},
 
     createdComplaint: null,
@@ -49,7 +49,7 @@ export function reducer(state: State = initialState, action: actions.ComplaintAc
             return {
                 ...state,
                 userComplaintList: [],
-                userComplaintTotal: 0,
+                userComplaintTotal: null,
                 userComplaintListLoadErrors: {}
             };
 
