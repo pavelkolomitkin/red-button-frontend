@@ -3,7 +3,7 @@ import {Issue} from '../../../../core/data/model/issue.model';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../app.state';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IssueDeleteReset, IssueDeleteStart, IssueGetReset, IssueGetStart} from '../../../data/issue.actions';
+import {IssueChangeLikeReset, IssueDeleteReset, IssueDeleteStart, IssueGetReset, IssueGetStart} from '../../../data/issue.actions';
 import {combineLatest, Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {GlobalConfirmationInit, GlobalPageTitle} from '../../../../core/data/actions';
@@ -27,6 +27,7 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
   idSubscription: Subscription;
   deleteConfirmationSubscription: Subscription;
   deleteSubscription: Subscription;
+  likeSubscription: Subscription;
 
   isOwnIssue: boolean = false;
 
@@ -41,6 +42,14 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new IssueGetReset());
     this.store.dispatch(new IssueDeleteReset());
     this.store.dispatch(new ComplaintConfirmationChangeStatusReset());
+    this.store.dispatch(new IssueChangeLikeReset());
+
+    this.likeSubscription = this.store.pipe(
+        select(state => state.clientIssue.lastLiked),
+        filter(result => !!result)
+    ).subscribe((issue) => {
+        this.issue = issue
+    });
 
     this.detailsSubscription = combineLatest(
         this.store.pipe(select(state => state.clientIssue.issueDetails), filter(result => !!result)),
@@ -55,18 +64,18 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
     });
 
 
-      this.store.pipe(
-          select(state => state.clientConfirmation.updatedConfirmation),
-          filter(result => !!result)
-      ).subscribe((confirmation: ComplaintConfirmation) => {
+    this.store.pipe(
+      select(state => state.clientConfirmation.updatedConfirmation),
+      filter(result => !!result)
+    ).subscribe((confirmation: ComplaintConfirmation) => {
 
-        const index = this.issue.complaintConfirmations.findIndex(item => item.id === confirmation.id);
-        if (index !== -1)
-        {
-            this.issue.complaintConfirmations[index] = confirmation;
-            this.issue = {...this.issue};
-        }
-      });
+    const index = this.issue.complaintConfirmations.findIndex(item => item.id === confirmation.id);
+    if (index !== -1)
+    {
+        this.issue.complaintConfirmations[index] = confirmation;
+        this.issue = {...this.issue};
+    }
+    });
 
     this.idSubscription = this.route.params.subscribe(
         (params) => {
@@ -101,6 +110,7 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
     this.idSubscription.unsubscribe();
     this.deleteConfirmationSubscription.unsubscribe();
     this.deleteSubscription.unsubscribe();
+    this.likeSubscription.unsubscribe();
   }
 
   onDeleteClickHandler(event)

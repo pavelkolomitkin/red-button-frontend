@@ -5,9 +5,10 @@ import {State} from '../../../app.state';
 import {IssueService} from '../../services/issue.service';
 import {Observable, of} from 'rxjs';
 import {
+    ISSUE_CHANGE_LIKE_START,
     ISSUE_CREATE_START,
     ISSUE_DELETE_START, ISSUE_GET_START,
-    ISSUE_UPDATE_START, ISSUE_USER_LIST_LOAD_START,
+    ISSUE_UPDATE_START, ISSUE_USER_LIST_LOAD_START, IssueChangeLikeError, IssueChangeLikeStart, IssueChangeLikeSuccess,
     IssueCreateError,
     IssueCreateStart,
     IssueCreateSuccess,
@@ -111,6 +112,36 @@ export class IssueEffects
                     return of(new IssueDeleteError(issue, errors.error.errors));
                 })
             );
+        })
+    );
+
+    @Effect()
+    issueChangeLikeStart: Observable<Action> = this.actions.pipe(
+        ofType(ISSUE_CHANGE_LIKE_START),
+        mergeMap((action: IssueChangeLikeStart) => {
+
+            const { issue, isUp } = action;
+
+            let result:Observable<any> = null;
+
+            if (isUp)
+            {
+                result = this.service.addLike(issue);
+            }
+            else
+            {
+                result = this.service.removeLike(issue);
+            }
+
+            return result.pipe(
+                map((issue: Issue) => {
+                    return new IssueChangeLikeSuccess(issue);
+                }),
+                catchError((errors) => {
+                    return of(new IssueChangeLikeError(errors.error.errors))
+                })
+            );
+
         })
     );
 

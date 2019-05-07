@@ -27,6 +27,11 @@ export const ISSUE_DELETE_START = 'ISSUE_DELETE_START';
 export const ISSUE_DELETE_SUCCESS = 'ISSUE_DELETE_SUCCESS';
 export const ISSUE_DELETE_ERROR = 'ISSUE_DELETE_ERROR';
 
+export const ISSUE_CHANGE_LIKE_RESET = 'ISSUE_CHANGE_LIKE_RESET';
+export const ISSUE_CHANGE_LIKE_START = 'ISSUE_CHANGE_LIKE_START';
+export const ISSUE_CHANGE_LIKE_SUCCESS = 'ISSUE_CHANGE_LIKE_SUCCESS';
+export const ISSUE_CHANGE_LIKE_ERROR = 'ISSUE_CHANGE_LIKE_ERROR';
+
 
 export class IssueUserListReset implements Action
 {
@@ -167,6 +172,32 @@ export class IssueDeleteError implements Action
     constructor(public issue: Issue, public errors: Object) {}
 }
 
+export class IssueChangeLikeReset implements Action
+{
+    readonly type = ISSUE_CHANGE_LIKE_RESET;
+}
+
+export class IssueChangeLikeStart implements Action
+{
+    readonly type = ISSUE_CHANGE_LIKE_START;
+
+    constructor(public issue: Issue, public isUp: boolean = true) {}
+}
+
+export class IssueChangeLikeSuccess implements Action
+{
+    readonly type = ISSUE_CHANGE_LIKE_SUCCESS;
+
+    constructor(public issue: Issue) {}
+}
+
+export class IssueChangeLikeError implements Action
+{
+    readonly type = ISSUE_CHANGE_LIKE_ERROR;
+
+    constructor(public errors: any) {}
+}
+
 
 export type IssueActions =
 
@@ -195,5 +226,10 @@ export type IssueActions =
     | IssueDeleteStart
     | IssueDeleteSuccess
     | IssueDeleteError
+
+    | IssueChangeLikeReset
+    | IssueChangeLikeStart
+    | IssueChangeLikeSuccess
+    | IssueChangeLikeError
 
     ;

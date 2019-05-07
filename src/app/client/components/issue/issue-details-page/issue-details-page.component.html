@@ -14,7 +14,12 @@
         <p>
           <app-issue-map-view [issue]="issue"></app-issue-map-view>
         </p>
-        <app-confirmation-control [issue]="issue"></app-confirmation-control>
+        <div>
+          <app-confirmation-control [issue]="issue"></app-confirmation-control>
+          <div class="pull-right">
+            <app-issue-like-control [issue]="issue"></app-issue-like-control>
+          </div>
+        </div>
         <p *ngIf="!!issue.serviceType">
           <span class="text text-primary">{{ issue.serviceType.title }}</span>
         </p>

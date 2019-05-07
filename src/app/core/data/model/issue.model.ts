@@ -36,4 +36,8 @@ export class Issue
     company ?: Company;
 
     likeNumber ?: number;
+
+    commentNumber ?: number;
+
+    hasUserLike: boolean = false;
 }

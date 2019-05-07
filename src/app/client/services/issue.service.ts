@@ -108,8 +108,11 @@ export class IssueService extends BaseService
 
     get(id: number)
     {
-        return this.http.get<{ issue: Issue }>('/client/issue/' + id.toString()).pipe(
-            map(result => result.issue),
+        return this.http.get<{ issue: Issue, hasLike: boolean }>('/client/issue/' + id.toString()).pipe(
+            map(({ issue, hasLike }) => {
+                issue.hasUserLike = hasLike;
+                return issue;
+            }),
             map(issue => IssueService.transformEntity(issue)),
             catchError((response) => {
                 throw {
@@ -122,5 +125,27 @@ export class IssueService extends BaseService
     remove(issue: Issue)
     {
         return this.http.delete('/client/issue/' + issue.id.toString());
+    }
+
+    addLike(issue: Issue)
+    {
+        return this.http.post<{ issue: Issue, hasLike: boolean }>('/client/issue/' + issue.id + '/add-like', {}).pipe(
+            map(({ issue, hasLike }) => {
+                issue.hasUserLike = hasLike;
+                return issue;
+            }),
+            map(issue => IssueService.transformEntity(issue))
+        );
+    }
+
+    removeLike(issue: Issue)
+    {
+        return this.http.post<{ issue: Issue, hasLike: boolean }>('/client/issue/' + issue.id + '/remove-like', {}).pipe(
+            map(({ issue, hasLike }) => {
+                issue.hasUserLike = hasLike;
+                return issue;
+            }),
+            map(issue => IssueService.transformEntity(issue))
+        );
     }
 }

@@ -18,6 +18,9 @@ export interface State {
 
     issueDetails: Issue;
     issueDetailsErrors: Object;
+
+    lastLiked: Issue;
+    lastLikeErrors: Object;
 }
 
 const initialState: State = {
@@ -36,7 +39,9 @@ const initialState: State = {
     deleteIssueErrors: {},
 
     issueDetails: null,
-    issueDetailsErrors: {}
+    issueDetailsErrors: {},
+    lastLiked: null,
+    lastLikeErrors: {}
 };
 
 
@@ -177,6 +182,30 @@ export function reducer(state: State = initialState, action: actions.IssueAction
                 ...state,
                 issueDetails: null,
                 issueDetailsErrors: action.errors
+            };
+
+        case actions.ISSUE_CHANGE_LIKE_RESET:
+
+            return {
+                ...state,
+                lastLiked: null,
+                lastLikeErrors: {}
+            };
+
+        case actions.ISSUE_CHANGE_LIKE_SUCCESS:
+
+            return {
+                ...state,
+                lastLiked: action.issue,
+                lastLikeErrors: {}
+            };
+
+        case actions.ISSUE_CHANGE_LIKE_ERROR:
+
+            return {
+                ...state,
+                lastLiked: null,
+                lastLikeErrors: action.errors
             };
 
         default:

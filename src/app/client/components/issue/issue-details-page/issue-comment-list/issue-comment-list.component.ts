@@ -24,7 +24,7 @@ export class IssueCommentListComponent implements OnInit {
   @Input()
   set issue(value: Issue)
   {
-    if (!this._issue || (this._issue !== value))
+    if (!this._issue || (this._issue.id !== value.id))
     {
       this._issue = value;
 
@@ -70,6 +70,7 @@ export class IssueCommentListComponent implements OnInit {
         .toPromise()
         .then((comment) => {
           this.list.unshift(comment);
+          this.total++;
 
           this.newComment = new IssueComment();
           this.newCommentErrors = {};
@@ -85,6 +86,7 @@ export class IssueCommentListComponent implements OnInit {
     if (index !== -1)
     {
       this.list.splice(index, 1);
+      this.total--;
     }
   }
 }

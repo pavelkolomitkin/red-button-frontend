@@ -72,6 +72,7 @@ import { ConfirmationControlComponent } from './components/issue/issue-details-p
 import { IssueCommentListComponent } from './components/issue/issue-details-page/issue-comment-list/issue-comment-list.component';
 import { IssueCommentItemComponent } from './components/issue/issue-details-page/issue-comment-list/issue-comment-item/issue-comment-item.component';
 import { IssueCommentFormComponent } from './components/issue/issue-details-page/issue-comment-list/issue-comment-form/issue-comment-form.component';
+import { IssueLikeControlComponent } from './components/issue/issue-details-page/issue-like-control/issue-like-control.component';
 
 
 @NgModule({
@@ -124,7 +125,8 @@ import { IssueCommentFormComponent } from './components/issue/issue-details-page
       ConfirmationControlComponent,
       IssueCommentListComponent,
       IssueCommentItemComponent,
-      IssueCommentFormComponent
+      IssueCommentFormComponent,
+      IssueLikeControlComponent
   ],
     imports: [
         CommonModule,
