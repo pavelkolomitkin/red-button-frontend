@@ -15,6 +15,7 @@ import {GeoLocation} from '../../../../core/data/model/geo-location.model';
 import {GeoLocationSelectingWindowStateChanged} from '../../../data/geo-location.actions';
 import {MapSelectedLocationComponent} from '../map-selected-location/map-selected-location.component';
 import {Region} from '../../../../core/data/model/region.model';
+import {OSMSearchResult} from '../../../../core/data/model/osm-search-result.model';
 
 @Component({
   selector: 'app-geo-location-selector',
@@ -22,6 +23,8 @@ import {Region} from '../../../../core/data/model/region.model';
   styleUrls: ['./geo-location-selector.component.css']
 })
 export class GeoLocationSelectorComponent implements OnInit, OnDestroy {
+
+  static ADDRESS_VIEW_ZOOM = 15;
 
   @Output('onAddressSelect') addressSelected: EventEmitter<{ region: Region, address: Object, location: GeoLocation }> = new EventEmitter();
 
@@ -157,4 +160,15 @@ export class GeoLocationSelectorComponent implements OnInit, OnDestroy {
   }
 
   //===================// MAP EVENT HANDLERS ======================
+
+  onSearchAddressResultHandler(addresses: Array<OSMSearchResult>)
+  {
+    if (addresses.length > 0)
+    {
+      const address: OSMSearchResult = addresses[0];
+
+      this.mapInstance.setZoom(GeoLocationSelectorComponent.ADDRESS_VIEW_ZOOM);
+      this.mapInstance.setCenter(address.location, true);
+    }
+  }
 }

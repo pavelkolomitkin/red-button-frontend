@@ -43,3 +43,14 @@
 {
     display: none;
 }
+
+.search-panel
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: #ffffff00;
+    z-index: 99902;
+}

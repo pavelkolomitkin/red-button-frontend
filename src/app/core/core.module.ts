@@ -57,6 +57,7 @@ import { SignatureRequestComponent } from './components/header/signature-request
 import {ComplaintConfirmationService} from '../client/services/complaint-comfirmation.service';
 import {ConfirmLeavePageGuardService} from './services/guards/confirm-leave-page-guard.service';
 import {IssueCommentService} from './services/issue-comment.service';
+import {OSMSearchService} from './services/OSMSearchService';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -120,6 +121,7 @@ const httpInterceptorProviders = [
     ComplaintConfirmationService,
     ConfirmLeavePageGuardService,
     IssueCommentService,
+    OSMSearchService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,

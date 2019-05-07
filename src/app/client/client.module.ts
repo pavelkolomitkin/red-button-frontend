@@ -73,6 +73,7 @@ import { IssueCommentListComponent } from './components/issue/issue-details-page
 import { IssueCommentItemComponent } from './components/issue/issue-details-page/issue-comment-list/issue-comment-item/issue-comment-item.component';
 import { IssueCommentFormComponent } from './components/issue/issue-details-page/issue-comment-list/issue-comment-form/issue-comment-form.component';
 import { IssueLikeControlComponent } from './components/issue/issue-details-page/issue-like-control/issue-like-control.component';
+import { SearchAddressFormComponent } from './components/common/search-address-form/search-address-form.component';
 
 
 @NgModule({
@@ -126,7 +127,8 @@ import { IssueLikeControlComponent } from './components/issue/issue-details-page
       IssueCommentListComponent,
       IssueCommentItemComponent,
       IssueCommentFormComponent,
-      IssueLikeControlComponent
+      IssueLikeControlComponent,
+      SearchAddressFormComponent
   ],
     imports: [
         CommonModule,

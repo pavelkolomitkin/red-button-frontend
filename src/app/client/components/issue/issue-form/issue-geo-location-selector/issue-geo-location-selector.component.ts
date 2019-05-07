@@ -16,6 +16,7 @@ import {ComplaintConfirmationMapBalloonComponent} from './complaint-confirmation
 import {SearchFormComponent} from './search-form/search-form.component';
 import {debounceTime, filter, map, tap} from 'rxjs/operators';
 import {MapBalloonCenteringReset} from '../../../../../shared/data/map.actions';
+import {OSMSearchResult} from '../../../../../core/data/model/osm-search-result.model';
 
 @Component({
   selector: 'app-issue-geo-location-selector',
@@ -472,4 +473,16 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
     this.complaintBalloons = [];
   };
+
+
+  onSearchAddressResultHandler(addresses: Array<OSMSearchResult>)
+  {
+    if (addresses.length > 0)
+    {
+      const address: OSMSearchResult = addresses[0];
+
+      this.map.setZoom(15);
+      this.map.setCenter(address.location, true);
+    }
+  }
 }
