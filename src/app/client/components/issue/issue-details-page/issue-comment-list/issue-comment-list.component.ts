@@ -78,4 +78,13 @@ export class IssueCommentListComponent implements OnInit {
           this.newCommentErrors = errors.error.errors;
         });
   }
+
+  onCommentDeleteHandler(comment: IssueComment)
+  {
+    const index = this.list.findIndex(item => item.id === comment.id);
+    if (index !== -1)
+    {
+      this.list.splice(index, 1);
+    }
+  }
 }
