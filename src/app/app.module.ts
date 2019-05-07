@@ -8,10 +8,14 @@ import {SharedModule} from './shared/shared.module';
 import {AppRoutingModule} from './app-routing.module';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
+import { AppSecurityLayoutComponent } from './components/app-security-layout/app-security-layout.component';
+import { AppLayoutComponent } from './components/app-layout/app-layout.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AppSecurityLayoutComponent,
+    AppLayoutComponent
   ],
   imports: [
     BrowserModule,
