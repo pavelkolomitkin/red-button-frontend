@@ -1,31 +1,34 @@
-<ng-container *ngIf="isEditing">
-  <app-issue-comment-form
-          [comment]="comment"
-          [errors]="editErrors"
-          (onSubmit)="onCommentSubmitHandler($event)"
-          (onCancel)="onCancelEditCommentHandler($event)"
-          [withCancel]="true"
-  ></app-issue-comment-form>
-</ng-container>
-<ng-container *ngIf="!isEditing">
-  <div class="box box-solid">
-    <div class="box-header with-border">
-      <h4 class="box-title">{{ comment.author.fullName }}</h4>
-      <small class="text-muted pull-right">{{ comment.createdAt | amFromUnix }}</small>
-      <div class="pull-right" *ngIf="(user | async).id === comment.author.id">
-        <span class="btn" (click)="onEditCommentClickHandler($event)">
-          <i class="fa fa-edit"></i>
-        </span>
-          <span class="btn">
-          <i class="fa fa-trash"></i>
-        </span>
-      </div>
+<div class="box-comment comment-item">
+  <ng-container *ngIf="isEditing">
+    <app-issue-comment-form
+            [comment]="comment"
+            [errors]="editErrors"
+            (onSubmit)="onCommentSubmitHandler($event)"
+            (onCancel)="onCancelEditCommentHandler($event)"
+            [withCancel]="true"
+    ></app-issue-comment-form>
+  </ng-container>
+
+  <ng-container *ngIf="!isEditing">
+
+    <div class="comment-text">
+      <span class="username">{{ comment.author.fullName }}
+        <span class="text-muted pull-right">{{ comment.createdAt | amFromUnix }}</span>
+      </span>
+      {{ comment.message }}
     </div>
-    <div class="box-body">
-      <p>
-        {{ comment.message }}
-      </p>
+
+    <div class="controls" *ngIf="(user | async).id === comment.author.id">
+      <span class="btn btn-box-tool" (click)="onEditCommentClickHandler($event)">
+        <i class="fa fa-edit"></i>
+      </span>
+      <span class="btn btn-box-tool">
+        <i class="fa fa-trash"></i>
+      </span>
     </div>
-  </div>
-</ng-container>
+
+  </ng-container>
+
+</div>
+
 

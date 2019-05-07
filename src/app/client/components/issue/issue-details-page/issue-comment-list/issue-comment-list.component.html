@@ -1,24 +1,29 @@
-<div>
-  <app-issue-comment-form
-          [comment]="newComment"
-          (onSubmit)="onNewCommentSubmit($event)"
-          [errors]="newCommentErrors"
-  ></app-issue-comment-form>
+<div class="box box-solid">
+  <div class="box-header with-border">
+    <b>Comments</b>
+  </div>
+  <div class="box-body with-border">
+    <app-issue-comment-form
+            [comment]="newComment"
+            (onSubmit)="onNewCommentSubmit($event)"
+            [errors]="newCommentErrors"
+    ></app-issue-comment-form>
+  </div>
 
 
-  <div infiniteScroll
+  <div class="box-body with-border box-comments"
+       infiniteScroll
        [infiniteScrollDistance]="2"
        [infiniteScrollThrottle]="50"
-       [infiniteScrollDisabled]="this.list.length === 0"
+       [infiniteScrollDisabled]="list.length === 0"
        (scrolled)="onScroll()">
 
     <app-issue-comment-item
-            *ngFor="let comment of this.list"
+            *ngFor="let comment of list"
             [comment]="comment"
     ></app-issue-comment-item>
-
+<!--    <p class="alert alert-info" *ngIf="total === 0">No Comments</p>-->
   </div>
 
-  <p class="alert alert-info" *ngIf="this.total === 0">No Comments</p>
 
 </div>

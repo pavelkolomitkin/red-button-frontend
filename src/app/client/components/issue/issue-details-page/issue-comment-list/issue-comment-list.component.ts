@@ -43,6 +43,7 @@ export class IssueCommentListComponent implements OnInit {
   onScroll()
   {
     this.currentPage++;
+    this.loadComments();
   }
 
   loadComments()

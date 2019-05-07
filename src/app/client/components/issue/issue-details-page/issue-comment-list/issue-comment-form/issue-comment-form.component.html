@@ -1,8 +1,5 @@
 <form (ngSubmit)="onSubmitHandler(form)" #form="ngForm">
-  <div class="box box-solid">
-    <div class="box-body">
       <div class="form-group">
-        <label for="message">Message</label>
         <textarea
                 id="message"
                 class="form-control"
@@ -13,18 +10,18 @@
         ></textarea>
         <app-form-field-error-list [errors]="errors" [field]="'message'"></app-form-field-error-list>
       </div>
-    </div>
-    <div class="box-footer">
+
+    <div>
       <button
               type="submit"
               class="btn btn-primary"
               [disabled]="!form.valid"
-      >Save</button>
+      >Save</button>&nbsp;
       <span
               class="btn btn-default"
               (click)="onCancelClickHandler($event)"
               *ngIf="withCancel"
       >Cancel</span>
     </div>
-  </div>
+
 </form>
