@@ -1,0 +1,31 @@
+<ng-container *ngIf="isEditing">
+  <app-issue-comment-form
+          [comment]="comment"
+          [errors]="editErrors"
+          (onSubmit)="onCommentSubmitHandler($event)"
+          (onCancel)="onCancelEditCommentHandler($event)"
+          [withCancel]="true"
+  ></app-issue-comment-form>
+</ng-container>
+<ng-container *ngIf="!isEditing">
+  <div class="box box-solid">
+    <div class="box-header with-border">
+      <h4 class="box-title">{{ comment.author.fullName }}</h4>
+      <small class="text-muted pull-right">{{ comment.createdAt | amFromUnix }}</small>
+      <div class="pull-right" *ngIf="(user | async).id === comment.author.id">
+        <span class="btn" (click)="onEditCommentClickHandler($event)">
+          <i class="fa fa-edit"></i>
+        </span>
+          <span class="btn">
+          <i class="fa fa-trash"></i>
+        </span>
+      </div>
+    </div>
+    <div class="box-body">
+      <p>
+        {{ comment.message }}
+      </p>
+    </div>
+  </div>
+</ng-container>
+

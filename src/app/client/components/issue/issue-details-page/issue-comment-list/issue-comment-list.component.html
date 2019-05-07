@@ -1,0 +1,24 @@
+<div>
+  <app-issue-comment-form
+          [comment]="newComment"
+          (onSubmit)="onNewCommentSubmit($event)"
+          [errors]="newCommentErrors"
+  ></app-issue-comment-form>
+
+
+  <div infiniteScroll
+       [infiniteScrollDistance]="2"
+       [infiniteScrollThrottle]="50"
+       [infiniteScrollDisabled]="this.list.length === 0"
+       (scrolled)="onScroll()">
+
+    <app-issue-comment-item
+            *ngFor="let comment of this.list"
+            [comment]="comment"
+    ></app-issue-comment-item>
+
+  </div>
+
+  <p class="alert alert-info" *ngIf="this.total === 0">No Comments</p>
+
+</div>

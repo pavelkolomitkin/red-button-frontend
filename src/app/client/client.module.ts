@@ -69,6 +69,9 @@ import {State} from '../app.state';
 import {ProfileGetCommonInfoStart} from './data/profile.actions';
 import {ComplaintConfirmationEffects} from './data/effects/complaint-confirmation.effects';
 import { ConfirmationControlComponent } from './components/issue/issue-details-page/confirmation-control/confirmation-control.component';
+import { IssueCommentListComponent } from './components/issue/issue-details-page/issue-comment-list/issue-comment-list.component';
+import { IssueCommentItemComponent } from './components/issue/issue-details-page/issue-comment-list/issue-comment-item/issue-comment-item.component';
+import { IssueCommentFormComponent } from './components/issue/issue-details-page/issue-comment-list/issue-comment-form/issue-comment-form.component';
 
 
 @NgModule({
@@ -119,6 +122,9 @@ import { ConfirmationControlComponent } from './components/issue/issue-details-p
       ComplaintConfirmationViewBalloonComponent,
       IssueItemComponent,
       ConfirmationControlComponent,
+      IssueCommentListComponent,
+      IssueCommentItemComponent,
+      IssueCommentFormComponent
   ],
     imports: [
         CommonModule,

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import {Issue} from './model/issue.model';
+import {Issue} from '../../core/data/model/issue.model';
 
 export const ISSUE_USER_LIST_RESET = 'ISSUE_USER_LIST_RESET';
 export const ISSUE_USER_LIST_LOAD_START = 'ISSUE_USER_LIST_LOAD_START';

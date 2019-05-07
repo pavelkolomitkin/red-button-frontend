@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Issue} from '../../../../../data/model/issue.model';
+import {Issue} from '../../../../../../core/data/model/issue.model';
 import {GeoLocationService} from '../../../../../../core/services/geo-location.service';
 import {Subscription} from 'rxjs';
 

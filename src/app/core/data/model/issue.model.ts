@@ -1,11 +1,11 @@
-import {ServiceType} from '../../../core/data/model/service-type.model';
-import {Region} from '../../../core/data/model/region.model';
-import {Video} from './video.model';
-import {GeoLocation} from '../../../core/data/model/geo-location.model';
-import User from '../../../core/data/model/user.model';
+import {ServiceType} from './service-type.model';
+import {Region} from './region.model';
+import {Video} from '../../../client/data/model/video.model';
+import {GeoLocation} from './geo-location.model';
+import User from './user.model';
 import {IssuePicture} from './issue-picture.model';
-import {Company} from '../../../core/data/model/company.model';
-import {ComplaintConfirmation} from './complaint-confirmation.model';
+import {Company} from './company.model';
+import {ComplaintConfirmation} from '../../../client/data/model/complaint-confirmation.model';
 
 export class Issue
 {

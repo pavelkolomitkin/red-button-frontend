@@ -1,48 +1,57 @@
 <app-client-common-layout>
-  <div class="box box-primary" *ngIf="!!issue">
-    <div class="box-header with-border">
-      <h3 class="box-title">{{ issue.region.title }} <span class="text-muted">({{ issue.region.federalDistrict.title }})</span></h3>
 
-      <div class="box-tools pull-right" *ngIf="isOwnIssue">
-        <a routerLink="/client/issue/{{issue.id}}/edit" type="button" class="btn btn-box-tool"><i class="fa fa-edit"></i></a>
-        <button type="button" class="btn btn-box-tool" (click)="onDeleteClickHandler($event)"><i class="fa fa-trash"></i></button>
+  <ng-container *ngIf="!!issue">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ issue.region.title }} <span class="text-muted">({{ issue.region.federalDistrict.title }})</span></h3>
+
+        <div class="box-tools pull-right" *ngIf="isOwnIssue">
+          <a routerLink="/client/issue/{{issue.id}}/edit" type="button" class="btn btn-box-tool"><i class="fa fa-edit"></i></a>
+          <button type="button" class="btn btn-box-tool" (click)="onDeleteClickHandler($event)"><i class="fa fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="box-body">
+        <p>
+          <app-issue-map-view [issue]="issue"></app-issue-map-view>
+        </p>
+        <app-confirmation-control [issue]="issue"></app-confirmation-control>
+        <p *ngIf="!!issue.serviceType">
+          <span class="text text-primary">{{ issue.serviceType.title }}</span>
+        </p>
+        <p>
+          <b>Company</b>
+          <br />
+          <ng-container *ngIf="!!issue.company; else noCompany">
+            <span class="text-primary" >{{ issue.company.fullName }}</span><span class="text-muted"> ({{ issue.company.actualAddress }})</span>
+          </ng-container>
+          <ng-template #noCompany>
+            <span class="text-muted">(None)</span>
+          </ng-template>
+        </p>
+        <p>
+          <b>Message</b>
+          <br/>
+          <span class="text">{{ issue.message }}</span>
+        </p>
+        <p *ngIf="issue.pictures.length > 0">
+          <b>Pictures</b>
+          <br/>
+          <app-picture-list [list]="issue.pictures"></app-picture-list>
+        </p>
+        <p>
+          <app-video-list [list]="issue.videos"></app-video-list>
+        </p>
+      </div>
+
+      <div class="box-footer">
+        <small class="pull-right text-muted">{{ issue.createdAt | amFromUnix }}</small>
       </div>
     </div>
-    <div class="box-body">
-      <p>
-        <app-issue-map-view [issue]="issue"></app-issue-map-view>
-      </p>
-      <app-confirmation-control [issue]="issue"></app-confirmation-control>
-      <p *ngIf="!!issue.serviceType">
-        <span class="text text-primary">{{ issue.serviceType.title }}</span>
-      </p>
-      <p>
-        <b>Company</b>
-        <br />
-        <ng-container *ngIf="!!issue.company; else noCompany">
-          <span class="text-primary" >{{ issue.company.fullName }}</span><span class="text-muted"> ({{ issue.company.actualAddress }})</span>
-        </ng-container>
-        <ng-template #noCompany>
-          <span class="text-muted">(None)</span>
-        </ng-template>
-      </p>
-      <p>
-        <b>Message</b>
-        <br/>
-        <span class="text">{{ issue.message }}</span>
-      </p>
-      <p *ngIf="issue.pictures.length > 0">
-        <b>Pictures</b>
-        <br/>
-        <app-picture-list [list]="issue.pictures"></app-picture-list>
-      </p>
-      <p>
-        <app-video-list [list]="issue.videos"></app-video-list>
-      </p>
-    </div>
 
-    <div class="box-footer">
-      <small class="pull-right text-muted">{{ issue.createdAt | amFromUnix }}</small>
-    </div>
-  </div>
+    <app-issue-comment-list [issue]="issue"></app-issue-comment-list>
+
+  </ng-container>
+
+
+
 </app-client-common-layout>

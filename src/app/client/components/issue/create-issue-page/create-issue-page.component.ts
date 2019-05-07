@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Issue} from '../../../data/model/issue.model';
+import {Issue} from '../../../../core/data/model/issue.model';
 import {Observable, Subscription} from 'rxjs';
 import {State} from '../../../../app.state';
 import {select, Store} from '@ngrx/store';

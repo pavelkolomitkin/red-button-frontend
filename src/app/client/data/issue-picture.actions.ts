@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import {UploadItem} from '../../shared/data/model/upload-item.model';
-import {IssuePicture} from './model/issue-picture.model';
+import {IssuePicture} from '../../core/data/model/issue-picture.model';
 
 export const ISSUE_PICTURE_UPLOAD_RESET = 'ISSUE_PICTURE_UPLOAD_RESET';
 export const ISSUE_PICTURE_UPLOAD_SELECT = 'ISSUE_PICTURE_UPLOAD_SELECT';

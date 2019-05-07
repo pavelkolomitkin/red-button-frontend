@@ -19,7 +19,7 @@ import {
     IssueUpdateSuccess, IssueUserListLoadError, IssueUserListLoadStart, IssueUserListLoadSuccess
 } from '../issue.actions';
 import {catchError, map, mergeMap} from 'rxjs/operators';
-import {Issue} from '../model/issue.model';
+import {Issue} from '../../../core/data/model/issue.model';
 
 @Injectable()
 export class IssueEffects

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Issue} from '../../../../data/model/issue.model';
+import {Issue} from '../../../../../core/data/model/issue.model';
 
 @Component({
   selector: 'app-issue-item',

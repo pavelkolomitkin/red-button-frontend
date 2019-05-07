@@ -12,7 +12,7 @@ import {
     IssuePictureUploadSelect
 } from '../issue-picture.actions';
 import {IssuePictureService} from '../../services/issue-picture.service';
-import {IssuePicture} from '../model/issue-picture.model';
+import {IssuePicture} from '../../../core/data/model/issue-picture.model';
 import {UploadItem} from '../../../shared/data/model/upload-item.model';
 
 

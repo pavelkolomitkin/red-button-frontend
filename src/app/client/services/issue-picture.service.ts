@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {FileUploadService} from '../../core/services/file-upload.service';
 import {UploadItem} from '../../shared/data/model/upload-item.model';
 import {map} from 'rxjs/operators';
-import {IssuePicture} from '../data/model/issue-picture.model';
+import {IssuePicture} from '../../core/data/model/issue-picture.model';
 
 @Injectable()
 export class IssuePictureService extends BaseService

@@ -1,5 +1,5 @@
 import {Component, ComponentRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {Issue} from '../../../../data/model/issue.model';
+import {Issue} from '../../../../../core/data/model/issue.model';
 import {GeoLocation} from '../../../../../core/data/model/geo-location.model';
 import {MapComponent} from '../../../../../shared/components/map/map.component';
 import {select, Store} from '@ngrx/store';

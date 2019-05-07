@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
-import {Issue} from '../../../../data/model/issue.model';
+import {Issue} from '../../../../../core/data/model/issue.model';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {Company} from '../../../../../core/data/model/company.model';
 import {Store} from '@ngrx/store';

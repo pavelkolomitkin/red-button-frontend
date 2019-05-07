@@ -1,5 +1,5 @@
 import {Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
-import {Issue} from '../../../data/model/issue.model';
+import {Issue} from '../../../../core/data/model/issue.model';
 import {ServiceType} from '../../../../core/data/model/service-type.model';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';

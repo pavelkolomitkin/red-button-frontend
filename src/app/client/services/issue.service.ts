@@ -1,6 +1,6 @@
 import {HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Issue} from '../data/model/issue.model';
+import {Issue} from '../../core/data/model/issue.model';
 import {catchError, map} from 'rxjs/operators';
 import {BaseService} from '../../core/services/base.service';
 import {ComplaintConfirmation} from '../data/model/complaint-confirmation.model';

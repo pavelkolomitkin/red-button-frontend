@@ -56,6 +56,7 @@ import {ProfileService} from '../client/services/profile.service';
 import { SignatureRequestComponent } from './components/header/signature-request/signature-request.component';
 import {ComplaintConfirmationService} from '../client/services/complaint-comfirmation.service';
 import {ConfirmLeavePageGuardService} from './services/guards/confirm-leave-page-guard.service';
+import {IssueCommentService} from './services/issue-comment.service';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -113,11 +114,12 @@ const httpInterceptorProviders = [
     ComplaintService,
     ClientLocationService,
     CompanyService,
-      IssueService,
-      FileUploadService,
-      ProfileService,
+    IssueService,
+    FileUploadService,
+    ProfileService,
     ComplaintConfirmationService,
     ConfirmLeavePageGuardService,
+    IssueCommentService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,

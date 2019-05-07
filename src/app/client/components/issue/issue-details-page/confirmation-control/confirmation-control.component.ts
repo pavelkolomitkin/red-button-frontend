@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Issue} from '../../../../data/model/issue.model';
+import {Issue} from '../../../../../core/data/model/issue.model';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../../app.state';
 import {filter} from 'rxjs/operators';

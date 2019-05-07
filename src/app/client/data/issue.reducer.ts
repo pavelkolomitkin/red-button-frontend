@@ -1,5 +1,5 @@
 import * as actions from './issue.actions';
-import {Issue} from './model/issue.model';
+import {Issue} from '../../core/data/model/issue.model';
 
 export interface State {
     userIssueList: Array<Issue>;

@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Issue} from '../../../../data/model/issue.model';
+import {Issue} from '../../../../../core/data/model/issue.model';
 import {MapComponent} from '../../../../../shared/components/map/map.component';
 import {IssueViewBalloonComponent} from './issue-view-balloon/issue-view-balloon.component';
 import {ComplaintConfirmationViewBalloonComponent} from './complaint-confirmation-view-balloon/complaint-confirmation-view-balloon.component';
