@@ -6,7 +6,7 @@ import {ProfileService} from '../../services/profile.service';
 import {Observable, of} from 'rxjs';
 import {
     PROFILE_GET_COMMON_INFO_START,
-    ProfileGetCommonInfoError,
+    ProfileGetCommonInfoError, ProfileGetCommonInfoReset,
     ProfileGetCommonInfoStart,
     ProfileGetCommonInfoSuccess
 } from '../profile.actions';
@@ -15,6 +15,7 @@ import {ProfileCommonInfo} from '../model/profile-common-info.model';
 import {COMPLAINT_CREATE_SUCCESS, COMPLAINT_DELETE_SUCCESS} from '../complaint.actions';
 import {ISSUE_CREATE_SUCCESS, ISSUE_DELETE_SUCCESS} from '../issue.actions';
 import {COMPLAINT_CONFIRMATION_CHANGE_STATUS_SUCCESS} from '../complaint-confirmation.actions';
+import {USER_INITIALIZE_SUCCESS, USER_LOGOUT} from '../../../security/data/actions';
 
 @Injectable()
 export class ProfileEffects
@@ -36,13 +37,24 @@ export class ProfileEffects
     );
 
     @Effect({ dispatch: false })
+    userLogout: Observable<Action> = this.actions.pipe(
+        ofType(
+            USER_LOGOUT
+        ),
+        tap(() => {
+            this.store.dispatch(new ProfileGetCommonInfoReset());
+        })
+    );
+
+    @Effect({ dispatch: false })
     profileNumberDataChange: Observable<Action> = this.actions.pipe(
         ofType(
             COMPLAINT_CREATE_SUCCESS,
             COMPLAINT_DELETE_SUCCESS,
             ISSUE_CREATE_SUCCESS,
             ISSUE_DELETE_SUCCESS,
-            COMPLAINT_CONFIRMATION_CHANGE_STATUS_SUCCESS
+            COMPLAINT_CONFIRMATION_CHANGE_STATUS_SUCCESS,
+            USER_INITIALIZE_SUCCESS
         ),
         tap(() => {
             this.store.dispatch(new ProfileGetCommonInfoStart());

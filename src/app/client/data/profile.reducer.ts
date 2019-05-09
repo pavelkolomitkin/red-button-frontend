@@ -15,6 +15,14 @@ export function reducer(state: State = initialState, action: actions.ProfileActi
 
     switch (action.type) {
 
+        case actions.PROFILE_GET_COMMON_INFO_RESET:
+
+            return {
+                ...action,
+                commonInfo: null,
+                commonInfoErrors: {}
+            };
+
         case actions.PROFILE_GET_COMMON_INFO_SUCCESS:
 
             return {
