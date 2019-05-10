@@ -1,0 +1,19 @@
+.comment-item {
+    position: relative;
+    border-top: 1px solid #eee !important;
+    padding-top: 5px !important;
+}
+.comment-item .controls {
+    position: absolute;
+    display: none;
+    bottom: 0px;
+    right: 0px;
+}
+
+.comment-item:hover .controls {
+    display: block;
+}
+
+.comment-text {
+    margin-left: 0;
+}

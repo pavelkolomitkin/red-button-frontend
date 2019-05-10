@@ -1,0 +1,65 @@
+<div class="issue-geo-location-selector">
+  <app-map #map
+          (onLocationClick)="onLocationClickHandler($event)"
+          (onReady)="onMapReadyHandler($event)"
+           (onViewBoxChange)="onViewBoxChangeHandler($event)"
+           [defaultCenter]="deviceLocation"
+           [defaultZoom]="10"
+  ></app-map>
+  <div class="control-panel">
+    <div class="control-container box-solid">
+      <div class="box-body">
+        <div class="controls">
+          <ng-container *ngIf="!internalIssue.isAddressInit()">
+            <p>
+              <button
+                      class="btn btn-primary"
+                      [attr.aria-pressed]="isSelectingLocation"
+                      [attr.data-toggle]="'button'"
+                      [attr.autocomplete]="'off'"
+                      (click)="isSelectingLocation = !isSelectingLocation"
+              >
+                <i class="fa fa-mouse-pointer"></i> Select location
+              </button>
+            </p>
+          </ng-container>
+          <ng-container *ngIf="internalIssue.isAddressInit()">
+            <p>
+              <button
+                      type="button"
+                      class="btn btn-success"
+                      [disabled]="!internalIssue.isAddressInit()"
+                      (click)="onConfirmButtonClickHandler($event)"
+              >
+                <i class="fa fa-check"></i>Confirm
+              </button>
+            </p>
+          </ng-container>
+          <p>
+            <span class="btn btn-default" (click)="onCancelButtonClickHandler($event)">
+                <i class="fa fa-close"></i> Cancel
+              </span>
+            </p>
+        </div>
+        <div>
+          <app-search-form
+                  #searchForm
+                  (onChange)="onSearchFormChangeHandler($event)"
+          ></app-search-form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-panel">
+    <div class="row">
+      <div class="col-3 col-md-3 col-sm-3 col-lg-3"></div>
+      <div class="col-6 col-md-6 col-sm-6 col-lg-6">
+        <app-search-address-form
+                (onSearch)="onSearchAddressResultHandler($event)"
+        ></app-search-address-form>
+      </div>
+      <div class="col-3 col-md-3 col-sm-3 col-lg-3"></div>
+    </div>
+  </div>
+</div>

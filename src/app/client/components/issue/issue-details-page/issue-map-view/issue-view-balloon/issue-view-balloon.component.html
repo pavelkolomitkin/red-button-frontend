@@ -1,0 +1,22 @@
+<app-map-balloon [colorStyle]="'issue'"
+                 [isCollapsed]="true"
+                 [populateCollapsing]="false"
+                 [location]="issue.location"
+                 [hasToCenteredOnOpen]="true"
+>
+
+  <div class="balloon-title">Issue</div>
+
+  <div class="balloon-content">
+    <div>
+      {{ issue.region.title }}<span class="text-muted">({{ issue.region.federalDistrict.title }})</span>
+    </div>
+    <div>
+      <span class="text-muted">{{ issue.address.displayName }}</span>
+    </div>
+
+  </div>
+
+  <div class="balloon-footer" *ngIf="false"></div>
+
+</app-map-balloon>

@@ -1,0 +1,39 @@
+<form #form="ngForm">
+
+  <div class="form-group">
+    <label>Service Type</label>
+    <select
+            class="form-control"
+            ngModel
+            [compareWith]="compareServiceTypes"
+            [required]="false"
+            name="selectedServiceType"
+            id="selectedServiceType"
+            (ngModelChange)="onServiceTypeChangeHandler($event)"
+    >
+      <option value="" [selected]="true">All</option>
+      <option *ngFor="let serviceType of serviceTypes | async" [ngValue]="serviceType">{{ serviceType.title }}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Tags</label>
+
+    <div class="tag-list">
+      <ng-container *ngIf="tagItems.length > 0; else noTags;">
+        <app-search-tag-item
+                *ngFor="let item of tagItems"
+                [tag]="item.tag"
+                [complaintNumber]="item.complaintNumber"
+                [isSelected]="isTagSelected(item.tag)"
+                (onSelect)="onTagSelectHandler($event)"
+                (onUnselect)="onTagUnSelectHandler($event)"
+        ></app-search-tag-item>
+      </ng-container>
+      <ng-template #noTags>
+        <span class="text-muted">None</span>
+      </ng-template>
+    </div>
+  </div>
+
+</form>

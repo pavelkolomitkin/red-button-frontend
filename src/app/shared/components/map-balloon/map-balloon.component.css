@@ -7,11 +7,13 @@
     left: -50px;
     max-width: 350px;
     min-width: 350px;
+
+    z-index: 10000;
 }
 
 .map-balloon.collapsed
 {
-
+    z-index: 500;
 }
 
 .map-balloon .box
@@ -91,4 +93,24 @@
     margin-left: -5px;
     margin-top: -5px;
     background-color: #fff;
+}
+
+.bg-issue
+{
+    background: #ff8700;
+}
+
+.bg-confirmation-confirmed
+{
+    background: #1fc346;
+}
+
+.bg-confirmation-pending
+{
+    background: #a4a4a4;
+}
+
+.bg-confirmation-rejected
+{
+    background: #a40600;
 }

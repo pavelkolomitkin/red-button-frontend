@@ -22,7 +22,7 @@ import { VideoFrameComponent } from './components/video-frame/video-frame.compon
     UploadItemComponent,
     PreventEnterSubmitFormDirective,
     PageHeaderDirective,
-    VideoFrameComponent
+    VideoFrameComponent,
   ],
   imports: [
     CommonModule,

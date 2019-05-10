@@ -1,0 +1,11 @@
+<button
+        type="button"
+        class="btn"
+        [disabled]="isLoading"
+        (click)="onLikeButtonClickHandler($event)"
+        [ngClass]="_issue.hasUserLike ? 'btn-primary' : 'btn-default'"
+>
+  <i class="fa fa-thumbs-o-down" *ngIf="_issue.hasUserLike"></i>
+  <i class="fa fa-thumbs-o-up" *ngIf="!_issue.hasUserLike"></i>
+  Like ({{ _issue.likeNumber }})
+</button>

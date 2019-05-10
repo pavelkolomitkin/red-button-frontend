@@ -25,12 +25,24 @@
     <ul class="sidebar-menu" data-widget="tree" #treeMenu>
       <li class="header">MAIN NAVIGATION</li>
 
-      <li *ngxPermissionsOnly="['ROLE_CLIENT_USER']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <a routerLink="/client/complaint/list">
-          <i class="fa fa-file-text-o"></i>
-          <span>Complaints</span>
-        </a>
-      </li>
+      <ng-container *ngxPermissionsOnly="['ROLE_CLIENT_USER']">
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a routerLink="/client/complaint/list">
+            <i class="fa fa-file-text-o"></i>
+            <span>Complaints</span>
+            <small class="label pull-right bg-blue" *ngIf="(clientCommonInfo | async) !== null">{{ (clientCommonInfo | async).complaintNumber }}</small>
+          </a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a routerLink="/client/issue/list">
+            <i class="fa fa-folder"></i>
+            <span>Issues</span>
+            <small class="label pull-right bg-blue" *ngIf="(clientCommonInfo | async) !== null">{{ (clientCommonInfo | async).issueNumber }}</small>
+          </a>
+        </li>
+      </ng-container>
+
+
 
 <!--      <li class="treeview">-->
 <!--        <a href="#">-->

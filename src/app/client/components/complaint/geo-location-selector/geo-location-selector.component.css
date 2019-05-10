@@ -1,0 +1,33 @@
+.geo-location-selector-container
+{
+    position: fixed;
+    background: #ffffff;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 99900;
+}
+
+.geo-location-selector-container .controls {
+    position: absolute;
+    z-index: 9999;
+    top: 0;
+    right: 0;
+
+    background: #cccccc;
+}
+.geo-location-selector-container .controls .control {
+
+}
+
+
+.geo-location-selector-container .search-panel
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: #ffffff00;
+}

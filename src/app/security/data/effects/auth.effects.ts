@@ -17,7 +17,7 @@ import {mergeMap, catchError, map, tap} from 'rxjs/operators';
 import { SecurityService } from '../../services/security.service';
 import User from '../../../core/data/model/user.model';
 import {State} from '../../../core/data/reducer';
-import {GlobalProgressHide, GlobalProgressShow} from '../../../core/data/actions';
+import {GlobalConfirmationReset, GlobalProgressHide, GlobalProgressShow} from '../../../core/data/actions';
 import {Router} from '@angular/router';
 import {LocalStorageService} from '../../../core/services/local-storage.service';
 import {NgxPermissionsService} from 'ngx-permissions';
@@ -98,6 +98,8 @@ export class AuthEffects
       this.localStorageService.remove('token');
       this.permissionService.loadPermissions([]);
       this.router.navigate(['/security', 'login']);
+
+      this.store.dispatch(new GlobalConfirmationReset());
     })
   );
 

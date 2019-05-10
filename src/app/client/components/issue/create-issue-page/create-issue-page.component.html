@@ -1,0 +1,14 @@
+<app-client-common-layout>
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Create Report</h3>
+    </div>
+
+    <app-issue-form #form
+            [issue]="issue"
+            [errors]="errors"
+            (onSubmit)="onSubmitHandler($event)"
+    ></app-issue-form>
+
+  </div>
+</app-client-common-layout>

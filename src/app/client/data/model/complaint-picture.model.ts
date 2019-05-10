@@ -2,6 +2,5 @@ import {PictureInterface} from '../../../shared/data/model/picture-interface.mod
 
 export interface ComplaintPicture extends PictureInterface
 {
-    id ?: number;
-    createdAt ?: number;
+
 }

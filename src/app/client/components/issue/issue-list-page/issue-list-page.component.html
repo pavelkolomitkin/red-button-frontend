@@ -1,0 +1,20 @@
+<app-client-common-layout>
+  <div>
+
+    <div infiniteScroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="50"
+         [infiniteScrollDisabled]="infinityScrollDisabled"
+         (scrolled)="onScroll()"
+    >
+
+      <div *ngFor="let issue of list">
+        <app-issue-item [issue]="issue" (onDelete)="onDeleteHandler($event)"></app-issue-item>
+      </div>
+
+    </div>
+
+    <p class="alert alert-info" *ngIf="total === 0">You have no issue! <a routerLink="/client/issue/create">Create a new one</a></p>
+
+  </div>
+</app-client-common-layout>

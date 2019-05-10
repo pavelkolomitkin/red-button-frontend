@@ -1,0 +1,71 @@
+<form appPreventEnterSubmitForm (ngSubmit)="onSubmitHandler($event)" #form="ngForm">
+  <div class="box-body">
+    <div class="form-group">
+      <label>Select Geo Location</label>
+      <app-geo-location-selector-field
+              [complaint]="complaint"
+              (onAddressSelect)="onFieldValueChangeHandler($event)"></app-geo-location-selector-field>
+      <app-form-field-error-list [field]="'location'" [errors]="errors"></app-form-field-error-list>
+    </div>
+
+    <div class="form-group">
+      <label>Service Type <span class="text-muted">(optional)</span></label>
+      <select
+              class="form-control"
+              [(ngModel)]="complaint.serviceType"
+              [compareWith]="compareServiceTypes"
+              [required]="false"
+              (ngModelChange)="onFieldValueChangeHandler($event)"
+              name="selectedServiceType"
+              id="selectedServiceType"
+      >
+        <option [value]="null">-</option>
+        <option *ngFor="let serviceType of serviceTypes | async" [ngValue]="serviceType">{{ serviceType.title }}</option>
+      </select>
+      <app-form-field-error-list [field]="'serviceType'" [errors]="errors"></app-form-field-error-list>
+    </div>
+
+    <div class="form-group">
+      <label for="complaintMessage">Message</label>
+      <textarea class="form-control"
+                required
+                id="complaintMessage"
+                [(ngModel)]="complaint.message"
+                name="complaintMessage"
+                (ngModelChange)="onFieldValueChangeHandler($event)"
+      ></textarea>
+      <app-form-field-error-list [field]="'message'" [errors]="errors"></app-form-field-error-list>
+    </div>
+
+    <div class="form-group">
+      <label>Pictures</label>
+      <app-complaint-pictures-field
+              [pictures]="complaint.pictures"
+              (onChange)="onFieldValueChangeHandler($event)"
+      ></app-complaint-pictures-field>
+      <app-form-field-error-list [field]="'pictures'" [errors]="errors"></app-form-field-error-list>
+    </div>
+
+    <div class="form-group">
+      <label>Video Links(use youtube to point videos)</label>
+      <app-video-list-field
+              [list]="complaint.videos"
+              (onChange)="onFieldValueChangeHandler($event)"
+      ></app-video-list-field>
+      <app-form-field-error-list [field]="'videos'" [errors]="errors"></app-form-field-error-list>
+    </div>
+
+    <div class="form-group">
+      <label>Tags</label>
+      <app-tag-list-field
+              [tags]="complaint.tags"
+              (onChange)="onFieldValueChangeHandler($event)"
+      ></app-tag-list-field>
+    </div>
+  </div>
+
+  <div class="box-footer">
+    <button type="submit" class="btn btn-primary" [disabled]="!isValid()">Save</button>
+  </div>
+
+</form>

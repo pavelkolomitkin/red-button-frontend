@@ -7,14 +7,16 @@ import {
   OnInit,
   Output, Type,
   ViewChild,
-  ViewContainerRef, ViewRef
+  ViewContainerRef
 } from '@angular/core';
 import {Map, View} from 'ol';
 import Overlay from 'ol/Overlay';
-import {fromLonLat, toLonLat } from 'ol/proj.js';
+import {fromLonLat, toLonLat, transformExtent } from 'ol/proj.js';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import {GeoLocation} from '../../../core/data/model/geo-location.model';
+import {MapViewBox} from '../../data/model/map-view-box.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-map',
@@ -28,6 +30,7 @@ export class MapComponent implements OnInit, OnDestroy {
   // output fields
   @Output('onLocationClick') locationClick: EventEmitter<GeoLocation> = new EventEmitter();
   @Output('onReady') ready: EventEmitter<any> = new EventEmitter();
+  @Output('onViewBoxChange') viewBoxChangeEvent: EventEmitter<MapViewBox> = new EventEmitter();
 
   // input fields
   @Input() defaultCenter: GeoLocation;
@@ -35,7 +38,11 @@ export class MapComponent implements OnInit, OnDestroy {
 
   @ViewChild('mapContainer', { read: ViewContainerRef }) mapContainerRef: ViewContainerRef;
 
-  constructor(private componentResolver: ComponentFactoryResolver) { }
+
+  constructor(private componentResolver: ComponentFactoryResolver) {
+
+
+  }
 
   ngOnInit() {
 
@@ -48,6 +55,7 @@ export class MapComponent implements OnInit, OnDestroy {
             source: new OSM()
           })
       ],
+      overlays: [],
       view: new View({
         center: fromLonLat([longitude, latitude]),
         zoom: this.defaultZoom
@@ -56,6 +64,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
 
     this.map.on('singleclick', this.onMapClickHandler);
+    this.map.on('moveend', this.onManMoveEndHandler);
 
     this.ready.emit();
   }
@@ -63,19 +72,58 @@ export class MapComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
     this.map.un('singleclick');
-
+    this.map.un('moveend');
   }
 
   //======================= VIEW APP =============================
 
-  setCenter(location: GeoLocation)
+  setCenter(location: GeoLocation, withAnimation: boolean = false)
   {
-    this.map.getView().setCenter(fromLonLat([location.longitude, location.latitude]));
+
+    const center = fromLonLat([location.longitude, location.latitude]);
+
+    if (!withAnimation)
+    {
+      this.map.getView().setCenter(center);
+    }
+    else
+    {
+      this.map.getView().animate({
+        center: center,
+        duration: 500
+      });
+    }
   }
 
   setZoom(value: number)
   {
     this.map.getView().setZoom(value);
+  }
+
+  getZoom()
+  {
+    return this.map.getView().getZoom();
+  }
+
+  getViewBox(): MapViewBox
+  {
+    let extent = this.map.getView().calculateExtent(this.map.getSize());
+
+    extent = transformExtent(extent,'EPSG:3857', 'EPSG:4326');
+
+    const result = {
+      topLeft: {
+        latitude: extent[3],
+        longitude: extent[0]
+      },
+      bottomRight: {
+        latitude: extent[1],
+        longitude: extent[2]
+      },
+      zoom: this.getZoom()
+    };
+
+    return result;
   }
 
   //=====================// VIEW APP =============================
@@ -91,7 +139,14 @@ export class MapComponent implements OnInit, OnDestroy {
     };
 
     this.locationClick.emit(location);
-  }
+  };
+
+  onManMoveEndHandler = (event) => {
+
+    const box = this.getViewBox();
+
+    this.viewBoxChangeEvent.emit(box);
+  };
 
   addBalloon<C>(component: Type<C>, location: GeoLocation): ComponentRef<C>
   {
@@ -102,6 +157,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
     const overlay: Overlay = this.createOverlay(result);
     overlay.setPosition(position);
+
     this.map.addOverlay(overlay);
 
     return result;
@@ -119,6 +175,11 @@ export class MapComponent implements OnInit, OnDestroy {
     }
 
     return result;
+  }
+
+  removeAllBalloons()
+  {
+    this.mapContainerRef.clear();
   }
 
   createOverlay<C>(component: ComponentRef<C>): Overlay

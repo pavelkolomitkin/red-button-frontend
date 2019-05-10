@@ -1,0 +1,41 @@
+<app-map-balloon [colorStyle]="
+    currentState === 'STATE_LOCATION_DETECTED_SUCCESS' ? 'green' :
+    currentState === 'STATE_LOCATION_DETECTED_ERROR' ? 'red' : 'default'"
+    [isCollapsed]="false"
+    [hasToCenteredOnOpen]="true"
+    [populateCollapsing]="false">
+
+  <div class="balloon-title">
+    <ng-container *ngIf="currentState === 'STATE_LOADING'"></ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">Confirm the location</ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'">Cannot identify the region!</ng-container>
+  </div>
+
+  <div class="balloon-content">
+    <ng-container *ngIf="currentState === 'STATE_LOADING'">
+      <div class="overlay">
+        <i class="fa fa-refresh fa-spin"></i>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">
+      <div>
+        {{ complaint.region.title }}<span class="text-muted">({{ complaint.region.federalDistrict.title }})</span>
+      </div>
+      <div>
+        <span class="text-muted">{{ complaint.address.displayName }}</span>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'">
+      Cannot identify the region! Try only to choose location in a Russia!
+    </ng-container>
+  </div>
+
+  <div class="balloon-footer">
+    <ng-container *ngIf="currentState === 'STATE_LOADING'"></ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">
+      <span class="btn btn-success" (click)="onConfirmAddressClick($event)">Confirm</span>
+    </ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'"></ng-container>
+  </div>
+
+</app-map-balloon>

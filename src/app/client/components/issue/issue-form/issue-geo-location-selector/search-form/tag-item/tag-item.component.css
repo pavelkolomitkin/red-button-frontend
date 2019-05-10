@@ -1,0 +1,14 @@
+.tag
+{
+    padding: 5px;
+    margin-right: 5px;
+    display: inline-block;
+    font-size: 0.9em;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.tag.selected
+{
+    background: #ccc;
+}

@@ -20,6 +20,7 @@ export interface State {
 
   breadCrumbs: Array<BreadCrumb>;
 
+  leavePageConfirmation: boolean;
 }
 
 const initialState: State = {
@@ -34,7 +35,9 @@ const initialState: State = {
   pageTitle: '',
   pageSubTitle: '',
 
-  breadCrumbs: []
+  breadCrumbs: [],
+
+  leavePageConfirmation: false
 };
 
 export function reducer(state = initialState, action: actions.CoreActions): State {
@@ -122,6 +125,20 @@ export function reducer(state = initialState, action: actions.CoreActions): Stat
       return {
         ...state,
         breadCrumbs: [...action.items]
+      };
+
+    case actions.GLOBAL_CONFIRM_LEAVE_PAGE_INIT:
+
+      return {
+        ...state,
+        leavePageConfirmation: true
+      };
+
+    case actions.GLOBAL_CONFIRM_LEAVE_PAGE_RESET:
+
+      return {
+        ...state,
+        leavePageConfirmation: false
       };
 
     default:

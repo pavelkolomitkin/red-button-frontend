@@ -1,0 +1,29 @@
+<div class="box box-solid">
+  <div class="box-header with-border">
+    <b>Comments <span class="text-muted small" *ngIf="total !== null">({{ total }})</span></b>
+  </div>
+  <div class="box-body with-border">
+    <app-issue-comment-form
+            [comment]="newComment"
+            (onSubmit)="onNewCommentSubmit($event)"
+            [errors]="newCommentErrors"
+    ></app-issue-comment-form>
+  </div>
+
+
+  <div class="box-body with-border box-comments"
+       infiniteScroll
+       [infiniteScrollDistance]="2"
+       [infiniteScrollThrottle]="50"
+       [infiniteScrollDisabled]="list.length === 0"
+       (scrolled)="onScroll()">
+
+    <app-issue-comment-item
+            *ngFor="let comment of list"
+            [comment]="comment"
+            (onDelete)="onCommentDeleteHandler($event)"
+    ></app-issue-comment-item>
+  </div>
+
+
+</div>

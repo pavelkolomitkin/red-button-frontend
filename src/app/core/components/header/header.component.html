@@ -18,56 +18,80 @@
 
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
-          <li *ngxPermissionsOnly="['ROLE_CLIENT_USER']" [routerLinkActive]="'active'">
-              <a routerLink="/client/complaint/create" class="btn"><i class="fa fa-plus"></i> Complaint</a>
-          </li>
-
-        <li class="dropdown user user-menu">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-<!--            <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->
-            <span class="hidden-xs">{{ (user | async).fullName }}</span>
-          </a>
-          <ul class="dropdown-menu">
-
-<!--            <li class="user-header">-->
-<!--              <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">-->
-
-<!--              <p>-->
-<!--                Alexander Pierce - Web Developer-->
-<!--                <small>Member since Nov. 2012</small>-->
-<!--              </p>-->
-<!--            </li>-->
-
-<!--            <li class="user-body">-->
-<!--              <div class="row">-->
-<!--                <div class="col-xs-4 text-center">-->
-<!--                  <a href="#">Followers</a>-->
-<!--                </div>-->
-<!--                <div class="col-xs-4 text-center">-->
-<!--                  <a href="#">Sales</a>-->
-<!--                </div>-->
-<!--                <div class="col-xs-4 text-center">-->
-<!--                  <a href="#">Friends</a>-->
-<!--                </div>-->
-<!--              </div>-->
-
-<!--            </li>-->
-
-            <li class="user-footer">
-              <div *ngxPermissionsOnly="['ROLE_CLIENT_USER']" class="pull-left">
-                <a routerLink="/client/profile" class="btn btn-default btn-flat">Profile</a>
-              </div>
-              <div class="pull-right">
-                <span (click)="onLogoutClickHandler()" class="btn btn-default btn-flat">Sign out</span>
-              </div>
-            </li>
-          </ul>
-        </li>
 
 
-<!--        <li>-->
-<!--          <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>-->
-<!--        </li>-->
+
+
+
+          <ng-container *ngxPermissionsOnly="['ROLE_CLIENT_USER']">
+
+
+              <li class="dropdown notifications-menu">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" title="Signature Requests">
+                      <i class="fa fa-bell-o"></i>
+                      <ng-container *ngIf="(clientCommonInfo | async) !== null">
+                          <span class="label label-warning" *ngIf="(clientCommonInfo | async).confirmationNumber > 0">{{ (clientCommonInfo | async).confirmationNumber }}</span>
+                      </ng-container>
+                  </a>
+
+                  <ng-container *ngIf="(clientCommonInfo | async) !== null">
+
+                      <ul class="dropdown-menu">
+
+                          <ng-container *ngIf="(clientCommonInfo | async).confirmations.length > 0; else noConfirmations">
+                              <li class="header">You have {{ (clientCommonInfo | async).confirmations.length }} request(s)</li>
+                              <li>
+                                  <!-- inner menu: contains the actual data -->
+                                  <ul class="menu">
+
+                                      <li *ngFor="let confirmation of (clientCommonInfo | async).confirmations">
+
+                                          <app-signature-request [confirmation]="confirmation"></app-signature-request>
+                                      </li>
+                                  </ul>
+                              </li>
+                          </ng-container>
+
+                          <ng-template #noConfirmations>
+                              <li class="header">No new confirmations</li>
+                          </ng-template>
+
+                      </ul>
+
+                  </ng-container>
+
+
+              </li>
+
+
+              <li [routerLinkActive]="'active'">
+                  <a routerLink="/client/issue/create" class="btn"><i class="fa fa-plus"></i> Issue</a>
+              </li>
+              <li [routerLinkActive]="'active'">
+                  <a routerLink="/client/complaint/create" class="btn bg-red"><i class="fa fa-plus"></i> Complaint</a>
+              </li>
+
+              <li class="dropdown user user-menu">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <!--            <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->
+                      <span class="hidden-xs">{{ (user | async).fullName }}</span>
+                  </a>
+                  <ul class="dropdown-menu">
+
+                      <li class="user-footer">
+                          <div class="pull-left">
+                              <a routerLink="/client/profile" class="btn btn-default btn-flat">Profile</a>
+                          </div>
+                          <div class="pull-right">
+                              <span (click)="onLogoutClickHandler()" class="btn btn-default btn-flat">Sign out</span>
+                          </div>
+                      </li>
+                  </ul>
+              </li>
+
+
+          </ng-container>
+
       </ul>
     </div>
   </nav>

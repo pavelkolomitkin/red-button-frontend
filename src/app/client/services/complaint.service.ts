@@ -2,34 +2,61 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Complaint} from '../data/model/complaint.model';
 import {catchError, map} from 'rxjs/operators';
-import {of} from 'rxjs';
+import {BaseService} from '../../core/services/base.service';
 
 @Injectable()
-export class ComplaintService {
+export class ComplaintService extends BaseService {
 
-    constructor(private http: HttpClient) {}
+    static transformEntity = (complaint) => {
 
-    transformEntity = (complaint) => {
-
-        const result = {
+        const result = Object.assign(new Complaint(), {
             ...complaint,
             location: {
                 latitude: complaint.address.latitude,
                 longitude: complaint.address.longitude
-            }};
-
+            }
+        });
 
         return result;
     }
 
+    tagSearch(params: Object)
+    {
+        let parameters: HttpParams = this.getHttpParamsFromObject(params);
+
+        return this
+            .http
+            .get<{ tags: Array<{}> }>('/client/complaint/geo-tag/search', { params: parameters })
+            .pipe(
+                map(result => result.tags)
+            )
+            ;
+    }
+
+    search(params: any)
+    {
+
+        let criteria = Object.assign(params, {
+            tags: !!params.tags ? params.tags.map(item => item.id) : []
+        });
+
+        let parameters: HttpParams = this.getHttpParamsFromObject(criteria);
+
+        return this
+            .http
+            .get<{ complaints: Array<Complaint> }>('/client/complaint/geo/search', { params: parameters })
+            .pipe(
+                map(({ complaints }) => {
+                    return complaints.map(item => ComplaintService.transformEntity(item))
+                })
+            );
+    }
+
     getUserComplaints(params: Object, page: number = 1)
     {
-        let parameters: HttpParams = new HttpParams().set('page', page.toString());
-        
-        for (let [name, value] of Object.entries(params))
-        {
-            parameters = parameters.append(name, value.toString());
-        }
+        let parameters: HttpParams = this.getHttpParamsFromObject(Object.assign(params, {
+            page: page
+        }));
 
         return this
             .http
@@ -40,7 +67,7 @@ export class ComplaintService {
             .pipe(
                 map(({ complaints, total }) => {
                     return {
-                        complaints: complaints.map(item => this.transformEntity(item)),
+                        complaints: complaints.map(item => ComplaintService.transformEntity(item)),
                         total: total
                     };
                 })
@@ -61,7 +88,7 @@ export class ComplaintService {
 
         return this.http.post<{ complaint: Complaint }>('/client/complaint', body).pipe(
             map(result => result.complaint),
-            map(complaint => this.transformEntity(complaint))
+            map(complaint => ComplaintService.transformEntity(complaint))
         );
     }
 
@@ -79,7 +106,7 @@ export class ComplaintService {
 
         return this.http.put<{ complaint: Complaint }>('/client/complaint/' + complaint.id, body).pipe(
             map(result => result.complaint),
-            map(complaint => this.transformEntity(complaint))
+            map(complaint => ComplaintService.transformEntity(complaint))
         );
     }
 
@@ -87,7 +114,7 @@ export class ComplaintService {
     {
         return this.http.get<{ complaint: Complaint }>('/client/complaint/' + id).pipe(
             map(result => result.complaint),
-            map(complaint => this.transformEntity(complaint)),
+            map(complaint => ComplaintService.transformEntity(complaint)),
             catchError((response) => {
                 throw {
                     error: 'Not found'

@@ -1,0 +1,21 @@
+<div>
+  <p *ngIf="!!_issue.company; else noSelectedCompany">
+    <span class="text-primary">{{ _issue.company.fullName }}</span>
+  </p>
+  <ng-template #noSelectedCompany>
+    <p class="text text-muted">(None)</p>
+  </ng-template>
+  <div>
+    <button
+            type="button"
+            class="btn btn-primary"
+            [disabled]="!_issue.region"
+            [attr.title]="!_issue.region ? 'Choose a location first' : ''"
+            (click)="onChooseButtonClickHandler($event)"
+    >Choose a company</button>
+  </div>
+</div>
+
+<ng-template #searchCompanyModal let-modal>
+  <app-company-search-form (onCompanySelect)="onCompanySelectHandler($event)" [region]="_issue.region"></app-company-search-form>
+</ng-template>

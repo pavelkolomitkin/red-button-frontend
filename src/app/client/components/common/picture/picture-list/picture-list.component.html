@@ -1,0 +1,10 @@
+<div>
+    <app-picture-item
+            [ngStyle]="{ cursor: 'pointer' }"
+            *ngFor="let picture of list; index as i;"
+            [picture]="picture"
+            [size]="'previewMiddle'"
+            (click)="onPictureClickHandler($event, i)"
+            [attr.index]="i"
+    ></app-picture-item>
+</div>

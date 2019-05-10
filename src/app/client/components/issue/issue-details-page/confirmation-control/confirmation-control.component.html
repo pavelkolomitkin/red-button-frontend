@@ -1,0 +1,14 @@
+<ng-container *ngIf="!!userConfirmation">
+  <span
+          class="btn btn-warning"
+          *ngIf="userConfirmation.status.code === 'pending' && !isConfirming"
+          (click)="onConfirmSignatureClickHandler($event)"
+  >Confirm your signature!</span>
+  <span class="btn btn-default disabled" *ngIf="isConfirming">
+    <i class="fa fa-clock-o"></i>Confirming
+  </span>
+  <span
+          class="btn btn-default disabled text-muted"
+          *ngIf="userConfirmation.status.code === 'confirmed'">You have confirmed it</span>
+
+</ng-container>

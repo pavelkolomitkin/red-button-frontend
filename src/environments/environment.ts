@@ -8,7 +8,12 @@ export const environment = {
   defaultGeoPosition: {
     latitude: 55.75184939,
     longitude: 37.62817383
-  }
+  },
+  maxUploadPictureSize: 5242880,
+  maxUploadPictureSizeLabel: '5M',
+  uploadPictureAllowedMimeTypes: ['image/jpeg', 'image/png'],
+
+  clientCommonInfoInterval: 10000
 };
 
 /*

@@ -33,6 +33,12 @@ button.dropdown-item
     text-align: left;
 }
 
+.dropdown-menu .dropdown-item.active
+{
+    background: #3498db;
+    color: #fff;
+}
+
 .box.box-solid>.box-header .btn:hover, .box.box-solid>.box-header a:hover
 {
     background: none !important;
@@ -45,4 +51,12 @@ button.dropdown-item
 
 .toast {
     opacity: 1 !important;
+}
+
+.complaint-signature
+{
+    font-size: 0.9em;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
 }

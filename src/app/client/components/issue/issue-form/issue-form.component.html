@@ -1,0 +1,75 @@
+<form (ngSubmit)="onSubmitHandler($event)" #form="ngForm">
+
+  <div class="box-body">
+    <div class="form-group">
+      <label>Select Geo Location and signatures from other people</label>
+      <app-issue-geo-location-selector-field
+              [issue]="issue"
+              (onAddressUpdate)="onAddressUpdateHandler($event);onFormFieldChangeHandler($event)"
+      ></app-issue-geo-location-selector-field>
+      <app-form-field-error-list [field]="'location'" [errors]="errors"></app-form-field-error-list>
+    </div>
+
+    <div class="form-group">
+      <label>Select a company<span class="text-muted">(optional)</span></label>
+      <app-issue-company-selector-field
+              [issue]="issue"
+              (onSelect)="onCompanySelectHandler($event);onFormFieldChangeHandler($event)"
+      ></app-issue-company-selector-field>
+      <app-form-field-error-list [field]="'company'" [errors]="errors"></app-form-field-error-list>
+    </div>
+
+    <div class="form-group">
+      <label>Service Type <span class="text-muted">(optional)</span></label>
+      <select
+              class="form-control"
+              [(ngModel)]="issue.serviceType"
+              [compareWith]="compareServiceTypes"
+              [required]="false"
+              (ngModelChange)="onFormFieldChangeHandler($event)"
+              name="selectedServiceType"
+              id="selectedServiceType"
+      >
+        <option [value]="null">-</option>
+        <option *ngFor="let serviceType of serviceTypes | async" [ngValue]="serviceType">{{ serviceType.title }}</option>
+      </select>
+      <app-form-field-error-list [field]="'serviceType'" [errors]="errors"></app-form-field-error-list>
+    </div>
+
+    <div class="form-group">
+      <label for="issueMessage">Message</label>
+      <textarea class="form-control"
+                required
+                id="issueMessage"
+                [(ngModel)]="issue.message"
+                (ngModelChange)="onFormFieldChangeHandler($event)"
+                name="issueMessage"
+                rows="10"
+      ></textarea>
+      <app-form-field-error-list [field]="'message'" [errors]="errors"></app-form-field-error-list>
+    </div>
+
+    <div class="form-group">
+      <label>Pictures</label>
+      <app-issue-picture-list-field
+              [pictures]="issue.pictures"
+              (onChange)="onFormFieldChangeHandler($event)"
+      ></app-issue-picture-list-field>
+      <app-form-field-error-list [field]="'pictures'" [errors]="errors"></app-form-field-error-list>
+    </div>
+
+    <div class="form-group">
+      <label>Video Links(use youtube to point videos)</label>
+      <app-video-list-field
+              [list]="issue.videos"
+              (onChange)="onFormFieldChangeHandler($event)"
+      ></app-video-list-field>
+      <app-form-field-error-list [field]="'videos'" [errors]="errors"></app-form-field-error-list>
+    </div>
+
+  </div>
+
+  <div class="box-footer">
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
+  </div>
+</form>

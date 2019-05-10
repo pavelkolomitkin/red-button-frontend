@@ -1,0 +1,15 @@
+<div *ngIf="complaint.isAddressInit()" class="address-info-container">
+  <span class="text text-primary">{{ complaint.region.title }}</span><span class="text-muted">({{ complaint.region.federalDistrict.title }})</span>
+  <br />
+  <span class="text-muted">{{ complaint.address.displayName }}</span>
+</div>
+<div>
+  <span class="btn btn-primary" (click)="onChooseButtonClickHandler($event)">Choose a location</span>
+</div>
+
+<app-geo-location-selector
+        *ngIf="isSelectorOpen"
+        [complaint]="complaint"
+        (onSelect)="onAddressSelectHandler($event)"
+        (onCancel)="onCancelHandler($event)"
+></app-geo-location-selector>

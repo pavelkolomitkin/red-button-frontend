@@ -1,0 +1,28 @@
+<div *ngIf="!!issue.region" class="address-info-container">
+  <p>
+    <span class="text text-primary">{{ issue.region.title }}</span><span class="text-muted">({{ issue.region.federalDistrict.title }})</span>
+    <br />
+    <span class="text-muted">{{ issue.address.displayName }}</span>
+  </p>
+  <div *ngIf="issue.complaintConfirmations.length > 0">
+
+    <div><b>Signatures<span class="text-muted">({{ issue.complaintConfirmations.length }})</span></b></div>
+    <p>
+      <span
+              class="label complaint-signature"
+              *ngFor="let confirmation of issue.complaintConfirmations"
+              [ngClass]="confirmation.status.code === 'confirmed' ? 'bg-green' : (confirmation.status.code === 'rejected' ? 'bg-red' : 'bg-gray')"
+      >{{ confirmation.complaint.client.fullName }}</span>
+    </p>
+
+  </div>
+</div>
+<div>
+  <span class="btn btn-primary" (click)="onChooseButtonClickHandler($event)">Choose a location and gather signatures from other people</span>
+</div>
+<app-issue-geo-location-selector
+        *ngIf="isSelectorOpen"
+        (onSelect)="onSelectAddressHandler($event)"
+        (onCancel)="onCancelSelectHandler($event)"
+        [issue]="issue"
+></app-issue-geo-location-selector>

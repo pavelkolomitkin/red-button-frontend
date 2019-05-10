@@ -1,0 +1,19 @@
+<div>
+  <input
+          #inputElement
+          id="tag-search"
+          type="text"
+          class="form-control"
+          [(ngModel)]="model"
+          [ngbTypeahead]="search"
+          [focusFirst]="false"
+          [inputFormatter]="formatter"
+          [resultFormatter]="formatter"
+          (selectItem)="onItemSelectHandler($event)"
+          (keydown.enter)="onEnterHandler($event)"
+  />
+
+</div>
+<div class="tab-list">
+  <app-tag-item *ngFor="let tag of tags" [tag]="tag" (onRemove)="onRemoveTagHandler($event)"></app-tag-item>
+</div>

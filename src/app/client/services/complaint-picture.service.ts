@@ -2,50 +2,35 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
 import {UploadItem} from '../../shared/data/model/upload-item.model';
 import {ComplaintPicture} from '../data/model/complaint-picture.model';
-import {Observable} from 'rxjs';
+import {BaseService} from '../../core/services/base.service';
+import {FileUploadService} from '../../core/services/file-upload.service';
+import {map} from 'rxjs/operators';
 
 @Injectable()
-export class ComplaintPictureService
+export class ComplaintPictureService extends BaseService
 {
-    constructor(private http: HttpClient) {}
+    constructor(http: HttpClient, private uploader: FileUploadService) {
+        super(http);
+    }
 
     upload(picture: UploadItem<ComplaintPicture>)
     {
-        return new Observable((observer) => {
-
-            const formData: FormData = new FormData();
-            formData.append('imageFile', picture.file);
-
-            const request = new HttpRequest(
-                'POST', '/client/complaint-picture/create',
-                formData,
-                {
-                    reportProgress: true,
-                    headers: new HttpHeaders({ 'enctype':  'multipart/form-data; boundary=----WebKitFormBoundaryuL67FWkv1CA'})
-                }
-            );
-
-            this.http.request(request).subscribe(
-                (event) => {
-                    if (event.type === HttpEventType.UploadProgress)
+        return this
+            .uploader
+            .upload('/client/complaint-picture/create', picture.file, 'imageFile')
+            .pipe(
+                map((state: any) => {
+                    if (state.type === FileUploadService.UPLOAD_EVENT_TYPE_PROGRESS)
                     {
-                        picture.setProgress(event.loaded, event.total);
-                        observer.next(picture);
+                        picture.setProgress(state.loaded, state.total);
                     }
-                    else if (event instanceof HttpResponse)
+                    else if (state.type === FileUploadService.UPLOAD_EVENT_TYPE_COMPLETE)
                     {
-                        // success
-                        picture.uploaded = event.body['picture'];
-                        observer.next(picture);
+                        picture.uploaded = state.body['picture'];
                     }
-                },
-                (errors) => {
-                    picture.errors = errors.error.errors;
-                    observer.error(picture);
-                },
-                () => {
-                }
+
+                    return picture;
+                })
             );
-        });
     }
 }

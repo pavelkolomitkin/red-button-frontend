@@ -17,9 +17,10 @@ import { reducer as coreReducer } from './data/reducer';
 import { reducer as securityReducer } from '../security/data/reducer';
 import { reducer as geoLocationReducer } from './data/geo-location.reducer';
 import { reducer as serviceTypeReducer } from './data/service-type.reducer';
+import { reducer as mapReducer } from '../shared/data/map.reducer';
 import { RegisterEffects } from '../security/data/effects/register.effects';
 import { AuthEffects } from '../security/data/effects/auth.effects';
-import { AuthUserGuard } from '../security/services/guards/AuthUserGuard';
+import { AuthUserGuardService } from '../security/services/guards/auth-user-guard.service';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { GlobalProgressComponent } from './components/global-progress/global-progress.component';
@@ -47,6 +48,16 @@ import { ControlItemComponent } from './components/confirmation-window/control-i
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import {MessageNotifierComponent} from './components/message-notifier/message-notifier.component';
 import {ToastrModule} from 'ngx-toastr';
+import {CompanyService} from './services/company.service';
+import {IssuePictureService} from '../client/services/issue-picture.service';
+import {FileUploadService} from './services/file-upload.service';
+import {IssueService} from '../client/services/issue.service';
+import {ProfileService} from '../client/services/profile.service';
+import { SignatureRequestComponent } from './components/header/signature-request/signature-request.component';
+import {ComplaintConfirmationService} from '../client/services/complaint-comfirmation.service';
+import {ConfirmLeavePageGuardService} from './services/guards/confirm-leave-page-guard.service';
+import {IssueCommentService} from './services/issue-comment.service';
+import {OSMSearchService} from './services/OSMSearchService';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -68,7 +79,8 @@ const httpInterceptorProviders = [
     ConfirmationWindowComponent,
     ControlItemComponent,
     ConfirmationComponent,
-      MessageNotifierComponent
+      MessageNotifierComponent,
+      SignatureRequestComponent
   ],
   imports: [
     CommonModule,
@@ -81,14 +93,15 @@ const httpInterceptorProviders = [
       core: coreReducer,
       security: securityReducer,
       geoLocation: geoLocationReducer,
-      serviceType: serviceTypeReducer
+      serviceType: serviceTypeReducer,
+      map: mapReducer
     }),
     EffectsModule.forRoot([
       RegisterEffects, AuthEffects, ServiceTypeEffects, ClientDeviceEffects
     ])
   ],
   providers: [
-    AuthUserGuard,
+    AuthUserGuardService,
     DefaultRedirectGuard,
     httpInterceptorProviders,
     SecurityService,
@@ -97,9 +110,18 @@ const httpInterceptorProviders = [
     VideoService,
     ComplaintTagService,
     ComplaintPictureService,
+    IssuePictureService,
     ServiceTypeService,
     ComplaintService,
     ClientLocationService,
+    CompanyService,
+    IssueService,
+    FileUploadService,
+    ProfileService,
+    ComplaintConfirmationService,
+    ConfirmLeavePageGuardService,
+    IssueCommentService,
+    OSMSearchService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,
