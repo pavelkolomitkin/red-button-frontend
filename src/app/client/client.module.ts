@@ -66,7 +66,7 @@ import { ComplaintConfirmationViewBalloonComponent } from './components/issue/is
 import { IssueItemComponent } from './components/issue/issue-list-page/issue-item/issue-item.component';
 import {ProfileEffects} from './data/effects/profile.effects';
 import {State} from '../app.state';
-import {ProfileGetCommonInfoStart} from './data/profile.actions';
+import {ClientModuleInitialize} from './data/profile.actions';
 import {ComplaintConfirmationEffects} from './data/effects/complaint-confirmation.effects';
 import { ConfirmationControlComponent } from './components/issue/issue-details-page/confirmation-control/confirmation-control.component';
 import { IssueCommentListComponent } from './components/issue/issue-details-page/issue-comment-list/issue-comment-list.component';
@@ -169,9 +169,10 @@ import { SearchAddressFormComponent } from './components/common/search-address-f
       ComplaintConfirmationViewBalloonComponent
   ]
 })
-export class ClientModule {
+export class ClientModule
+{
     constructor(private store: Store<State>)
     {
-        this.store.dispatch(new ProfileGetCommonInfoStart());
+        this.store.dispatch(new ClientModuleInitialize());
     }
 }

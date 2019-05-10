@@ -11,7 +11,9 @@ export const environment = {
   },
   maxUploadPictureSize: 5242880,
   maxUploadPictureSizeLabel: '5M',
-  uploadPictureAllowedMimeTypes: ['image/jpeg', 'image/png']
+  uploadPictureAllowedMimeTypes: ['image/jpeg', 'image/png'],
+
+  clientCommonInfoInterval: 10000
 };
 
 /*

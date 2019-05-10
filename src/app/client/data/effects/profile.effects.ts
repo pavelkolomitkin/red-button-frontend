@@ -5,6 +5,7 @@ import {State} from '../../../app.state';
 import {ProfileService} from '../../services/profile.service';
 import {Observable, of} from 'rxjs';
 import {
+    CLIENT_MODULE_INITIALIZE,
     PROFILE_GET_COMMON_INFO_START,
     ProfileGetCommonInfoError, ProfileGetCommonInfoReset,
     ProfileGetCommonInfoStart,
@@ -16,6 +17,7 @@ import {COMPLAINT_CREATE_SUCCESS, COMPLAINT_DELETE_SUCCESS} from '../complaint.a
 import {ISSUE_CREATE_SUCCESS, ISSUE_DELETE_SUCCESS} from '../issue.actions';
 import {COMPLAINT_CONFIRMATION_CHANGE_STATUS_SUCCESS} from '../complaint-confirmation.actions';
 import {USER_INITIALIZE_SUCCESS, USER_LOGOUT} from '../../../security/data/actions';
+import {environment} from '../../../../environments/environment';
 
 @Injectable()
 export class ProfileEffects
@@ -42,7 +44,10 @@ export class ProfileEffects
             USER_LOGOUT
         ),
         tap(() => {
+
+            this.toggleGettingProfileInfoInterval(false);
             this.store.dispatch(new ProfileGetCommonInfoReset());
+
         })
     );
 
@@ -54,12 +59,39 @@ export class ProfileEffects
             ISSUE_CREATE_SUCCESS,
             ISSUE_DELETE_SUCCESS,
             COMPLAINT_CONFIRMATION_CHANGE_STATUS_SUCCESS,
-            USER_INITIALIZE_SUCCESS
+            USER_INITIALIZE_SUCCESS,
+            CLIENT_MODULE_INITIALIZE
         ),
         tap(() => {
-            this.store.dispatch(new ProfileGetCommonInfoStart());
+
+            this.emitGetUserInfo();
+            this.toggleGettingProfileInfoInterval(true);
+
         })
     );
+
+    toggleGettingProfileInfoInterval(flag: boolean)
+    {
+        if (this.gettingCommonInfoIntervalDescriptor !== null)
+        {
+            clearInterval(this.gettingCommonInfoIntervalDescriptor);
+            this.gettingCommonInfoIntervalDescriptor = null;
+        }
+
+        if (flag)
+        {
+            this.gettingCommonInfoIntervalDescriptor = setInterval(() => {
+                this.emitGetUserInfo();
+            }, environment.clientCommonInfoInterval);
+        }
+    }
+
+    emitGetUserInfo()
+    {
+        this.store.dispatch(new ProfileGetCommonInfoStart());
+    }
+
+    private gettingCommonInfoIntervalDescriptor = null;
 
     constructor(
         private actions: Actions,
