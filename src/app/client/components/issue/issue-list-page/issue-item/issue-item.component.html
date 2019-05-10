@@ -9,8 +9,9 @@
   </div>
 
   <div class="box-body">
-    <p *ngIf="!!issue.serviceType">
-      <span class="text-primary">{{ issue.serviceType.title }}</span>
+    <p *ngIf="!!issue.serviceType || !!issue.company">
+      <span class="text" *ngIf="!!issue.company">{{ issue.company.title }} </span>
+      <span class="text-primary" *ngIf="!!issue.serviceType">{{ issue.serviceType.title }}</span>
     </p>
     <p class="text-muted">{{ issue.message }}</p>
     <p *ngIf="issue.pictures.length > 0">
