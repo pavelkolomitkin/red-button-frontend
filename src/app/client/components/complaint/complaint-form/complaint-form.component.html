@@ -3,10 +3,8 @@
     <div class="form-group">
       <label>Select Geo Location</label>
       <app-geo-location-selector-field
-              [region]="complaint.region"
-              [address]="complaint.address"
-              [location]="complaint.location"
-              (onAddressSelect)="onAddressSelectHandler($event);onFieldValueChangeHandler($event)"></app-geo-location-selector-field>
+              [complaint]="complaint"
+              (onAddressSelect)="onFieldValueChangeHandler($event)"></app-geo-location-selector-field>
       <app-form-field-error-list [field]="'location'" [errors]="errors"></app-form-field-error-list>
     </div>
 

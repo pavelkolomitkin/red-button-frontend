@@ -6,8 +6,9 @@ import User from './user.model';
 import {IssuePicture} from './issue-picture.model';
 import {Company} from './company.model';
 import {ComplaintConfirmation} from '../../../client/data/model/complaint-confirmation.model';
+import {CloneInterface} from './clone.interface';
 
-export class Issue
+export class Issue implements CloneInterface<Issue>
 {
     id ?: number;
 
@@ -40,4 +41,37 @@ export class Issue
     commentNumber ?: number;
 
     hasUserLike: boolean = false;
+
+    isAddressInit()
+    {
+        return !!this.address && !!this.region;
+    }
+
+    resetAddress()
+    {
+        this.region = null;
+        this.address = null;
+    }
+
+    clone(): Issue {
+
+        const result: Issue = Object.assign(new Issue(), this, {
+
+            region: !!this.region ? { ...this.region } : null,
+            serviceType: !!this.serviceType ? { ...this.serviceType } : null,
+            address: !!this.address ? { ...this.address } : null,
+            pictures: [...this.pictures],
+            videos: [...this.videos],
+            location: !!this.location ? {...this.location} : null,
+            client: !!this.client ? { ...this.client } : null,
+            company: !!this.company ? { ...this.company } : null,
+
+            complaintConfirmations: [...this.complaintConfirmations]
+
+        });
+
+
+        return result;
+
+    }
 }

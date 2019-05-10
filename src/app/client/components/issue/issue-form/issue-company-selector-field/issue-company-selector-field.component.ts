@@ -2,10 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} 
 import {Issue} from '../../../../../core/data/model/issue.model';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {Company} from '../../../../../core/data/model/company.model';
-import {Store} from '@ngrx/store';
-import {State} from '../../../../../app.state';
-import {GlobalConfirmationInit, GlobalConfirmLeavePageInit} from '../../../../../core/data/actions';
-import {Region} from '../../../../../core/data/model/region.model';
 
 @Component({
   selector: 'app-issue-company-selector-field',
@@ -16,8 +12,13 @@ export class IssueCompanySelectorFieldComponent implements OnInit {
 
   @Output('onSelect') selectEvent: EventEmitter<Company> = new EventEmitter<Company>();
 
-  @Input() company: Company;
-  @Input() region: Region;
+  _issue: Issue;
+
+  @Input()
+  set issue(value: Issue)
+  {
+    this._issue = value;
+  }
 
   @ViewChild('searchCompanyModal') searchCompanyWindowTemplate: TemplateRef<any>;
   searchCompanyWindow: NgbModalRef = null;

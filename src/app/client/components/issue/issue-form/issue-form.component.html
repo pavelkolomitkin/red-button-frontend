@@ -5,7 +5,7 @@
       <label>Select Geo Location and signatures from other people</label>
       <app-issue-geo-location-selector-field
               [issue]="issue"
-              (onAddressUpdate)="onFormFieldChangeHandler($event)"
+              (onAddressUpdate)="onAddressUpdateHandler($event);onFormFieldChangeHandler($event)"
       ></app-issue-geo-location-selector-field>
       <app-form-field-error-list [field]="'location'" [errors]="errors"></app-form-field-error-list>
     </div>
@@ -13,8 +13,7 @@
     <div class="form-group">
       <label>Select a company<span class="text-muted">(optional)</span></label>
       <app-issue-company-selector-field
-              [region]="issue.region"
-              [company]="issue.company"
+              [issue]="issue"
               (onSelect)="onCompanySelectHandler($event);onFormFieldChangeHandler($event)"
       ></app-issue-company-selector-field>
       <app-form-field-error-list [field]="'company'" [errors]="errors"></app-form-field-error-list>

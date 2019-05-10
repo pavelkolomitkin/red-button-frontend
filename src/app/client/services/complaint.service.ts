@@ -9,13 +9,13 @@ export class ComplaintService extends BaseService {
 
     static transformEntity = (complaint) => {
 
-        const result = {
+        const result = Object.assign(new Complaint(), {
             ...complaint,
             location: {
                 latitude: complaint.address.latitude,
                 longitude: complaint.address.longitude
-            }};
-
+            }
+        });
 
         return result;
     }

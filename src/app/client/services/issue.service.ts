@@ -21,13 +21,13 @@ export class IssueService extends BaseService
             return confirmation;
         });
 
-        const result = {
+        const result = Object.assign(new Issue(), {
             ...issue,
             location: {
                 latitude: issue.address.latitude,
                 longitude: issue.address.longitude
-            }};
-
+            }
+        });
 
         return result;
     };

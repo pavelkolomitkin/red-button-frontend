@@ -51,6 +51,8 @@ export class MapBalloonComponent implements OnInit, OnDestroy {
             this.isCollapsed = true;
           }
         });
+
+    //this.handleOpenedState();
   }
 
   ngOnDestroy(): void {
@@ -66,6 +68,11 @@ export class MapBalloonComponent implements OnInit, OnDestroy {
 
     this.toggleCollapse.emit(this.isCollapsed);
 
+    this.handleOpenedState();
+  }
+
+  handleOpenedState()
+  {
     if (!this.isCollapsed)
     {
       this.store.dispatch(new MapBalloonOpen(this));

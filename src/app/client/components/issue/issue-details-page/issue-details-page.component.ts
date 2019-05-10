@@ -73,7 +73,7 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
     if (index !== -1)
     {
         this.issue.complaintConfirmations[index] = confirmation;
-        this.issue = {...this.issue};
+        this.issue = Object.assign(new Issue(), this.issue);
     }
     });
 

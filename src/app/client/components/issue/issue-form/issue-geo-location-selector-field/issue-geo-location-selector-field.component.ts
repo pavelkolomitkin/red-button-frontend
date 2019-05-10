@@ -8,7 +8,7 @@ import {Issue} from '../../../../../core/data/model/issue.model';
 })
 export class IssueGeoLocationSelectorFieldComponent implements OnInit {
 
-  @Output('onAddressUpdate') addressUpdateEvent: EventEmitter<void> = new EventEmitter();
+  @Output('onAddressUpdate') addressUpdateEvent: EventEmitter<Issue> = new EventEmitter();
 
   @Input() issue: Issue;
 
@@ -26,12 +26,11 @@ export class IssueGeoLocationSelectorFieldComponent implements OnInit {
 
   onSelectAddressHandler(updatedIssue: Issue)
   {
-    this.issue.location = updatedIssue.location;
-    this.issue.region = updatedIssue.region;
-    this.issue.address = updatedIssue.address;
+    this.issue = updatedIssue.clone();
+
     this.isSelectorOpen = false;
 
-    this.addressUpdateEvent.emit();
+    this.addressUpdateEvent.emit(this.issue);
   }
 
   onCancelSelectHandler(event)

@@ -58,6 +58,11 @@ export class IssueFormComponent implements OnInit {
     this.issue.company = company;
   }
 
+  onAddressUpdateHandler(updatedIssue: Issue)
+  {
+    this.issue = updatedIssue;
+  }
+
   onFormFieldChangeHandler(event)
   {
     this.store.dispatch(new GlobalConfirmLeavePageInit());

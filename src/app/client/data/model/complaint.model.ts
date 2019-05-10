@@ -31,4 +31,15 @@ export class Complaint {
     updatedAt ?: number;
 
     client ?: User;
+
+    isAddressInit()
+    {
+        return !!this.address && !!this.region;
+    }
+
+    resetAddress()
+    {
+        this.region = null;
+        this.address = null;
+    }
 }

@@ -66,7 +66,8 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.internalIssue = {...this.issue};
+
+    this.internalIssue = this.issue.clone();
   }
 
   ngOnDestroy(): void {
@@ -81,7 +82,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
   onMapReadyHandler(event)
   {
 
-    if (this.isAddressSelected())
+    if (this.issue.isAddressInit())
     {
       const { location } = this.internalIssue;
 
@@ -106,8 +107,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   onConfirmButtonClickHandler(event)
   {
-    this.issue = Object.assign(this.internalIssue);
-    this.selectEvent.emit(this.issue);
+    this.selectEvent.emit(this.internalIssue);
   }
 
   @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
@@ -119,16 +119,11 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
     this.cancelEvent.emit();
   }
 
-  isAddressSelected()
-  {
-    return !!this.internalIssue.address && !!this.internalIssue.region;
-  }
-
   onSearchFormChangeHandler(criteria: Object)
   {
     this.searchCriteria = criteria;
 
-    if (this.isAddressSelected())
+    if (this.internalIssue.isAddressInit())
     {
       this.initUnAttachedComplaintAroundIssue();
     }
@@ -161,6 +156,8 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
   {
     if (this.isSelectingLocation)
     {
+      this.internalIssue.resetAddress();
+
       this.selectIssueLocation(location);
       this.map.setCenter(location, true);
     }
@@ -288,7 +285,6 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
     this.internalIssue.location = location;
 
     instance.issue = this.internalIssue;
-    instance.needPositionReload = !this.isAddressSelected();
   }
 
   removeIssueBalloon()
@@ -373,7 +369,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   onViewBoxChangeHandler(box: MapViewBox)
   {
-    if (this.isAddressSelected())
+    if (this.internalIssue.isAddressInit())
     {
       return;
     }

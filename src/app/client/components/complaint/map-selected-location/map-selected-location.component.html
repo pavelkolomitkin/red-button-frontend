@@ -1,7 +1,9 @@
 <app-map-balloon [colorStyle]="
     currentState === 'STATE_LOCATION_DETECTED_SUCCESS' ? 'green' :
     currentState === 'STATE_LOCATION_DETECTED_ERROR' ? 'red' : 'default'"
-    [isCollapsed]="false">
+    [isCollapsed]="false"
+    [hasToCenteredOnOpen]="true"
+    [populateCollapsing]="false">
 
   <div class="balloon-title">
     <ng-container *ngIf="currentState === 'STATE_LOADING'"></ng-container>
@@ -17,10 +19,10 @@
     </ng-container>
     <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">
       <div>
-        {{ region.title }}<span class="text-muted">({{ region.federalDistrict.title }})</span>
+        {{ complaint.region.title }}<span class="text-muted">({{ complaint.region.federalDistrict.title }})</span>
       </div>
       <div>
-        <span class="text-muted">{{ address.displayName }}</span>
+        <span class="text-muted">{{ complaint.address.displayName }}</span>
       </div>
     </ng-container>
     <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'">

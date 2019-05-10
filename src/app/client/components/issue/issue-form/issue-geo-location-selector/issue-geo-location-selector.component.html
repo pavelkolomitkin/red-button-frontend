@@ -10,7 +10,7 @@
     <div class="control-container box-solid">
       <div class="box-body">
         <div class="controls">
-          <ng-container *ngIf="!isAddressSelected()">
+          <ng-container *ngIf="!internalIssue.isAddressInit()">
             <p>
               <button
                       class="btn btn-primary"
@@ -23,12 +23,12 @@
               </button>
             </p>
           </ng-container>
-          <ng-container *ngIf="isAddressSelected()">
+          <ng-container *ngIf="internalIssue.isAddressInit()">
             <p>
               <button
                       type="button"
                       class="btn btn-success"
-                      [disabled]="!isAddressSelected()"
+                      [disabled]="!internalIssue.isAddressInit()"
                       (click)="onConfirmButtonClickHandler($event)"
               >
                 <i class="fa fa-check"></i>Confirm

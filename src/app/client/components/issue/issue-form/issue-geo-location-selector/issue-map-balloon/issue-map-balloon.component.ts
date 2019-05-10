@@ -18,8 +18,6 @@ export class IssueMapBalloonComponent implements OnInit {
   @Output('onLocationUpdateError') locationUpdateErrorEvent: EventEmitter<Issue> = new EventEmitter();
   @Output('onLocationCancel') locationCancelEvent: EventEmitter<Issue> = new EventEmitter();
 
-  @Input() needPositionReload: boolean = false;
-
   @Input() issue: Issue;
 
   currentState: string = IssueMapBalloonComponent.STATE_LOADING;
@@ -31,7 +29,7 @@ export class IssueMapBalloonComponent implements OnInit {
 
   ngOnInit()
   {
-    if (this.needPositionReload)
+    if (!this.issue.isAddressInit())
     {
       this.service.getAddressByCoordinates(this.issue.location)
           .toPromise()

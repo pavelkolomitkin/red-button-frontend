@@ -1,9 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {State} from '../../../../app.state';
 import {Store} from '@ngrx/store';
-import {GeoLocationSelectingWindowStateChanged} from '../../../data/geo-location.actions';
-import {Region} from '../../../../core/data/model/region.model';
-import {GeoLocation} from '../../../../core/data/model/geo-location.model';
+import {Complaint} from '../../../data/model/complaint.model';
 
 @Component({
   selector: 'app-geo-location-selector-field',
@@ -12,11 +10,11 @@ import {GeoLocation} from '../../../../core/data/model/geo-location.model';
 })
 export class GeoLocationSelectorFieldComponent implements OnInit {
 
-  @Output('onAddressSelect') addressSelected: EventEmitter<{ region: Region, address: Object, location: GeoLocation }> = new EventEmitter();
+  @Output('onAddressSelect') addressSelected: EventEmitter<void> = new EventEmitter();
 
-  @Input() region: Region = null;
-  @Input() address: Object = null;
-  @Input() location: GeoLocation = null;
+  @Input() complaint: Complaint;
+
+  isSelectorOpen: boolean = false;
 
   constructor(private store: Store<State>) { }
 
@@ -25,17 +23,22 @@ export class GeoLocationSelectorFieldComponent implements OnInit {
 
   onChooseButtonClickHandler(event: Event)
   {
-    this.store.dispatch(new GeoLocationSelectingWindowStateChanged(true));
+    this.isSelectorOpen = true;
   }
 
-  onAddressSelectHandler({ region, address, location })
+  onCancelHandler(event)
   {
-    this.region = region;
-    this.address = address;
-    this.location = location;
+    this.isSelectorOpen = false;
+  }
 
-    this.addressSelected.emit({ region, address, location });
+  onAddressSelectHandler(updatedComplaint: Complaint)
+  {
+    this.complaint.region = updatedComplaint.region;
+    this.complaint.address = updatedComplaint.address;
+    this.complaint.location = updatedComplaint.location;
 
-    this.store.dispatch(new GeoLocationSelectingWindowStateChanged(false));
+    this.isSelectorOpen = false;
+
+    this.addressSelected.emit();
   }
 }

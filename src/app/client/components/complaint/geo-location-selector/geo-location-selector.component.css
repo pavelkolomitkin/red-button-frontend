@@ -6,15 +6,8 @@
     right: 0;
     left: 0;
     bottom: 0;
-    z-index: -1;
-}
-
-.geo-location-selector-container.visible
-{
     z-index: 99900;
 }
-
-
 
 .geo-location-selector-container .controls {
     position: absolute;

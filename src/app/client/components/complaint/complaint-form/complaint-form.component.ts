@@ -52,16 +52,10 @@ export class ComplaintFormComponent implements OnInit {
     this.submitForm.emit(this.complaint);
   }
 
-  onAddressSelectHandler({ region, address, location })
-  {
-    this.complaint.region = region;
-    this.complaint.address = address;
-    this.complaint.location = location;
-  }
 
   isValid(): boolean
   {
-    return this.form.valid && !!this.complaint.region;
+    return this.form.valid && this.complaint.isAddressInit();
   }
 
   onFieldValueChangeHandler(event)

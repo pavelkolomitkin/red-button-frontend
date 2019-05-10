@@ -1,8 +1,9 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {GeoLocation} from '../../../../core/data/model/geo-location.model';
 import {Region} from '../../../../core/data/model/region.model';
 import {GeoLocationService} from '../../../../core/services/geo-location.service';
 import {Subscription} from 'rxjs';
+import {Complaint} from '../../../data/model/complaint.model';
 
 @Component({
   selector: 'app-map-selected-location',
@@ -15,80 +16,50 @@ export class MapSelectedLocationComponent implements OnInit, OnDestroy {
   static STATE_LOCATION_DETECTED_SUCCESS = 'STATE_LOCATION_DETECTED_SUCCESS';
   static STATE_LOCATION_DETECTED_ERROR = 'STATE_LOCATION_DETECTED_ERROR';
 
-  @Output('onAddressSuccess') addressSuccess:EventEmitter<{ region: Region, address: Object, location: GeoLocation }> = new EventEmitter();
-  @Output('onAddressError') addressError:EventEmitter<{ location: GeoLocation, message: string }> = new EventEmitter();
-  @Output('onAddressSelect') addressSelected: EventEmitter<{ region: Region, address: Object, location: GeoLocation }> = new EventEmitter();
+  @Output('onAddressSelect') addressSelected: EventEmitter<Complaint> = new EventEmitter();
+
+  @Input() complaint: Complaint;
 
   currentState = MapSelectedLocationComponent.STATE_LOADING;
 
-  region: Region;
-  address: Object;
-
-  _location: GeoLocation = null;
-  addressSubscription: Subscription = null;
-
   constructor(private locationService: GeoLocationService) { }
 
-  get location() : GeoLocation
+  ngOnInit()
   {
-    return this._location;
+    console.log('Init complaint balloon...');
+
+    if (!this.complaint.isAddressInit())
+    {
+      this.locationService.getAddressByCoordinates(this.complaint.location)
+          .toPromise()
+          .then(({region, addition}) => {
+
+
+            this.currentState = MapSelectedLocationComponent.STATE_LOCATION_DETECTED_SUCCESS;
+
+            this.complaint.region = region;
+            this.complaint.address = addition;
+
+          })
+          .catch((errors) => {
+
+            this.currentState = MapSelectedLocationComponent.STATE_LOCATION_DETECTED_ERROR;
+          });
+    }
+    else
+    {
+      this.currentState = MapSelectedLocationComponent.STATE_LOCATION_DETECTED_SUCCESS;
+    }
   }
 
-  set location(value: GeoLocation)
+  ngOnDestroy(): void
   {
-    this._location = value;
 
-    this.identifyAddress();
-  }
-
-  identifyAddress()
-  {
-    if (this._location === null)
-    {
-      return;
-    }
-
-    if (this.addressSubscription !== null)
-    {
-      this.addressSubscription.unsubscribe();
-      this.addressSubscription = null;
-    }
-
-    this.addressSubscription = this.locationService.getAddressByCoordinates(this._location).subscribe(
-        ({region, addition}) => {
-
-          this.region = region;
-          this.address = addition;
-
-          this.currentState = MapSelectedLocationComponent.STATE_LOCATION_DETECTED_SUCCESS;
-
-          this.addressSuccess.emit({region: this.region, address: this.address, location: this._location});
-        },
-        (errors) => {
-
-          this.currentState = MapSelectedLocationComponent.STATE_LOCATION_DETECTED_ERROR;
-
-          //this.addressError.emit(errors.error.errors['location'] ? errors.error.errors['location'] : 'Cannot identify region!');
-        }
-    );
-  }
-
-  ngOnInit() {
-
-  }
-
-  ngOnDestroy(): void {
-
-    if (this.addressSubscription !== null)
-    {
-      this.addressSubscription.unsubscribe();
-      this.addressSubscription = null;
-    }
   }
 
   onConfirmAddressClick(event) {
 
-    this.addressSelected.emit({location: this._location, address: this.address, region: this.region});
+    this.addressSelected.emit(this.complaint);
 
   }
 
