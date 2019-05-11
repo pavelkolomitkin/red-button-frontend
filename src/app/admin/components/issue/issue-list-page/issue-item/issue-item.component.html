@@ -1,0 +1,39 @@
+<ng-container>
+  <td><a [routerLink]="'/admin/issue/' + issue.id" class="center-block">{{ issue.id }}</a></td>
+  <td>{{ issue.client.fullName }}</td>
+  <td>
+    <span *ngIf="!!issue.serviceType" class="text text-primary">{{ issue.serviceType.title }}</span>
+    <span *ngIf="!issue.serviceType" class="text text-muted">-</span>
+  </td>
+  <td>
+    <span *ngIf="!!issue.company" class="text text-primary">{{ issue.company.title }}</span>
+    <span *ngIf="!issue.company" class="text text-muted">-</span>
+  </td>
+  <td [attr.title]="issue.address.displayName">
+    <span class="text text-primary">{{ issue.region.title }} </span>
+    <span class="text text-muted small">({{ issue.region.federalDistrict.title }})</span>
+  </td>
+  <td>
+    <span class="text-muted small" title="[latitude, longitude]">[{{ issue.location.latitude }}, {{ issue.location.longitude }}]</span>
+  </td>
+  <td>
+    <span class="text-muted small">{{ issue.message.length > 150 ? ( issue.message |slice:0:150 ) + '...' : issue.message }}</span>
+  </td>
+  <td>{{ issue.createdAt | amFromUnix }}</td>
+  <td>
+    <span class="text text-success">{{ approvedSignatureNumber() }}</span> / <span class="text">{{ issue.complaintConfirmations.length }}</span>
+  </td>
+  <td>
+    <span *ngIf="issue.pictures.length > 0">{{ issue.pictures.length }}</span>
+    <span *ngIf="issue.pictures.length === 0" class="text text-muted">-</span>
+  </td>
+  <td>
+    <span *ngIf="issue.pictures.length > 0">{{ issue.videos.length }}</span>
+    <span *ngIf="issue.pictures.length === 0" class="text text-muted">-</span>
+  </td>
+  <td>
+    <div class="box-tools">
+      <span class="btn btn-box-tool" (click)="onDeleteClickHandler($event)"><i class="fa fa-trash"></i></span>
+    </div>
+  </td>
+</ng-container>

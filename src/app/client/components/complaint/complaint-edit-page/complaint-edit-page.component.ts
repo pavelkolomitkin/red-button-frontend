@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Complaint} from '../../../data/model/complaint.model';
+import {Complaint} from '../../../../core/data/model/complaint.model';
 import {combineLatest, Observable, Subscription} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../app.state';

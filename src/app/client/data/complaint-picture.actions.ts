@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import {UploadItem} from '../../shared/data/model/upload-item.model';
-import {ComplaintPicture} from './model/complaint-picture.model';
+import {ComplaintPicture} from '../../core/data/model/complaint-picture.model';
 
 export const COMPLAINT_PICTURE_UPLOAD_RESET = 'COMPLAINT_PICTURE_UPLOAD_RESET';
 export const COMPLAINT_PICTURE_UPLOAD_SELECT = 'COMPLAINT_PICTURE_UPLOAD_SELECT';

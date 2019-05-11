@@ -3,7 +3,7 @@ import {ServiceTypeService} from '../../../../../../core/services/service-type.s
 import {Observable} from 'rxjs';
 import {ServiceType} from '../../../../../../core/data/model/service-type.model';
 import {ComplaintService} from '../../../../../services/complaint.service';
-import {ComplaintTag} from '../../../../../data/model/complaint-tag.model';
+import {ComplaintTag} from '../../../../../../core/data/model/complaint-tag.model';
 
 @Component({
   selector: 'app-search-form',

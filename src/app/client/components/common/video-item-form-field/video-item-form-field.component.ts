@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Video} from '../../../data/model/video.model';
+import {Video} from '../../../../core/data/model/video.model';
 
 @Component({
   selector: 'app-video-item-form-field',

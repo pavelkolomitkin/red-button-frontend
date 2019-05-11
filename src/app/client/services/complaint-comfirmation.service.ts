@@ -1,9 +1,10 @@
 import {BaseService} from '../../core/services/base.service';
-import {ComplaintConfirmation} from '../data/model/complaint-confirmation.model';
+import {ComplaintConfirmation} from '../../core/data/model/complaint-confirmation.model';
 import {map} from 'rxjs/operators';
 import {IssueService} from './issue.service';
 import {ComplaintService} from './complaint.service';
 import {Issue} from '../../core/data/model/issue.model';
+import {EntityTransformer} from '../../core/services/helper/EntityTransformer';
 
 export class ComplaintConfirmationService extends BaseService
 {
@@ -13,8 +14,8 @@ export class ComplaintConfirmationService extends BaseService
             status: statusCode
         }).pipe(
             map(({confirmation, issue}) => {
-                confirmation.issue = IssueService.transformEntity(issue);
-                confirmation.complaint = ComplaintService.transformEntity(confirmation.complaint);
+                confirmation.issue = EntityTransformer.transformIssue(issue);
+                confirmation.complaint = EntityTransformer.transformComplaint(confirmation.complaint);
 
                 return confirmation;
             })

@@ -19,7 +19,7 @@ import {
     ComplaintUpdateSuccess, ComplaintUserListLoadError, ComplaintUserListLoadStart, ComplaintUserListLoadSuccess
 } from '../complaint.actions';
 import {catchError, map, mergeMap} from 'rxjs/operators';
-import {Complaint} from '../model/complaint.model';
+import {Complaint} from '../../../core/data/model/complaint.model';
 
 @Injectable()
 export class ComplaintEffects

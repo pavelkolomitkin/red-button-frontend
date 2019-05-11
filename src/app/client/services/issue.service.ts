@@ -3,35 +3,12 @@ import {Injectable} from '@angular/core';
 import {Issue} from '../../core/data/model/issue.model';
 import {catchError, map} from 'rxjs/operators';
 import {BaseService} from '../../core/services/base.service';
-import {ComplaintConfirmation} from '../data/model/complaint-confirmation.model';
-import {ComplaintService} from './complaint.service';
+import {ComplaintConfirmation} from '../../core/data/model/complaint-confirmation.model';
+import {EntityTransformer} from '../../core/services/helper/EntityTransformer';
 
 @Injectable()
 export class IssueService extends BaseService
 {
-    static transformEntity = (issue) => {
-
-        issue.complaintConfirmations = issue.complaintConfirmations.map((confirmation) => {
-            if (!confirmation)
-            {
-                return null;
-            }
-            confirmation.complaint = ComplaintService.transformEntity(confirmation.complaint);
-
-            return confirmation;
-        });
-
-        const result = Object.assign(new Issue(), {
-            ...issue,
-            location: {
-                latitude: issue.address.latitude,
-                longitude: issue.address.longitude
-            }
-        });
-
-        return result;
-    };
-
     getUserIssues(params: Object, page: number = 1)
     {
         let parameters: HttpParams = this.getHttpParamsFromObject(Object.assign(params, {
@@ -44,7 +21,7 @@ export class IssueService extends BaseService
             .pipe(
                 map(({ issues, total }) => {
                     return {
-                        issues: issues.map(item => IssueService.transformEntity(item)),
+                        issues: issues.map(item => EntityTransformer.transformIssue(item)),
                         total: total
                     };
                 })
@@ -72,7 +49,7 @@ export class IssueService extends BaseService
 
         return this.http.post<{ issue: Issue }>('/client/issue', body).pipe(
             map(result => result.issue),
-            map(issue => IssueService.transformEntity(issue))
+            map(issue => EntityTransformer.transformIssue(issue))
         );
     }
 
@@ -101,7 +78,7 @@ export class IssueService extends BaseService
 
         return this.http.put<{ issue: Issue }>('/client/issue/' + issue.id.toString(), body).pipe(
             map(result => result.issue),
-            map(issue => IssueService.transformEntity(issue))
+            map(issue => EntityTransformer.transformIssue(issue))
         );
     }
 
@@ -113,7 +90,7 @@ export class IssueService extends BaseService
                 issue.hasUserLike = hasLike;
                 return issue;
             }),
-            map(issue => IssueService.transformEntity(issue)),
+            map(issue => EntityTransformer.transformIssue(issue)),
             catchError((response) => {
                 throw {
                     error: 'Not found'
@@ -134,7 +111,7 @@ export class IssueService extends BaseService
                 issue.hasUserLike = hasLike;
                 return issue;
             }),
-            map(issue => IssueService.transformEntity(issue))
+            map(issue => EntityTransformer.transformIssue(issue))
         );
     }
 
@@ -145,7 +122,7 @@ export class IssueService extends BaseService
                 issue.hasUserLike = hasLike;
                 return issue;
             }),
-            map(issue => IssueService.transformEntity(issue))
+            map(issue => EntityTransformer.transformIssue(issue))
         );
     }
 }

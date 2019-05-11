@@ -9,7 +9,7 @@ import {filter} from 'rxjs/operators';
 import {GlobalConfirmationInit, GlobalPageTitle} from '../../../../core/data/actions';
 import {ActionConfirmation} from '../../../../core/data/model/action-confirmation.model';
 import {ConfirmationActionOption} from '../../../../core/data/model/confirmation-action-option.model';
-import {ComplaintConfirmation} from '../../../data/model/complaint-confirmation.model';
+import {ComplaintConfirmation} from '../../../../core/data/model/complaint-confirmation.model';
 import {ComplaintConfirmationChangeStatusReset} from '../../../data/complaint-confirmation.actions';
 
 @Component({

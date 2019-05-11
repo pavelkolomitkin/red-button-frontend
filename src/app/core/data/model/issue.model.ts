@@ -1,11 +1,11 @@
 import {ServiceType} from './service-type.model';
 import {Region} from './region.model';
-import {Video} from '../../../client/data/model/video.model';
+import {Video} from './video.model';
 import {GeoLocation} from './geo-location.model';
 import User from './user.model';
 import {IssuePicture} from './issue-picture.model';
 import {Company} from './company.model';
-import {ComplaintConfirmation} from '../../../client/data/model/complaint-confirmation.model';
+import {ComplaintConfirmation} from './complaint-confirmation.model';
 import {CloneInterface} from './clone.interface';
 
 export class Issue implements CloneInterface<Issue>

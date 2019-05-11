@@ -4,10 +4,10 @@ import {select, Store} from '@ngrx/store';
 import {State} from '../../../../../app.state';
 import {filter} from 'rxjs/operators';
 import User from '../../../../../core/data/model/user.model';
-import {ComplaintConfirmation} from '../../../../data/model/complaint-confirmation.model';
+import {ComplaintConfirmation} from '../../../../../core/data/model/complaint-confirmation.model';
 import {Subscription} from 'rxjs';
 import {ComplaintConfirmationChangeStatusStart} from '../../../../data/complaint-confirmation.actions';
-import {ComplaintConfirmationStatus} from '../../../../data/model/complaint-confirmation-status.model';
+import {ComplaintConfirmationStatus} from '../../../../../core/data/model/complaint-confirmation-status.model';
 
 @Component({
   selector: 'app-confirmation-control',

@@ -3,7 +3,7 @@ import {select, Store} from '@ngrx/store';
 import {State} from '../../../../app.state';
 import {combineLatest, Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
-import {Complaint} from '../../../data/model/complaint.model';
+import {Complaint} from '../../../../core/data/model/complaint.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ComplaintDeleteReset, ComplaintDeleteStart, ComplaintGetReset, ComplaintGetStart} from '../../../data/complaint.actions';
 import {GlobalBreadCrumbs, GlobalConfirmationInit, GlobalPageTitle} from '../../../../core/data/actions';

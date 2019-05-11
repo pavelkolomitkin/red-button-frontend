@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Complaint} from '../../../../data/model/complaint.model';
+import {Complaint} from '../../../../../core/data/model/complaint.model';
 import {MapComponent} from '../../../../../shared/components/map/map.component';
 import {ComplaintDetailsBalloonComponent} from '../complaint-details-balloon/complaint-details-balloon.component';
 

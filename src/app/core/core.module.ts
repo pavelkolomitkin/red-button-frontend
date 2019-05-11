@@ -59,6 +59,8 @@ import {ConfirmLeavePageGuardService} from './services/guards/confirm-leave-page
 import {IssueCommentService} from './services/issue-comment.service';
 import {OSMSearchService} from './services/OSMSearchService';
 
+import { IssueService as AdminIssueService } from '../admin/services/issue.service';
+
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: DefaultHttpHeadersInterceptor, multi: true },
@@ -97,7 +99,10 @@ const httpInterceptorProviders = [
       map: mapReducer
     }),
     EffectsModule.forRoot([
-      RegisterEffects, AuthEffects, ServiceTypeEffects, ClientDeviceEffects
+      RegisterEffects,
+      AuthEffects,
+      ServiceTypeEffects,
+      ClientDeviceEffects
     ])
   ],
   providers: [
@@ -122,6 +127,7 @@ const httpInterceptorProviders = [
     ConfirmLeavePageGuardService,
     IssueCommentService,
     OSMSearchService,
+    AdminIssueService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,

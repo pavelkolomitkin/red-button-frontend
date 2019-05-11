@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ComplaintTag} from '../../../data/model/complaint-tag.model';
+import {ComplaintTag} from '../../../../core/data/model/complaint-tag.model';
 
 @Component({
   selector: 'app-common-tag-item',

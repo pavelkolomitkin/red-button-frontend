@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import {ComplaintConfirmation} from './model/complaint-confirmation.model';
+import {ComplaintConfirmation} from '../../core/data/model/complaint-confirmation.model';
 
 export const COMPLAINT_CONFIRMATION_CHANGE_STATUS_RESET = 'COMPLAINT_CONFIRMATION_CHANGE_STATUS_RESET';
 export const COMPLAINT_CONFIRMATION_CHANGE_STATUS_START = 'COMPLAINT_CONFIRMATION_CHANGE_STATUS_START';

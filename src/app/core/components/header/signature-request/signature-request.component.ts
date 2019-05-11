@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ComplaintConfirmation} from '../../../../client/data/model/complaint-confirmation.model';
+import {ComplaintConfirmation} from '../../../data/model/complaint-confirmation.model';
 
 @Component({
   selector: 'app-signature-request',

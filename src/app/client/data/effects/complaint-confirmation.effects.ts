@@ -10,7 +10,7 @@ import {
     ComplaintConfirmationChangeStatusSuccess
 } from '../complaint-confirmation.actions';
 import {catchError, map, mergeMap} from 'rxjs/operators';
-import {ComplaintConfirmation} from '../model/complaint-confirmation.model';
+import {ComplaintConfirmation} from '../../../core/data/model/complaint-confirmation.model';
 
 @Injectable()
 export class ComplaintConfirmationEffects

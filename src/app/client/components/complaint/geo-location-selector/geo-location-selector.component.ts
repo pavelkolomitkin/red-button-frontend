@@ -13,7 +13,7 @@ import {MapComponent} from '../../../../shared/components/map/map.component';
 import {GeoLocation} from '../../../../core/data/model/geo-location.model';
 import {MapSelectedLocationComponent} from '../map-selected-location/map-selected-location.component';
 import {OSMSearchResult} from '../../../../core/data/model/osm-search-result.model';
-import {Complaint} from '../../../data/model/complaint.model';
+import {Complaint} from '../../../../core/data/model/complaint.model';
 import {MapBalloonCenteringReset} from '../../../../shared/data/map.actions';
 import {filter} from 'rxjs/operators';
 

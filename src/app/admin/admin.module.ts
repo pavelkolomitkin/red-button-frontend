@@ -9,6 +9,13 @@ import { ComplaintDetailsPageComponent } from './components/complaint/complaint-
 import { DashboardPageComponent } from './components/dashboard/dashboard-page/dashboard-page.component';
 import { CommonLayoutComponent } from './components/common/common-layout/common-layout.component';
 import {SharedModule} from '../shared/shared.module';
+import {StoreModule} from '@ngrx/store';
+
+import { reducer as issueReducer } from './data/issue.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import {IssueEffects} from './data/effects/issue.effects';
+import { PaginatorComponent } from './components/common/paginator/paginator.component';
+import { IssueItemComponent } from './components/issue/issue-list-page/issue-item/issue-item.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +25,23 @@ import {SharedModule} from '../shared/shared.module';
     ComplaintListPageComponent,
     ComplaintDetailsPageComponent,
     DashboardPageComponent,
-    CommonLayoutComponent
+    CommonLayoutComponent,
+    PaginatorComponent,
+    IssueItemComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    StoreModule.forFeature('adminIssue', issueReducer),
+    EffectsModule.forFeature([
+        IssueEffects
+    ])
+  ],
+  exports: [
+    StoreModule,
+    EffectsModule,
+    SharedModule
   ]
 })
 export class AdminModule { }

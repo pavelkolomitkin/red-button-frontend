@@ -1,6 +1,6 @@
 import {ComplaintConfirmationStatus} from './complaint-confirmation-status.model';
 import {Complaint} from './complaint.model';
-import {Issue} from '../../../core/data/model/issue.model';
+import {Issue} from './issue.model';
 
 export interface ComplaintConfirmation {
 

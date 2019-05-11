@@ -1,10 +1,10 @@
 import {ComplaintTag} from './complaint-tag.model';
-import {ServiceType} from '../../../core/data/model/service-type.model';
-import {Region} from '../../../core/data/model/region.model';
+import {ServiceType} from './service-type.model';
+import {Region} from './region.model';
 import {ComplaintPicture} from './complaint-picture.model';
 import {Video} from './video.model';
-import {GeoLocation} from '../../../core/data/model/geo-location.model';
-import User from '../../../core/data/model/user.model';
+import {GeoLocation} from './geo-location.model';
+import User from './user.model';
 
 export class Complaint {
 

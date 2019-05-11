@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {ComplaintTag} from '../data/model/complaint-tag.model';
+import {ComplaintTag} from '../../core/data/model/complaint-tag.model';
 import {Observable} from 'rxjs';
 
 @Injectable()
