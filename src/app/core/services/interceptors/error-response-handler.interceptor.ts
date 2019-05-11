@@ -35,7 +35,10 @@ export class ErrorResponseHandlerInterceptor implements HttpInterceptor
               return;
             }
 
-            this.store.dispatch(new GlobalNotifyErrorMessage(new NotifyMessage('Application error. Please try later.')));
+            if (error.status >= 500)
+            {
+              this.store.dispatch(new GlobalNotifyErrorMessage(new NotifyMessage('Application error. Please try later.')));
+            }
           }
         })
     );

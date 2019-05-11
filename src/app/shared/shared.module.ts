@@ -12,6 +12,7 @@ import {PreventEnterSubmitFormDirective} from './directives/prevent-enter-submit
 import {PageHeaderDirective} from './directives/page-header.directive';
 import {LightboxModule} from 'ngx-lightbox';
 import { VideoFrameComponent } from './components/video-frame/video-frame.component';
+import {NotFoundPageComponent} from './components/not-found-page/not-found-page.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { VideoFrameComponent } from './components/video-frame/video-frame.compon
     PreventEnterSubmitFormDirective,
     PageHeaderDirective,
     VideoFrameComponent,
+      NotFoundPageComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { VideoFrameComponent } from './components/video-frame/video-frame.compon
         PreventEnterSubmitFormDirective,
         PageHeaderDirective,
         LightboxModule,
-        VideoFrameComponent
+        VideoFrameComponent,
+        NotFoundPageComponent
     ],
   entryComponents: [MapComponent]
 })

@@ -102,12 +102,7 @@ export class ComplaintService extends BaseService {
     {
         return this.http.get<{ complaint: Complaint }>('/client/complaint/' + id).pipe(
             map(result => result.complaint),
-            map(complaint => EntityTransformer.transformComplaint(complaint)),
-            catchError((response) => {
-                throw {
-                    error: 'Not found'
-                };
-            })
+            map(complaint => EntityTransformer.transformComplaint(complaint))
         );
     }
 

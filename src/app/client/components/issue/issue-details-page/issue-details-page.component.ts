@@ -28,6 +28,7 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
   deleteConfirmationSubscription: Subscription;
   deleteSubscription: Subscription;
   likeSubscription: Subscription;
+  detailsErrorSubscription: Subscription;
 
   isOwnIssue: boolean = false;
 
@@ -61,6 +62,14 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
       this.issue = issue;
 
       this.store.dispatch(new GlobalPageTitle('Issue details', this.issue.client.fullName));
+    });
+
+    this.detailsErrorSubscription = this.store.pipe(
+        select(state => state.clientIssue.issueDetailsErrors),
+        filter(result => !!result),
+        filter(result => Object.keys(result).length > 0)
+    ).subscribe(() => {
+        this.router.navigateByUrl('/client/404');
     });
 
 
@@ -111,6 +120,7 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
     this.deleteConfirmationSubscription.unsubscribe();
     this.deleteSubscription.unsubscribe();
     this.likeSubscription.unsubscribe();
+    this.detailsErrorSubscription.unsubscribe();
   }
 
   onDeleteClickHandler(event)

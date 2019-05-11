@@ -25,6 +25,7 @@ export class ComplaintDetailsPageComponent implements OnInit, OnDestroy {
   idSubscription: Subscription;
   deleteConfirmationSubscription: Subscription;
   deleteSubscription: Subscription;
+  detailsErrorSubscription: Subscription;
 
   isOwnComplaint: boolean = false;
 
@@ -50,6 +51,14 @@ export class ComplaintDetailsPageComponent implements OnInit, OnDestroy {
         this.complaint = complaint;
 
         this.store.dispatch(new GlobalPageTitle('Complaint details', this.complaint.client.fullName));
+    });
+
+    this.detailsErrorSubscription = this.store.pipe(
+        select(state => state.clientComplaint.complaintDetailsErrors),
+        filter(result => !!result),
+        filter(result => Object.keys(result).length > 0)
+    ).subscribe(() => {
+        this.router.navigateByUrl('/client/404');
     });
 
     this.idSubscription = this.route.params.subscribe(
@@ -86,6 +95,7 @@ export class ComplaintDetailsPageComponent implements OnInit, OnDestroy {
     this.idSubscription.unsubscribe();
     this.deleteConfirmationSubscription.unsubscribe();
     this.deleteSubscription.unsubscribe();
+    this.detailsErrorSubscription.unsubscribe();
   }
 
   onDeleteClickHandler(event)

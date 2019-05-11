@@ -19,6 +19,7 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
 
   listSubscription: Subscription;
   queryParamSubscription: Subscription;
+  currentPage: number;
 
   constructor(
       private store: Store<State>,
@@ -43,11 +44,10 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
 
     this.queryParamSubscription = this.route.queryParams.subscribe((params) => {
 
-      const pageNumber = (!!params.page && params.page > 0) ? params.page : 1;
+      this.currentPage = (!!params.page && params.page > 0) ? params.page : 1;
 
-      this.store.dispatch(new IssueListLoadStart(pageNumber));
+      this.store.dispatch(new IssueListLoadStart(this.currentPage));
     });
-
   }
 
   ngOnDestroy(): void {
@@ -57,7 +57,15 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
 
   onDeleteIssueHandler(issue: Issue)
   {
-
+    if (this.currentPage !== 1)
+    {
+      this.router.navigateByUrl('/admin/issue/list');
+    }
+    else
+    {
+      this.currentPage = 1;
+      this.store.dispatch(new IssueListLoadStart(this.currentPage));
+    }
   }
 
 }

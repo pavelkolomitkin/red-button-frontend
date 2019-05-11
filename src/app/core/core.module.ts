@@ -24,7 +24,6 @@ import { AuthUserGuardService } from '../security/services/guards/auth-user-guar
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { GlobalProgressComponent } from './components/global-progress/global-progress.component';
-import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { SecurityService } from '../security/services/security.service';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import {DefaultRedirectGuard} from '../security/services/guards/default-redirect-guard.service';
@@ -70,7 +69,6 @@ const httpInterceptorProviders = [
 
 @NgModule({
   declarations: [
-    NotFoundPageComponent,
     GlobalProgressComponent,
     CommonLayoutComponent,
     ContentComponent,

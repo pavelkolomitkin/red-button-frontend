@@ -7,6 +7,7 @@ import {IssueListPageComponent} from './components/issue/issue-list-page/issue-l
 import {IssueDetailsPageComponent} from './components/issue/issue-details-page/issue-details-page.component';
 import {DashboardPageComponent} from './components/dashboard/dashboard-page/dashboard-page.component';
 import {BreadCrumb} from '../core/data/model/bread-crumb.model';
+import {NotFoundPageComponent} from '../shared/components/not-found-page/not-found-page.component';
 
 const routes: Routes = [
     { path: '', children: [
@@ -64,6 +65,13 @@ const routes: Routes = [
                 }
             },
             { path: 'issue/:id', component: IssueDetailsPageComponent, pathMatch: 'full' },
+            {
+                path: '404',
+                component: NotFoundPageComponent,
+                data: {
+
+                }
+            }
         ]
     }
 ];

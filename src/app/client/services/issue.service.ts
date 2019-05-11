@@ -90,12 +90,7 @@ export class IssueService extends BaseService
                 issue.hasUserLike = hasLike;
                 return issue;
             }),
-            map(issue => EntityTransformer.transformIssue(issue)),
-            catchError((response) => {
-                throw {
-                    error: 'Not found'
-                };
-            })
+            map(issue => EntityTransformer.transformIssue(issue))
         );
     }
 
