@@ -1,6 +1,72 @@
 <app-admin-common-layout>
-  <p>
-    issue-details-page works!
-  </p>
+
+  <ng-container *ngIf="!!issue">
+    <div class="box box-primary">
+
+
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ issue.region.title }} <span class="text-muted">({{ issue.region.federalDistrict.title }})</span></h3>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" (click)="onDeleteClickHandler($event)"><i class="fa fa-trash"></i></button>
+        </div>
+      </div>
+
+
+      <div class="box-body">
+<!--        <p>-->
+<!--          <app-issue-map-view [issue]="issue"></app-issue-map-view>-->
+<!--        </p>-->
+        <p>
+          <b>Service Type</b>
+          <br/>
+          <span class="text text-primary" *ngIf="!!issue.serviceType; else noServiceType">{{ issue.serviceType.title }}</span>
+          <ng-template #noServiceType>
+            <span class="text-muted">(None)</span>
+          </ng-template>
+        </p>
+        <p>
+          <b>Company</b>
+          <br />
+          <ng-container *ngIf="!!issue.company; else noCompany">
+            <span class="text-primary" >{{ issue.company.fullName }}</span><span class="text-muted"> ({{ issue.company.actualAddress }})</span>
+          </ng-container>
+          <ng-template #noCompany>
+            <span class="text-muted">(None)</span>
+          </ng-template>
+        </p>
+        <p>
+          <b>Message</b>
+          <br/>
+          <span class="text">{{ issue.message }}</span>
+        </p>
+        <p>
+          <b>Pictures</b>
+          <br/>
+          <ng-container *ngIf="issue.pictures.length > 0; else noPictures">
+
+          </ng-container>
+          <ng-template #noPictures>
+            <span class="text-muted">(None)</span>
+          </ng-template>
+<!--          <app-picture-list [list]="issue.pictures"></app-picture-list>-->
+        </p>
+        <p>
+          <b>Videos</b>
+          <br />
+          <ng-container *ngIf="issue.videos.length > 0; else noVideo">
+
+          </ng-container>
+          <ng-template #noVideo>
+            <span class="text-muted">(None)</span>
+          </ng-template>
+<!--          <app-video-list [list]="issue.videos"></app-video-list>-->
+        </p>
+      </div>
+
+
+
+    </div>
+  </ng-container>
+
 </app-admin-common-layout>
 

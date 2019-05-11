@@ -29,12 +29,10 @@ export class IssueService extends BaseService
     get(id: number)
     {
         return this.http.get<{ issue: Issue }>('/admin/issue/' + id.toString()).pipe(
-            map(issue => EntityTransformer.transformIssue(issue)),
-            catchError((response) => {
-                throw {
-                    error: 'Not found'
-                };
-            })
+            map(({ issue }) =>
+                {
+                    return EntityTransformer.transformIssue(issue);
+                })
         );
     }
 
