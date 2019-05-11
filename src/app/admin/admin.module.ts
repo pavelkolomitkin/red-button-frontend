@@ -7,11 +7,22 @@ import { IssueDetailsPageComponent } from './components/issue/issue-details-page
 import { ComplaintListPageComponent } from './components/complaint/complaint-list-page/complaint-list-page.component';
 import { ComplaintDetailsPageComponent } from './components/complaint/complaint-details-page/complaint-details-page.component';
 import { DashboardPageComponent } from './components/dashboard/dashboard-page/dashboard-page.component';
+import { CommonLayoutComponent } from './components/common/common-layout/common-layout.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
-  declarations: [ProfilePageComponent, IssueListPageComponent, IssueDetailsPageComponent, ComplaintListPageComponent, ComplaintDetailsPageComponent, DashboardPageComponent],
+  declarations: [
+      ProfilePageComponent,
+    IssueListPageComponent,
+    IssueDetailsPageComponent,
+    ComplaintListPageComponent,
+    ComplaintDetailsPageComponent,
+    DashboardPageComponent,
+    CommonLayoutComponent
+  ],
   imports: [
     CommonModule,
+    SharedModule,
     AdminRoutingModule
   ]
 })

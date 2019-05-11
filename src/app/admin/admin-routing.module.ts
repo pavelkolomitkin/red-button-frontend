@@ -59,7 +59,7 @@ const routes: Routes = [
                     pageSubTitle: 'latest',
                     breadCrumbs: [
                         new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Issues', null, 'file-edit')
+                        new BreadCrumb('Issues', null, 'file-text-o')
                     ]
                 }
             },
