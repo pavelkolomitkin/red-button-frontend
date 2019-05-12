@@ -6,6 +6,7 @@ import {filter} from 'rxjs/operators';
 import {Issue} from '../../../../core/data/model/issue.model';
 import {IssueGetReset, IssueGetStart} from '../../../data/issue.actions';
 import {Subscription} from 'rxjs';
+import {GlobalPageTitle} from '../../../../core/data/actions';
 
 @Component({
   selector: 'app-issue-details-page',
@@ -36,6 +37,8 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
     ).subscribe((issue: Issue) => {
       
       this.issue = issue;
+       debugger
+      this.store.dispatch(new GlobalPageTitle('Issue', this.issue.client.fullName));
 
     });
 

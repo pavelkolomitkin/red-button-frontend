@@ -75,20 +75,6 @@ export class IssueItemComponent implements OnInit, OnDestroy {
     return result;
   }
 
-  getApprovedSignaturePercents()
-  {
-     const approved = this.approvedSignatureNumber();
-     const allNumber = this.issue.complaintConfirmations.length;
-     if (approved === allNumber)
-     {
-       return 100;
-     }
-
-     const result = Math.floor(approved / allNumber);
-
-     return result;
-  }
-
   onDeleteClickHandler(event)
   {
     const confirmation: ActionConfirmation = new ActionConfirmation(

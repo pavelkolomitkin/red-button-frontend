@@ -1,6 +1,16 @@
 <app-admin-common-layout>
 
   <ng-container *ngIf="!!issue">
+
+  <div class="row">
+      <div class="col-md-6">
+          <app-admin-issue-signatures-widget [issue]="issue"></app-admin-issue-signatures-widget>
+      </div>
+
+      <div class="col-md-6">
+          <app-admin-issue-like-widget [issue]="issue"></app-admin-issue-like-widget>
+      </div>
+  </div>
     <div class="box box-primary">
 
 
@@ -16,6 +26,10 @@
 <!--        <p>-->
 <!--          <app-issue-map-view [issue]="issue"></app-issue-map-view>-->
 <!--        </p>-->
+
+      <p>
+<!--          <app-admin-issue-signature-list [issue]="issue"></app-admin-issue-signature-list>-->
+      </p>
         <p>
           <b>Service Type</b>
           <br/>

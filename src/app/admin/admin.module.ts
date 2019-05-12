@@ -19,6 +19,10 @@ import { IssueItemComponent } from './components/issue/issue-list-page/issue-ite
 import {State} from '../app.state';
 import {RegionAllGetStart} from '../core/data/region.actions';
 import {ServiceTypeListLoadStart} from '../core/data/service-type.actions';
+import { SignatureListComponent } from './components/issue/issue-details-page/signature-list/signature-list.component';
+import { SignatureItemComponent } from './components/issue/issue-details-page/signature-list/signature-item/signature-item.component';
+import { SignaturesWidgetComponent } from './components/issue/issue-details-page/signatures-widget/signatures-widget.component';
+import { LikeWidgetComponent } from './components/issue/issue-details-page/like-widget/like-widget.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,11 @@ import {ServiceTypeListLoadStart} from '../core/data/service-type.actions';
     DashboardPageComponent,
     CommonLayoutComponent,
     PaginatorComponent,
-    IssueItemComponent
+    IssueItemComponent,
+    SignatureListComponent,
+    SignatureItemComponent,
+    SignaturesWidgetComponent,
+    LikeWidgetComponent
   ],
   imports: [
     CommonModule,

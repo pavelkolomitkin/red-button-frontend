@@ -1,0 +1,13 @@
+<div class="info-box bg-aqua">
+  <span class="info-box-icon"><i class="fa fa-check-circle-o"></i></span>
+
+  <div class="info-box-content">
+    <span class="info-box-text">Signatures</span>
+    <span class="info-box-number">{{ issue.getApprovedConfirmations().length }} / {{ issue.complaintConfirmations.length }}</span>
+
+    <div class="progress">
+      <div class="progress-bar" [ngStyle]="{width: issue.getApprovedPercent() + '%'}"></div>
+    </div>
+    <span class="progress-description">{{ issue.getApprovedPercent() + '%'}}</span>
+  </div>
+</div>
