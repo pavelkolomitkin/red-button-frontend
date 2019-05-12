@@ -11,6 +11,7 @@ import {NotFoundPageComponent} from '../shared/components/not-found-page/not-fou
 
 const routes: Routes = [
     { path: '', children: [
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             {
                 path: 'profile',
                 component: ProfilePageComponent,
