@@ -55,7 +55,6 @@ export class ProfileEffects
     userInitialize: Observable<Action> = this.actions.pipe(
         ofType(USER_INITIALIZE_SUCCESS),
         tap((action: UserInitializeSuccess) => {
-            debugger
             if (action.user.isClient())
             {
                 this.emitGetUserInfo();
@@ -77,7 +76,6 @@ export class ProfileEffects
         ),
         tap(() => {
 
-            debugger
             this.emitGetUserInfo();
             this.toggleGettingProfileInfoInterval(true);
 
