@@ -28,7 +28,6 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-
     this.store.dispatch(new IssueGetReset());
 
     this.detailsSubscription = this.store.pipe(
@@ -37,7 +36,7 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
     ).subscribe((issue: Issue) => {
       
       this.issue = issue;
-       debugger
+
       this.store.dispatch(new GlobalPageTitle('Issue', this.issue.client.fullName));
 
     });
@@ -46,7 +45,7 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
         select(state => state.adminIssue.detailsErrors),
         filter(result => !!result),
         filter(result => Object.keys(result).length > 0)
-    ).subscribe(() => {
+    ).subscribe((result) => {
       this.router.navigateByUrl('/admin/404');
     });
 
