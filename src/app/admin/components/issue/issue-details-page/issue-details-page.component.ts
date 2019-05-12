@@ -37,7 +37,7 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
       
       this.issue = issue;
 
-      this.store.dispatch(new GlobalPageTitle('Issue', this.issue.client.fullName));
+      this.store.dispatch(new GlobalPageTitle('Issue', '#' + this.issue.id.toString()));
 
     });
 
