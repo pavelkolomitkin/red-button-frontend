@@ -13,6 +13,7 @@ import {PageHeaderDirective} from './directives/page-header.directive';
 import {LightboxModule} from 'ngx-lightbox';
 import { VideoFrameComponent } from './components/video-frame/video-frame.component';
 import {NotFoundPageComponent} from './components/not-found-page/not-found-page.component';
+import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {NotFoundPageComponent} from './components/not-found-page/not-found-page.
     PreventEnterSubmitFormDirective,
     PageHeaderDirective,
     VideoFrameComponent,
-      NotFoundPageComponent
+      NotFoundPageComponent,
+      DateRangePickerComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +50,8 @@ import {NotFoundPageComponent} from './components/not-found-page/not-found-page.
         PageHeaderDirective,
         LightboxModule,
         VideoFrameComponent,
-        NotFoundPageComponent
+        NotFoundPageComponent,
+        DateRangePickerComponent
     ],
   entryComponents: [MapComponent]
 })

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Issue} from '../../../../core/data/model/issue.model';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../app.state';
@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IssueDeleteReset, IssueListLoadStart, IssueListReset} from '../../../data/issue.actions';
 import {GlobalConfirmationReset} from '../../../../core/data/actions';
+import {DatePeriod} from '../../../../shared/data/model/date-period.model';
 
 @Component({
   selector: 'app-issue-list-page',
@@ -14,12 +15,17 @@ import {GlobalConfirmationReset} from '../../../../core/data/actions';
 })
 export class IssueListPageComponent implements OnInit, OnDestroy {
 
+
+  @ViewChild('datePeriodFilter') datePeriodFilter: ElementRef;
+
   list: Array<Issue> = null;
   total: number = null;
 
   listSubscription: Subscription;
   queryParamSubscription: Subscription;
   currentPage: number;
+
+  searchParams: any = {};
 
   constructor(
       private store: Store<State>,
@@ -55,7 +61,7 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
     this.queryParamSubscription.unsubscribe();
   }
 
-  onDeleteIssueHandler(issue: Issue)
+  resetList()
   {
     if (this.currentPage !== 1)
     {
@@ -64,8 +70,29 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
     else
     {
       this.currentPage = 1;
-      this.store.dispatch(new IssueListLoadStart(this.currentPage));
+      this.store.dispatch(new IssueListLoadStart(this.currentPage, this.searchParams));
     }
+  }
+
+  onDeleteIssueHandler(issue: Issue)
+  {
+    this.resetList();
+  }
+
+  onDatePeriodChangeHandler(period: DatePeriod)
+  {
+    if (period !== null)
+    {
+      this.searchParams.startDate = period.startDate.toDateString();
+      this.searchParams.endDate = period.endDate.toDateString();
+    }
+    else
+    {
+      delete this.searchParams.startDate;
+      delete this.searchParams.endDate;
+    }
+
+    this.resetList();
   }
 
 }
