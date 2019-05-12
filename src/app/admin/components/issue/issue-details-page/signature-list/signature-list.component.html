@@ -1,8 +1,11 @@
-<div>
-  <div class="items-container">
+<div class="items-container">
+  <ng-container *ngIf="issue.complaintConfirmations.length > 0; else noConfirmations">
     <app-admin-issue-signature-item
             *ngFor="let confirmation of issue.complaintConfirmations"
             [confirmation]="confirmation"
     ></app-admin-issue-signature-item>
-  </div>
+  </ng-container>
+  <ng-template #noConfirmations>
+    <span class="text-muted">(None)</span>
+  </ng-template>
 </div>

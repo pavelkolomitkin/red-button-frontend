@@ -1,3 +1,6 @@
-<span class="label" [ngClass]="confirmation.status.code === 'confirmed' ? 'label-success': ''">
+<span class="label"
+      [ngClass]="confirmation.status.code === 'confirmed' ? 'label-success': 'label-default'"
+      title="{{ confirmation.status.title }}"
+    >
   <span class="text">{{ confirmation.complaint.client.fullName }}</span>
 </span>
