@@ -18,6 +18,7 @@ import { PaginatorComponent } from './components/common/paginator/paginator.comp
 import { IssueItemComponent } from './components/issue/issue-list-page/issue-item/issue-item.component';
 import {State} from '../app.state';
 import {RegionAllGetStart} from '../core/data/region.actions';
+import {ServiceTypeListLoadStart} from '../core/data/service-type.actions';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ export class AdminModule {
   constructor(private store: Store<State>) {
 
     this.store.dispatch(new RegionAllGetStart());
+    this.store.dispatch(new ServiceTypeListLoadStart())
 
   }
 

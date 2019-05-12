@@ -8,6 +8,7 @@ import {IssueDeleteReset, IssueListLoadStart, IssueListReset} from '../../../dat
 import {GlobalConfirmationReset} from '../../../../core/data/actions';
 import {DatePeriod} from '../../../../shared/data/model/date-period.model';
 import {Region} from '../../../../core/data/model/region.model';
+import {ServiceType} from '../../../../core/data/model/service-type.model';
 
 @Component({
   selector: 'app-issue-list-page',
@@ -28,8 +29,10 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
 
   searchParams: any = {};
   selectedRegion: Region;
+  selectedServiceType: ServiceType;
 
   regions: Observable<Array<Region>>;
+  serviceTypes: Observable<Array<ServiceType>>;
 
   constructor(
       private store: Store<State>,
@@ -46,6 +49,7 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new GlobalConfirmationReset());
 
     this.regions = this.store.pipe(select(state => state.region.list));
+    this.serviceTypes = this.store.pipe(select(state => state.serviceType.list));
 
     this.listSubscription = this.store.pipe(select(state => state.adminIssue)).subscribe(
         ({ list, listTotal }) => {
@@ -105,6 +109,14 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
   {
     //debugger
     this.searchParams.region = !!this.selectedRegion ? this.selectedRegion.id : null;
+
+    this.resetList();
+  }
+
+  onServiceTypeChangeHandler(event)
+  {
+    //debugger
+    this.searchParams.serviceType = !!this.selectedServiceType ? this.selectedServiceType.id : null;
 
     this.resetList();
   }
