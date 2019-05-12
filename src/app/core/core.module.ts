@@ -18,6 +18,7 @@ import { reducer as securityReducer } from '../security/data/reducer';
 import { reducer as geoLocationReducer } from './data/geo-location.reducer';
 import { reducer as serviceTypeReducer } from './data/service-type.reducer';
 import { reducer as mapReducer } from '../shared/data/map.reducer';
+import { reducer as regionReducer } from './data/region.reducer';
 import { RegisterEffects } from '../security/data/effects/register.effects';
 import { AuthEffects } from '../security/data/effects/auth.effects';
 import { AuthUserGuardService } from '../security/services/guards/auth-user-guard.service';
@@ -56,9 +57,11 @@ import { SignatureRequestComponent } from './components/header/signature-request
 import {ComplaintConfirmationService} from '../client/services/complaint-comfirmation.service';
 import {ConfirmLeavePageGuardService} from './services/guards/confirm-leave-page-guard.service';
 import {IssueCommentService} from './services/issue-comment.service';
-import {OSMSearchService} from './services/OSMSearchService';
+import {OSMSearchService} from './services/osm-search.service';
 
 import { IssueService as AdminIssueService } from '../admin/services/issue.service';
+import {RegionService} from './services/region.service';
+import {RegionEffects} from './data/effects/region.effects';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -94,13 +97,15 @@ const httpInterceptorProviders = [
       security: securityReducer,
       geoLocation: geoLocationReducer,
       serviceType: serviceTypeReducer,
-      map: mapReducer
+      map: mapReducer,
+      region: regionReducer
     }),
     EffectsModule.forRoot([
       RegisterEffects,
       AuthEffects,
       ServiceTypeEffects,
-      ClientDeviceEffects
+      ClientDeviceEffects,
+      RegionEffects
     ])
   ],
   providers: [
@@ -126,6 +131,7 @@ const httpInterceptorProviders = [
     IssueCommentService,
     OSMSearchService,
     AdminIssueService,
+    RegionService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {OSMSearchResult} from '../../../../core/data/model/osm-search-result.model';
 import {NgForm} from '@angular/forms';
-import {OSMSearchService} from '../../../../core/services/OSMSearchService';
+import {OSMSearchService} from '../../../../core/services/osm-search.service';
 
 @Component({
   selector: 'app-search-address-form',

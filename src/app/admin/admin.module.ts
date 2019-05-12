@@ -9,13 +9,15 @@ import { ComplaintDetailsPageComponent } from './components/complaint/complaint-
 import { DashboardPageComponent } from './components/dashboard/dashboard-page/dashboard-page.component';
 import { CommonLayoutComponent } from './components/common/common-layout/common-layout.component';
 import {SharedModule} from '../shared/shared.module';
-import {StoreModule} from '@ngrx/store';
+import {Store, StoreModule} from '@ngrx/store';
 
 import { reducer as issueReducer } from './data/issue.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {IssueEffects} from './data/effects/issue.effects';
 import { PaginatorComponent } from './components/common/paginator/paginator.component';
 import { IssueItemComponent } from './components/issue/issue-list-page/issue-item/issue-item.component';
+import {State} from '../app.state';
+import {RegionAllGetStart} from '../core/data/region.actions';
 
 @NgModule({
   declarations: [
@@ -44,4 +46,12 @@ import { IssueItemComponent } from './components/issue/issue-list-page/issue-ite
     SharedModule
   ]
 })
-export class AdminModule { }
+export class AdminModule {
+
+  constructor(private store: Store<State>) {
+
+    this.store.dispatch(new RegionAllGetStart());
+
+  }
+
+}

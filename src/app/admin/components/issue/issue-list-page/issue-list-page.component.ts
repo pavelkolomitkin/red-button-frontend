@@ -2,11 +2,12 @@ import {AfterContentInit, AfterViewInit, Component, ElementRef, OnDestroy, OnIni
 import {Issue} from '../../../../core/data/model/issue.model';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../app.state';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IssueDeleteReset, IssueListLoadStart, IssueListReset} from '../../../data/issue.actions';
 import {GlobalConfirmationReset} from '../../../../core/data/actions';
 import {DatePeriod} from '../../../../shared/data/model/date-period.model';
+import {Region} from '../../../../core/data/model/region.model';
 
 @Component({
   selector: 'app-issue-list-page',
@@ -26,6 +27,9 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
   currentPage: number;
 
   searchParams: any = {};
+  selectedRegion: Region;
+
+  regions: Observable<Array<Region>>;
 
   constructor(
       private store: Store<State>,
@@ -40,6 +44,8 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new IssueListReset());
     this.store.dispatch(new IssueDeleteReset());
     this.store.dispatch(new GlobalConfirmationReset());
+
+    this.regions = this.store.pipe(select(state => state.region.list));
 
     this.listSubscription = this.store.pipe(select(state => state.adminIssue)).subscribe(
         ({ list, listTotal }) => {
@@ -69,7 +75,7 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
     }
     else
     {
-      this.currentPage = 1;
+      //debugger;
       this.store.dispatch(new IssueListLoadStart(this.currentPage, this.searchParams));
     }
   }
@@ -83,8 +89,8 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
   {
     if (period !== null)
     {
-      this.searchParams.startDate = period.startDate.toDateString();
-      this.searchParams.endDate = period.endDate.toDateString();
+      this.searchParams.startDate = period.startDate.toUTCString();
+      this.searchParams.endDate = period.endDate.toUTCString();
     }
     else
     {
@@ -93,6 +99,24 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
     }
 
     this.resetList();
+  }
+
+  onRegionChangeHandler(event)
+  {
+    //debugger
+    this.searchParams.region = !!this.selectedRegion ? this.selectedRegion.id : null;
+
+    this.resetList();
+  }
+
+  compareEntity(a: any, b: any)
+  {
+    if (!a || !b)
+    {
+      return false;
+    }
+
+    return a.id === b.id;
   }
 
 }
