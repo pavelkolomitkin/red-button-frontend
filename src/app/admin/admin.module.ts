@@ -40,15 +40,15 @@ import { LikeWidgetComponent } from './components/issue/issue-details-page/like-
     SignaturesWidgetComponent,
     LikeWidgetComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    AdminRoutingModule,
-    StoreModule.forFeature('adminIssue', issueReducer),
-    EffectsModule.forFeature([
-        IssueEffects
-    ])
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        AdminRoutingModule,
+        StoreModule.forFeature('adminIssue', issueReducer),
+        EffectsModule.forFeature([
+            IssueEffects
+        ]),
+    ],
   exports: [
     StoreModule,
     EffectsModule,

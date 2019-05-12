@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Lightbox} from 'ngx-lightbox';
-import {PictureInterface} from '../../../../../shared/data/model/picture-interface.model';
+import {PictureInterface} from '../../../data/model/picture-interface.model';
 
 @Component({
   selector: 'app-picture-list',

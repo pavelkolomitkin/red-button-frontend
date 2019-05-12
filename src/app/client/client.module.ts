@@ -36,11 +36,9 @@ import { TagListFieldComponent } from './components/common/tag-list-field/tag-li
 import { TagItemComponent } from './components/common/tag-list-field/tag-item/tag-item.component';
 import { ComplaintItemComponent } from './components/complaint/complaint-list-page/complaint-item/complaint-item.component';
 import { CommonTagItemComponent } from './components/common/common-tag-item/common-tag-item.component';
-import { PictureItemComponent } from './components/common/picture/picture-item/picture-item.component';
 import { VideoItemComponent } from './components/common/video/video-item/video-item.component';
 import { CommonLayoutComponent } from './components/common/common-layout/common-layout.component';
 import { MapViewComponent } from './components/complaint/complaint-details-page/map-view/map-view.component';
-import { PictureListComponent } from './components/common/picture/picture-list/picture-list.component';
 import { VideoListComponent } from './components/common/video/video-list/video-list.component';
 import { ComplaintDetailsBalloonComponent } from './components/complaint/complaint-details-page/complaint-details-balloon/complaint-details-balloon.component';
 import { CreateIssuePageComponent } from './components/issue/create-issue-page/create-issue-page.component';
@@ -97,11 +95,9 @@ import { SearchAddressFormComponent } from './components/common/search-address-f
     TagItemComponent,
     ComplaintItemComponent,
     CommonTagItemComponent,
-    PictureItemComponent,
     VideoItemComponent,
     CommonLayoutComponent,
     MapViewComponent,
-    PictureListComponent,
     VideoListComponent,
     ComplaintDetailsBalloonComponent,
     CreateIssuePageComponent,
@@ -154,11 +150,11 @@ import { SearchAddressFormComponent } from './components/common/search-address-f
             ComplaintConfirmationEffects
         ])
     ],
-  exports: [
-      StoreModule,
-      EffectsModule,
-      SharedModule
-  ],
+    exports: [
+        StoreModule,
+        EffectsModule,
+        SharedModule
+    ],
   entryComponents: [
       MapSelectedLocationComponent,
       ComplaintDetailsBalloonComponent,

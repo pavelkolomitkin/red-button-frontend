@@ -82,6 +82,7 @@ export class AuthEffects
 
       return this.service.getAuthorizedUser().pipe(
         map((user: User) => {
+            debugger
           return new UserInitializeSuccess(user, this.localStorageService.get('token'));
         }),
         catchError((errors: Object) => {

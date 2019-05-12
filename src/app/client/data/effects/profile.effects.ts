@@ -16,7 +16,7 @@ import {ProfileCommonInfo} from '../model/profile-common-info.model';
 import {COMPLAINT_CREATE_SUCCESS, COMPLAINT_DELETE_SUCCESS} from '../complaint.actions';
 import {ISSUE_CREATE_SUCCESS, ISSUE_DELETE_SUCCESS} from '../issue.actions';
 import {COMPLAINT_CONFIRMATION_CHANGE_STATUS_SUCCESS} from '../complaint-confirmation.actions';
-import {USER_INITIALIZE_SUCCESS, USER_LOGOUT} from '../../../security/data/actions';
+import {USER_INITIALIZE_SUCCESS, USER_LOGOUT, UserInitializeSuccess} from '../../../security/data/actions';
 import {environment} from '../../../../environments/environment';
 
 @Injectable()
@@ -52,6 +52,20 @@ export class ProfileEffects
     );
 
     @Effect({ dispatch: false })
+    userInitialize: Observable<Action> = this.actions.pipe(
+        ofType(USER_INITIALIZE_SUCCESS),
+        tap((action: UserInitializeSuccess) => {
+            debugger
+            if (action.user.isClient())
+            {
+                this.emitGetUserInfo();
+                this.toggleGettingProfileInfoInterval(true);
+            }
+
+        })
+    );
+
+    @Effect({ dispatch: false })
     profileNumberDataChange: Observable<Action> = this.actions.pipe(
         ofType(
             COMPLAINT_CREATE_SUCCESS,
@@ -59,11 +73,11 @@ export class ProfileEffects
             ISSUE_CREATE_SUCCESS,
             ISSUE_DELETE_SUCCESS,
             COMPLAINT_CONFIRMATION_CHANGE_STATUS_SUCCESS,
-            USER_INITIALIZE_SUCCESS,
             CLIENT_MODULE_INITIALIZE
         ),
         tap(() => {
 
+            debugger
             this.emitGetUserInfo();
             this.toggleGettingProfileInfoInterval(true);
 

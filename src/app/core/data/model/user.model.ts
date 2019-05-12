@@ -9,4 +9,21 @@ export default class User
   public phoneNumber?: string;
 
   public roles: Array<string> = [];
+
+  isAdmin()
+  {
+    return this.roles.includes('ROLE_ADMIN_USER');
+  }
+
+  isClient()
+  {
+    return this.roles.includes('ROLE_CLIENT_USER');
+  }
+
+  static createFromRawData(data: any)
+  {
+    const result: User = Object.assign(new User(), data);
+
+    return result;
+  }
 }

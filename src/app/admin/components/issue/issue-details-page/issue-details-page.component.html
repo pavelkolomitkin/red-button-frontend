@@ -131,7 +131,7 @@
           <b>Pictures</b>
           <br/>
           <ng-container *ngIf="issue.pictures.length > 0; else noPictures">
-
+            <app-picture-list [list]="issue.pictures"></app-picture-list>
           </ng-container>
           <ng-template #noPictures>
             <span class="text-muted">(None)</span>

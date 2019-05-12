@@ -15,6 +15,8 @@ import { VideoFrameComponent } from './components/video-frame/video-frame.compon
 import {NotFoundPageComponent} from './components/not-found-page/not-found-page.component';
 import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
 import { MultiLinePipe } from './pipes/multi-line.pipe';
+import {PictureListComponent} from './components/picture/picture-list/picture-list.component';
+import {PictureItemComponent} from './components/picture/picture-item/picture-item.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { MultiLinePipe } from './pipes/multi-line.pipe';
     VideoFrameComponent,
       NotFoundPageComponent,
       DateRangePickerComponent,
-      MultiLinePipe
+      MultiLinePipe,
+      PictureListComponent,
+      PictureItemComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +58,9 @@ import { MultiLinePipe } from './pipes/multi-line.pipe';
         VideoFrameComponent,
         NotFoundPageComponent,
         DateRangePickerComponent,
-        MultiLinePipe
+        MultiLinePipe,
+        PictureListComponent,
+        PictureItemComponent
     ],
   entryComponents: [MapComponent]
 })
