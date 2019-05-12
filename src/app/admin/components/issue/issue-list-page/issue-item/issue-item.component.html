@@ -14,14 +14,23 @@
     <span class="text text-muted small">({{ issue.region.federalDistrict.title }})</span>
   </td>
   <td>
-    <span class="text-muted small" title="[latitude, longitude]">[{{ issue.location.latitude }}, {{ issue.location.longitude }}]</span>
-  </td>
-  <td>
     <span class="text-muted small">{{ issue.message.length > 150 ? ( issue.message |slice:0:150 ) + '...' : issue.message }}</span>
   </td>
   <td>{{ issue.createdAt | amFromUnix }}</td>
   <td>
-    <span class="text text-success">{{ approvedSignatureNumber() }}</span> / <span class="text">{{ issue.complaintConfirmations.length }}</span>
+    <div>
+      <span class="text text-success">{{ approvedSignatureNumber() }}</span> / <span class="text">{{ issue.complaintConfirmations.length }}</span>
+    </div>
+
+    <div *ngIf="issue.complaintConfirmations.length > 0" class="progress progress-xs">
+
+      <div class="progress-bar"
+              [ngStyle]="{ width: getApprovedSignaturePercents() + '%' }"
+              [ngClass]="getApprovedSignaturePercents() === 100 ? 'progress-bar progress-bar-success' : 'progress-bar-primary'"
+      ></div>
+
+    </div>
+
   </td>
   <td>
     <span *ngIf="issue.pictures.length > 0">{{ issue.pictures.length }}</span>
