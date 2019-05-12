@@ -40,16 +40,86 @@
             <span class="text-muted">(None)</span>
           </ng-template>
         </p>
+
+
         <p>
           <b>Company</b>
           <br />
           <ng-container *ngIf="!!issue.company; else noCompany">
-            <span class="text-primary" >{{ issue.company.fullName }}</span><span class="text-muted"> ({{ issue.company.actualAddress }})</span>
+
+            <table class="table table-bordered">
+              <tbody>
+                <tr>
+                  <th>Title</th>
+                  <td>{{ issue.company.title }}</td>
+                </tr>
+                <tr>
+                  <th>Full Name</th>
+                  <td>{{ issue.company.fullName }}</td>
+                </tr>
+                <tr>
+                  <th>INN / OGRN</th>
+                  <td>{{ issue.company.INN }} / {{ issue.company.OGRN }}</td>
+                </tr>
+                <tr>
+                  <th>Head Name</th>
+                  <td>{{ issue.company.headName }} </td>
+                </tr>
+                <tr>
+                  <th>Legal Address</th>
+                  <td>{{ issue.company.legalAddress }}</td>
+                </tr>
+                <tr>
+                  <th>Actual Address</th>
+                  <td>{{ issue.company.actualAddress }}</td>
+                </tr>
+                <tr>
+                  <th>Email</th>
+                  <td>{{ issue.company.email }}</td>
+                </tr>
+                <tr>
+                  <th>Phone Numbers</th>
+                  <td>{{ issue.company.phoneNumbers }}</td>
+                </tr>
+                <tr>
+                  <th>Office Hours</th>
+                  <td>{{ issue.company.officeHours }}</td>
+                </tr>
+                <tr>
+                  <th>Postal Address</th>
+                  <td>{{ issue.company.postalAddress }}</td>
+                </tr>
+                <tr>
+                  <th>Site</th>
+                  <td>
+                    <a *ngIf="!!issue.company.site"
+                       href="http://{{ issue.company.site }}"
+                       target="_blank">{{ issue.company.site }}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Administrative Units</th>
+                  <td>
+                    <ng-container *ngIf="issue.company.administrativeUnits.length > 0; else noAdministrativeUnits">
+                      <div *ngFor="let unit of issue.company.administrativeUnits; last as isLast">
+                        {{ unit.title }} <span class="text-muted">{{ unit.region.federalDistrict.title }} - {{ unit.region.title }}</span>
+                        <ng-container *ngIf="!isLast">, </ng-container>
+                      </div>
+                    </ng-container>
+                    <ng-template #noAdministrativeUnits>
+                      <span class="text-muted">(None)</span>
+                    </ng-template>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </ng-container>
           <ng-template #noCompany>
             <span class="text-muted">(None)</span>
           </ng-template>
+
         </p>
+
         <p>
           <b>Message</b>
           <br/>
