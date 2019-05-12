@@ -17,6 +17,8 @@ import { DateRangePickerComponent } from './components/date-range-picker/date-ra
 import { MultiLinePipe } from './pipes/multi-line.pipe';
 import {PictureListComponent} from './components/picture/picture-list/picture-list.component';
 import {PictureItemComponent} from './components/picture/picture-item/picture-item.component';
+import {VideoListComponent} from './components/video/video-list/video-list.component';
+import {VideoItemComponent} from './components/video/video-item/video-item.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import {PictureItemComponent} from './components/picture/picture-item/picture-it
       DateRangePickerComponent,
       MultiLinePipe,
       PictureListComponent,
-      PictureItemComponent
+      PictureItemComponent,
+      VideoListComponent,
+      VideoItemComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +64,9 @@ import {PictureItemComponent} from './components/picture/picture-item/picture-it
         DateRangePickerComponent,
         MultiLinePipe,
         PictureListComponent,
-        PictureItemComponent
+        PictureItemComponent,
+        VideoListComponent,
+        VideoItemComponent
     ],
   entryComponents: [MapComponent]
 })

@@ -36,10 +36,8 @@ import { TagListFieldComponent } from './components/common/tag-list-field/tag-li
 import { TagItemComponent } from './components/common/tag-list-field/tag-item/tag-item.component';
 import { ComplaintItemComponent } from './components/complaint/complaint-list-page/complaint-item/complaint-item.component';
 import { CommonTagItemComponent } from './components/common/common-tag-item/common-tag-item.component';
-import { VideoItemComponent } from './components/common/video/video-item/video-item.component';
 import { CommonLayoutComponent } from './components/common/common-layout/common-layout.component';
 import { MapViewComponent } from './components/complaint/complaint-details-page/map-view/map-view.component';
-import { VideoListComponent } from './components/common/video/video-list/video-list.component';
 import { ComplaintDetailsBalloonComponent } from './components/complaint/complaint-details-page/complaint-details-balloon/complaint-details-balloon.component';
 import { CreateIssuePageComponent } from './components/issue/create-issue-page/create-issue-page.component';
 import { IssueFormComponent } from './components/issue/issue-form/issue-form.component';
@@ -95,10 +93,8 @@ import { SearchAddressFormComponent } from './components/common/search-address-f
     TagItemComponent,
     ComplaintItemComponent,
     CommonTagItemComponent,
-    VideoItemComponent,
     CommonLayoutComponent,
     MapViewComponent,
-    VideoListComponent,
     ComplaintDetailsBalloonComponent,
     CreateIssuePageComponent,
     IssueFormComponent,

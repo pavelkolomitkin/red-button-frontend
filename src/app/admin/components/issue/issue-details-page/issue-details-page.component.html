@@ -142,12 +142,11 @@
           <b>Videos</b>
           <br />
           <ng-container *ngIf="issue.videos.length > 0; else noVideo">
-
+            <app-video-list [list]="issue.videos"></app-video-list>
           </ng-container>
           <ng-template #noVideo>
             <span class="text-muted">(None)</span>
           </ng-template>
-<!--          <app-video-list [list]="issue.videos"></app-video-list>-->
         </p>
       </div>
 
