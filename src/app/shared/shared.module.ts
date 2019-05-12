@@ -14,6 +14,7 @@ import {LightboxModule} from 'ngx-lightbox';
 import { VideoFrameComponent } from './components/video-frame/video-frame.component';
 import {NotFoundPageComponent} from './components/not-found-page/not-found-page.component';
 import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
+import { MultiLinePipe } from './pipes/multi-line.pipe';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { DateRangePickerComponent } from './components/date-range-picker/date-ra
     PageHeaderDirective,
     VideoFrameComponent,
       NotFoundPageComponent,
-      DateRangePickerComponent
+      DateRangePickerComponent,
+      MultiLinePipe
   ],
   imports: [
     CommonModule,
@@ -51,7 +53,8 @@ import { DateRangePickerComponent } from './components/date-range-picker/date-ra
         LightboxModule,
         VideoFrameComponent,
         NotFoundPageComponent,
-        DateRangePickerComponent
+        DateRangePickerComponent,
+        MultiLinePipe
     ],
   entryComponents: [MapComponent]
 })

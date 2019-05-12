@@ -36,7 +36,7 @@
         <p>
           <b>Message</b>
           <br/>
-          <span class="text">{{ issue.message }}</span>
+          <span class="text" [innerHTML]="issue.message | multiLine"></span>
         </p>
         <p *ngIf="issue.pictures.length > 0">
           <b>Pictures</b>

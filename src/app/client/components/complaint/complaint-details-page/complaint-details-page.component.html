@@ -18,7 +18,7 @@
             <p>
                 <b>Message</b>
                 <br/>
-                <span class="text">{{ complaint.message }}</span>
+                <span class="text" [innerHTML]="complaint.message | multiLine"></span>
             </p>
             <p *ngIf="complaint.pictures.length > 0">
                 <b>Pictures</b>

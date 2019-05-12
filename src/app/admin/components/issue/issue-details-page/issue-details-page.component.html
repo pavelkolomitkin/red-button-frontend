@@ -2,15 +2,17 @@
 
   <ng-container *ngIf="!!issue">
 
-  <div class="row">
-      <div class="col-md-6">
-          <app-admin-issue-signatures-widget [issue]="issue"></app-admin-issue-signatures-widget>
-      </div>
+    <div class="row">
+        <div class="col-md-6">
+            <app-admin-issue-signatures-widget [issue]="issue"></app-admin-issue-signatures-widget>
+        </div>
 
-      <div class="col-md-6">
-          <app-admin-issue-like-widget [issue]="issue"></app-admin-issue-like-widget>
-      </div>
-  </div>
+        <div class="col-md-6">
+            <app-admin-issue-like-widget [issue]="issue"></app-admin-issue-like-widget>
+        </div>
+    </div>
+
+
     <div class="box box-primary">
 
 
@@ -123,7 +125,7 @@
         <p>
           <b>Message</b>
           <br/>
-          <span class="text">{{ issue.message }}</span>
+          <span class="text" [innerHTML]="issue.message | multiLine"></span>
         </p>
         <p>
           <b>Pictures</b>
