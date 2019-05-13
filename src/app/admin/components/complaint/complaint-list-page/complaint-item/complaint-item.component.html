@@ -1,0 +1,46 @@
+<ng-container>
+
+  <td><a [routerLink]="'/admin/complaint/' + complaint.id" class="center-block">{{ complaint.id }}</a></td>
+
+  <td>{{ complaint.client.fullName }}</td>
+
+  <td>
+    <span *ngIf="!!complaint.serviceType" class="text text-primary">{{ complaint.serviceType.title }}</span>
+    <span *ngIf="!complaint.serviceType" class="text text-muted">-</span>
+  </td>
+
+  <td [attr.title]="complaint.address.displayName">
+    <span class="text text-primary">{{ complaint.region.title }} </span>
+    <span class="text text-muted small">({{ complaint.region.federalDistrict.title }})</span>
+  </td>
+
+  <td>
+    <span class="text-muted small">{{ complaint.message.length > 150 ? ( complaint.message |slice:0:150 ) + '...' : complaint.message }}</span>
+  </td>
+
+  <td>{{ complaint.createdAt | amFromUnix }}</td>
+
+  <td>
+    <span *ngIf="complaint.pictures.length > 0">{{ complaint.pictures.length }}</span>
+    <span *ngIf="complaint.pictures.length === 0" class="text text-muted">-</span>
+  </td>
+  <td>
+    <span *ngIf="complaint.pictures.length > 0">{{ complaint.videos.length }}</span>
+    <span *ngIf="complaint.pictures.length === 0" class="text text-muted">-</span>
+  </td>
+
+  <td>
+    <ng-container *ngIf="complaint.tags.length > 0">
+      <div class="label label-primary inline margin-r-5"
+        *ngFor="let tag of complaint.tags"
+      >{{ tag.title }}</div>
+    </ng-container>
+  </td>
+
+  <td>
+    <div class="box-tools">
+      <span class="btn btn-box-tool" (click)="onDeleteClickHandler($event)"><i class="fa fa-trash"></i></span>
+    </div>
+  </td>
+
+</ng-container>

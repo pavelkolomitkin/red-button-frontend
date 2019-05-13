@@ -14,6 +14,7 @@ import * as clientComplaintConfirmationReducer from './client/data/complaint-con
 import * as mapReducer from './shared/data/map.reducer';
 import * as regionReducer from './core/data/region.reducer';
 
+import * as adminComplaintReducer from './admin/data/complaint.reducer';
 import * as adminIssueReducer from './admin/data/issue.reducer';
 import * as adminProfileReducer from './admin/data/profile.reducer';
 
@@ -35,6 +36,7 @@ export interface State
   map: mapReducer.State;
   region: regionReducer.State;
 
+  adminComplaint: adminComplaintReducer.State;
   adminIssue: adminIssueReducer.State;
   adminProfile: adminProfileReducer.State;
 }

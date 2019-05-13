@@ -11,6 +11,7 @@ import { CommonLayoutComponent } from './components/common/common-layout/common-
 import {SharedModule} from '../shared/shared.module';
 import {Store, StoreModule} from '@ngrx/store';
 
+import { reducer as complaintReducer } from './data/complaint.reducer';
 import { reducer as issueReducer } from './data/issue.reducer';
 import { reducer as profileReducer } from './data/profile.reducer';
 import {EffectsModule} from '@ngrx/effects';
@@ -25,9 +26,13 @@ import { SignatureItemComponent } from './components/issue/issue-details-page/si
 import { SignaturesWidgetComponent } from './components/issue/issue-details-page/signatures-widget/signatures-widget.component';
 import { LikeWidgetComponent } from './components/issue/issue-details-page/like-widget/like-widget.component';
 import {CommonInfoService} from './services/common-info.service';
-import { IssueService as AdminIssueService } from '../admin/services/issue.service';
+import { IssueService } from './services/issue.service';
 import {ProfileEffects} from './data/effects/profile.effects';
 import {ProfileGetCommonInfoStart} from './data/profile.actions';
+import {ComplaintService} from './services/complaint.service';
+import {ComplaintEffects} from './data/effects/complaint.effects';
+import { DefaultEntityFilterComponent } from './components/common/default-entity-filter/default-entity-filter.component';
+import { ComplaintItemComponent } from './components/complaint/complaint-list-page/complaint-item/complaint-item.component';
 
 @NgModule({
   declarations: [
@@ -44,21 +49,26 @@ import {ProfileGetCommonInfoStart} from './data/profile.actions';
     SignatureItemComponent,
     SignaturesWidgetComponent,
     LikeWidgetComponent,
+    DefaultEntityFilterComponent,
+    ComplaintItemComponent,
   ],
     imports: [
         CommonModule,
         SharedModule,
         AdminRoutingModule,
+        StoreModule.forFeature('adminComplaint', complaintReducer),
         StoreModule.forFeature('adminIssue', issueReducer),
         StoreModule.forFeature('adminProfile', profileReducer),
         EffectsModule.forFeature([
+            ComplaintEffects,
             IssueEffects,
             ProfileEffects
         ]),
     ],
     providers: [
         CommonInfoService,
-        AdminIssueService
+        IssueService,
+        ComplaintService
     ],
   exports: [
     StoreModule,

@@ -2,13 +2,10 @@ import {AfterContentInit, AfterViewInit, Component, ElementRef, OnDestroy, OnIni
 import {Issue} from '../../../../core/data/model/issue.model';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../app.state';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IssueDeleteReset, IssueListLoadStart, IssueListReset} from '../../../data/issue.actions';
 import {GlobalConfirmationReset} from '../../../../core/data/actions';
-import {DatePeriod} from '../../../../shared/data/model/date-period.model';
-import {Region} from '../../../../core/data/model/region.model';
-import {ServiceType} from '../../../../core/data/model/service-type.model';
 
 @Component({
   selector: 'app-issue-list-page',
@@ -18,8 +15,6 @@ import {ServiceType} from '../../../../core/data/model/service-type.model';
 export class IssueListPageComponent implements OnInit, OnDestroy {
 
 
-  @ViewChild('datePeriodFilter') datePeriodFilter: ElementRef;
-
   list: Array<Issue> = null;
   total: number = null;
 
@@ -28,11 +23,6 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
   currentPage: number;
 
   searchParams: any = {};
-  selectedRegion: Region;
-  selectedServiceType: ServiceType;
-
-  regions: Observable<Array<Region>>;
-  serviceTypes: Observable<Array<ServiceType>>;
 
   constructor(
       private store: Store<State>,
@@ -48,9 +38,6 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new IssueDeleteReset());
     this.store.dispatch(new GlobalConfirmationReset());
 
-    this.regions = this.store.pipe(select(state => state.region.list));
-    this.serviceTypes = this.store.pipe(select(state => state.serviceType.list));
-
     this.listSubscription = this.store.pipe(select(state => state.adminIssue)).subscribe(
         ({ list, listTotal }) => {
           this.list = list;
@@ -62,7 +49,7 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
 
       this.currentPage = (!!params.page && params.page > 0) ? params.page : 1;
 
-      this.store.dispatch(new IssueListLoadStart(this.currentPage));
+      this.store.dispatch(new IssueListLoadStart(this.currentPage, this.searchParams));
     });
   }
 
@@ -89,7 +76,7 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
     this.resetList();
   }
 
-  onDatePeriodChangeHandler(period: DatePeriod)
+  onSearchFilterChangeHandler({ period, region, serviceType })
   {
     if (period !== null)
     {
@@ -102,33 +89,10 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
       delete this.searchParams.endDate;
     }
 
-    this.resetList();
-  }
+    this.searchParams.region = !!region ? region.id : null;
 
-  onRegionChangeHandler(event)
-  {
-    //debugger
-    this.searchParams.region = !!this.selectedRegion ? this.selectedRegion.id : null;
+    this.searchParams.serviceType = !!serviceType ? serviceType.id : null;
 
     this.resetList();
   }
-
-  onServiceTypeChangeHandler(event)
-  {
-    //debugger
-    this.searchParams.serviceType = !!this.selectedServiceType ? this.selectedServiceType.id : null;
-
-    this.resetList();
-  }
-
-  compareEntity(a: any, b: any)
-  {
-    if (!a || !b)
-    {
-      return false;
-    }
-
-    return a.id === b.id;
-  }
-
 }
