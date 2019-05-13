@@ -30,6 +30,12 @@
 <!--        </p>-->
 
         <p>
+          <b>Address</b>
+          <br/>
+          {{ issue.address.displayName }}
+        </p>
+
+        <p>
           <b>Author</b>
           <br/>
           <span class="text text-primary">{{ issue.client.fullName }}</span>
@@ -159,9 +165,10 @@
         <small class="pull-right text-muted">{{ issue.createdAt | amFromUnix }}</small>
       </div>
 
-
-
     </div>
+
+    <app-issue-comment-list [issue]="issue"></app-issue-comment-list>
+
   </ng-container>
 
 </app-admin-common-layout>

@@ -26,7 +26,6 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { GlobalProgressComponent } from './components/global-progress/global-progress.component';
 import { SecurityService } from '../security/services/security.service';
-import { NgxPermissionsModule } from 'ngx-permissions';
 import {DefaultRedirectGuard} from '../security/services/guards/default-redirect-guard.service';
 import {CommonLayoutComponent} from './components/common-layout/common-layout.component';
 import {ContentComponent} from './components/content/content.component';
@@ -62,6 +61,7 @@ import {OSMSearchService} from './services/osm-search.service';
 import { IssueService as AdminIssueService } from '../admin/services/issue.service';
 import {RegionService} from './services/region.service';
 import {RegionEffects} from './data/effects/region.effects';
+import {NgxPermissionsModule, NgxPermissionsService} from 'ngx-permissions';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -89,8 +89,8 @@ const httpInterceptorProviders = [
     CommonModule,
     RouterModule,
     HttpClientModule,
+      NgxPermissionsModule.forRoot(),
     SharedModule,
-    NgxPermissionsModule.forRoot(),
     ToastrModule.forRoot(),
     StoreModule.forRoot({
       core: coreReducer,
@@ -141,6 +141,8 @@ const httpInterceptorProviders = [
     }
   ],
     exports: [
+        NgxPermissionsModule,
+        SharedModule,
         GlobalProgressComponent,
         CommonLayoutComponent,
         ContentComponent,
@@ -150,7 +152,6 @@ const httpInterceptorProviders = [
         MainMenuComponent,
         StoreModule,
         EffectsModule,
-        NgxPermissionsModule,
         ConfirmationComponent,
         MessageNotifierComponent,
         ToastrModule

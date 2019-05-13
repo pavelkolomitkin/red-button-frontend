@@ -4,7 +4,7 @@ import {Issue} from '../../core/data/model/issue.model';
 import {catchError, map} from 'rxjs/operators';
 import {BaseService} from '../../core/services/base.service';
 import {ComplaintConfirmation} from '../../core/data/model/complaint-confirmation.model';
-import {EntityTransformer} from '../../core/services/helper/EntityTransformer';
+import {EntityTransformer} from '../../core/services/helper/entity-transformer.helper';
 
 @Injectable()
 export class IssueService extends BaseService

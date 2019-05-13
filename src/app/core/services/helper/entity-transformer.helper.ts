@@ -1,5 +1,6 @@
 import {Issue} from '../../data/model/issue.model';
 import {Complaint} from '../../data/model/complaint.model';
+import User from '../../data/model/user.model';
 
 export class EntityTransformer
 {
@@ -37,5 +38,17 @@ export class EntityTransformer
         });
 
         return result;
+    }
+
+    static transformIssueComment(comment)
+    {
+        comment.author = EntityTransformer.transformUser(comment.author);
+
+        return comment;
+    }
+
+    static transformUser(user)
+    {
+        return User.createFromRawData(user);
     }
 }

@@ -13,19 +13,33 @@
 
     <div class="comment-text">
       <span class="username">{{ comment.author.fullName }}
+        <small *ngIf="comment.author.isAdmin()" class="text-danger">(admin)</small>
         <span class="text-muted pull-right">{{ comment.createdAt | amFromUnix }}</span>
       </span>
       {{ comment.message }}
     </div>
 
-    <div class="controls" *ngIf="(user | async).id === comment.author.id">
-      <span class="btn btn-box-tool" (click)="onEditCommentClickHandler($event)">
+    <div class="controls" *ngxPermissionsOnly="['ROLE_ADMIN_USER']">
+      <span class="btn btn-box-tool"
+            *ngIf="(user | async).id === comment.author.id"
+            (click)="onEditCommentClickHandler($event)">
         <i class="fa fa-edit"></i>
       </span>
       <span class="btn btn-box-tool" (click)="onDeleteClickHandler($event)">
         <i class="fa fa-trash"></i>
       </span>
     </div>
+
+    <ng-container *ngxPermissionsExcept="['ROLE_ADMIN_USER']">
+      <div class="controls" *ngIf="(user | async).id === comment.author.id">
+        <span class="btn btn-box-tool" (click)="onEditCommentClickHandler($event)">
+          <i class="fa fa-edit"></i>
+        </span>
+        <span class="btn btn-box-tool" (click)="onDeleteClickHandler($event)">
+          <i class="fa fa-trash"></i>
+        </span>
+      </div>
+    </ng-container>
 
   </ng-container>
 

@@ -1,8 +1,8 @@
 import {BaseService} from '../../core/services/base.service';
 import {HttpParams} from '@angular/common/http';
 import {Issue} from '../../core/data/model/issue.model';
-import {catchError, map} from 'rxjs/operators';
-import {EntityTransformer} from '../../core/services/helper/EntityTransformer';
+import {map} from 'rxjs/operators';
+import {EntityTransformer} from '../../core/services/helper/entity-transformer.helper';
 
 export class IssueService extends BaseService
 {

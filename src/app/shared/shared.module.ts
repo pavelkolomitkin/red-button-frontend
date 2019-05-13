@@ -20,6 +20,11 @@ import {PictureItemComponent} from './components/picture/picture-item/picture-it
 import {VideoListComponent} from './components/video/video-list/video-list.component';
 import {VideoItemComponent} from './components/video/video-item/video-item.component';
 
+import { IssueCommentListComponent } from './components/issue-comment-list/issue-comment-list.component';
+import { IssueCommentItemComponent } from './components/issue-comment-list/issue-comment-item/issue-comment-item.component';
+import { IssueCommentFormComponent } from './components/issue-comment-list/issue-comment-form/issue-comment-form.component';
+import {NgxPermissionsModule} from 'ngx-permissions';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +41,10 @@ import {VideoItemComponent} from './components/video/video-item/video-item.compo
       PictureListComponent,
       PictureItemComponent,
       VideoListComponent,
-      VideoItemComponent
+      VideoItemComponent,
+      IssueCommentListComponent,
+      IssueCommentItemComponent,
+      IssueCommentFormComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +52,8 @@ import {VideoItemComponent} from './components/video/video-item/video-item.compo
     InfiniteScrollModule,
     MomentModule,
     NgbModule,
-      LightboxModule
+      LightboxModule,
+      NgxPermissionsModule.forChild()
 
   ],
     exports: [
@@ -66,7 +75,10 @@ import {VideoItemComponent} from './components/video/video-item/video-item.compo
         PictureListComponent,
         PictureItemComponent,
         VideoListComponent,
-        VideoItemComponent
+        VideoItemComponent,
+        IssueCommentListComponent,
+        IssueCommentItemComponent,
+        IssueCommentFormComponent
     ],
   entryComponents: [MapComponent]
 })

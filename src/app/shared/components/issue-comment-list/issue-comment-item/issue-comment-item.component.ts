@@ -1,16 +1,16 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {IssueComment} from '../../../../../../core/data/model/issue-comment.model';
+import {IssueComment} from '../../../../core/data/model/issue-comment.model';
 import {select, Store} from '@ngrx/store';
-import {State} from '../../../../../../app.state';
-import User from '../../../../../../core/data/model/user.model';
+import {State} from '../../../../app.state';
+import User from '../../../../core/data/model/user.model';
 import {Observable, Subscription} from 'rxjs';
-import {IssueCommentService} from '../../../../../../core/services/issue-comment.service';
-import {ActionConfirmation} from '../../../../../../core/data/model/action-confirmation.model';
-import {ConfirmationActionOption} from '../../../../../../core/data/model/confirmation-action-option.model';
-import {GlobalConfirmationInit} from '../../../../../../core/data/actions';
+import {IssueCommentService} from '../../../../core/services/issue-comment.service';
+import {ActionConfirmation} from '../../../../core/data/model/action-confirmation.model';
+import {ConfirmationActionOption} from '../../../../core/data/model/confirmation-action-option.model';
+import {GlobalConfirmationInit} from '../../../../core/data/actions';
 import {filter} from 'rxjs/operators';
-import {Issue} from '../../../../../../core/data/model/issue.model';
-import {IssueDeleteStart} from '../../../../../data/issue.actions';
+import {Issue} from '../../../../core/data/model/issue.model';
+import {IssueDeleteStart} from '../../../../client/data/issue.actions';
 
 @Component({
   selector: 'app-issue-comment-item',

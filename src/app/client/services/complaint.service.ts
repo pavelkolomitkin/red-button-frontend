@@ -3,7 +3,7 @@ import {HttpParams} from '@angular/common/http';
 import {Complaint} from '../../core/data/model/complaint.model';
 import {catchError, map} from 'rxjs/operators';
 import {BaseService} from '../../core/services/base.service';
-import {EntityTransformer} from '../../core/services/helper/EntityTransformer';
+import {EntityTransformer} from '../../core/services/helper/entity-transformer.helper';
 
 @Injectable()
 export class ComplaintService extends BaseService {

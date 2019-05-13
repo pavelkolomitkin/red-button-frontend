@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {IssueComment} from '../../../../../../core/data/model/issue-comment.model';
+import {IssueComment} from '../../../../core/data/model/issue-comment.model';
 
 @Component({
   selector: 'app-issue-comment-form',

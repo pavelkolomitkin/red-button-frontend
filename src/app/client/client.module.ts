@@ -65,9 +65,6 @@ import {State} from '../app.state';
 import {ClientModuleInitialize} from './data/profile.actions';
 import {ComplaintConfirmationEffects} from './data/effects/complaint-confirmation.effects';
 import { ConfirmationControlComponent } from './components/issue/issue-details-page/confirmation-control/confirmation-control.component';
-import { IssueCommentListComponent } from './components/issue/issue-details-page/issue-comment-list/issue-comment-list.component';
-import { IssueCommentItemComponent } from './components/issue/issue-details-page/issue-comment-list/issue-comment-item/issue-comment-item.component';
-import { IssueCommentFormComponent } from './components/issue/issue-details-page/issue-comment-list/issue-comment-form/issue-comment-form.component';
 import { IssueLikeControlComponent } from './components/issue/issue-details-page/issue-like-control/issue-like-control.component';
 import { SearchAddressFormComponent } from './components/common/search-address-form/search-address-form.component';
 
@@ -116,9 +113,6 @@ import { SearchAddressFormComponent } from './components/common/search-address-f
       ComplaintConfirmationViewBalloonComponent,
       IssueItemComponent,
       ConfirmationControlComponent,
-      IssueCommentListComponent,
-      IssueCommentItemComponent,
-      IssueCommentFormComponent,
       IssueLikeControlComponent,
       SearchAddressFormComponent
   ],
