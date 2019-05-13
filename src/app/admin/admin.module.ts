@@ -28,7 +28,7 @@ import { LikeWidgetComponent } from './components/issue/issue-details-page/like-
 import {CommonInfoService} from './services/common-info.service';
 import { IssueService } from './services/issue.service';
 import {ProfileEffects} from './data/effects/profile.effects';
-import {ProfileGetCommonInfoStart} from './data/profile.actions';
+import {AdminModuleInitialized, ProfileGetCommonInfoStart} from './data/profile.actions';
 import {ComplaintService} from './services/complaint.service';
 import {ComplaintEffects} from './data/effects/complaint.effects';
 import { DefaultEntityFilterComponent } from './components/common/default-entity-filter/default-entity-filter.component';
@@ -82,7 +82,7 @@ export class AdminModule {
 
     this.store.dispatch(new RegionAllGetStart());
     this.store.dispatch(new ServiceTypeListLoadStart());
-    this.store.dispatch(new ProfileGetCommonInfoStart());
+    this.store.dispatch(new AdminModuleInitialized());
   }
 
 }

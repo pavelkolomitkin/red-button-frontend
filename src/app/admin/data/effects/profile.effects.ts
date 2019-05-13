@@ -14,6 +14,8 @@ import {Observable, of} from 'rxjs';
 import {catchError, map, mergeMap, tap} from 'rxjs/operators';
 import {USER_INITIALIZE_SUCCESS, USER_LOGOUT, UserInitializeSuccess} from '../../../security/data/actions';
 import {ProfileCommonInfo} from '../model/profile-common-info.model';
+import {ISSUE_DELETE_SUCCESS} from '../issue.actions';
+import {COMPLAINT_DELETE_SUCCESS} from '../complaint.actions';
 
 @Injectable()
 export class ProfileEffects
@@ -49,7 +51,9 @@ export class ProfileEffects
 
     @Effect({ dispatch: false })
     userInitialize: Observable<Action> = this.actions.pipe(
-        ofType(USER_INITIALIZE_SUCCESS),
+        ofType(
+            USER_INITIALIZE_SUCCESS
+        ),
         tap((action: UserInitializeSuccess) => {
             if (action.user.isAdmin())
             {
@@ -63,7 +67,9 @@ export class ProfileEffects
     @Effect({ dispatch: false })
     profileNumberDataChange: Observable<Action> = this.actions.pipe(
         ofType(
-            ADMIN_MODULE_INITIALIZED
+            ADMIN_MODULE_INITIALIZED,
+            ISSUE_DELETE_SUCCESS,
+            COMPLAINT_DELETE_SUCCESS
         ),
         tap(() => {
 

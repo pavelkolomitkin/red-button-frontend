@@ -6,7 +6,6 @@ import {State} from '../../../../app.state';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GlobalConfirmationReset} from '../../../../core/data/actions';
 import {ComplaintDeleteReset, ComplaintListLoadStart, ComplaintListReset} from '../../../data/complaint.actions';
-import {IssueListLoadStart} from '../../../data/issue.actions';
 
 @Component({
   selector: 'app-complaint-list-page',
@@ -87,6 +86,11 @@ export class ComplaintListPageComponent implements OnInit, OnDestroy {
 
     this.searchParams.serviceType = !!serviceType ? serviceType.id : null;
 
+    this.resetList();
+  }
+
+  onComplaintDeleteHandler(complaint: Complaint)
+  {
     this.resetList();
   }
 

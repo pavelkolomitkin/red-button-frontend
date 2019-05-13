@@ -38,6 +38,7 @@
           <tr app-admin-complaint-item
               *ngFor="let complaint of list"
               [complaint]="complaint"
+              (onDelete)="onComplaintDeleteHandler($event)"
           >
 
           </tr>
