@@ -58,10 +58,9 @@ import {ConfirmLeavePageGuardService} from './services/guards/confirm-leave-page
 import {IssueCommentService} from './services/issue-comment.service';
 import {OSMSearchService} from './services/osm-search.service';
 
-import { IssueService as AdminIssueService } from '../admin/services/issue.service';
 import {RegionService} from './services/region.service';
 import {RegionEffects} from './data/effects/region.effects';
-import {NgxPermissionsModule, NgxPermissionsService} from 'ngx-permissions';
+import {NgxPermissionsModule} from 'ngx-permissions';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -130,7 +129,6 @@ const httpInterceptorProviders = [
     ConfirmLeavePageGuardService,
     IssueCommentService,
     OSMSearchService,
-    AdminIssueService,
     RegionService,
     AppInitializerService,
     {

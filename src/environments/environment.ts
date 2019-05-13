@@ -13,7 +13,8 @@ export const environment = {
   maxUploadPictureSizeLabel: '5M',
   uploadPictureAllowedMimeTypes: ['image/jpeg', 'image/png'],
 
-  clientCommonInfoInterval: 10000
+  clientCommonInfoInterval: 10000,
+  adminCommonInfoInterval: 10000
 };
 
 /*

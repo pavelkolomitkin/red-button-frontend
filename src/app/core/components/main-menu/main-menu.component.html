@@ -56,12 +56,14 @@
           <a routerLink="/admin/issue/list">
             <i class="fa fa-file-text-o"></i>
             <span>Issues</span>
+            <small class="label pull-right bg-blue" *ngIf="(adminCommonInfo | async) !== null">{{ (adminCommonInfo | async).issueNumber }}</small>
           </a>
         </li>
         <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a routerLink="/admin/complaint/list">
             <i class="fa fa-file-text-o"></i>
             <span>Complaints</span>
+            <small class="label pull-right bg-blue" *ngIf="(adminCommonInfo | async) !== null">{{ (adminCommonInfo | async).complaintNumber }}</small>
           </a>
         </li>
 

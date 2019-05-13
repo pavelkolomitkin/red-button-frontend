@@ -15,6 +15,7 @@ import * as mapReducer from './shared/data/map.reducer';
 import * as regionReducer from './core/data/region.reducer';
 
 import * as adminIssueReducer from './admin/data/issue.reducer';
+import * as adminProfileReducer from './admin/data/profile.reducer';
 
 export interface State
 {
@@ -35,4 +36,5 @@ export interface State
   region: regionReducer.State;
 
   adminIssue: adminIssueReducer.State;
+  adminProfile: adminProfileReducer.State;
 }

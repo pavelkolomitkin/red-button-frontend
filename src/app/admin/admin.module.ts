@@ -12,6 +12,7 @@ import {SharedModule} from '../shared/shared.module';
 import {Store, StoreModule} from '@ngrx/store';
 
 import { reducer as issueReducer } from './data/issue.reducer';
+import { reducer as profileReducer } from './data/profile.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {IssueEffects} from './data/effects/issue.effects';
 import { PaginatorComponent } from './components/common/paginator/paginator.component';
@@ -23,6 +24,10 @@ import { SignatureListComponent } from './components/issue/issue-details-page/si
 import { SignatureItemComponent } from './components/issue/issue-details-page/signature-list/signature-item/signature-item.component';
 import { SignaturesWidgetComponent } from './components/issue/issue-details-page/signatures-widget/signatures-widget.component';
 import { LikeWidgetComponent } from './components/issue/issue-details-page/like-widget/like-widget.component';
+import {CommonInfoService} from './services/common-info.service';
+import { IssueService as AdminIssueService } from '../admin/services/issue.service';
+import {ProfileEffects} from './data/effects/profile.effects';
+import {ProfileGetCommonInfoStart} from './data/profile.actions';
 
 @NgModule({
   declarations: [
@@ -45,9 +50,15 @@ import { LikeWidgetComponent } from './components/issue/issue-details-page/like-
         SharedModule,
         AdminRoutingModule,
         StoreModule.forFeature('adminIssue', issueReducer),
+        StoreModule.forFeature('adminProfile', profileReducer),
         EffectsModule.forFeature([
-            IssueEffects
+            IssueEffects,
+            ProfileEffects
         ]),
+    ],
+    providers: [
+        CommonInfoService,
+        AdminIssueService
     ],
   exports: [
     StoreModule,
@@ -60,8 +71,8 @@ export class AdminModule {
   constructor(private store: Store<State>) {
 
     this.store.dispatch(new RegionAllGetStart());
-    this.store.dispatch(new ServiceTypeListLoadStart())
-
+    this.store.dispatch(new ServiceTypeListLoadStart());
+    this.store.dispatch(new ProfileGetCommonInfoStart());
   }
 
 }
