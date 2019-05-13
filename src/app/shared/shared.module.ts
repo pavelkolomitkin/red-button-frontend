@@ -28,6 +28,8 @@ import {IssueMapViewComponent} from './components/issue-map-view/issue-map-view.
 import {IssueViewBalloonComponent} from './components/issue-map-view/issue-view-balloon/issue-view-balloon.component';
 import {ComplaintConfirmationViewBalloonComponent} from './components/issue-map-view/complaint-confirmation-view-balloon/complaint-confirmation-view-balloon.component';
 import {RouterModule} from '@angular/router';
+import {ComplaintMapViewComponent} from './components/complaint-map-view/complaint-map-view.component';
+import {ComplaintDetailsBalloonComponent} from './components/complaint-map-view/complaint-details-balloon/complaint-details-balloon.component';
 
 
 @NgModule({
@@ -52,6 +54,8 @@ import {RouterModule} from '@angular/router';
       IssueMapViewComponent,
       IssueViewBalloonComponent,
       ComplaintConfirmationViewBalloonComponent,
+      ComplaintMapViewComponent,
+      ComplaintDetailsBalloonComponent
   ],
   imports: [
     CommonModule,
@@ -90,11 +94,14 @@ import {RouterModule} from '@angular/router';
         IssueMapViewComponent,
         IssueViewBalloonComponent,
         ComplaintConfirmationViewBalloonComponent,
+        ComplaintMapViewComponent,
+        ComplaintDetailsBalloonComponent
     ],
   entryComponents: [
       MapComponent,
       IssueViewBalloonComponent,
-      ComplaintConfirmationViewBalloonComponent
+      ComplaintConfirmationViewBalloonComponent,
+      ComplaintDetailsBalloonComponent
   ]
 })
 export class SharedModule { }

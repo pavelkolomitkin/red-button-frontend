@@ -10,7 +10,7 @@
         </div>
         <div class="box-body">
             <p>
-                <app-map-view [complaint]="complaint"></app-map-view>
+                <app-complaint-map-view [complaint]="complaint"></app-complaint-map-view>
             </p>
             <p *ngIf="!!complaint.serviceType">
                 <span class="text text-primary">{{ complaint.serviceType.title }}</span>

@@ -37,8 +37,6 @@ import { TagItemComponent } from './components/common/tag-list-field/tag-item/ta
 import { ComplaintItemComponent } from './components/complaint/complaint-list-page/complaint-item/complaint-item.component';
 import { CommonTagItemComponent } from './components/common/common-tag-item/common-tag-item.component';
 import { CommonLayoutComponent } from './components/common/common-layout/common-layout.component';
-import { MapViewComponent } from './components/complaint/complaint-details-page/map-view/map-view.component';
-import { ComplaintDetailsBalloonComponent } from './components/complaint/complaint-details-page/complaint-details-balloon/complaint-details-balloon.component';
 import { CreateIssuePageComponent } from './components/issue/create-issue-page/create-issue-page.component';
 import { IssueFormComponent } from './components/issue/issue-form/issue-form.component';
 import { IssueListPageComponent } from './components/issue/issue-list-page/issue-list-page.component';
@@ -88,8 +86,6 @@ import { SearchAddressFormComponent } from './components/common/search-address-f
     ComplaintItemComponent,
     CommonTagItemComponent,
     CommonLayoutComponent,
-    MapViewComponent,
-    ComplaintDetailsBalloonComponent,
     CreateIssuePageComponent,
     IssueFormComponent,
     IssueListPageComponent,
@@ -141,7 +137,6 @@ import { SearchAddressFormComponent } from './components/common/search-address-f
     ],
   entryComponents: [
       MapSelectedLocationComponent,
-      ComplaintDetailsBalloonComponent,
       ComplaintMapBalloonComponent,
       IssueMapBalloonComponent,
       ComplaintConfirmationMapBalloonComponent,
