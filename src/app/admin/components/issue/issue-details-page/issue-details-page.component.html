@@ -63,47 +63,47 @@
             <table class="table table-bordered">
               <tbody>
                 <tr>
-                  <th>Title</th>
+                  <td>Title</td>
                   <td>{{ issue.company.title }}</td>
                 </tr>
                 <tr>
-                  <th>Full Name</th>
+                  <td>Full Name</td>
                   <td>{{ issue.company.fullName }}</td>
                 </tr>
                 <tr>
-                  <th>INN / OGRN</th>
+                  <td>INN / OGRN</td>
                   <td>{{ issue.company.INN }} / {{ issue.company.OGRN }}</td>
                 </tr>
                 <tr>
-                  <th>Head Name</th>
+                  <td>Head Name</td>
                   <td>{{ issue.company.headName }} </td>
                 </tr>
                 <tr>
-                  <th>Legal Address</th>
+                  <td>Legal Address</td>
                   <td>{{ issue.company.legalAddress }}</td>
                 </tr>
                 <tr>
-                  <th>Actual Address</th>
+                  <td>Actual Address</td>
                   <td>{{ issue.company.actualAddress }}</td>
                 </tr>
                 <tr>
-                  <th>Email</th>
+                  <td>Email</td>
                   <td>{{ issue.company.email }}</td>
                 </tr>
                 <tr>
-                  <th>Phone Numbers</th>
+                  <td>Phone Numbers</td>
                   <td>{{ issue.company.phoneNumbers }}</td>
                 </tr>
                 <tr>
-                  <th>Office Hours</th>
+                  <td>Office Hours</td>
                   <td>{{ issue.company.officeHours }}</td>
                 </tr>
                 <tr>
-                  <th>Postal Address</th>
+                  <td>Postal Address</td>
                   <td>{{ issue.company.postalAddress }}</td>
                 </tr>
                 <tr>
-                  <th>Site</th>
+                  <td>Site</td>
                   <td>
                     <a *ngIf="!!issue.company.site"
                        href="http://{{ issue.company.site }}"
@@ -111,7 +111,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <th>Administrative Units</th>
+                  <td>Administrative Units</td>
                   <td>
                     <ng-container *ngIf="issue.company.administrativeUnits.length > 0; else noAdministrativeUnits">
                       <div *ngFor="let unit of issue.company.administrativeUnits; last as isLast">
@@ -147,7 +147,6 @@
           <ng-template #noPictures>
             <span class="text-muted">(None)</span>
           </ng-template>
-<!--          <app-picture-list [list]="issue.pictures"></app-picture-list>-->
         </p>
         <p>
           <b>Videos</b>

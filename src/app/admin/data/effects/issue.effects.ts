@@ -32,7 +32,7 @@ export class IssueEffects
                     return new IssueListLoadSuccess(issues, total);
                 }),
                 catchError((errors) => {
-                    return of(new IssueListLoadError(errors.error.errors));
+                    return of(new IssueListLoadError(errors));
                 })
             );
 
@@ -50,7 +50,7 @@ export class IssueEffects
                     return new IssueGetSuccess(issue);
                 }),
                 catchError((errors) => {
-                    return of(new IssueGetError(errors.error.errors))
+                    return of(new IssueGetError(errors))
                 })
             );
         })
