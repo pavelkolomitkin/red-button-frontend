@@ -1,14 +1,14 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Issue} from '../../../../../core/data/model/issue.model';
-import {MapComponent} from '../../../../../shared/components/map/map.component';
+import {Issue} from '../../../core/data/model/issue.model';
+import {MapComponent} from '../map/map.component';
 import {IssueViewBalloonComponent} from './issue-view-balloon/issue-view-balloon.component';
 import {ComplaintConfirmationViewBalloonComponent} from './complaint-confirmation-view-balloon/complaint-confirmation-view-balloon.component';
 import {select, Store} from '@ngrx/store';
-import {State} from '../../../../../app.state';
+import {State} from '../../../app.state';
 import {filter} from 'rxjs/operators';
-import {GeoLocation} from '../../../../../core/data/model/geo-location.model';
+import {GeoLocation} from '../../../core/data/model/geo-location.model';
 import {Subscription} from 'rxjs';
-import {MapBalloonCenteringReset} from '../../../../../shared/data/map.actions';
+import {MapBalloonCenteringReset} from '../../data/map.actions';
 
 @Component({
   selector: 'app-issue-map-view',

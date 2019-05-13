@@ -56,9 +56,6 @@ import {IssuePictureEffects} from './data/effects/issue-picture.effects';
 import {IssueEffects} from './data/effects/issue.effects';
 import { EditIssuePageComponent } from './components/issue/edit-issue-page/edit-issue-page.component';
 import { IssueDetailsPageComponent } from './components/issue/issue-details-page/issue-details-page.component';
-import { IssueMapViewComponent } from './components/issue/issue-details-page/issue-map-view/issue-map-view.component';
-import { IssueViewBalloonComponent } from './components/issue/issue-details-page/issue-map-view/issue-view-balloon/issue-view-balloon.component';
-import { ComplaintConfirmationViewBalloonComponent } from './components/issue/issue-details-page/issue-map-view/complaint-confirmation-view-balloon/complaint-confirmation-view-balloon.component';
 import { IssueItemComponent } from './components/issue/issue-list-page/issue-item/issue-item.component';
 import {ProfileEffects} from './data/effects/profile.effects';
 import {State} from '../app.state';
@@ -108,9 +105,6 @@ import { SearchAddressFormComponent } from './components/common/search-address-f
       IssuePictureListFieldComponent,
       EditIssuePageComponent,
       IssueDetailsPageComponent,
-      IssueMapViewComponent,
-      IssueViewBalloonComponent,
-      ComplaintConfirmationViewBalloonComponent,
       IssueItemComponent,
       ConfirmationControlComponent,
       IssueLikeControlComponent,
@@ -151,8 +145,6 @@ import { SearchAddressFormComponent } from './components/common/search-address-f
       ComplaintMapBalloonComponent,
       IssueMapBalloonComponent,
       ComplaintConfirmationMapBalloonComponent,
-      IssueViewBalloonComponent,
-      ComplaintConfirmationViewBalloonComponent
   ]
 })
 export class ClientModule

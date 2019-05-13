@@ -24,6 +24,10 @@ import { IssueCommentListComponent } from './components/issue-comment-list/issue
 import { IssueCommentItemComponent } from './components/issue-comment-list/issue-comment-item/issue-comment-item.component';
 import { IssueCommentFormComponent } from './components/issue-comment-list/issue-comment-form/issue-comment-form.component';
 import {NgxPermissionsModule} from 'ngx-permissions';
+import {IssueMapViewComponent} from './components/issue-map-view/issue-map-view.component';
+import {IssueViewBalloonComponent} from './components/issue-map-view/issue-view-balloon/issue-view-balloon.component';
+import {ComplaintConfirmationViewBalloonComponent} from './components/issue-map-view/complaint-confirmation-view-balloon/complaint-confirmation-view-balloon.component';
+import {RouterModule} from '@angular/router';
 
 
 @NgModule({
@@ -44,7 +48,10 @@ import {NgxPermissionsModule} from 'ngx-permissions';
       VideoItemComponent,
       IssueCommentListComponent,
       IssueCommentItemComponent,
-      IssueCommentFormComponent
+      IssueCommentFormComponent,
+      IssueMapViewComponent,
+      IssueViewBalloonComponent,
+      ComplaintConfirmationViewBalloonComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +59,7 @@ import {NgxPermissionsModule} from 'ngx-permissions';
     InfiniteScrollModule,
     MomentModule,
     NgbModule,
+      RouterModule,
       LightboxModule,
       NgxPermissionsModule.forChild()
 
@@ -78,8 +86,15 @@ import {NgxPermissionsModule} from 'ngx-permissions';
         VideoItemComponent,
         IssueCommentListComponent,
         IssueCommentItemComponent,
-        IssueCommentFormComponent
+        IssueCommentFormComponent,
+        IssueMapViewComponent,
+        IssueViewBalloonComponent,
+        ComplaintConfirmationViewBalloonComponent,
     ],
-  entryComponents: [MapComponent]
+  entryComponents: [
+      MapComponent,
+      IssueViewBalloonComponent,
+      ComplaintConfirmationViewBalloonComponent
+  ]
 })
 export class SharedModule { }

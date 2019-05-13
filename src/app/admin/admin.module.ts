@@ -38,7 +38,7 @@ import { LikeWidgetComponent } from './components/issue/issue-details-page/like-
     SignatureListComponent,
     SignatureItemComponent,
     SignaturesWidgetComponent,
-    LikeWidgetComponent
+    LikeWidgetComponent,
   ],
     imports: [
         CommonModule,

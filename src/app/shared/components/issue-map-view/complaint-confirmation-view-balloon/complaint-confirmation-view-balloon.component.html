@@ -18,7 +18,9 @@
       confirmation.complaint.message.length > 150 ?
               (confirmation.complaint.message | slice:0:150) + '...'
               : confirmation.complaint.message }}
-      <a [routerLink]="'/client/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">More...</a>
+      <ng-container *ngxPermissionsExcept="['ROLE_ADMIN_USER']">
+        <a [routerLink]="'/client/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">More...</a>
+      </ng-container>
     </p>
     <p>
       <ng-container *ngIf="confirmation.complaint.pictures.length > 0">
