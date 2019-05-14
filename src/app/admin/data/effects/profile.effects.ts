@@ -16,6 +16,7 @@ import {USER_INITIALIZE_SUCCESS, USER_LOGOUT, UserInitializeSuccess} from '../..
 import {ProfileCommonInfo} from '../model/profile-common-info.model';
 import {ISSUE_DELETE_SUCCESS} from '../issue.actions';
 import {COMPLAINT_DELETE_SUCCESS} from '../complaint.actions';
+import {ACCOUNT_CREATE_SUCCESS} from '../account.actions';
 
 @Injectable()
 export class ProfileEffects
@@ -69,7 +70,8 @@ export class ProfileEffects
         ofType(
             ADMIN_MODULE_INITIALIZED,
             ISSUE_DELETE_SUCCESS,
-            COMPLAINT_DELETE_SUCCESS
+            COMPLAINT_DELETE_SUCCESS,
+            ACCOUNT_CREATE_SUCCESS
         ),
         tap(() => {
 
@@ -90,7 +92,7 @@ export class ProfileEffects
         if (flag)
         {
             this.gettingCommonInfoIntervalDescriptor = setInterval(() => {
-                //this.emitGetUserInfo();
+                this.emitGetUserInfo();
             }, environment.adminCommonInfoInterval);
         }
     }

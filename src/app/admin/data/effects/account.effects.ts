@@ -70,7 +70,6 @@ export class AccountEffects
             const { account, password, passwordRepeat } = action;
 
             let result: Observable<User>;
-            debugger
 
             if (account instanceof CompanyRepresentativeUser)
             {
