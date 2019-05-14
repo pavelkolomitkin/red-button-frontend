@@ -1,3 +1,17 @@
-<p>
-  analyst-account-edit-page works!
-</p>
+<app-admin-common-layout>
+
+  <div class="box box-default" *ngIf="!!account">
+
+    <div class="box-header with-border">
+      <h3>Edit Analyst Account</h3>
+    </div>
+
+    <app-analyst-account-form
+            [account]="account"
+            [errors]="errors"
+            (onSubmit)="onSubmitFormHandler($event)"
+    ></app-analyst-account-form>
+
+  </div>
+
+</app-admin-common-layout>

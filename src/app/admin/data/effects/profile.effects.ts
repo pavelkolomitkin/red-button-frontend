@@ -90,7 +90,7 @@ export class ProfileEffects
         if (flag)
         {
             this.gettingCommonInfoIntervalDescriptor = setInterval(() => {
-                this.emitGetUserInfo();
+                //this.emitGetUserInfo();
             }, environment.adminCommonInfoInterval);
         }
     }

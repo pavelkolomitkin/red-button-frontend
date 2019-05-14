@@ -5,7 +5,7 @@
       <th>Email</th>
       <th>Full Name</th>
 
-      <ng-container *ngIf="accountType === 'company'">
+      <ng-container *ngIf="accountType === 'company-representative'">
         <th>Company</th>
       </ng-container>
 
@@ -26,7 +26,7 @@
       </td>
       <td>{{ account.fullName }}</td>
 
-      <ng-container *ngIf="accountType === 'company'">
+      <ng-container *ngIf="accountType === 'company-representative'">
         <td>
           <span class="text text-primary">{{ account.company.title }}</span>
         </td>

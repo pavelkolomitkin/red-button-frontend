@@ -47,6 +47,7 @@ import {AccountService} from './services/account.service';
 import {AccountEffects} from './data/effects/account.effects';
 import { CommonListPageComponent } from './components/account/common-list-page/common-list-page.component';
 import { AccountCommonListComponent } from './components/account/account-common-list/account-common-list.component';
+import { AccountCommonFormComponent } from './components/account/account-common-form/account-common-form.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { AccountCommonListComponent } from './components/account/account-common-
     ClientListPageComponent,
     CommonListPageComponent,
     AccountCommonListComponent,
+    AccountCommonFormComponent,
   ],
     imports: [
         CommonModule,

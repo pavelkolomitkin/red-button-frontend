@@ -70,8 +70,9 @@ export class AccountEffects
             const { account, password, passwordRepeat } = action;
 
             let result: Observable<User>;
+            debugger
 
-            if (account as CompanyRepresentativeUser)
+            if (account instanceof CompanyRepresentativeUser)
             {
                 result = this.service.createCompanyRepresentative(<CompanyRepresentativeUser>account, password, passwordRepeat);
             }
@@ -85,7 +86,6 @@ export class AccountEffects
                     return new AccountCreateSuccess(account);
                 }),
                 catchError((errors) => {
-                    debugger
                     return of(new AccountCreateError(errors.error.errors));
                 })
             );
@@ -102,7 +102,7 @@ export class AccountEffects
 
             let result: Observable<User>;
 
-            if (account as CompanyRepresentativeUser)
+            if (account instanceof CompanyRepresentativeUser)
             {
                 result = this.service.updateCompanyRepresentativeAccount(<CompanyRepresentativeUser>account);
             }

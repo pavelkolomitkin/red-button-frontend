@@ -59,15 +59,18 @@ export class CompanyRepresentativeFormComponent implements OnInit {
     this.account.company = company;
   }
 
-  onSubmitHandler(form: NgForm)
+  onSubmitHandler({ account, password, passwordRepeat })
   {
-    const { password, passwordRepeat } = form.value;
-
     this.submitEvent.emit({
       account: this.account,
       password: password,
       passwordRepeat: passwordRepeat
     });
+  }
+
+  isValid()
+  {
+    return !!this.account.company;
   }
 
 }

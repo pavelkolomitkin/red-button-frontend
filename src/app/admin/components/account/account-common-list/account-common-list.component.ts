@@ -9,7 +9,7 @@ import User from '../../../../core/data/model/user.model';
 export class AccountCommonListComponent implements OnInit {
 
   static ACCOUNT_CLIENT_TYPE = 'client';
-  static ACCOUNT_COMPANY_TYPE = 'company';
+  static ACCOUNT_COMPANY_TYPE = 'company-representative';
   static ACCOUNT_ANALYST_TYPE = 'analyst';
 
 
