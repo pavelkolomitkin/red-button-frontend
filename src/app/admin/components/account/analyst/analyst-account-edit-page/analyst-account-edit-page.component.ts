@@ -58,7 +58,7 @@ export class AnalystAccountEditPageComponent implements OnInit, OnDestroy {
         select(state => state.adminAccount.updated),
         filter(result => !!result)
     ).subscribe((account: User) => {
-      this.router.navigateByUrl('/admin/account/analyst/list');
+      this.router.navigateByUrl('/admin/account/' + account.id);
     });
 
     this.paramsSubscription = this.route.params.subscribe((params) => {

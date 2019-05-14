@@ -15,6 +15,7 @@ import {AnalystAccountEditPageComponent} from './components/account/analyst/anal
 import {AnalystListPageComponent} from './components/account/analyst/analyst-list-page/analyst-list-page.component';
 import {CompanyRepresentativeListComponent} from './components/account/company/company-representative-list/company-representative-list.component';
 import {ClientListPageComponent} from './components/account/client/client-list-page/client-list-page.component';
+import {AccountCommonDetailsPageComponent} from './components/account/account-common-details-page/account-common-details-page.component';
 
 const routes: Routes = [
     { path: '', children: [
@@ -172,6 +173,20 @@ const routes: Routes = [
                         new BreadCrumb('Home', '/', 'home'),
                         new BreadCrumb('Accounts', '/account/analyst/list', 'users'),
                         new BreadCrumb('Edit Account', null, 'user'),
+                    ]
+                },
+                pathMatch: 'full'
+            },
+
+            {
+                path: 'account/:id',
+                component: AccountCommonDetailsPageComponent,
+                data: {
+                    pageTitle: 'Account Details',
+                    pageSubTitle: '',
+                    breadCrumbs: [
+                        new BreadCrumb('Home', '/', 'home'),
+                        new BreadCrumb('Account Details', null, 'user'),
                     ]
                 },
                 pathMatch: 'full'

@@ -34,7 +34,7 @@ export class CompanyRepresentativeCreateAccountPageComponent implements OnInit, 
         filter(result => !!result)
     ).subscribe((account: CompanyRepresentativeUser) => {
 
-      this.router.navigateByUrl('/admin/account/company-representative/list');
+      this.router.navigateByUrl('/admin/account/' + account.id);
     });
 
     this.errors = this.store.pipe(select(state => state.adminAccount.createErrors));

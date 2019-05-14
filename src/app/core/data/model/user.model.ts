@@ -24,6 +24,16 @@ export default class User
     return this.roles.includes('ROLE_CLIENT_USER');
   }
 
+  isAnalyst()
+  {
+    return this.roles.includes('ROLE_ANALYST_USER');
+  }
+
+  isCompanyRepresentative()
+  {
+    return this.roles.includes('ROLE_COMPANY_REPRESENTATIVE_USER');
+  }
+
   static createFromRawData(data: any)
   {
     const result: User = Object.assign(new User(), data);

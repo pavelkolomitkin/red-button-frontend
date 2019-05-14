@@ -57,7 +57,7 @@ export class CompanyRepresentativeEditAccountPageComponent implements OnInit, On
         select(state => state.adminAccount.updated),
         filter(result => !!result)
     ).subscribe((account: CompanyRepresentativeUser) => {
-      this.router.navigateByUrl('/admin/account/company-representative/list');
+      this.router.navigateByUrl('/admin/account/' + account.id);
     });
 
     this.paramsSubscription = this.route.params.subscribe((params) => {

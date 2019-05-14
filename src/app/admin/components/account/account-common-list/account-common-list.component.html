@@ -9,6 +9,10 @@
         <th>Company</th>
       </ng-container>
 
+      <ng-container *ngIf="accountType === 'client'">
+        <th>Phone Number</th>
+      </ng-container>
+
       <th>Active</th>
       <th>Created</th>
 
@@ -20,7 +24,9 @@
 
     <tr *ngFor="let account of list">
 
-      <td>{{ account.id }}</td>
+      <td>
+        <a [routerLink]="'/admin/account/' + account.id" class="center-block">{{ account.id }}</a>
+      </td>
       <td>
         <span class="text text-primary">{{ account.email }}</span>
       </td>
@@ -29,6 +35,15 @@
       <ng-container *ngIf="accountType === 'company-representative'">
         <td>
           <span class="text text-primary">{{ account.company.title }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container *ngIf="accountType === 'client'">
+        <td>
+          <span *ngIf="!!account.phoneNumber; else noPhone;">{{ account.phoneNumber }}</span>
+          <ng-template #noPhone>
+            <span class="text-muted">-</span>
+          </ng-template>
         </td>
       </ng-container>
 
