@@ -23,7 +23,7 @@
     </li>
 
     <li [ngClass]="page == numberOfPages ? 'active' : ''">
-      <ng-container *ngIf="page == numberOfPages; else lastCurrentPage">
+      <ng-container *ngIf="page !== numberOfPages; else lastCurrentPage">
         <a [routerLink]="location.pathname" [queryParams]="getQueryParameters(numberOfPages)">»</a>
       </ng-container>
       <ng-template #lastCurrentPage>

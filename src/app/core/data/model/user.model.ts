@@ -8,7 +8,11 @@ export default class User
 
   public phoneNumber?: string;
 
+  public isActive?: boolean;
+
   public roles: Array<string> = [];
+
+  public createdAt: number;
 
   isAdmin()
   {

@@ -1,6 +1,7 @@
 import {Issue} from '../../data/model/issue.model';
 import {Complaint} from '../../data/model/complaint.model';
 import User from '../../data/model/user.model';
+import {CompanyRepresentativeUser} from '../../data/model/company-representative-user.model';
 
 export class EntityTransformer
 {
@@ -49,6 +50,14 @@ export class EntityTransformer
 
     static transformUser(user)
     {
-        return User.createFromRawData(user);
+        if (typeof user['company'] !== 'undefined')
+        {
+            return CompanyRepresentativeUser.createFromRawData(user);
+        }
+        else
+        {
+            return User.createFromRawData(user);
+        }
+
     }
 }

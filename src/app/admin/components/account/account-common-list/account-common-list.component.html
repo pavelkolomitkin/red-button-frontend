@@ -1,0 +1,52 @@
+<table class="table table-hover">
+  <tbody>
+    <tr>
+      <th [ngStyle]="{ minWidth: '40px' }">#</th>
+      <th>Email</th>
+      <th>Full Name</th>
+
+      <ng-container *ngIf="accountType === 'company'">
+        <th>Company</th>
+      </ng-container>
+
+      <th>Active</th>
+      <th>Created</th>
+
+      <ng-container *ngIf="accountType !== 'client'">
+        <th>Controls</th>
+      </ng-container>
+
+    </tr>
+
+    <tr *ngFor="let account of list">
+
+      <td>{{ account.id }}</td>
+      <td>{{ account.email }}</td>
+      <td>{{ account.fullName }}</td>
+
+      <ng-container *ngIf="accountType === 'company'">
+        <td>{{ account.company.title }}</td>
+      </ng-container>
+
+      <td>
+        <span class="label label-success" *ngIf="account.isActive">Yes</span>
+        <span class="label label-default" *ngIf="!account.isActive">No</span>
+      </td>
+
+      <td>{{ account.createdAt | amFromUnix}}</td>
+      <ng-container *ngIf="accountType !== 'client'">
+        <td>
+          <div class="box-tools">
+
+
+              <a [routerLink]="'/admin/account/' + accountType + '/' + account.id + '/edit'" class="btn btn-box-tool"><i class="fa fa-edit"></i></a>
+
+          </div>
+        </td>
+      </ng-container>
+    </tr>
+
+
+  </tbody>
+
+</table>

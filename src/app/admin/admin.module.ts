@@ -14,6 +14,7 @@ import {Store, StoreModule} from '@ngrx/store';
 import { reducer as complaintReducer } from './data/complaint.reducer';
 import { reducer as issueReducer } from './data/issue.reducer';
 import { reducer as profileReducer } from './data/profile.reducer';
+import { reducer as accountReducer } from './data/account.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {IssueEffects} from './data/effects/issue.effects';
 import { PaginatorComponent } from './components/common/paginator/paginator.component';
@@ -33,6 +34,19 @@ import {ComplaintService} from './services/complaint.service';
 import {ComplaintEffects} from './data/effects/complaint.effects';
 import { DefaultEntityFilterComponent } from './components/common/default-entity-filter/default-entity-filter.component';
 import { ComplaintItemComponent } from './components/complaint/complaint-list-page/complaint-item/complaint-item.component';
+import { CompanyRepresentativeFormComponent } from './components/account/company/company-representative-form/company-representative-form.component';
+import { CompanyRepresentativeCreateAccountPageComponent } from './components/account/company/company-representative-create-account-page/company-representative-create-account-page.component';
+import { CompanyRepresentativeEditAccountPageComponent } from './components/account/company/company-representative-edit-account-page/company-representative-edit-account-page.component';
+import { AnalystAccountFormComponent } from './components/account/analyst/analyst-account-form/analyst-account-form.component';
+import { AnalystAccountCreatePageComponent } from './components/account/analyst/analyst-account-create-page/analyst-account-create-page.component';
+import { AnalystAccountEditPageComponent } from './components/account/analyst/analyst-account-edit-page/analyst-account-edit-page.component';
+import { AnalystListPageComponent } from './components/account/analyst/analyst-list-page/analyst-list-page.component';
+import { CompanyRepresentativeListComponent } from './components/account/company/company-representative-list/company-representative-list.component';
+import { ClientListPageComponent } from './components/account/client/client-list-page/client-list-page.component';
+import {AccountService} from './services/account.service';
+import {AccountEffects} from './data/effects/account.effects';
+import { CommonListPageComponent } from './components/account/common-list-page/common-list-page.component';
+import { AccountCommonListComponent } from './components/account/account-common-list/account-common-list.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +65,17 @@ import { ComplaintItemComponent } from './components/complaint/complaint-list-pa
     LikeWidgetComponent,
     DefaultEntityFilterComponent,
     ComplaintItemComponent,
+    CompanyRepresentativeFormComponent,
+    CompanyRepresentativeCreateAccountPageComponent,
+    CompanyRepresentativeEditAccountPageComponent,
+    AnalystAccountFormComponent,
+    AnalystAccountCreatePageComponent,
+    AnalystAccountEditPageComponent,
+    AnalystListPageComponent,
+    CompanyRepresentativeListComponent,
+    ClientListPageComponent,
+    CommonListPageComponent,
+    AccountCommonListComponent,
   ],
     imports: [
         CommonModule,
@@ -59,16 +84,19 @@ import { ComplaintItemComponent } from './components/complaint/complaint-list-pa
         StoreModule.forFeature('adminComplaint', complaintReducer),
         StoreModule.forFeature('adminIssue', issueReducer),
         StoreModule.forFeature('adminProfile', profileReducer),
+        StoreModule.forFeature('adminAccount', accountReducer),
         EffectsModule.forFeature([
             ComplaintEffects,
             IssueEffects,
-            ProfileEffects
+            ProfileEffects,
+            AccountEffects
         ]),
     ],
     providers: [
         CommonInfoService,
         IssueService,
-        ComplaintService
+        ComplaintService,
+        AccountService
     ],
   exports: [
     StoreModule,

@@ -8,6 +8,13 @@ import {IssueDetailsPageComponent} from './components/issue/issue-details-page/i
 import {DashboardPageComponent} from './components/dashboard/dashboard-page/dashboard-page.component';
 import {BreadCrumb} from '../core/data/model/bread-crumb.model';
 import {NotFoundPageComponent} from '../shared/components/not-found-page/not-found-page.component';
+import {CompanyRepresentativeCreateAccountPageComponent} from './components/account/company/company-representative-create-account-page/company-representative-create-account-page.component';
+import {CompanyRepresentativeEditAccountPageComponent} from './components/account/company/company-representative-edit-account-page/company-representative-edit-account-page.component';
+import {AnalystAccountCreatePageComponent} from './components/account/analyst/analyst-account-create-page/analyst-account-create-page.component';
+import {AnalystAccountEditPageComponent} from './components/account/analyst/analyst-account-edit-page/analyst-account-edit-page.component';
+import {AnalystListPageComponent} from './components/account/analyst/analyst-list-page/analyst-list-page.component';
+import {CompanyRepresentativeListComponent} from './components/account/company/company-representative-list/company-representative-list.component';
+import {ClientListPageComponent} from './components/account/client/client-list-page/client-list-page.component';
 
 const routes: Routes = [
     { path: '', children: [
@@ -72,6 +79,102 @@ const routes: Routes = [
                 data: {
 
                 }
+            },
+
+            {
+                path: 'account/client/list',
+                component: ClientListPageComponent,
+                data: {
+                    pageTitle: 'Client Accounts',
+                    pageSubTitle: 'latest',
+                    breadCrumbs: [
+                        new BreadCrumb('Home', '/', 'home'),
+                        new BreadCrumb('Client Accounts', null, 'users'),
+                    ]
+                }
+            },
+
+            {
+                path: 'account/company-representative/list',
+                component: CompanyRepresentativeListComponent,
+                data: {
+                    pageTitle: 'Company Accounts',
+                    pageSubTitle: 'latest',
+                    breadCrumbs: [
+                        new BreadCrumb('Home', '/', 'home'),
+                        new BreadCrumb('Company Accounts', null, 'users'),
+                    ]
+                }
+            },
+
+            {
+                path: 'account/company-representative/create',
+                component: CompanyRepresentativeCreateAccountPageComponent,
+                data: {
+                    pageTitle: 'Create Account',
+                    pageSubTitle: 'Company Representative',
+                    breadCrumbs: [
+                        new BreadCrumb('Home', '/', 'home'),
+                        new BreadCrumb('Accounts', '/account/company-representative/list', 'users'),
+                        new BreadCrumb('New Account', null, 'user'),
+                    ]
+                }
+            },
+            {
+                path: 'account/company-representative/:id/edit',
+                component: CompanyRepresentativeEditAccountPageComponent,
+                data: {
+                    pageTitle: 'Edit Account',
+                    pageSubTitle: 'Company Representative',
+                    breadCrumbs: [
+                        new BreadCrumb('Home', '/', 'home'),
+                        new BreadCrumb('Accounts', '/account/company-representative/list', 'users'),
+                        new BreadCrumb('Edit Account', null, 'user'),
+                    ]
+                },
+                pathMatch: 'full'
+            },
+
+            {
+                path: 'account/analyst/list',
+                component: AnalystListPageComponent,
+                data: {
+                    pageTitle: 'Analyst Accounts',
+                    pageSubTitle: 'latest',
+                    breadCrumbs: [
+                        new BreadCrumb('Home', '/', 'home'),
+                        new BreadCrumb('Analyst Accounts', null, 'users'),
+                    ]
+                }
+            },
+
+            {
+                path: 'account/analyst/create',
+                component: AnalystAccountCreatePageComponent,
+                data: {
+                    pageTitle: 'Create Account',
+                    pageSubTitle: 'Analyst',
+                    breadCrumbs: [
+                        new BreadCrumb('Home', '/', 'home'),
+                        new BreadCrumb('Accounts', '/account/analyst/list', 'users'),
+                        new BreadCrumb('New Account', null, 'user'),
+                    ]
+                }
+            },
+
+            {
+                path: 'account/analyst/:id/edit',
+                component: AnalystAccountEditPageComponent,
+                data: {
+                    pageTitle: 'Create Account',
+                    pageSubTitle: 'Analyst',
+                    breadCrumbs: [
+                        new BreadCrumb('Home', '/', 'home'),
+                        new BreadCrumb('Accounts', '/account/analyst/list', 'users'),
+                        new BreadCrumb('Edit Account', null, 'user'),
+                    ]
+                },
+                pathMatch: 'full'
             }
         ]
     }
