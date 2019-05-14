@@ -21,11 +21,15 @@
     <tr *ngFor="let account of list">
 
       <td>{{ account.id }}</td>
-      <td>{{ account.email }}</td>
+      <td>
+        <span class="text text-primary">{{ account.email }}</span>
+      </td>
       <td>{{ account.fullName }}</td>
 
       <ng-container *ngIf="accountType === 'company'">
-        <td>{{ account.company.title }}</td>
+        <td>
+          <span class="text text-primary">{{ account.company.title }}</span>
+        </td>
       </ng-container>
 
       <td>

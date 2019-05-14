@@ -24,6 +24,15 @@ export class AccountService extends BaseService
         );
     }
 
+    get(id: number)
+    {
+        return this.http.get<{ account: User }>('/admin/account/' + id).pipe(
+            map(({ account }) => {
+                return EntityTransformer.transformUser(account);
+            })
+        );
+    }
+
     createCompanyRepresentative(
         account: CompanyRepresentativeUser,
         password: string,
@@ -31,7 +40,7 @@ export class AccountService extends BaseService
     )
     {
         const body = {
-            company: account.company.id,
+            company: !!account.company ? account.company.id : null,
             email: account.email,
             fullName: account.fullName,
             isActive: account.isActive,
@@ -54,7 +63,7 @@ export class AccountService extends BaseService
     )
     {
         const body = {
-            company: account.company.id,
+            company: !!account.company ? account.company.id : null,
             email: account.email,
             fullName: account.fullName,
             isActive: account.isActive

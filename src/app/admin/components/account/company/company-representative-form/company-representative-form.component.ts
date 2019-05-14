@@ -14,7 +14,15 @@ import {NgForm} from '@angular/forms';
 })
 export class CompanyRepresentativeFormComponent implements OnInit {
 
-  @Output('onSubmit') submitEvent: EventEmitter<CompanyRepresentativeUser> = new EventEmitter<CompanyRepresentativeUser>();
+  @Output('onSubmit') submitEvent: EventEmitter<{
+    account: CompanyRepresentativeUser,
+    password: string,
+    passwordRepeat: string
+  }> = new EventEmitter<{
+      account: CompanyRepresentativeUser,
+      password: string,
+      passwordRepeat: string
+    }>();
 
   @Input() account: CompanyRepresentativeUser;
 
@@ -53,7 +61,13 @@ export class CompanyRepresentativeFormComponent implements OnInit {
 
   onSubmitHandler(form: NgForm)
   {
-    this.submitEvent.emit(this.account);
+    const { password, passwordRepeat } = form.value;
+
+    this.submitEvent.emit({
+      account: this.account,
+      password: password,
+      passwordRepeat: passwordRepeat
+    });
   }
 
 }

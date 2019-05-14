@@ -5,12 +5,21 @@ import {AccountService} from '../../services/account.service';
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {
-    ACCOUNT_CREATE_START, ACCOUNT_GET_LIST_START,
+    ACCOUNT_CREATE_START,
+    ACCOUNT_GET_LIST_START,
+    ACCOUNT_GET_START,
     ACCOUNT_UPDATE_START,
     AccountCreateError,
     AccountCreateStart,
-    AccountCreateSuccess, AccountGetListError, AccountGetListStart, AccountGetListSuccess, AccountGetSuccess, AccountUpdateError,
-    AccountUpdateStart, AccountUpdateSuccess
+    AccountCreateSuccess, AccountGetError,
+    AccountGetListError,
+    AccountGetListStart,
+    AccountGetListSuccess,
+    AccountGetStart,
+    AccountGetSuccess,
+    AccountUpdateError,
+    AccountUpdateStart,
+    AccountUpdateSuccess
 } from '../account.actions';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {CompanyRepresentativeUser} from '../../../core/data/model/company-representative-user.model';
@@ -19,6 +28,23 @@ import User from '../../../core/data/model/user.model';
 @Injectable()
 export class AccountEffects
 {
+    @Effect()
+    getDetailsStart: Observable<Action> = this.actions.pipe(
+        ofType(ACCOUNT_GET_START),
+        mergeMap((action: AccountGetStart) => {
+            const { id } = action;
+
+            return this.service.get(id).pipe(
+                map((account: User) => {
+                    return new AccountGetSuccess(account);
+                }),
+                catchError((errors) => {
+                    return of(new AccountGetError(errors));
+                })
+            );
+        })
+    );
+
     @Effect()
     getListStart: Observable<Action> = this.actions.pipe(
         ofType(ACCOUNT_GET_LIST_START),
@@ -59,6 +85,7 @@ export class AccountEffects
                     return new AccountCreateSuccess(account);
                 }),
                 catchError((errors) => {
+                    debugger
                     return of(new AccountCreateError(errors.error.errors));
                 })
             );

@@ -67,28 +67,28 @@
           </a>
         </li>
 
-        <li class="treeview menu-open">
+        <li class="treeview menu-open" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a href="#">
-            <i class="fa fa-laptop"></i>
+            <i class="fa fa-users"></i>
             <span>Accounts</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu" style="display: block;">
-            <li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
               <a [routerLink]="'/admin/account/company-representative/list'">
                 <i class="fa fa-users text-aqua"></i> Company
                 <small class="label pull-right bg-blue" *ngIf="(adminCommonInfo | async) !== null">{{ (adminCommonInfo | async).companyAccountNumber }}</small>
               </a>
             </li>
-            <li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
               <a [routerLink]="'/admin/account/analyst/list'">
                 <i class="fa fa-users text-red"></i> Analysts
                 <small class="label pull-right bg-red" *ngIf="(adminCommonInfo | async) !== null">{{ (adminCommonInfo | async).analystAccountNumber }}</small>
               </a>
             </li>
-            <li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
               <a [routerLink]="'/admin/account/client/list'">
                 <i class="fa fa-users"></i> Clients
                 <small class="label pull-right bg-orange" *ngIf="(adminCommonInfo | async) !== null">{{ (adminCommonInfo | async).clientAccountNumber }}</small>
