@@ -30,6 +30,8 @@ import {ComplaintConfirmationViewBalloonComponent} from './components/issue-map-
 import {RouterModule} from '@angular/router';
 import {ComplaintMapViewComponent} from './components/complaint-map-view/complaint-map-view.component';
 import {ComplaintDetailsBalloonComponent} from './components/complaint-map-view/complaint-details-balloon/complaint-details-balloon.component';
+import {CompanySearchFormComponent} from './components/company-search-form/company-search-form.component';
+import { CompanySearchFieldComponent } from './components/company-search-form/company-search-field/company-search-field.component';
 
 
 @NgModule({
@@ -55,7 +57,9 @@ import {ComplaintDetailsBalloonComponent} from './components/complaint-map-view/
       IssueViewBalloonComponent,
       ComplaintConfirmationViewBalloonComponent,
       ComplaintMapViewComponent,
-      ComplaintDetailsBalloonComponent
+      ComplaintDetailsBalloonComponent,
+      CompanySearchFormComponent,
+      CompanySearchFieldComponent
   ],
   imports: [
     CommonModule,
@@ -95,7 +99,9 @@ import {ComplaintDetailsBalloonComponent} from './components/complaint-map-view/
         IssueViewBalloonComponent,
         ComplaintConfirmationViewBalloonComponent,
         ComplaintMapViewComponent,
-        ComplaintDetailsBalloonComponent
+        ComplaintDetailsBalloonComponent,
+        CompanySearchFormComponent,
+        CompanySearchFieldComponent
     ],
   entryComponents: [
       MapComponent,

@@ -48,7 +48,6 @@ import { IssueMapBalloonComponent } from './components/issue/issue-form/issue-ge
 import { ComplaintConfirmationMapBalloonComponent } from './components/issue/issue-form/issue-geo-location-selector/complaint-confirmation-map-balloon/complaint-confirmation-map-balloon.component';
 import { ComplaintMapBalloonComponent } from './components/issue/issue-form/issue-geo-location-selector/complaint-map-balloon/complaint-map-balloon.component';
 import {SearchTagItemComponent} from './components/issue/issue-form/issue-geo-location-selector/search-form/tag-item/tag-item.component';
-import { CompanySearchFormComponent } from './components/issue/issue-form/issue-company-selector-field/company-search-form/company-search-form.component';
 import { IssuePictureListFieldComponent } from './components/issue/issue-form/issue-picture-list-field/issue-picture-list-field.component';
 import {IssuePictureEffects} from './data/effects/issue-picture.effects';
 import {IssueEffects} from './data/effects/issue.effects';
@@ -97,7 +96,6 @@ import { SearchAddressFormComponent } from './components/common/search-address-f
     ComplaintConfirmationMapBalloonComponent,
     ComplaintMapBalloonComponent,
       SearchTagItemComponent,
-      CompanySearchFormComponent,
       IssuePictureListFieldComponent,
       EditIssuePageComponent,
       IssueDetailsPageComponent,

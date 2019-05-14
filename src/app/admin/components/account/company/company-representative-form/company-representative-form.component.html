@@ -1,3 +1,110 @@
-<p>
-  company-representative-form works!
-</p>
+<form (ngSubmit)="onSubmitHandler(form)" #form="ngForm">
+
+  <div class="box-body">
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Email"
+              [(ngModel)]="account.email"
+              name="email"
+              required
+      >
+      <app-form-field-error-list [field]="'email'" [errors]="errors"></app-form-field-error-list>
+    </div>
+
+    <div class="form-group">
+      <label for="fullName">Full Name</label>
+      <input
+              type="text"
+              class="form-control"
+              id="fullName"
+              placeholder="Full Name"
+              [(ngModel)]="account.fullName"
+              name="fullName"
+              required
+      >
+      <app-form-field-error-list [field]="'fullName'" [errors]="errors"></app-form-field-error-list>
+    </div>
+
+    <div class="form-group has-feedback">
+      <label for="password">Password</label>
+      <input
+              ngModel
+              id="password"
+              name="password"
+              autocomplete
+              required
+              type="password"
+              class="form-control"
+              placeholder="Password"
+      >
+      <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      <app-form-field-error-list [field]="'password'" [errors]="errors.plainPassword ? errors.plainPassword : {}"></app-form-field-error-list>
+    </div>
+
+    <div class="form-group has-feedback">
+      <label for="passwordRepeat">Repeat Password</label>
+      <input
+              ngModel
+              id="passwordRepeat"
+              name="passwordRepeat"
+              autocomplete
+              required
+              type="password"
+              class="form-control"
+              placeholder="Retype password"
+      >
+      <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+      <app-form-field-error-list [field]="'passwordRepeat'" [errors]="errors.plainPassword ? errors.plainPassword : {}"></app-form-field-error-list>
+    </div>
+
+
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <input
+                  type="checkbox"
+                  [(ngModel)]="account.isActive"
+                  name="isActive"
+          >
+          Active
+        </label>
+        <app-form-field-error-list [field]="'isActive'" [errors]="errors"></app-form-field-error-list>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Region</label>
+      <select
+              class="form-control"
+              [(ngModel)]="selectedRegion"
+              [compareWith]="compareEntity"
+              [required]="false"
+              (ngModelChange)="onRegionSelectHandler($event)"
+              name="selectedServiceType"
+              id="selectedServiceType"
+      >
+        <option [value]="null">-</option>
+        <option *ngFor="let region of regions | async" [ngValue]="region">{{ region.title }}</option>
+      </select>
+
+      <app-company-search-field
+              [region]="selectedRegion"
+              (onSelect)="onCompanySelectHandler($event)"
+      ></app-company-search-field>
+
+      <div class="text text-primary" *ngIf="!!account.company">{{ account.company.title}}</div>
+
+    </div>
+
+  </div>
+
+  <div class="box-footer">
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid || !account.company">Save</button>
+  </div>
+
+</form>
