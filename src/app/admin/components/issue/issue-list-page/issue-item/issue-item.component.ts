@@ -59,22 +59,6 @@ export class IssueItemComponent implements OnInit, OnDestroy {
     this.deleteSubscription.unsubscribe();
   }
 
-  approvedSignatureNumber()
-  {
-    let result = 0;
-
-    this.issue.complaintConfirmations.forEach((item) => {
-
-      if (item.status.code === ComplaintConfirmationStatus.STATUS_CONFIRMED)
-      {
-        result++;
-      }
-
-    });
-
-    return result;
-  }
-
   onDeleteClickHandler(event)
   {
     const confirmation: ActionConfirmation = new ActionConfirmation(
