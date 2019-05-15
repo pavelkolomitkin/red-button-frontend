@@ -45,11 +45,11 @@ import { CompanyRepresentativeListComponent } from './components/account/company
 import { ClientListPageComponent } from './components/account/client/client-list-page/client-list-page.component';
 import {AccountService} from './services/account.service';
 import {AccountEffects} from './data/effects/account.effects';
-import { CommonListPageComponent } from './components/account/common-list-page/common-list-page.component';
-import { AccountCommonListComponent } from './components/account/account-common-list/account-common-list.component';
-import { AccountCommonFormComponent } from './components/account/account-common-form/account-common-form.component';
-import { AccountCommonDetailsPageComponent } from './components/account/account-common-details-page/account-common-details-page.component';
-import { AccountResetPasswordComponent } from './components/account/account-reset-password/account-reset-password.component';
+import { CommonListPageComponent } from './components/account/common/common-list-page/common-list-page.component';
+import { AccountCommonListComponent } from './components/account/common/account-common-list/account-common-list.component';
+import { AccountCommonFormComponent } from './components/account/common/account-common-form/account-common-form.component';
+import { AccountCommonDetailsPageComponent } from './components/account/common/account-common-details-page/account-common-details-page.component';
+import { AccountResetPasswordComponent } from './components/account/common/account-reset-password/account-reset-password.component';
 
 @NgModule({
   declarations: [

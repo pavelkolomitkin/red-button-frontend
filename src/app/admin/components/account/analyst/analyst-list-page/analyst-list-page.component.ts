@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import User from '../../../../../core/data/model/user.model';
 import {AccountGetListReset} from '../../../../data/account.actions';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CommonListPageComponent} from '../../common-list-page/common-list-page.component';
+import {CommonListPageComponent} from '../../common/common-list-page/common-list-page.component';
 
 @Component({
   selector: 'app-analyst-list-page',

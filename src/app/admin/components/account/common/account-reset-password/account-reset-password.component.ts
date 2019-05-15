@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import User from '../../../../core/data/model/user.model';
-import {AccountService} from '../../../services/account.service';
+import User from '../../../../../core/data/model/user.model';
+import {AccountService} from '../../../../services/account.service';
 
 @Component({
   selector: 'app-account-reset-password',

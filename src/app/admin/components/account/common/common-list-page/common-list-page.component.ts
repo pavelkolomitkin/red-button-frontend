@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
-import {State} from '../../../../app.state';
+import {State} from '../../../../../app.state';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
-import User from '../../../../core/data/model/user.model';
-import {AccountGetListReset, AccountGetListStart} from '../../../data/account.actions';
-import {GlobalConfirmationReset} from '../../../../core/data/actions';
+import User from '../../../../../core/data/model/user.model';
+import {AccountGetListReset, AccountGetListStart} from '../../../../data/account.actions';
+import {GlobalConfirmationReset} from '../../../../../core/data/actions';
 
 @Component({
   selector: 'app-common-list-page',

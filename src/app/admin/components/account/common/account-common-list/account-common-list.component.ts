@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import User from '../../../../core/data/model/user.model';
+import User from '../../../../../core/data/model/user.model';
 
 @Component({
   selector: 'app-admin-account-common-list',

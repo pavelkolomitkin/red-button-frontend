@@ -1,14 +1,14 @@
 import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {select, Store} from '@ngrx/store';
-import {State} from '../../../../app.state';
+import {State} from '../../../../../app.state';
 import {ActivatedRoute, Router} from '@angular/router';
-import User from '../../../../core/data/model/user.model';
-import {AccountGetReset, AccountGetStart} from '../../../data/account.actions';
+import User from '../../../../../core/data/model/user.model';
+import {AccountGetReset, AccountGetStart} from '../../../../data/account.actions';
 import {Observable, Subscription} from 'rxjs';
 import {filter, take} from 'rxjs/operators';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {GlobalNotifySuccessMessage} from '../../../../core/data/actions';
-import {NotifyMessage} from '../../../../core/data/model/notify-message.model';
+import {GlobalNotifySuccessMessage} from '../../../../../core/data/actions';
+import {NotifyMessage} from '../../../../../core/data/model/notify-message.model';
 
 @Component({
   selector: 'app-account-common-details-page',

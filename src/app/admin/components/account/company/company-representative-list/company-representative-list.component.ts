@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CommonListPageComponent} from '../../common-list-page/common-list-page.component';
+import {CommonListPageComponent} from '../../common/common-list-page/common-list-page.component';
 
 @Component({
   selector: 'app-company-representative-list',
