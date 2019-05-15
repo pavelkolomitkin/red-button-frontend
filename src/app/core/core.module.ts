@@ -18,15 +18,14 @@ import { reducer as securityReducer } from '../security/data/reducer';
 import { reducer as geoLocationReducer } from './data/geo-location.reducer';
 import { reducer as serviceTypeReducer } from './data/service-type.reducer';
 import { reducer as mapReducer } from '../shared/data/map.reducer';
+import { reducer as regionReducer } from './data/region.reducer';
 import { RegisterEffects } from '../security/data/effects/register.effects';
 import { AuthEffects } from '../security/data/effects/auth.effects';
 import { AuthUserGuardService } from '../security/services/guards/auth-user-guard.service';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { GlobalProgressComponent } from './components/global-progress/global-progress.component';
-import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { SecurityService } from '../security/services/security.service';
-import { NgxPermissionsModule } from 'ngx-permissions';
 import {DefaultRedirectGuard} from '../security/services/guards/default-redirect-guard.service';
 import {CommonLayoutComponent} from './components/common-layout/common-layout.component';
 import {ContentComponent} from './components/content/content.component';
@@ -57,7 +56,11 @@ import { SignatureRequestComponent } from './components/header/signature-request
 import {ComplaintConfirmationService} from '../client/services/complaint-comfirmation.service';
 import {ConfirmLeavePageGuardService} from './services/guards/confirm-leave-page-guard.service';
 import {IssueCommentService} from './services/issue-comment.service';
-import {OSMSearchService} from './services/OSMSearchService';
+import {OSMSearchService} from './services/osm-search.service';
+
+import {RegionService} from './services/region.service';
+import {RegionEffects} from './data/effects/region.effects';
+import {NgxPermissionsModule} from 'ngx-permissions';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -68,7 +71,6 @@ const httpInterceptorProviders = [
 
 @NgModule({
   declarations: [
-    NotFoundPageComponent,
     GlobalProgressComponent,
     CommonLayoutComponent,
     ContentComponent,
@@ -86,18 +88,23 @@ const httpInterceptorProviders = [
     CommonModule,
     RouterModule,
     HttpClientModule,
+      NgxPermissionsModule.forRoot(),
     SharedModule,
-    NgxPermissionsModule.forRoot(),
     ToastrModule.forRoot(),
     StoreModule.forRoot({
       core: coreReducer,
       security: securityReducer,
       geoLocation: geoLocationReducer,
       serviceType: serviceTypeReducer,
-      map: mapReducer
+      map: mapReducer,
+      region: regionReducer
     }),
     EffectsModule.forRoot([
-      RegisterEffects, AuthEffects, ServiceTypeEffects, ClientDeviceEffects
+      RegisterEffects,
+      AuthEffects,
+      ServiceTypeEffects,
+      ClientDeviceEffects,
+      RegionEffects
     ])
   ],
   providers: [
@@ -122,6 +129,7 @@ const httpInterceptorProviders = [
     ConfirmLeavePageGuardService,
     IssueCommentService,
     OSMSearchService,
+    RegionService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,
@@ -131,6 +139,8 @@ const httpInterceptorProviders = [
     }
   ],
     exports: [
+        NgxPermissionsModule,
+        SharedModule,
         GlobalProgressComponent,
         CommonLayoutComponent,
         ContentComponent,
@@ -140,7 +150,6 @@ const httpInterceptorProviders = [
         MainMenuComponent,
         StoreModule,
         EffectsModule,
-        NgxPermissionsModule,
         ConfirmationComponent,
         MessageNotifierComponent,
         ToastrModule

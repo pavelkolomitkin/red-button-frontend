@@ -12,7 +12,10 @@ export abstract class BaseService
 
         for (let [name, value] of Object.entries(params))
         {
-            result = result.append(name, value.toString());
+            if ((typeof value !== 'undefined') && (value !== null))
+            {
+                result = result.append(name, value.toString());
+            }
         }
 
         return result;

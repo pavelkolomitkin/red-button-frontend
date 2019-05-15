@@ -11,6 +11,7 @@ import {IssueListPageComponent} from './components/issue/issue-list-page/issue-l
 import {IssueDetailsPageComponent} from './components/issue/issue-details-page/issue-details-page.component';
 import {EditIssuePageComponent} from './components/issue/edit-issue-page/edit-issue-page.component';
 import {ConfirmLeavePageGuardService} from '../core/services/guards/confirm-leave-page-guard.service';
+import {NotFoundPageComponent} from '../shared/components/not-found-page/not-found-page.component';
 
 
 const routes: Routes = [
@@ -126,6 +127,14 @@ const routes: Routes = [
                     ]
                 }
             },
+
+            {
+                path: '404',
+                component: NotFoundPageComponent,
+                data: {
+
+                }
+            }
 
 
         ]

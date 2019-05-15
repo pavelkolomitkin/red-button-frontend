@@ -12,7 +12,7 @@ import {
     ComplaintPictureUploadSelect
 } from '../complaint-picture.actions';
 import {ComplaintPictureService} from '../../services/complaint-picture.service';
-import {ComplaintPicture} from '../model/complaint-picture.model';
+import {ComplaintPicture} from '../../../core/data/model/complaint-picture.model';
 import {UploadItem} from '../../../shared/data/model/upload-item.model';
 
 

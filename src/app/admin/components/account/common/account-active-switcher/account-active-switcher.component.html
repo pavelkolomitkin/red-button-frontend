@@ -1,0 +1,9 @@
+<img *ngIf="isLoading" src="../../../../../../assets/ajax-loader.gif">
+<span *ngIf="!isLoading"
+        class="label"
+        [ngStyle]="{ cursor: !isLoading ? 'pointer' : 'default' }"
+        [ngClass]="account.isActive ? 'label-success' : 'label-default'"
+        (click)="onClickHandler($event)">
+  <ng-container *ngIf="account.isActive; else inActive;">Yes</ng-container>
+  <ng-template #inActive>No</ng-template>
+</span>

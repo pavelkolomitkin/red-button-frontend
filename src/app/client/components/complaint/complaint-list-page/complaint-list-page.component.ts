@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../app.state';
-import {Complaint} from '../../../data/model/complaint.model';
+import {Complaint} from '../../../../core/data/model/complaint.model';
 import {Subscription} from 'rxjs';
 import {ComplaintDeleteStart, ComplaintUserListLoadStart, ComplaintUserListReset} from '../../../data/complaint.actions';
 import {GlobalConfirmationInit, GlobalConfirmationReset} from '../../../../core/data/actions';

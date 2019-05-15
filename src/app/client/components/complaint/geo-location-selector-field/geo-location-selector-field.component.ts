@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {State} from '../../../../app.state';
 import {Store} from '@ngrx/store';
-import {Complaint} from '../../../data/model/complaint.model';
+import {Complaint} from '../../../../core/data/model/complaint.model';
 
 @Component({
   selector: 'app-geo-location-selector-field',

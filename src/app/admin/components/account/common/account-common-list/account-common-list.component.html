@@ -1,0 +1,70 @@
+<table class="table table-hover">
+  <tbody>
+    <tr>
+      <th [ngStyle]="{ minWidth: '40px' }">#</th>
+      <th>Email</th>
+      <th>Full Name</th>
+
+      <ng-container *ngIf="accountType === 'company-representative'">
+        <th>Company</th>
+      </ng-container>
+
+      <ng-container *ngIf="accountType === 'client'">
+        <th>Phone Number</th>
+      </ng-container>
+
+      <th>Active</th>
+      <th>Created</th>
+
+      <ng-container *ngIf="accountType !== 'client'">
+        <th>Controls</th>
+      </ng-container>
+
+    </tr>
+
+    <tr *ngFor="let account of list">
+
+      <td>
+        <a [routerLink]="'/admin/account/' + account.id" class="center-block">{{ account.id }}</a>
+      </td>
+      <td>
+        <span class="text text-primary">{{ account.email }}</span>
+      </td>
+      <td>{{ account.fullName }}</td>
+
+      <ng-container *ngIf="accountType === 'company-representative'">
+        <td>
+          <span class="text text-primary">{{ account.company.title }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container *ngIf="accountType === 'client'">
+        <td>
+          <span *ngIf="!!account.phoneNumber; else noPhone;">{{ account.phoneNumber }}</span>
+          <ng-template #noPhone>
+            <span class="text-muted">-</span>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <td>
+        <app-account-active-switcher [account]="account"></app-account-active-switcher>
+      </td>
+
+      <td>{{ account.createdAt | amFromUnix}}</td>
+      <ng-container *ngIf="accountType !== 'client'">
+        <td>
+          <div class="box-tools">
+
+
+              <a [routerLink]="'/admin/account/' + accountType + '/' + account.id + '/edit'" class="btn btn-box-tool"><i class="fa fa-edit"></i></a>
+
+          </div>
+        </td>
+      </ng-container>
+    </tr>
+
+
+  </tbody>
+
+</table>

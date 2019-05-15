@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import {ComplaintTag} from './model/complaint-tag.model';
+import {ComplaintTag} from '../../core/data/model/complaint-tag.model';
 
 export const COMPLAINT_TAG_SEARCH_START = 'COMPLAINT_TAG_SEARCH_START';
 export const COMPLAINT_TAG_SEARCH_SUCCESS = 'COMPLAINT_TAG_SEARCH_SUCCESS';

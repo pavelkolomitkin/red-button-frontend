@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {Video} from '../../../client/data/model/video.model';
+import {Video} from '../../../core/data/model/video.model';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 declare var $: any;

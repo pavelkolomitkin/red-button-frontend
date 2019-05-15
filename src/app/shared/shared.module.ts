@@ -12,6 +12,26 @@ import {PreventEnterSubmitFormDirective} from './directives/prevent-enter-submit
 import {PageHeaderDirective} from './directives/page-header.directive';
 import {LightboxModule} from 'ngx-lightbox';
 import { VideoFrameComponent } from './components/video-frame/video-frame.component';
+import {NotFoundPageComponent} from './components/not-found-page/not-found-page.component';
+import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
+import { MultiLinePipe } from './pipes/multi-line.pipe';
+import {PictureListComponent} from './components/picture/picture-list/picture-list.component';
+import {PictureItemComponent} from './components/picture/picture-item/picture-item.component';
+import {VideoListComponent} from './components/video/video-list/video-list.component';
+import {VideoItemComponent} from './components/video/video-item/video-item.component';
+
+import { IssueCommentListComponent } from './components/issue-comment-list/issue-comment-list.component';
+import { IssueCommentItemComponent } from './components/issue-comment-list/issue-comment-item/issue-comment-item.component';
+import { IssueCommentFormComponent } from './components/issue-comment-list/issue-comment-form/issue-comment-form.component';
+import {NgxPermissionsModule} from 'ngx-permissions';
+import {IssueMapViewComponent} from './components/issue-map-view/issue-map-view.component';
+import {IssueViewBalloonComponent} from './components/issue-map-view/issue-view-balloon/issue-view-balloon.component';
+import {ComplaintConfirmationViewBalloonComponent} from './components/issue-map-view/complaint-confirmation-view-balloon/complaint-confirmation-view-balloon.component';
+import {RouterModule} from '@angular/router';
+import {ComplaintMapViewComponent} from './components/complaint-map-view/complaint-map-view.component';
+import {ComplaintDetailsBalloonComponent} from './components/complaint-map-view/complaint-details-balloon/complaint-details-balloon.component';
+import {CompanySearchFormComponent} from './components/company-search-form/company-search-form.component';
+import { CompanySearchFieldComponent } from './components/company-search-form/company-search-field/company-search-field.component';
 
 
 @NgModule({
@@ -23,6 +43,23 @@ import { VideoFrameComponent } from './components/video-frame/video-frame.compon
     PreventEnterSubmitFormDirective,
     PageHeaderDirective,
     VideoFrameComponent,
+      NotFoundPageComponent,
+      DateRangePickerComponent,
+      MultiLinePipe,
+      PictureListComponent,
+      PictureItemComponent,
+      VideoListComponent,
+      VideoItemComponent,
+      IssueCommentListComponent,
+      IssueCommentItemComponent,
+      IssueCommentFormComponent,
+      IssueMapViewComponent,
+      IssueViewBalloonComponent,
+      ComplaintConfirmationViewBalloonComponent,
+      ComplaintMapViewComponent,
+      ComplaintDetailsBalloonComponent,
+      CompanySearchFormComponent,
+      CompanySearchFieldComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +67,9 @@ import { VideoFrameComponent } from './components/video-frame/video-frame.compon
     InfiniteScrollModule,
     MomentModule,
     NgbModule,
-      LightboxModule
+      RouterModule,
+      LightboxModule,
+      NgxPermissionsModule.forChild()
 
   ],
     exports: [
@@ -45,8 +84,30 @@ import { VideoFrameComponent } from './components/video-frame/video-frame.compon
         PreventEnterSubmitFormDirective,
         PageHeaderDirective,
         LightboxModule,
-        VideoFrameComponent
+        VideoFrameComponent,
+        NotFoundPageComponent,
+        DateRangePickerComponent,
+        MultiLinePipe,
+        PictureListComponent,
+        PictureItemComponent,
+        VideoListComponent,
+        VideoItemComponent,
+        IssueCommentListComponent,
+        IssueCommentItemComponent,
+        IssueCommentFormComponent,
+        IssueMapViewComponent,
+        IssueViewBalloonComponent,
+        ComplaintConfirmationViewBalloonComponent,
+        ComplaintMapViewComponent,
+        ComplaintDetailsBalloonComponent,
+        CompanySearchFormComponent,
+        CompanySearchFieldComponent
     ],
-  entryComponents: [MapComponent]
+  entryComponents: [
+      MapComponent,
+      IssueViewBalloonComponent,
+      ComplaintConfirmationViewBalloonComponent,
+      ComplaintDetailsBalloonComponent
+  ]
 })
 export class SharedModule { }

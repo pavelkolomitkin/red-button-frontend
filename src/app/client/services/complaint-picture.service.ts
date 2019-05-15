@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
 import {UploadItem} from '../../shared/data/model/upload-item.model';
-import {ComplaintPicture} from '../data/model/complaint-picture.model';
+import {ComplaintPicture} from '../../core/data/model/complaint-picture.model';
 import {BaseService} from '../../core/services/base.service';
 import {FileUploadService} from '../../core/services/file-upload.service';
 import {map} from 'rxjs/operators';

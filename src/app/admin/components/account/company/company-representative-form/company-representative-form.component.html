@@ -1,0 +1,36 @@
+<app-account-common-form
+        (onSubmit)="onSubmitHandler($event)"
+        [errors]="errors"
+        [account]="account"
+        [additionValidation]="isValid"
+>
+
+
+  <div class="form-group addition-fields">
+    <label>Region</label>
+    <select
+            class="form-control"
+            [(ngModel)]="selectedRegion"
+            [compareWith]="compareEntity"
+            [required]="false"
+            (ngModelChange)="onRegionSelectHandler($event)"
+            name="selectedServiceType"
+            id="selectedServiceType"
+    >
+      <option [value]="null">-</option>
+      <option *ngFor="let region of regions | async" [ngValue]="region">{{ region.title }}</option>
+    </select>
+
+    <app-company-search-field
+            [region]="selectedRegion"
+            (onSelect)="onCompanySelectHandler($event)"
+    ></app-company-search-field>
+
+    <div class="text text-primary" *ngIf="!!account.company">{{ account.company.title}}</div>
+
+    <app-form-field-error-list [field]="'company'" [errors]="errors"></app-form-field-error-list>
+  </div>
+
+
+
+</app-account-common-form>

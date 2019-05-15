@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import {Video} from './model/video.model';
+import {Video} from '../../core/data/model/video.model';
 
 export const VIDEO_CREATE_START = 'VIDEO_CREATE_START';
 export const VIDEO_CREATE_SUCCESS = 'VIDEO_CREATE_SUCCESS';

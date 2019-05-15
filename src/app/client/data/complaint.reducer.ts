@@ -1,5 +1,5 @@
 import * as actions from './complaint.actions';
-import {Complaint} from './model/complaint.model';
+import {Complaint} from '../../core/data/model/complaint.model';
 
 export interface State {
     userComplaintList: Array<Complaint>;

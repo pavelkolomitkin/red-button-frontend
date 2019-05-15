@@ -8,5 +8,36 @@ export default class User
 
   public phoneNumber?: string;
 
+  public isActive?: boolean;
+
   public roles: Array<string> = [];
+
+  public createdAt: number;
+
+  isAdmin()
+  {
+    return this.roles.includes('ROLE_ADMIN_USER');
+  }
+
+  isClient()
+  {
+    return this.roles.includes('ROLE_CLIENT_USER');
+  }
+
+  isAnalyst()
+  {
+    return this.roles.includes('ROLE_ANALYST_USER');
+  }
+
+  isCompanyRepresentative()
+  {
+    return this.roles.includes('ROLE_COMPANY_REPRESENTATIVE_USER');
+  }
+
+  static createFromRawData(data: any)
+  {
+    const result: User = Object.assign(new User(), data);
+
+    return result;
+  }
 }

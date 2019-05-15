@@ -1,12 +1,13 @@
 import {ServiceType} from './service-type.model';
 import {Region} from './region.model';
-import {Video} from '../../../client/data/model/video.model';
+import {Video} from './video.model';
 import {GeoLocation} from './geo-location.model';
 import User from './user.model';
 import {IssuePicture} from './issue-picture.model';
 import {Company} from './company.model';
-import {ComplaintConfirmation} from '../../../client/data/model/complaint-confirmation.model';
+import {ComplaintConfirmation} from './complaint-confirmation.model';
 import {CloneInterface} from './clone.interface';
+import {ComplaintConfirmationStatus} from './complaint-confirmation-status.model';
 
 export class Issue implements CloneInterface<Issue>
 {
@@ -73,5 +74,30 @@ export class Issue implements CloneInterface<Issue>
 
         return result;
 
+    }
+
+    getApprovedConfirmations()
+    {
+        return this.complaintConfirmations.filter(item => item.status.code === ComplaintConfirmationStatus.STATUS_CONFIRMED);
+    }
+
+    getApprovedPercent()
+    {
+        let result = 0;
+
+        if (this.complaintConfirmations.length !== 0)
+        {
+            const approvedNumber = this.getApprovedConfirmations().length;
+            if (approvedNumber === this.complaintConfirmations.length)
+            {
+                result = 100;
+            }
+            else
+            {
+                result = Math.floor(approvedNumber / this.complaintConfirmations.length);
+            }
+        }
+
+        return result;
     }
 }

@@ -3,7 +3,7 @@ import {GeoLocation} from '../../../../core/data/model/geo-location.model';
 import {Region} from '../../../../core/data/model/region.model';
 import {GeoLocationService} from '../../../../core/services/geo-location.service';
 import {Subscription} from 'rxjs';
-import {Complaint} from '../../../data/model/complaint.model';
+import {Complaint} from '../../../../core/data/model/complaint.model';
 
 @Component({
   selector: 'app-map-selected-location',

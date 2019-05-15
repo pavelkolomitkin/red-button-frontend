@@ -1,0 +1,34 @@
+<app-admin-common-layout>
+
+  <div class="box">
+
+    <div class="box-header">
+      <h3 class="box-title">Analyst Accounts <small class="text-muted" *ngIf="total !== null">({{ total }})</small></h3>
+    </div>
+
+
+    <ng-container *ngIf="total !== null">
+
+
+      <div class="box-body table-responsive no-padding">
+
+        <app-admin-account-common-list [list]="list" [accountType]="'analyst'"></app-admin-account-common-list>
+
+      </div>
+
+      <div class="box-footer">
+        <app-paginator
+                [itemsOnPage]="10"
+                [totalItems]="total"
+        ></app-paginator>
+      </div>
+
+
+    </ng-container>
+
+  </div>
+
+  <div class="alert alert-info" *ngIf="total === 0">No Accounts</div>
+
+
+</app-admin-common-layout>

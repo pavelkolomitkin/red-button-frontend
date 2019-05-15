@@ -1,4 +1,4 @@
-import {ComplaintConfirmation} from './complaint-confirmation.model';
+import {ComplaintConfirmation} from '../../../core/data/model/complaint-confirmation.model';
 
 export class ProfileCommonInfo
 {

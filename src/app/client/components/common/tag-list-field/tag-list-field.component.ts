@@ -1,6 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ComplaintTagService} from '../../../services/complaint-tag.service';
-import {ComplaintTag} from '../../../data/model/complaint-tag.model';
+import {ComplaintTag} from '../../../../core/data/model/complaint-tag.model';
 import {NgbTypeaheadSelectItemEvent} from '@ng-bootstrap/ng-bootstrap';
 import {Observable, of} from 'rxjs';
 import {debounceTime, map, mergeMap, tap} from 'rxjs/operators';

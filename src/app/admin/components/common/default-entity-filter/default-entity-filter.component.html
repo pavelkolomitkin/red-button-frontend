@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-4">
+    <label>Period</label>
+    <app-date-range-picker (onChange)="onDatePeriodChangeHandler($event); onChangeHandler($event)"></app-date-range-picker>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Region</label>
+      <select
+              class="form-control"
+              [(ngModel)]="selectedRegion"
+              [compareWith]="compareEntity"
+              [required]="false"
+              (ngModelChange)="onRegionChangeHandler($event); onChangeHandler($event)"
+              name="selectedRegion"
+              id="selectedRegion"
+      >
+        <option [value]="null" class="text-muted"> - </option>
+        <option *ngFor="let region of regions | async" [ngValue]="region">{{ region.title }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Service Type</label>
+      <select
+              class="form-control"
+              [(ngModel)]="selectedServiceType"
+              [compareWith]="compareEntity"
+              [required]="false"
+              (ngModelChange)="onServiceTypeChangeHandler($event); onChangeHandler($event)"
+              name="selectedServiceType"
+              id="selectedServiceType"
+      >
+        <option [value]="null" class="text-muted"> - </option>
+        <option *ngFor="let serviceType of serviceTypes | async" [ngValue]="serviceType">{{ serviceType.title }}</option>
+      </select>
+    </div>
+  </div>
+</div>

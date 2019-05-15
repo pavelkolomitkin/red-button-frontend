@@ -1,6 +1,6 @@
 import * as actions from './complaint-picture.actions';
 import {UploadItem} from '../../shared/data/model/upload-item.model';
-import {ComplaintPicture} from './model/complaint-picture.model';
+import {ComplaintPicture} from '../../core/data/model/complaint-picture.model';
 
 export interface State {
     uploadingFileSet: Array<UploadItem<ComplaintPicture>>;

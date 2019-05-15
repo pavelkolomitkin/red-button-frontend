@@ -3,6 +3,7 @@ import {IssueComment} from '../data/model/issue-comment.model';
 import {map} from 'rxjs/operators';
 import {Issue} from '../data/model/issue.model';
 import {Injectable} from '@angular/core';
+import {EntityTransformer} from './helper/entity-transformer.helper';
 
 @Injectable()
 export class IssueCommentService extends BaseService
@@ -13,7 +14,15 @@ export class IssueCommentService extends BaseService
 
         return this.http.get<{ comments: Array<IssueComment>, total: number }>('/issue-comment/' + issue.id + '/list', {
             params: params
-        });
+        }).pipe(
+            map(({comments, total}) => {
+
+                return {
+                    comments: comments.map(item => EntityTransformer.transformIssueComment(item)),
+                    total: total
+                };
+            })
+        );
     }
 
     create(comment: IssueComment)
@@ -23,7 +32,7 @@ export class IssueCommentService extends BaseService
         })
             .pipe(
                 map(({ comment }) => {
-                    return comment
+                    return EntityTransformer.transformIssueComment(comment)
                 })
             );
     }
@@ -35,7 +44,8 @@ export class IssueCommentService extends BaseService
         })
             .pipe(
                 map(({ comment }) => {
-                    return comment
+
+                    return EntityTransformer.transformIssueComment(comment);
                 })
             );
     }

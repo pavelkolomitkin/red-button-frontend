@@ -1,5 +1,5 @@
 import * as actions from './video.actions';
-import {Video} from './model/video.model';
+import {Video} from '../../core/data/model/video.model';
 
 export interface State {
     creationLink: string;

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ComplaintConfirmation} from '../../../../../data/model/complaint-confirmation.model';
+import {ComplaintConfirmation} from '../../../../../../core/data/model/complaint-confirmation.model';
 
 @Component({
   selector: 'app-complaint-confirmation-map-balloon',

@@ -1,0 +1,32 @@
+<div class="box box-warning">
+  <div class="box-header with-border">
+    <h3 class="box-title">Latest Complaints</h3>
+  </div>
+
+  <div class="box-body" >
+
+    <ul class="products-list product-list-in-box">
+      <li class="item" *ngFor="let complaint of complaints">
+        <div class="product-info">
+          <a [routerLink]="'/admin/complaint/' + complaint.id" class="product-title">{{ complaint.region.title }}
+            <span title="pictures" class="label label-danger pull-right" *ngIf="complaint.pictures.length > 0">{{ complaint.pictures.length }} picture(s) </span>
+            <span title="videos" class="label label-primary pull-right margin-r-5" *ngIf="complaint.videos.length > 0">{{ complaint.videos.length }} video(s)</span>
+
+          </a>
+          <span class="product-description">
+            {{ complaint.message.length > 150 ? (complaint.message | slice:0:150) + '...' : complaint.message }}
+          </span>
+
+          <span class="pull-right text-muted small">{{ complaint.createdAt | amFromUnix }}</span>
+        </div>
+      </li>
+
+    </ul>
+
+  </div>
+
+  <div class="box-footer text-center">
+    <a [routerLink]="'/admin/complaint/list'">View All Complaints</a>
+  </div>
+
+</div>

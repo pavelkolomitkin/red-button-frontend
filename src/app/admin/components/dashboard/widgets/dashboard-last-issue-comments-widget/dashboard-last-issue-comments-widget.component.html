@@ -1,0 +1,37 @@
+<div class="box box-warning direct-chat direct-chat-warning">
+  <div class="box-header with-border">
+    <h3 class="box-title">Latest Comments</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <!-- Conversations are loaded here -->
+    <div class="direct-chat-messages">
+
+
+      <div class="direct-chat-msg right" *ngFor="let comment of comments">
+        <div class="direct-chat-info clearfix">
+          <span class="direct-chat-name pull-right">{{ comment.author.fullName }}</span>
+          <span class="direct-chat-timestamp pull-left">{{ comment.createdAt | amFromUnix }}</span>
+        </div>
+        <!-- /.direct-chat-info -->
+        <img class="direct-chat-img" src="../../../../../../assets/default_user_avatar/icons8-user-100.png">
+        <!-- /.direct-chat-img -->
+        <div class="direct-chat-text">
+          {{ comment.message.length > 150 ? (comment.message | slice:0:150) + '...' : comment.message }}
+        </div>
+        <div class="pull-left">
+          <a [routerLink]="'/admin/issue/' + comment.issue.id">{{ comment.issue.serviceType ? comment.issue.serviceType.title : 'Issue >' }}</a>
+        </div>
+        <!-- /.direct-chat-text -->
+      </div>
+
+
+    </div>
+    <!--/.direct-chat-messages-->
+  </div>
+  <!-- /.box-body -->
+  <div class="box-footer">
+
+  </div>
+  <!-- /.box-footer-->
+</div>

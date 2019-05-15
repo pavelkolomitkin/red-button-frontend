@@ -1,4 +1,6 @@
-export interface Company
+import {AdministrativeUnit} from './administrative-unit.model';
+
+export class Company
 {
     id: number;
 
@@ -21,4 +23,17 @@ export interface Company
     email: string;
 
     site: string;
+
+    INN?: string;
+
+    OGRN?: string;
+
+    headName?: string;
+
+    buildingNumber?: number;
+
+    surface?: number;
+
+    administrativeUnits?: Array<AdministrativeUnit> = [];
+
 }

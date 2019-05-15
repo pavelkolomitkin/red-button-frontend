@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Video} from '../data/model/video.model';
+import {Video} from '../../core/data/model/video.model';
 import {map} from 'rxjs/operators';
 
 @Injectable()

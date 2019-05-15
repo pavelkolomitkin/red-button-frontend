@@ -1,0 +1,63 @@
+<div class="box box-info">
+  <div class="box-header with-border">
+    <h3 class="box-title">Latest Issues</h3>
+
+<!--    <div class="box-tools pull-right">-->
+<!--      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>-->
+<!--      </button>-->
+<!--      <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>-->
+<!--    </div>-->
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <div class="table-responsive">
+      <table class="table no-margin">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Service Type</th>
+            <th>Company</th>
+            <th>Region</th>
+            <th>Signatures</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let issue of issues">
+            <td>
+              <a [routerLink]="'/admin/issue/' + issue.id">{{ issue.id }}</a>
+            </td>
+            <td>
+              <span class="text-primary" *ngIf="issue.serviceType">{{ issue.serviceType.title }}</span>
+              <ng-template #noServiceType>
+                <span class="text-muted">-</span>
+              </ng-template>
+            </td>
+            <td>
+              <span *ngIf="!!issue.company" class="text-primary">{{ issue.company.title }}</span>
+              <ng-template #noCompany>
+                <span class="text-muted">-</span>
+              </ng-template>
+            </td>
+            <td [attr.title]="issue.address.displayName">
+              <span class="text text-primary">{{ issue.region.title }} </span>
+              <span class="text text-muted small">({{ issue.region.federalDistrict.title }})</span>
+            </td>
+            <td>
+              <app-issue-signature-progress [issue]="issue"></app-issue-signature-progress>
+            </td>
+            <td>
+              {{ issue.createdAt | amFromUnix }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.table-responsive -->
+  </div>
+  <!-- /.box-body -->
+  <div class="box-footer clearfix">
+    <a [routerLink]="'/admin/issue/list'" class="btn btn-sm btn-default btn-flat pull-right">View All Issues</a>
+  </div>
+  <!-- /.box-footer -->
+</div>

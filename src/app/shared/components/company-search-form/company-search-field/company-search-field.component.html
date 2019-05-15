@@ -1,0 +1,17 @@
+<div class="form-group url-form-field">
+  <label for="company-search">Company Name</label>
+  <input
+          #inputElement
+          id="company-search"
+          type="text"
+          class="form-control"
+          name="company"
+          [(ngModel)]="model"
+          [ngbTypeahead]="search"
+          [inputFormatter]="formatter"
+          [resultFormatter]="formatter"
+          (selectItem)="onItemSelectHandler($event)"
+          (keydown.enter)="onEnterHandler($event)"
+
+  />
+</div>

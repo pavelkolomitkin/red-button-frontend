@@ -6,7 +6,7 @@ import {VideoService} from '../../services/video.service';
 import {Observable, of} from 'rxjs';
 import {VIDEO_CREATE_START, VideoCreateError, VideoCreateStart, VideoCreateSuccess} from '../video.actions';
 import {catchError, map, mergeMap} from 'rxjs/operators';
-import {Video} from '../model/video.model';
+import {Video} from '../../../core/data/model/video.model';
 
 @Injectable()
 export class VideoEffects

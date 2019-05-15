@@ -55,7 +55,7 @@ export class IssueEffects
                     return new IssueGetSuccess(issue);
                 }),
                 catchError((errors) => {
-                    return of(new IssueGetError(errors.error));
+                    return of(new IssueGetError({ message : 'Not found'}));
                 })
             );
         })

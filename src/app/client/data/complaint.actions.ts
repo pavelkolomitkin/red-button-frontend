@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import {Complaint} from './model/complaint.model';
+import {Complaint} from '../../core/data/model/complaint.model';
 
 export const COMPLAINT_USER_LIST_RESET = 'COMPLAINT_USER_LIST_RESET';
 export const COMPLAINT_USER_LIST_LOAD_START = 'COMPLAINT_USER_LIST_LOAD_START';

@@ -9,7 +9,7 @@ import {filter} from 'rxjs/operators';
 import {GlobalConfirmationInit, GlobalPageTitle} from '../../../../core/data/actions';
 import {ActionConfirmation} from '../../../../core/data/model/action-confirmation.model';
 import {ConfirmationActionOption} from '../../../../core/data/model/confirmation-action-option.model';
-import {ComplaintConfirmation} from '../../../data/model/complaint-confirmation.model';
+import {ComplaintConfirmation} from '../../../../core/data/model/complaint-confirmation.model';
 import {ComplaintConfirmationChangeStatusReset} from '../../../data/complaint-confirmation.actions';
 
 @Component({
@@ -28,6 +28,7 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
   deleteConfirmationSubscription: Subscription;
   deleteSubscription: Subscription;
   likeSubscription: Subscription;
+  detailsErrorSubscription: Subscription;
 
   isOwnIssue: boolean = false;
 
@@ -61,6 +62,14 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
       this.issue = issue;
 
       this.store.dispatch(new GlobalPageTitle('Issue details', this.issue.client.fullName));
+    });
+
+    this.detailsErrorSubscription = this.store.pipe(
+        select(state => state.clientIssue.issueDetailsErrors),
+        filter(result => !!result),
+        filter(result => Object.keys(result).length > 0)
+    ).subscribe(() => {
+        this.router.navigateByUrl('/client/404');
     });
 
 
@@ -111,6 +120,7 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
     this.deleteConfirmationSubscription.unsubscribe();
     this.deleteSubscription.unsubscribe();
     this.likeSubscription.unsubscribe();
+    this.detailsErrorSubscription.unsubscribe();
   }
 
   onDeleteClickHandler(event)

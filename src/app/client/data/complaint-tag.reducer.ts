@@ -1,5 +1,5 @@
 import * as actions from './complaint-tag.actions';
-import {ComplaintTag} from './model/complaint-tag.model';
+import {ComplaintTag} from '../../core/data/model/complaint-tag.model';
 
 export interface State {
 

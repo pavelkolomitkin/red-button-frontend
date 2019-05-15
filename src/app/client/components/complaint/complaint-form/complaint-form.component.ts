@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {Complaint} from '../../../data/model/complaint.model';
+import {Complaint} from '../../../../core/data/model/complaint.model';
 import {Observable} from 'rxjs';
 import {ServiceType} from '../../../../core/data/model/service-type.model';
 import {select, Store} from '@ngrx/store';

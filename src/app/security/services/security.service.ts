@@ -14,14 +14,14 @@ export class SecurityService
   public registerUser(data: RegisterData): Observable<User>
   {
     return this.http.post<{ user: User }>('/security/register', data).pipe(
-      map(result => result.user)
+      map(result => <User> result.user)
     );
   }
 
   public registerConfirm(confirmationKey: string): Observable<User>
   {
     return this.http.post<{ user: User }>('/security/confirm-register/' + confirmationKey, {}).pipe(
-      map(result => result.user)
+      map(result => <User> result.user)
     );
   }
 
@@ -38,7 +38,9 @@ export class SecurityService
   public getAuthorizedUser()
   {
     return this.http.get<{user: User}>('/security/profile').pipe(
-      map(result => result.user)
+      map((result) => {
+        return User.createFromRawData(result.user);
+      })
     );
   }
 }

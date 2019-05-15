@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {Video} from '../../../data/model/video.model';
+import {Video} from '../../../../core/data/model/video.model';
 import {VideoService} from '../../../services/video.service';
 import {catchError, map} from 'rxjs/operators';
 import {Subscription} from 'rxjs';

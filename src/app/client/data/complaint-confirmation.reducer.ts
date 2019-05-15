@@ -1,5 +1,5 @@
 import * as actions from './complaint-confirmation.actions';
-import {ComplaintConfirmation} from './model/complaint-confirmation.model';
+import {ComplaintConfirmation} from '../../core/data/model/complaint-confirmation.model';
 
 export interface State
 {

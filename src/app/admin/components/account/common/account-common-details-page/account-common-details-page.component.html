@@ -1,0 +1,76 @@
+<app-admin-common-layout>
+  <div class="box box-primary" *ngIf="!!(account | async)">
+
+    <div class="box-header with-border">
+      <h3 class="box-title">
+        {{ (account | async).fullName }}
+
+        <span class="text-muted" *ngIf="(account | async).isClient()">(Client)</span>
+        <span class="text-muted" *ngIf="(account | async).isCompanyRepresentative()">(Company Representative)</span>
+        <span class="text-muted" *ngIf="(account | async).isAnalyst()">(Analyst)</span>
+      </h3>
+      <div class="box-tools pull-right">
+        <a
+                [routerLink]="'/admin/account/company-representative/' + (account | async).id + '/edit'"
+                *ngIf="(account | async).isCompanyRepresentative()"
+        ><i class="fa fa-edit"></i></a>
+        <a
+                [routerLink]="'/admin/account/analyst/' + (account | async).id + '/edit'"
+                *ngIf="(account | async).isAnalyst()"
+        ><i class="fa fa-edit"></i></a>
+      </div>
+    </div>
+
+    <div class="box-body">
+
+      <p>
+        <b>Email</b>
+        <br/>
+        <span class="text-primary">{{ (account | async).email }}</span>
+      </p>
+
+      <p *ngIf="(account | async).isClient()">
+        <b>Phone Number</b>
+        <br/>
+        <span *ngIf="!!(account | async).phoneNumber; else noPhone;">{{ (account | async).phoneNumber }}</span>
+        <ng-template #noPhone>
+          <span class="text-muted">(None)</span>
+        </ng-template>
+      </p>
+
+      <p>
+        <b>Active</b>
+        <br/>
+        <app-account-active-switcher [account]="(account | async)"></app-account-active-switcher>
+      </p>
+
+      <p *ngIf="(account | async).isCompanyRepresentative()">
+        <b>Company</b>
+        <br/>
+        <span class="text-primary">{{ (account | async).company.title }}</span>
+        <br/>
+        <span *ngFor="let administrativeUnit of (account | async).company.administrativeUnits">
+          {{ administrativeUnit.title }} - ({{administrativeUnit.region.title}}) </span>
+      </p>
+
+      <p>
+        <b>Password</b>
+        <br/>
+        <span class="btn btn-danger" (click)="onResetPasswordClickHandler($event)">Reset Password</span>
+      </p>
+
+    </div>
+    <div class="box-footer">
+      <span class="pull-right small">{{ (account | async).createdAt | amFromUnix }}</span>
+
+    </div>
+
+  </div>
+
+  <ng-template #resetPasswordWindow let-modal>
+    <app-account-reset-password
+            [account]="(account | async)"
+            (onPasswordReset)="onPasswordResetHandler($event)"
+    ></app-account-reset-password>
+  </ng-template>
+</app-admin-common-layout>
