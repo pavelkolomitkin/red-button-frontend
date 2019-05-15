@@ -69,4 +69,11 @@
     </div>
 
   </div>
+
+  <ng-template #resetPasswordWindow let-modal>
+    <app-account-reset-password
+            [account]="(account | async)"
+            (onPasswordReset)="onPasswordResetHandler($event)"
+    ></app-account-reset-password>
+  </ng-template>
 </app-admin-common-layout>

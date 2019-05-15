@@ -49,6 +49,7 @@ import { CommonListPageComponent } from './components/account/common-list-page/c
 import { AccountCommonListComponent } from './components/account/account-common-list/account-common-list.component';
 import { AccountCommonFormComponent } from './components/account/account-common-form/account-common-form.component';
 import { AccountCommonDetailsPageComponent } from './components/account/account-common-details-page/account-common-details-page.component';
+import { AccountResetPasswordComponent } from './components/account/account-reset-password/account-reset-password.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { AccountCommonDetailsPageComponent } from './components/account/account-
     AccountCommonListComponent,
     AccountCommonFormComponent,
     AccountCommonDetailsPageComponent,
+    AccountResetPasswordComponent,
   ],
     imports: [
         CommonModule,
