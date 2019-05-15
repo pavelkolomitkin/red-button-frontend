@@ -137,4 +137,15 @@ export class AccountService extends BaseService
             })
         );
     }
+
+    changeActive(account: User)
+    {
+        return this.http.put<{ account: User }>('/admin/account/change-active/' + account.id, {
+            isActive: account.isActive
+        }).pipe(
+            map(({ account }) => {
+                return EntityTransformer.transformUser(account);
+            })
+        );
+    }
 }

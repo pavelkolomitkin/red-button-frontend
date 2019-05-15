@@ -48,8 +48,7 @@
       </ng-container>
 
       <td>
-        <span class="label label-success" *ngIf="account.isActive">Yes</span>
-        <span class="label label-default" *ngIf="!account.isActive">No</span>
+        <app-account-active-switcher [account]="account"></app-account-active-switcher>
       </td>
 
       <td>{{ account.createdAt | amFromUnix}}</td>

@@ -41,10 +41,7 @@
       <p>
         <b>Active</b>
         <br/>
-        <span class="label label-success" *ngIf="(account | async).isActive; else inActive;">Yes</span>
-        <ng-template #inActive>
-          <span class="label label-default">No</span>
-        </ng-template>
+        <app-account-active-switcher [account]="(account | async)"></app-account-active-switcher>
       </p>
 
       <p *ngIf="(account | async).isCompanyRepresentative()">
