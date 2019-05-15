@@ -9,8 +9,8 @@
       <li class="item" *ngFor="let complaint of complaints">
         <div class="product-info">
           <a [routerLink]="'/admin/complaint/' + complaint.id" class="product-title">{{ complaint.region.title }}
-            <span title="pictures" class="label label-danger pull-right" *ngIf="complaint.pictures.length > 0">{{ complaint.pictures.length }} video(s)</span>
-            <span title="videos" class="label label-primary pull-right margin-r-5" *ngIf="complaint.videos.length > 0">{{ complaint.pictures.length }} picture(s)</span>
+            <span title="pictures" class="label label-danger pull-right" *ngIf="complaint.pictures.length > 0">{{ complaint.pictures.length }} picture(s) </span>
+            <span title="videos" class="label label-primary pull-right margin-r-5" *ngIf="complaint.videos.length > 0">{{ complaint.videos.length }} video(s)</span>
 
           </a>
           <span class="product-description">
