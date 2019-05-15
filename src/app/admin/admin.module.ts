@@ -51,11 +51,13 @@ import { AccountCommonFormComponent } from './components/account/common/account-
 import { AccountCommonDetailsPageComponent } from './components/account/common/account-common-details-page/account-common-details-page.component';
 import { AccountResetPasswordComponent } from './components/account/common/account-reset-password/account-reset-password.component';
 import { AccountActiveSwitcherComponent } from './components/account/common/account-active-switcher/account-active-switcher.component';
-import { DashboardLastComplaintsWidgetComponent } from './components/dashboard/dashboard-last-complaints-widget/dashboard-last-complaints-widget.component';
-import { DashboardLastIssuesWidgetComponent } from './components/dashboard/dashboard-last-issues-widget/dashboard-last-issues-widget.component';
-import { DashboardLastIssueCommentsWidgetComponent } from './components/dashboard/dashboard-last-issue-comments-widget/dashboard-last-issue-comments-widget.component';
-import { DashboardLastClientsWidgetComponent } from './components/dashboard/dashboard-last-clients-widget/dashboard-last-clients-widget.component';
+import { DashboardLastComplaintsWidgetComponent } from './components/dashboard/widgets/dashboard-last-complaints-widget/dashboard-last-complaints-widget.component';
+import { DashboardLastIssuesWidgetComponent } from './components/dashboard/widgets/dashboard-last-issues-widget/dashboard-last-issues-widget.component';
+import { DashboardLastIssueCommentsWidgetComponent } from './components/dashboard/widgets/dashboard-last-issue-comments-widget/dashboard-last-issue-comments-widget.component';
+import { DashboardLastClientsWidgetComponent } from './components/dashboard/widgets/dashboard-last-clients-widget/dashboard-last-clients-widget.component';
 import { IssueSignatureProgressComponent } from './components/issue/issue-list-page/issue-signature-progress/issue-signature-progress.component';
+import { DashboardCommonWidgetComponent } from './components/dashboard/widgets/dashboard-common-widget/dashboard-common-widget.component';
+import {IssueCommentService} from './services/issue-comment.service';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,7 @@ import { IssueSignatureProgressComponent } from './components/issue/issue-list-p
     DashboardLastIssueCommentsWidgetComponent,
     DashboardLastClientsWidgetComponent,
     IssueSignatureProgressComponent,
+    DashboardCommonWidgetComponent,
   ],
     imports: [
         CommonModule,
@@ -114,7 +117,8 @@ import { IssueSignatureProgressComponent } from './components/issue/issue-list-p
         CommonInfoService,
         IssueService,
         ComplaintService,
-        AccountService
+        AccountService,
+        IssueCommentService
     ],
   exports: [
     StoreModule,

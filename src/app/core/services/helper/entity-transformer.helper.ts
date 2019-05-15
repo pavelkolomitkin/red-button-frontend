@@ -45,6 +45,11 @@ export class EntityTransformer
     {
         comment.author = EntityTransformer.transformUser(comment.author);
 
+        if (!!comment.issue)
+        {
+            comment.issue = EntityTransformer.transformIssue(comment.issue);
+        }
+
         return comment;
     }
 
