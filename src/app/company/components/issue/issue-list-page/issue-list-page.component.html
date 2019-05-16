@@ -1,0 +1,86 @@
+<app-company-common-layout>
+
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Issues <small class="text-muted" *ngIf="total !== null">({{ total }})</small></h3>
+        </div>
+
+        <ng-container *ngIf="total !== null">
+
+            <div class="box-body table-responsive no-padding">
+
+                <table class="table table-hover">
+
+                    <tbody>
+
+                        <tr>
+                            <td [ngStyle]="{ minWidth: '40px' }">#</td>
+                            <th>Author</th>
+                            <td>Service Type</td>
+                            <th>Region</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                            <th>Signatures</th>
+                            <th>Photos</th>
+                            <th>Videos</th>
+                        </tr>
+
+                        <tr *ngFor="let issue of list">
+                            <td>
+                                <a [routerLink]="'/company/issue/' + issue.id">{{ issue.id }}</a>
+                            </td>
+                            <td>
+                                {{ issue.client.fullName }}
+                            </td>
+                            <td>
+                                <span class="text-primary" *ngIf="!!issue.serviceType; else noServiceType;">{{ issue.serviceType.title }}</span>
+                                <ng-template #noServiceType>
+                                    <span class="text-muted">-</span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <span class="text-primary">{{ issue.region.title }} </span>
+                                <span class="text-muted">({{ issue.region.federalDistrict.title }})</span>
+                            </td>
+                            <td>
+                                <span class="text-muted small">{{ issue.message.length > 150 ? (issue.message | slice:0:150) + '...' : issue.message }}</span>
+                            </td>
+                            <td title="{{ issue.createdAt | amFromUnix }}">
+                                {{ issue.createdAt | amFromUnix | amTimeAgo }}
+                            </td>
+                            <td>
+                                <app-issue-signature-progress [issue]="issue"></app-issue-signature-progress>
+                            </td>
+                            <td>
+                                <span class="text-primary" *ngIf="issue.pictures.length > 0; else noPhotos;">{{ issue.pictures.length }}</span>
+                                <ng-template #noPhotos>
+                                    <span class="text-muted">-</span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <span class="text-danger" *ngIf="issue.videos.length > 0; else noVideos;">{{ issue.videos.length }}</span>
+                                <ng-template #noVideos>
+                                    <span class="text-muted">-</span>
+                                </ng-template>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="box-footer">
+                <app-paginator
+                        [itemsOnPage]="10"
+                        [totalItems]="total"
+                ></app-paginator>
+            </div>
+
+        </ng-container>
+
+    </div>
+
+</app-company-common-layout>

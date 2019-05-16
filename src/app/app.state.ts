@@ -19,6 +19,8 @@ import * as adminIssueReducer from './admin/data/issue.reducer';
 import * as adminProfileReducer from './admin/data/profile.reducer';
 import * as adminAccountReducer from './admin/data/account.reducer';
 
+import * as companyIssueReducer from './company/data/issue.reducer';
+
 export interface State
 {
   security: securityReducer.State;
@@ -41,4 +43,6 @@ export interface State
   adminIssue: adminIssueReducer.State;
   adminProfile: adminProfileReducer.State;
   adminAccount: adminAccountReducer.State;
+
+  companyIssue: companyIssueReducer.State;
 }

@@ -16,7 +16,8 @@ export class AuthUserGuardService implements CanActivate {
 
   static routePermissionRules: { [s: string]: Array<string> } = {
       admin: [ 'ROLE_ADMIN_USER' ],
-      client: [ 'ROLE_CLIENT_USER' ]
+      client: [ 'ROLE_CLIENT_USER' ],
+      company: [ 'ROLE_COMPANY_REPRESENTATIVE_USER' ]
   };
 
   constructor(

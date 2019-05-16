@@ -32,6 +32,8 @@ import {ComplaintMapViewComponent} from './components/complaint-map-view/complai
 import {ComplaintDetailsBalloonComponent} from './components/complaint-map-view/complaint-details-balloon/complaint-details-balloon.component';
 import {CompanySearchFormComponent} from './components/company-search-form/company-search-form.component';
 import { CompanySearchFieldComponent } from './components/company-search-form/company-search-field/company-search-field.component';
+import {PaginatorComponent} from './components/paginator/paginator.component';
+import {IssueSignatureProgressComponent} from './components/issue-signature-progress/issue-signature-progress.component';
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import { CompanySearchFieldComponent } from './components/company-search-form/co
       ComplaintMapViewComponent,
       ComplaintDetailsBalloonComponent,
       CompanySearchFormComponent,
-      CompanySearchFieldComponent
+      CompanySearchFieldComponent,
+      PaginatorComponent,
+      IssueSignatureProgressComponent
   ],
   imports: [
     CommonModule,
@@ -101,7 +105,9 @@ import { CompanySearchFieldComponent } from './components/company-search-form/co
         ComplaintMapViewComponent,
         ComplaintDetailsBalloonComponent,
         CompanySearchFormComponent,
-        CompanySearchFieldComponent
+        CompanySearchFieldComponent,
+        PaginatorComponent,
+        IssueSignatureProgressComponent
     ],
   entryComponents: [
       MapComponent,

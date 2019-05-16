@@ -139,6 +139,33 @@
 
           </ng-container>
 
+          <ng-container *ngxPermissionsOnly="['ROLE_COMPANY_REPRESENTATIVE_USER']">
+
+
+              <li [routerLinkActive]="'active'">
+                  <a routerLink="/company/issue/geo" class="btn"><i class="fa fa-map-marker"></i> Map</a>
+              </li>
+
+              <li class="dropdown user user-menu">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <!--            <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->
+                      <span class="hidden-xs">{{ (user | async).fullName }} </span><b class="small">({{ (user | async).company.title }})</b>
+                  </a>
+                  <ul class="dropdown-menu">
+
+                      <li class="user-footer">
+                          <div class="pull-left">
+                              <a routerLink="/company/profile" class="btn btn-default btn-flat">Profile</a>
+                          </div>
+                          <div class="pull-right">
+                              <span (click)="onLogoutClickHandler()" class="btn btn-default btn-flat">Sign out</span>
+                          </div>
+                      </li>
+                  </ul>
+              </li>
+
+          </ng-container>
+
       </ul>
     </div>
   </nav>
