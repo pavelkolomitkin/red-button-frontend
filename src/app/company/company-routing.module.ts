@@ -5,6 +5,7 @@ import {BreadCrumb} from '../core/data/model/bread-crumb.model';
 import {IssueListPageComponent} from './components/issue/issue-list-page/issue-list-page.component';
 import {IssueDetailsPageComponent} from './components/issue/issue-details-page/issue-details-page.component';
 import {IssueGeographyPageComponent} from './components/issue/issue-geography-page/issue-geography-page.component';
+import {NotFoundPageComponent} from '../shared/components/not-found-page/not-found-page.component';
 
 const routes: Routes = [
     {
@@ -50,6 +51,13 @@ const routes: Routes = [
                 path: 'issue/:id',
                 component: IssueDetailsPageComponent,
                 pathMatch: 'full'
+            },
+            {
+                path: '404',
+                component: NotFoundPageComponent,
+                data: {
+
+                }
             },
 
         ]

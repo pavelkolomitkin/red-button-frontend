@@ -21,8 +21,6 @@ import { IssueItemComponent } from './components/issue/issue-list-page/issue-ite
 import {State} from '../app.state';
 import {RegionAllGetStart} from '../core/data/region.actions';
 import {ServiceTypeListLoadStart} from '../core/data/service-type.actions';
-import { SignatureListComponent } from './components/issue/issue-details-page/signature-list/signature-list.component';
-import { SignatureItemComponent } from './components/issue/issue-details-page/signature-list/signature-item/signature-item.component';
 import { SignaturesWidgetComponent } from './components/issue/issue-details-page/signatures-widget/signatures-widget.component';
 import { LikeWidgetComponent } from './components/issue/issue-details-page/like-widget/like-widget.component';
 import {CommonInfoService} from './services/common-info.service';
@@ -67,8 +65,6 @@ import {IssueCommentService} from './services/issue-comment.service';
     DashboardPageComponent,
     CommonLayoutComponent,
     IssueItemComponent,
-    SignatureListComponent,
-    SignatureItemComponent,
     SignaturesWidgetComponent,
     LikeWidgetComponent,
     DefaultEntityFilterComponent,

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ComplaintConfirmation} from '../../../../../../core/data/model/complaint-confirmation.model';
+import {ComplaintConfirmation} from '../../../../../core/data/model/complaint-confirmation.model';
 
 @Component({
   selector: 'app-admin-issue-signature-item',

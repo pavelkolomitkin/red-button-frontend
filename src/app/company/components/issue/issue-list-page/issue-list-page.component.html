@@ -27,7 +27,7 @@
 
                         <tr *ngFor="let issue of list">
                             <td>
-                                <a [routerLink]="'/company/issue/' + issue.id">{{ issue.id }}</a>
+                                <a [routerLink]="'/company/issue/' + issue.id" class="center-block">{{ issue.id }}</a>
                             </td>
                             <td>
                                 {{ issue.client.fullName }}

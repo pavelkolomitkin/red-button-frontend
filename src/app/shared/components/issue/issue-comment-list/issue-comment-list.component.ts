@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Issue} from '../../../core/data/model/issue.model';
-import {IssueCommentService} from '../../../core/services/issue-comment.service';
-import {IssueComment} from '../../../core/data/model/issue-comment.model';
+import {Issue} from '../../../../core/data/model/issue.model';
+import {IssueCommentService} from '../../../../core/services/issue-comment.service';
+import {IssueComment} from '../../../../core/data/model/issue-comment.model';
 
 @Component({
   selector: 'app-issue-comment-list',

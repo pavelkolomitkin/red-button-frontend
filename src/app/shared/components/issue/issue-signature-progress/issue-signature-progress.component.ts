@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Issue} from '../../../core/data/model/issue.model';
-import {ComplaintConfirmationStatus} from '../../../core/data/model/complaint-confirmation-status.model';
+import {Issue} from '../../../../core/data/model/issue.model';
+import {ComplaintConfirmationStatus} from '../../../../core/data/model/complaint-confirmation-status.model';
 
 @Component({
   selector: 'app-issue-signature-progress',
