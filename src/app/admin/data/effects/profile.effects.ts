@@ -26,7 +26,7 @@ export class ProfileEffects
         ofType(PROFILE_GET_COMMON_INFO_START),
         mergeMap((action: ProfileGetCommonInfoStart) => {
 
-            return this.service.getCommonInfo().pipe(
+            return this.service.getInfo().pipe(
                 map((info: ProfileCommonInfo) => {
                     return new ProfileGetCommonInfoSuccess(info);
                 }),

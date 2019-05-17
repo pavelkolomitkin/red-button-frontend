@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import User from '../../data/model/user.model';
 import {ProfileCommonInfo} from '../../../client/data/model/profile-common-info.model';
 import {ProfileCommonInfo as AdminCommonInfo} from '../../../admin/data/model/profile-common-info.model';
+import { ProfileCommonInfo as CompanyCommonInfo } from '../../../company/data/model/profile-common-info.model';
 import {filter} from 'rxjs/operators';
 
 declare var $: any;
@@ -22,6 +23,7 @@ export class MainMenuComponent implements OnInit, AfterViewInit {
 
   clientCommonInfo: Observable<ProfileCommonInfo>;
   adminCommonInfo: Observable<AdminCommonInfo>;
+  companyCommonInfo: Observable<CompanyCommonInfo>;
 
   constructor(private store:Store<State>)
   {
@@ -36,6 +38,12 @@ export class MainMenuComponent implements OnInit, AfterViewInit {
 
     this.adminCommonInfo = this.store.pipe(
         select(state => state.adminProfile),
+        filter(result => !!result),
+        select(result => result.commonInfo)
+    );
+
+    this.companyCommonInfo = this.store.pipe(
+        select(state => state.companyProfile),
         filter(result => !!result),
         select(result => result.commonInfo)
     );

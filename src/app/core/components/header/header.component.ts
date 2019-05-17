@@ -6,6 +6,7 @@ import User from '../../data/model/user.model';
 import {UserLogout} from '../../../security/data/actions';
 import {filter} from 'rxjs/operators';
 import {ProfileCommonInfo} from '../../../client/data/model/profile-common-info.model';
+import { ProfileCommonInfo as CompanyCommonInfo } from '../../../company/data/model/profile-common-info.model';
 
 @Component({
   selector: 'app-header',
@@ -17,12 +18,19 @@ export class HeaderComponent implements OnInit {
   user: Observable<User>;
 
   clientCommonInfo: Observable<ProfileCommonInfo>;
+  companyCommonInfo: Observable<CompanyCommonInfo>;
 
   constructor(private store:Store<State>) {
     this.user = this.store.pipe(select(state => state.security.authorizedUser));
 
     this.clientCommonInfo = this.store.pipe(
         select(state => state.clientProfile),
+        filter(result => !!result),
+        select(result => result.commonInfo)
+    );
+
+    this.companyCommonInfo = this.store.pipe(
+        select(state => state.companyProfile),
         filter(result => !!result),
         select(result => result.commonInfo)
     );

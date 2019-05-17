@@ -14,7 +14,8 @@ export const environment = {
   uploadPictureAllowedMimeTypes: ['image/jpeg', 'image/png'],
 
   clientCommonInfoInterval: 10000,
-  adminCommonInfoInterval: 10000
+  adminCommonInfoInterval: 10000,
+  companyCommonInfoInterval: 10000,
 };
 
 /*

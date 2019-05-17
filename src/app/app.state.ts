@@ -21,6 +21,7 @@ import * as adminAccountReducer from './admin/data/account.reducer';
 
 import * as companyIssueReducer from './company/data/issue.reducer';
 import * as companyComplaintReducer from './company/data/complaint.reducer';
+import * as companyProfileReducer from './company/data/profile.reducer';
 
 export interface State
 {
@@ -47,4 +48,5 @@ export interface State
 
   companyIssue: companyIssueReducer.State;
   companyComplaint: companyComplaintReducer.State;
+  companyProfile: companyProfileReducer.State;
 }

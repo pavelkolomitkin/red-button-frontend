@@ -143,7 +143,11 @@
 
 
               <li [routerLinkActive]="'active'">
-                  <a routerLink="/company/issue/geo" class="btn"><i class="fa fa-map-marker"></i> Map</a>
+                  <a routerLink="/company/issue/geo" class="btn"><i class="fa fa-map-marker"></i>
+                      <ng-container *ngIf="(companyCommonInfo | async) !== null">
+                          <span class="label label-warning" *ngIf="(companyCommonInfo | async).issueNumber > 0">{{ (companyCommonInfo | async).issueNumber }}</span>
+                      </ng-container>
+                  </a>
               </li>
 
               <li class="dropdown user user-menu">
