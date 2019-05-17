@@ -6,6 +6,7 @@ import {IssueListPageComponent} from './components/issue/issue-list-page/issue-l
 import {IssueDetailsPageComponent} from './components/issue/issue-details-page/issue-details-page.component';
 import {IssueGeographyPageComponent} from './components/issue/issue-geography-page/issue-geography-page.component';
 import {NotFoundPageComponent} from '../shared/components/not-found-page/not-found-page.component';
+import {ComplaintDetailsPageComponent} from './components/complaint/complaint-details-page/complaint-details-page.component';
 
 const routes: Routes = [
     {
@@ -59,6 +60,13 @@ const routes: Routes = [
 
                 }
             },
+            {
+                path: 'complaint/:id',
+                component: ComplaintDetailsPageComponent,
+                data: {
+
+                }
+            }
 
         ]
     }

@@ -18,8 +18,14 @@
       confirmation.complaint.message.length > 150 ?
               (confirmation.complaint.message | slice:0:150) + '...'
               : confirmation.complaint.message }}
-      <ng-container *ngxPermissionsExcept="['ROLE_ADMIN_USER']">
+      <ng-container *ngxPermissionsOnly="['ROLE_CLIENT_USER']">
         <a [routerLink]="'/client/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">More...</a>
+      </ng-container>
+      <ng-container *ngxPermissionsOnly="['ROLE_ADMIN_USER']">
+        <a [routerLink]="'/admin/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">More...</a>
+      </ng-container>
+      <ng-container *ngxPermissionsOnly="['ROLE_COMPANY_REPRESENTATIVE_USER']">
+        <a [routerLink]="'/company/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">More...</a>
       </ng-container>
     </p>
     <p>

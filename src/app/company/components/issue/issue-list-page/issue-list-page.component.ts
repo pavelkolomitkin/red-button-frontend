@@ -20,7 +20,9 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
   queryParamSubscription: Subscription;
   currentPage: number;
 
-  searchParams: any = {};
+  searchParams: any = {
+    popular: 0
+  };
 
   constructor(
       private store: Store<State>,
@@ -64,6 +66,24 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
     {
       this.store.dispatch(new IssueListLoadStart(this.currentPage, this.searchParams));
     }
+  }
+
+  onSearchFilterChangeHandler({ period, popular })
+  {
+    if (period !== null)
+    {
+      this.searchParams.startDate = period.startDate.toUTCString();
+      this.searchParams.endDate = period.endDate.toUTCString();
+    }
+    else
+    {
+      delete this.searchParams.startDate;
+      delete this.searchParams.endDate;
+    }
+
+    this.searchParams.popular = popular ? 1 : 0;
+
+    this.resetList();
   }
 
 }

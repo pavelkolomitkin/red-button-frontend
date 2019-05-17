@@ -5,6 +5,10 @@
             <h3 class="box-title">Issues <small class="text-muted" *ngIf="total !== null">({{ total }})</small></h3>
         </div>
 
+        <div class="box-body with-border">
+            <app-company-issue-search-filter (onChange)="onSearchFilterChangeHandler($event)"></app-company-issue-search-filter>
+        </div>
+
         <ng-container *ngIf="total !== null">
 
             <div class="box-body table-responsive no-padding">
@@ -23,6 +27,8 @@
                             <th>Signatures</th>
                             <th>Photos</th>
                             <th>Videos</th>
+                            <th>Likes</th>
+                            <th>Comments</th>
                         </tr>
 
                         <tr *ngFor="let issue of list">
@@ -64,6 +70,9 @@
                                 </ng-template>
                             </td>
 
+                            <td>{{ issue.likeNumber }}</td>
+                            <td>{{ issue.commentNumber }}</td>
+
                         </tr>
 
                     </tbody>
@@ -78,6 +87,8 @@
                         [totalItems]="total"
                 ></app-paginator>
             </div>
+
+            <div class="alert alert-info" *ngIf="total === 0">No Issues</div>
 
         </ng-container>
 

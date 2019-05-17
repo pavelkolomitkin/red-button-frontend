@@ -30,7 +30,10 @@
         <p>
           <b>Signatures</b>
           <br/>
-          <app-issue-signature-list [issue]="issue"></app-issue-signature-list>
+          <app-issue-signature-item
+                  *ngFor="let confirmation of issue.complaintConfirmations"
+                  [confirmation]="confirmation"
+          ></app-issue-signature-item>
         </p>
         <p>
           <b>Service Type</b>
