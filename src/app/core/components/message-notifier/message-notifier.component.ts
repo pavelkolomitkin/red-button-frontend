@@ -27,6 +27,12 @@ export class MessageNotifierComponent implements OnInit {
       }
     );
 
+    this.store.pipe(select(state => state.core.lastWarningMessage), filter(message => !!message)).subscribe(
+        (message: NotifyMessage) => {
+          this.toastr.warning(message.text, 'Warning!');
+        }
+    );
+
     this.store.pipe(select(state => state.core.lastErrorMessage), filter(message => !!message)).subscribe(
       (message: NotifyMessage) => {
         this.toastr.error(message.text, 'Oops!')

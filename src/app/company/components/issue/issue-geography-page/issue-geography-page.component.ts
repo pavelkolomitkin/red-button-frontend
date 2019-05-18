@@ -7,9 +7,12 @@ import {MapComponent} from '../../../../shared/components/map/map.component';
 import {MapViewConfiguratorFactory} from '../../../../core/services/map/map-view-configurator.factory';
 import {IssueGeoSearchReset, IssueGeoSearchStart} from '../../../data/issue.actions';
 import {MapViewConfiguratorBase} from '../../../../core/services/map/map-view-configurator-base';
-import {combineLatest, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {Issue} from '../../../../core/data/model/issue.model';
 import {IssueBalloonComponent} from './issue-balloon/issue-balloon.component';
+import {GlobalNotifyWarningMessage} from '../../../../core/data/actions';
+import {NotifyMessage} from '../../../../core/data/model/notify-message.model';
+import {filter, skip} from 'rxjs/operators';
 
 @Component({
   selector: 'app-issue-geography-page',
@@ -20,6 +23,7 @@ export class IssueGeographyPageComponent implements OnInit, OnDestroy {
 
   @ViewChild('map') map: MapComponent;
 
+  centeringBalloonSubscription: Subscription;
   searchSubscription: Subscription;
 
   searchParams: any = {};
@@ -44,32 +48,37 @@ export class IssueGeographyPageComponent implements OnInit, OnDestroy {
       this.searchSubscription.unsubscribe();
     }
 
+    if (!!this.centeringBalloonSubscription)
+    {
+      this.centeringBalloonSubscription.unsubscribe();
+    }
+
   }
 
   onMapReadyHandler()
   {
-    this.searchSubscription = combineLatest(
-        this.store.pipe(select(state => state.companyIssue.geoList)),
-        this.store.pipe(select(state => state.security.authorizedUser))
-    ).subscribe(([list, user]) => {
+    this.searchSubscription = this.store.pipe(select(state => state.companyIssue.geoList), skip(1)).subscribe((list) => {
 
       this.updateBalloons(list);
-
 
       let mapView: MapViewConfiguratorBase = null;
 
       if (list.length > 0)
       {
         mapView = this.mapViewConfiguratorFactory.createConfiguratorByPoints(this.map, list.map(item => item.location));
+        mapView.adjust();
       }
       else
       {
-        mapView = this.mapViewConfiguratorFactory.createConfiguratorBySinglePoint(this.map, this.defaultGeoPosition);
+        this.store.dispatch(new GlobalNotifyWarningMessage(new NotifyMessage('No Issues')));
       }
 
-      mapView.adjust();
-
     });
+
+    this.centeringBalloonSubscription = this.store.pipe(select(state => state.map.centeringBalloonLocation), filter(result => !!result))
+        .subscribe((location: GeoLocation) => {
+          this.map.setCenter(location, true);
+        });
 
     this.searchIssues();
   }
