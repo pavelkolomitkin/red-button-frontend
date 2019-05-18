@@ -13,18 +13,6 @@ const routes: Routes = [
         path: '', children: [
             { path: '', redirectTo: 'issue/list', pathMatch: 'full' },
             {
-                path: 'profile',
-                component: ProfilePageComponent,
-                data: {
-                    pageTitle: 'Profile',
-                    pageSubTitle: '',
-                    breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('My Profile', null, 'user')
-                    ]
-                }
-            },
-            {
                 path: 'issue/list',
                 component: IssueListPageComponent,
                 data: {
