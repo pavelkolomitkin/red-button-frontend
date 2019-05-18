@@ -11,6 +11,8 @@ export class IssueSignatureProgressComponent implements OnInit {
 
   @Input() issue: Issue;
 
+  @Input() noneMessage = null;
+
   constructor() { }
 
   ngOnInit() {

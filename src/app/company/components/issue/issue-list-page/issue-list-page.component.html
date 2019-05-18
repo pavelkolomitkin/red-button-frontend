@@ -55,7 +55,7 @@
                                 {{ issue.createdAt | amFromUnix | amTimeAgo }}
                             </td>
                             <td>
-                                <app-issue-signature-progress [issue]="issue"></app-issue-signature-progress>
+                                <app-issue-signature-progress [issue]="issue" [noneMessage]="'-'"></app-issue-signature-progress>
                             </td>
                             <td>
                                 <span class="text-primary" *ngIf="issue.pictures.length > 0; else noPhotos;">{{ issue.pictures.length }}</span>
