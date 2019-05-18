@@ -1,7 +1,17 @@
 <app-map-balloon [colorStyle]="'green'" isCollapsed="true" *ngIf="!!complaint">
   <div class="balloon-title">{{ complaint.region.title }}</div>
+
   <div class="balloon-content">
+    <div class="text-primary">{{ complaint.client.fullName }}</div>
     {{ complaint.address.displayName }}
+    <div class="text-muted">{{ complaint.message.length > 150 ? (complaint.message | slice:0:150) : complaint.message }}
+      <ng-container *ngxPermissionsOnly="['ROLE_CLIENT_USER']">
+        <a [routerLink]="'/client/complaint/' + complaint.id">More...</a>
+      </ng-container>
+    </div>
     <div class="text-primary" *ngIf="!!complaint.serviceType">{{ complaint.serviceType.title }}</div>
+  </div>
+  <div class="balloon-footer">
+    <span class="pull-right text-muted small" title="{{ complaint.createdAt | amFromUnix }}">{{ complaint.createdAt | amFromUnix | amTimeAgo }}</span>
   </div>
 </app-map-balloon>

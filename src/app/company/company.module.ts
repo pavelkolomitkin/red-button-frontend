@@ -24,7 +24,7 @@ import {ProfileEffects} from './data/effects/profile.effects';
 import {State} from '../app.state';
 import {CompanyModuleInitialized} from './data/profile.actions';
 import { IssueGeoSearchFilterComponent } from './components/issue/issue-geography-page/issue-geo-search-filter/issue-geo-search-filter.component';
-import { IssueBalloonComponent } from './components/issue/issue-geography-page/issue-balloon/issue-balloon.component';
+import {IssueBalloonComponent} from './components/issue/issue-geography-page/issue-balloon/issue-balloon.component';
 
 
 @NgModule({
@@ -38,7 +38,7 @@ import { IssueBalloonComponent } from './components/issue/issue-geography-page/i
     ComplaintDetailsPageComponent,
     IssueSignatureItemComponent,
     IssueGeoSearchFilterComponent,
-    IssueBalloonComponent
+      IssueBalloonComponent
   ],
   imports: [
     CommonModule,

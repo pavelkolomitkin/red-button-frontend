@@ -1,0 +1,60 @@
+<app-map-balloon [colorStyle]="'issue'"
+                 [isCollapsed]="true"
+                 [populateCollapsing]="true"
+                 [location]="issue.location"
+                 [hasToCenteredOnOpen]="true"
+>
+
+  <div class="balloon-title" title="{{ issue.address.displayName }}">{{ issue.client.fullName }}</div>
+
+  <div class="balloon-content">
+    <p class="text-primary" *ngIf="!!issue.serviceType">{{ issue.serviceType.title }}</p>
+    <p class="text-muted">{{
+      issue.message.length > 150 ?
+              (issue.message | slice:0:150) + '...'
+              : issue.message }}
+      <a [routerLink]="'/client/issue/' + issue.id">More...</a>
+    </p>
+
+    <p *ngIf="issue.complaintConfirmations.length > 0" title="Signatures">
+      <app-issue-signature-progress [issue]="issue"></app-issue-signature-progress>
+    </p>
+
+    <p *ngIf="(issue.pictures.length > 0) || (issue.videos.length > 0)">
+      <ng-container *ngIf="issue.pictures.length > 0">
+        <div>
+          <app-picture-item
+                  *ngFor="let picture of issue.pictures | slice:0:5"
+                  [picture]="picture" [size]="'previewExtraSmall'">
+          </app-picture-item>
+        </div>
+        <div>
+          <span class="small" *ngIf="issue.pictures.length > 0">{{ issue.pictures.length.toString() + ' picture(s)' }}&nbsp;</span>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="issue.videos.length > 0">
+
+        <div>
+          <app-video-item *ngFor="let video of issue.videos | slice:0:5" [video]="video" [size]="'extra-small'"></app-video-item>
+        </div>
+
+        <div>
+          <span class="small" *ngIf="issue.videos.length > 0">{{ issue.videos.length.toString() + ' video' }}</span>
+        </div>
+
+      </ng-container>
+    </p>
+
+  </div>
+
+  <div class="balloon-footer">
+    <div class="pull-left">
+      <small class="text-muted">{{ issue.likeNumber }} like(s) </small>
+      <small class="text-muted">{{ issue.commentNumber }} comment(s)</small>
+    </div>
+    <div class="pull-right">
+      <small class="text-muted" title="{{ issue.createdAt | amFromUnix }}">{{ issue.createdAt | amFromUnix | amTimeAgo }}</small>
+    </div>
+  </div>
+
+</app-map-balloon>

@@ -9,6 +9,18 @@ import {EntityTransformer} from '../../core/services/helper/entity-transformer.h
 @Injectable()
 export class IssueService extends BaseService
 {
+    geoSearch(params: Object)
+    {
+        let parameters: HttpParams = this.getHttpParamsFromObject(params);
+
+        return this.http.get<{ issues: Array<Issue> }>('/client/issue/geo/search', {params: parameters})
+            .pipe(
+                map(({ issues }) => {
+                    return  issues.map(item => EntityTransformer.transformIssue(item));
+                })
+            );
+    }
+
     getUserIssues(params: Object, page: number = 1)
     {
         let parameters: HttpParams = this.getHttpParamsFromObject(Object.assign(params, {

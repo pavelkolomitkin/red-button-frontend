@@ -25,6 +25,9 @@
 
           <ng-container *ngxPermissionsOnly="['ROLE_CLIENT_USER']">
 
+              <li [routerLinkActive]="'active'">
+                  <a routerLink="/client/geo" class="btn"><i class="fa fa-map-marker"></i></a>
+              </li>
 
               <li class="dropdown notifications-menu">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" title="Signature Requests">
