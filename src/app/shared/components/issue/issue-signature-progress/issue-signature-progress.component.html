@@ -1,9 +1,9 @@
 <ng-container>
-  <div>
+  <div title="{{ issue.getApprovedPercent() + '% approved' }}">
     <span class="text text-success">{{ approvedSignatureNumber() }}</span> / <span class="text">{{ issue.complaintConfirmations.length }}</span>
   </div>
 
-  <div *ngIf="issue.complaintConfirmations.length > 0" class="progress progress-xs">
+  <div *ngIf="issue.complaintConfirmations.length > 0" class="progress progress-xs" title="{{ issue.getApprovedPercent() + '% approved' }}">
 
     <div class="progress-bar"
          [ngStyle]="{ width: issue.getApprovedPercent() + '%' }"

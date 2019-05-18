@@ -17,6 +17,12 @@
         </p>
 
         <p>
+          <span class="pull-right label label-default" [ngStyle]="{ padding: '10px' }">
+            <i class="fa fa-thumbs-o-up"></i> {{ issue.likeNumber }} like(s)
+          </span>
+        </p>
+
+        <p>
           <b>Address</b>
           <br/>
           {{ issue.address.displayName }}

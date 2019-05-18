@@ -1,3 +1,23 @@
-<p>
-  issue-geography-page works!
-</p>
+<app-company-common-layout>
+
+  <div class="box box-primary">
+
+    <div class="box-body">
+      <app-map
+          #map
+          [defaultCenter]="defaultGeoPosition"
+          [defaultZoom]="10"></app-map>
+
+      <div class="search-form-container">
+        <app-company-issue-geo-search-filter (onChange)="onSearchFilterChangeHandler($event)"></app-company-issue-geo-search-filter>
+      </div>
+    </div>
+
+    <div class="box-footer">
+
+    </div>
+
+  </div>
+
+
+</app-company-common-layout>
