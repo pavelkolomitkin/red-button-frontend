@@ -61,6 +61,9 @@ import {ComplaintConfirmationEffects} from './data/effects/complaint-confirmatio
 import { ConfirmationControlComponent } from './components/issue/issue-details-page/confirmation-control/confirmation-control.component';
 import { IssueLikeControlComponent } from './components/issue/issue-details-page/issue-like-control/issue-like-control.component';
 import { SearchAddressFormComponent } from './components/common/search-address-form/search-address-form.component';
+import { GeographyPageComponent } from './components/geography/geography-page/geography-page.component';
+import { GeoSearchFilterComponent } from './components/geography/geography-page/geo-search-filter/geo-search-filter.component';
+import {IssueBalloonComponent} from './components/geography/geography-page/issue-balloon/issue-balloon.component';
 
 
 @NgModule({
@@ -102,7 +105,10 @@ import { SearchAddressFormComponent } from './components/common/search-address-f
       IssueItemComponent,
       ConfirmationControlComponent,
       IssueLikeControlComponent,
-      SearchAddressFormComponent
+      SearchAddressFormComponent,
+      GeographyPageComponent,
+      GeoSearchFilterComponent,
+      IssueBalloonComponent,
   ],
     imports: [
         CommonModule,
@@ -138,6 +144,7 @@ import { SearchAddressFormComponent } from './components/common/search-address-f
       ComplaintMapBalloonComponent,
       IssueMapBalloonComponent,
       ComplaintConfirmationMapBalloonComponent,
+      IssueBalloonComponent
   ]
 })
 export class ClientModule

@@ -67,7 +67,7 @@ import {SignatureItemComponent} from './components/issue/signature-list/signatur
       PaginatorComponent,
       IssueSignatureProgressComponent,
       SignatureListComponent,
-      SignatureItemComponent
+      SignatureItemComponent,
   ],
   imports: [
     CommonModule,
@@ -113,13 +113,13 @@ import {SignatureItemComponent} from './components/issue/signature-list/signatur
         PaginatorComponent,
         IssueSignatureProgressComponent,
         SignatureListComponent,
-        SignatureItemComponent
+        SignatureItemComponent,
     ],
   entryComponents: [
       MapComponent,
       IssueViewBalloonComponent,
       ComplaintConfirmationViewBalloonComponent,
-      ComplaintDetailsBalloonComponent
+      ComplaintDetailsBalloonComponent,
   ]
 })
 export class SharedModule { }

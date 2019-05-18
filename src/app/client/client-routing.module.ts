@@ -12,12 +12,25 @@ import {IssueDetailsPageComponent} from './components/issue/issue-details-page/i
 import {EditIssuePageComponent} from './components/issue/edit-issue-page/edit-issue-page.component';
 import {ConfirmLeavePageGuardService} from '../core/services/guards/confirm-leave-page-guard.service';
 import {NotFoundPageComponent} from '../shared/components/not-found-page/not-found-page.component';
+import {GeographyPageComponent} from './components/geography/geography-page/geography-page.component';
 
 
 const routes: Routes = [
     { path: '', children:
         [
             { path: '', redirectTo: 'profile', pathMatch: 'full' },
+            {
+                path: 'geo',
+                component: GeographyPageComponent,
+                data: {
+                    pageTitle: 'Geography',
+                    pageSubTitle: '',
+                    breadCrumbs: [
+                        new BreadCrumb('Home', '/', 'home'),
+                        new BreadCrumb('Geography', null, 'map-marker')
+                    ]
+                }
+            },
             {
                 path: 'profile',
                 component: ProfilePageComponent,

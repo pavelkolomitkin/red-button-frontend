@@ -1,0 +1,13 @@
+<div class="form-group">
+  <div class="checkbox">
+    <label for="withComplaints">
+      <input
+              id="withComplaints"
+              type="checkbox"
+              [(ngModel)]="withComplaints"
+              name="withComplaints"
+              (ngModelChange)="onWithComplaintsFlagChangeHandler($event); onChangeHandler($event)"
+      >Complaints</label>
+
+  </div>
+</div>
