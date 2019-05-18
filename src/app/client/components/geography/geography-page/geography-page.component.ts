@@ -12,6 +12,7 @@ import {Issue} from '../../../../core/data/model/issue.model';
 import {Complaint} from '../../../../core/data/model/complaint.model';
 import {ComplaintDetailsBalloonComponent} from '../../../../shared/components/complaint-map-view/complaint-details-balloon/complaint-details-balloon.component';
 import {IssueBalloonComponent} from './issue-balloon/issue-balloon.component';
+import {OSMSearchResult} from '../../../../core/data/model/osm-search-result.model';
 
 @Component({
   selector: 'app-geography-page',
@@ -149,6 +150,17 @@ export class GeographyPageComponent implements OnInit, OnDestroy {
   onViewBoxChangeHandler(event)
   {
     this.updateData();
+  }
+
+  onSearchAddressResultHandler(addresses: Array<OSMSearchResult>)
+  {
+    if (addresses.length > 0)
+    {
+      const address: OSMSearchResult = addresses[0];
+
+      this.map.setZoom(GeographyPageComponent.UPDATING_DATA_MIN_ZOOM);
+      this.map.setCenter(address.location, true);
+    }
   }
 
 }
