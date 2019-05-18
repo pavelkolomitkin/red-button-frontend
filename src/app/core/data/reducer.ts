@@ -8,6 +8,7 @@ export interface State {
   globalProgressLoaders: number;
 
   lastSuccessMessage: NotifyMessage;
+  lastWarningMessage: NotifyMessage;
   lastErrorMessage: NotifyMessage;
 
   deviceGeoLocation: GeoLocation;
@@ -27,7 +28,9 @@ const initialState: State = {
   globalProgressLoaders: 0,
 
   lastSuccessMessage: null,
+  lastWarningMessage: null,
   lastErrorMessage: null,
+
   deviceGeoLocation: null,
   lastInitConfirmation: null,
   lastRespondedConfirmation: null,
@@ -74,6 +77,13 @@ export function reducer(state = initialState, action: actions.CoreActions): Stat
       return {
         ...state,
         lastSuccessMessage: action.message
+      };
+
+    case actions.GLOBAL_NOTIFY_WARNING_MESSAGE:
+
+      return {
+        ...state,
+        lastWarningMessage: action.message
       };
 
     case actions.GLOBAL_NOTIFY_ERROR_MESSAGE:

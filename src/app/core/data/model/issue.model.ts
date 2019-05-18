@@ -8,8 +8,9 @@ import {Company} from './company.model';
 import {ComplaintConfirmation} from './complaint-confirmation.model';
 import {CloneInterface} from './clone.interface';
 import {ComplaintConfirmationStatus} from './complaint-confirmation-status.model';
+import {LocationInterface} from './location.interface';
 
-export class Issue implements CloneInterface<Issue>
+export class Issue implements CloneInterface<Issue>, LocationInterface
 {
     id ?: number;
 
@@ -42,6 +43,10 @@ export class Issue implements CloneInterface<Issue>
     commentNumber ?: number;
 
     hasUserLike: boolean = false;
+
+    getLocation(): GeoLocation {
+        return this.location;
+    }
 
     isAddressInit()
     {

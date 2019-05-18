@@ -99,6 +99,35 @@
 
       </ng-container>
 
+      <ng-container *ngxPermissionsOnly="['ROLE_COMPANY_REPRESENTATIVE_USER']">
+
+        <li class="treeview menu-open" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a href="#">
+            <i class="fa fa-folder"></i>
+            <span>Issues</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+              <small class="label pull-right bg-blue" *ngIf="(companyCommonInfo | async) !== null">{{ (companyCommonInfo | async).issueNumber }}</small>
+            </span>
+          </a>
+          <ul class="treeview-menu" style="display: block;">
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+              <a [routerLink]="'/company/issue/list'">
+                <i class="fa fa-list"></i> List
+<!--                <small class="label pull-right bg-blue" *ngIf="(adminCommonInfo | async) !== null">{{ (adminCommonInfo | async).companyAccountNumber }}</small>-->
+              </a>
+            </li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+              <a [routerLink]="'/company/issue/geo'">
+                <i class="fa fa-map-marker"></i> Map
+                <!--                <small class="label pull-right bg-blue" *ngIf="(adminCommonInfo | async) !== null">{{ (adminCommonInfo | async).companyAccountNumber }}</small>-->
+              </a>
+            </li>
+          </ul>
+        </li>
+
+      </ng-container>
+
 
 <!--      <li class="treeview">-->
 <!--        <a href="#">-->

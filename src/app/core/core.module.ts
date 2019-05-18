@@ -61,6 +61,7 @@ import {OSMSearchService} from './services/osm-search.service';
 import {RegionService} from './services/region.service';
 import {RegionEffects} from './data/effects/region.effects';
 import {NgxPermissionsModule} from 'ngx-permissions';
+import {MapViewConfiguratorFactory} from './services/map/map-view-configurator.factory';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -130,6 +131,7 @@ const httpInterceptorProviders = [
     IssueCommentService,
     OSMSearchService,
     RegionService,
+    MapViewConfiguratorFactory,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,

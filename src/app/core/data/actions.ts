@@ -8,6 +8,7 @@ export const GLOBAL_PROGRESS_SHOW = 'GLOBAL_PROGRESS_SHOW';
 export const GLOBAL_PROGRESS_HIDE = 'GLOBAL_PROGRESS_HIDE';
 
 export const GLOBAL_NOTIFY_SUCCESS_MESSAGE = 'GLOBAL_NOTIFY_SUCCESS_MESSAGE';
+export const GLOBAL_NOTIFY_WARNING_MESSAGE = 'GLOBAL_NOTIFY_WARNING_MESSAGE';
 export const GLOBAL_NOTIFY_ERROR_MESSAGE = 'GLOBAL_NOTIFY_ERROR_MESSAGE';
 
 export const GLOBAL_PAGE_TITLE = 'GLOBAL_PAGE_TITLE';
@@ -53,6 +54,13 @@ export class GlobalProgressHide implements Action
 export class GlobalNotifySuccessMessage implements Action
 {
   readonly type = GLOBAL_NOTIFY_SUCCESS_MESSAGE;
+
+  constructor(public message: NotifyMessage) {}
+}
+
+export class GlobalNotifyWarningMessage implements Action
+{
+  readonly type = GLOBAL_NOTIFY_WARNING_MESSAGE;
 
   constructor(public message: NotifyMessage) {}
 }
@@ -111,6 +119,7 @@ export type CoreActions =
     | GlobalProgressHide
 
     | GlobalNotifySuccessMessage
+    | GlobalNotifyWarningMessage
     | GlobalNotifyErrorMessage
 
     | GlobalDeviceGeoLocationDetectStart

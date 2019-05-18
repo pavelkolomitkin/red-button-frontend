@@ -10,6 +10,7 @@ const routes: Routes = [
     { path: 'security', component:AppSecurityLayoutComponent,  loadChildren: './security/security.module#SecurityModule' },
     { path: 'client', component: AppLayoutComponent,  loadChildren: './client/client.module#ClientModule', canActivate: [AuthUserGuardService]},
     { path: 'admin', component: AppLayoutComponent, loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthUserGuardService]},
+    { path: 'company', component: AppLayoutComponent, loadChildren: './company/company.module#CompanyModule', canActivate: [AuthUserGuardService] },
     { path: '', component: AppLayoutComponent, canActivate: [DefaultRedirectGuard], pathMatch: 'full', children: [] },
     { path: '404', component: NotFoundPageComponent },
     { path: '**', redirectTo: '404', pathMatch: 'full'}

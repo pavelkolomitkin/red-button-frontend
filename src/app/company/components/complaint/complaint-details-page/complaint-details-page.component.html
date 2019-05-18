@@ -1,0 +1,55 @@
+<app-company-common-layout>
+
+  <ng-container *ngIf="!!complaint">
+
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ complaint.region.title }} <span class="text-muted">({{ complaint.region.federalDistrict.title }})</span></h3>
+      </div>
+      <div class="box-body">
+        <p>
+          <app-complaint-map-view [complaint]="complaint"></app-complaint-map-view>
+        </p>
+        <p>
+          <b>Address</b>
+          <br/>
+          {{ complaint.address.displayName }}
+        </p>
+
+        <p>
+          <b>Author</b>
+          <br/>
+          <span class="text text-primary">{{ complaint.client.fullName }}</span>
+        </p>
+        <p *ngIf="!!complaint.serviceType">
+          <span class="text text-primary">{{ complaint.serviceType.title }}</span>
+        </p>
+        <p>
+          <b>Message</b>
+          <br/>
+          <span class="text" [innerHTML]="complaint.message | multiLine"></span>
+        </p>
+        <p *ngIf="complaint.pictures.length > 0">
+          <b>Pictures</b>
+          <br/>
+          <app-picture-list [list]="complaint.pictures"></app-picture-list>
+        </p>
+        <p>
+          <app-video-list [list]="complaint.videos"></app-video-list>
+        </p>
+      </div>
+
+      <div class="box-footer">
+        <div class="inline">
+          <div class="label label-primary margin-r-5 inline"
+               *ngFor="let tag of complaint.tags"
+          >{{ tag.title }}</div>
+        </div>
+
+        <small class="pull-right text-muted">{{ complaint.createdAt | amFromUnix }}</small>
+      </div>
+    </div>
+
+  </ng-container>
+
+</app-company-common-layout>

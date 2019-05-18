@@ -5,8 +5,9 @@ import {ComplaintPicture} from './complaint-picture.model';
 import {Video} from './video.model';
 import {GeoLocation} from './geo-location.model';
 import User from './user.model';
+import {LocationInterface} from './location.interface';
 
-export class Complaint {
+export class Complaint implements LocationInterface {
 
     id ?: number;
 
@@ -31,6 +32,11 @@ export class Complaint {
     updatedAt ?: number;
 
     client ?: User;
+
+    getLocation(): GeoLocation {
+        return this.location;
+    }
+
 
     isAddressInit()
     {

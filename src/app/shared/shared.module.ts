@@ -20,18 +20,22 @@ import {PictureItemComponent} from './components/picture/picture-item/picture-it
 import {VideoListComponent} from './components/video/video-list/video-list.component';
 import {VideoItemComponent} from './components/video/video-item/video-item.component';
 
-import { IssueCommentListComponent } from './components/issue-comment-list/issue-comment-list.component';
-import { IssueCommentItemComponent } from './components/issue-comment-list/issue-comment-item/issue-comment-item.component';
-import { IssueCommentFormComponent } from './components/issue-comment-list/issue-comment-form/issue-comment-form.component';
+import { IssueCommentListComponent } from './components/issue/issue-comment-list/issue-comment-list.component';
+import { IssueCommentItemComponent } from './components/issue/issue-comment-list/issue-comment-item/issue-comment-item.component';
+import { IssueCommentFormComponent } from './components/issue/issue-comment-list/issue-comment-form/issue-comment-form.component';
 import {NgxPermissionsModule} from 'ngx-permissions';
-import {IssueMapViewComponent} from './components/issue-map-view/issue-map-view.component';
-import {IssueViewBalloonComponent} from './components/issue-map-view/issue-view-balloon/issue-view-balloon.component';
-import {ComplaintConfirmationViewBalloonComponent} from './components/issue-map-view/complaint-confirmation-view-balloon/complaint-confirmation-view-balloon.component';
+import {IssueMapViewComponent} from './components/issue/issue-map-view/issue-map-view.component';
+import {IssueViewBalloonComponent} from './components/issue/issue-map-view/issue-view-balloon/issue-view-balloon.component';
+import {ComplaintConfirmationViewBalloonComponent} from './components/issue/issue-map-view/complaint-confirmation-view-balloon/complaint-confirmation-view-balloon.component';
 import {RouterModule} from '@angular/router';
 import {ComplaintMapViewComponent} from './components/complaint-map-view/complaint-map-view.component';
 import {ComplaintDetailsBalloonComponent} from './components/complaint-map-view/complaint-details-balloon/complaint-details-balloon.component';
 import {CompanySearchFormComponent} from './components/company-search-form/company-search-form.component';
 import { CompanySearchFieldComponent } from './components/company-search-form/company-search-field/company-search-field.component';
+import {PaginatorComponent} from './components/paginator/paginator.component';
+import {IssueSignatureProgressComponent} from './components/issue/issue-signature-progress/issue-signature-progress.component';
+import {SignatureListComponent} from './components/issue/signature-list/signature-list.component';
+import {SignatureItemComponent} from './components/issue/signature-list/signature-item/signature-item.component';
 
 
 @NgModule({
@@ -59,7 +63,11 @@ import { CompanySearchFieldComponent } from './components/company-search-form/co
       ComplaintMapViewComponent,
       ComplaintDetailsBalloonComponent,
       CompanySearchFormComponent,
-      CompanySearchFieldComponent
+      CompanySearchFieldComponent,
+      PaginatorComponent,
+      IssueSignatureProgressComponent,
+      SignatureListComponent,
+      SignatureItemComponent
   ],
   imports: [
     CommonModule,
@@ -101,7 +109,11 @@ import { CompanySearchFieldComponent } from './components/company-search-form/co
         ComplaintMapViewComponent,
         ComplaintDetailsBalloonComponent,
         CompanySearchFormComponent,
-        CompanySearchFieldComponent
+        CompanySearchFieldComponent,
+        PaginatorComponent,
+        IssueSignatureProgressComponent,
+        SignatureListComponent,
+        SignatureItemComponent
     ],
   entryComponents: [
       MapComponent,

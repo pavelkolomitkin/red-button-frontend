@@ -25,6 +25,8 @@ import {Subscription} from 'rxjs';
 })
 export class MapComponent implements OnInit, OnDestroy {
 
+  static DEFAULT_ANIMATION_DURATION = 500;
+
   map: Map;
 
   // output fields
@@ -90,7 +92,7 @@ export class MapComponent implements OnInit, OnDestroy {
     {
       this.map.getView().animate({
         center: center,
-        duration: 500
+        duration: MapComponent.DEFAULT_ANIMATION_DURATION
       });
     }
   }
@@ -124,6 +126,22 @@ export class MapComponent implements OnInit, OnDestroy {
     };
 
     return result;
+  }
+
+  setViewBoundaries(topLeft: GeoLocation, bottomRight: GeoLocation, callBack: Function = null, withAnimation: boolean = true)
+  {
+    const extent = transformExtent([
+      topLeft.longitude,
+      bottomRight.latitude,
+      bottomRight.longitude,
+      topLeft.latitude
+    ], 'EPSG:4326', 'EPSG:3857');
+
+    this.map.getView().fit(extent, {
+      padding: [20, 20, 20, 20],
+      duration: withAnimation ? MapComponent.DEFAULT_ANIMATION_DURATION : 0,
+      callback: callBack
+    });
   }
 
   //=====================// VIEW APP =============================

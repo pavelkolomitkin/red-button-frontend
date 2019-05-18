@@ -17,19 +17,16 @@ import { reducer as profileReducer } from './data/profile.reducer';
 import { reducer as accountReducer } from './data/account.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {IssueEffects} from './data/effects/issue.effects';
-import { PaginatorComponent } from './components/common/paginator/paginator.component';
 import { IssueItemComponent } from './components/issue/issue-list-page/issue-item/issue-item.component';
 import {State} from '../app.state';
 import {RegionAllGetStart} from '../core/data/region.actions';
 import {ServiceTypeListLoadStart} from '../core/data/service-type.actions';
-import { SignatureListComponent } from './components/issue/issue-details-page/signature-list/signature-list.component';
-import { SignatureItemComponent } from './components/issue/issue-details-page/signature-list/signature-item/signature-item.component';
 import { SignaturesWidgetComponent } from './components/issue/issue-details-page/signatures-widget/signatures-widget.component';
 import { LikeWidgetComponent } from './components/issue/issue-details-page/like-widget/like-widget.component';
 import {CommonInfoService} from './services/common-info.service';
 import { IssueService } from './services/issue.service';
 import {ProfileEffects} from './data/effects/profile.effects';
-import {AdminModuleInitialized, ProfileGetCommonInfoStart} from './data/profile.actions';
+import {AdminModuleInitialized} from './data/profile.actions';
 import {ComplaintService} from './services/complaint.service';
 import {ComplaintEffects} from './data/effects/complaint.effects';
 import { DefaultEntityFilterComponent } from './components/common/default-entity-filter/default-entity-filter.component';
@@ -55,7 +52,6 @@ import { DashboardLastComplaintsWidgetComponent } from './components/dashboard/w
 import { DashboardLastIssuesWidgetComponent } from './components/dashboard/widgets/dashboard-last-issues-widget/dashboard-last-issues-widget.component';
 import { DashboardLastIssueCommentsWidgetComponent } from './components/dashboard/widgets/dashboard-last-issue-comments-widget/dashboard-last-issue-comments-widget.component';
 import { DashboardLastClientsWidgetComponent } from './components/dashboard/widgets/dashboard-last-clients-widget/dashboard-last-clients-widget.component';
-import { IssueSignatureProgressComponent } from './components/issue/issue-list-page/issue-signature-progress/issue-signature-progress.component';
 import { DashboardCommonWidgetComponent } from './components/dashboard/widgets/dashboard-common-widget/dashboard-common-widget.component';
 import {IssueCommentService} from './services/issue-comment.service';
 
@@ -68,10 +64,7 @@ import {IssueCommentService} from './services/issue-comment.service';
     ComplaintDetailsPageComponent,
     DashboardPageComponent,
     CommonLayoutComponent,
-    PaginatorComponent,
     IssueItemComponent,
-    SignatureListComponent,
-    SignatureItemComponent,
     SignaturesWidgetComponent,
     LikeWidgetComponent,
     DefaultEntityFilterComponent,
@@ -95,7 +88,6 @@ import {IssueCommentService} from './services/issue-comment.service';
     DashboardLastIssuesWidgetComponent,
     DashboardLastIssueCommentsWidgetComponent,
     DashboardLastClientsWidgetComponent,
-    IssueSignatureProgressComponent,
     DashboardCommonWidgetComponent,
   ],
     imports: [
