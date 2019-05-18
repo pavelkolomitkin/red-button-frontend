@@ -14,6 +14,9 @@ export class MapViewSinglePointConfigurator extends MapViewConfiguratorBase
     }
 
     adjust(): void {
+
+        this.map.setCenter(this.center, true);
+
     }
 
 }

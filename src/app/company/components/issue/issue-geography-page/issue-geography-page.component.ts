@@ -34,6 +34,20 @@ export class IssueGeographyPageComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(new IssueGeoSearchReset());
 
+  }
+
+  ngOnDestroy(): void {
+
+
+    if (!!this.searchSubscription)
+    {
+      this.searchSubscription.unsubscribe();
+    }
+
+  }
+
+  onMapReadyHandler()
+  {
     this.searchSubscription = combineLatest(
         this.store.pipe(select(state => state.companyIssue.geoList)),
         this.store.pipe(select(state => state.security.authorizedUser))
@@ -51,23 +65,13 @@ export class IssueGeographyPageComponent implements OnInit, OnDestroy {
       else
       {
         mapView = this.mapViewConfiguratorFactory.createConfiguratorBySinglePoint(this.map, this.defaultGeoPosition);
-
-        // const { company: { actualAddress, legalAddress } } = <CompanyRepresentativeUser>user;
-        //
-        // const address = actualAddress ? actualAddress : legalAddress;
-        // mapView = this.mapViewConfiguratorFactory.createConfiguratorByAddress(this.map, address);
       }
 
       mapView.adjust();
 
     });
 
-  }
-
-  ngOnDestroy(): void {
-
-    this.searchSubscription.unsubscribe();
-
+    this.searchIssues();
   }
 
   updateBalloons(list: Array<Issue>)

@@ -5,6 +5,7 @@
     <div class="box-body">
       <app-map
           #map
+          (onReady)="onMapReadyHandler($event)"
           [defaultCenter]="defaultGeoPosition"
           [defaultZoom]="10"></app-map>
 
