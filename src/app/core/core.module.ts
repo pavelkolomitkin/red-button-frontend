@@ -19,6 +19,7 @@ import { reducer as geoLocationReducer } from './data/geo-location.reducer';
 import { reducer as serviceTypeReducer } from './data/service-type.reducer';
 import { reducer as mapReducer } from '../shared/data/map.reducer';
 import { reducer as regionReducer } from './data/region.reducer';
+import { reducer as federalDistrictReducer } from './data/federal-district.reducer';
 import { RegisterEffects } from '../security/data/effects/register.effects';
 import { AuthEffects } from '../security/data/effects/auth.effects';
 import { AuthUserGuardService } from '../security/services/guards/auth-user-guard.service';
@@ -62,6 +63,8 @@ import {RegionService} from './services/region.service';
 import {RegionEffects} from './data/effects/region.effects';
 import {NgxPermissionsModule} from 'ngx-permissions';
 import {MapViewConfiguratorFactory} from './services/map/map-view-configurator.factory';
+import {FederalDistrictService} from './services/federal-district.service';
+import {FederalDistrictEffects} from './data/effects/federal-district.effects';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -98,14 +101,16 @@ const httpInterceptorProviders = [
       geoLocation: geoLocationReducer,
       serviceType: serviceTypeReducer,
       map: mapReducer,
-      region: regionReducer
+      region: regionReducer,
+      federalDistrict: federalDistrictReducer
     }),
     EffectsModule.forRoot([
       RegisterEffects,
       AuthEffects,
       ServiceTypeEffects,
       ClientDeviceEffects,
-      RegionEffects
+      RegionEffects,
+      FederalDistrictEffects
     ])
   ],
   providers: [
@@ -130,6 +135,7 @@ const httpInterceptorProviders = [
     ConfirmLeavePageGuardService,
     IssueCommentService,
     OSMSearchService,
+    FederalDistrictService,
     RegionService,
     MapViewConfiguratorFactory,
     AppInitializerService,

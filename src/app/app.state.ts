@@ -13,6 +13,7 @@ import * as clientGeoLocationReducer from './client/data/geo-location.reducer';
 import * as clientComplaintConfirmationReducer from './client/data/complaint-confirmation.reducer';
 import * as mapReducer from './shared/data/map.reducer';
 import * as regionReducer from './core/data/region.reducer';
+import * as federalDistrictReducer from './core/data/federal-district.reducer';
 
 import * as adminComplaintReducer from './admin/data/complaint.reducer';
 import * as adminIssueReducer from './admin/data/issue.reducer';
@@ -40,6 +41,7 @@ export interface State
   clientConfirmation: clientComplaintConfirmationReducer.State;
   map: mapReducer.State;
   region: regionReducer.State;
+  federalDistrict: federalDistrictReducer.State;
 
   adminComplaint: adminComplaintReducer.State;
   adminIssue: adminIssueReducer.State;

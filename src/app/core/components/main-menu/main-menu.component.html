@@ -129,6 +129,31 @@
       </ng-container>
 
 
+      <ng-container *ngxPermissionsOnly="['ROLE_ANALYST_USER']">
+
+
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a [routerLink]="'/analytics/statistic/common'">
+            <i class="fa fa-map"></i>
+            <span>Россия</span>
+          </a>
+        </li>
+
+
+        <li
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          *ngFor="let federalDistrict of (federalDistricts | async)">
+
+            <a [routerLink]="'/analytics/statistic/federal-district/' + federalDistrict.id">
+              <i class="fa fa-map-o"></i>
+              <span>{{ federalDistrict.title }}</span>
+            </a>
+        </li>
+
+      </ng-container>
+
+
 <!--      <li class="treeview">-->
 <!--        <a href="#">-->
 <!--          <i class="fa fa-dashboard"></i> <span>Dashboard</span>-->

@@ -10,7 +10,8 @@ export class DefaultRedirectGuard implements CanActivate
     roleDefaultRouteMap = {
         'ROLE_ADMIN_USER': '/admin',
         'ROLE_CLIENT_USER': '/client',
-        'ROLE_COMPANY_REPRESENTATIVE_USER': '/company'
+        'ROLE_COMPANY_REPRESENTATIVE_USER': '/company',
+        'ROLE_ANALYST_USER': '/analytics'
     };
 
     constructor(private router: Router, private permissionService: NgxPermissionsService) {}

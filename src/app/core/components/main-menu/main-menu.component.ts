@@ -7,6 +7,7 @@ import {ProfileCommonInfo} from '../../../client/data/model/profile-common-info.
 import {ProfileCommonInfo as AdminCommonInfo} from '../../../admin/data/model/profile-common-info.model';
 import { ProfileCommonInfo as CompanyCommonInfo } from '../../../company/data/model/profile-common-info.model';
 import {filter} from 'rxjs/operators';
+import {FederalDistrict} from '../../data/model/federal-district.model';
 
 declare var $: any;
 
@@ -24,6 +25,8 @@ export class MainMenuComponent implements OnInit, AfterViewInit {
   clientCommonInfo: Observable<ProfileCommonInfo>;
   adminCommonInfo: Observable<AdminCommonInfo>;
   companyCommonInfo: Observable<CompanyCommonInfo>;
+
+  federalDistricts: Observable<Array<FederalDistrict>>;
 
   constructor(private store:Store<State>)
   {
@@ -46,6 +49,10 @@ export class MainMenuComponent implements OnInit, AfterViewInit {
         select(state => state.companyProfile),
         filter(result => !!result),
         select(result => result.commonInfo)
+    );
+
+    this.federalDistricts = this.store.pipe(
+        select(state => state.federalDistrict.list)
     );
 
   }
