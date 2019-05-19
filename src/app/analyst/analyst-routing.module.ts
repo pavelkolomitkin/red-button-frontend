@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {CommonCountryStatisticPageComponent} from './components/common-country-statistic-page/common-country-statistic-page.component';
 import {BreadCrumb} from '../core/data/model/bread-crumb.model';
 import {FederalDistrictStatisticPageComponent} from './components/federal-district-statistic-page/federal-district-statistic-page.component';
+import {RegionStatisticPageComponent} from './components/region-statistic-page/region-statistic-page.component';
 
 const routes: Routes = [
     {
@@ -24,6 +25,13 @@ const routes: Routes = [
                 path: 'statistic/federal-district/:id',
                 component: FederalDistrictStatisticPageComponent,
                 data: {
+                }
+            },
+            {
+                path: 'statistic/region/:id',
+                component: RegionStatisticPageComponent,
+                data: {
+
                 }
             }
 

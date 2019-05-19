@@ -140,15 +140,42 @@
         </li>
 
 
-        <li
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          *ngFor="let federalDistrict of (federalDistricts | async)">
+<!--        <li-->
+<!--          routerLinkActive="active"-->
+<!--          [routerLinkActiveOptions]="{ exact: true }"-->
+<!--          *ngFor="let federalDistrict of (federalDistricts | async)">-->
 
-            <a [routerLink]="'/analytics/statistic/federal-district/' + federalDistrict.id">
-              <i class="fa fa-map-o"></i>
-              <span>{{ federalDistrict.title }}</span>
-            </a>
+<!--            <a [routerLink]="'/analytics/statistic/federal-district/' + federalDistrict.id">-->
+<!--              <i class="fa fa-map-o"></i>-->
+<!--              <span>{{ federalDistrict.title }}</span>-->
+<!--            </a>-->
+<!--        </li>-->
+
+
+        <li class="treeview"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            *ngFor="let federalDistrict of (federalDistricts | async)"
+        >
+          <a [routerLink]="'/analytics/statistic/federal-district/' + federalDistrict.id">
+            <i class="fa fa-map-o"></i>
+            <span>{{ federalDistrict.title }}</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    *ngFor="let region of federalDistrict.regions"
+            >
+              <a [routerLink]="'/analytics/statistic/region/' + region.id">
+                {{ region.title }}
+                <!--                <small class="label pull-right bg-blue" *ngIf="(adminCommonInfo | async) !== null">{{ (adminCommonInfo | async).companyAccountNumber }}</small>-->
+              </a>
+            </li>
+          </ul>
         </li>
 
       </ng-container>

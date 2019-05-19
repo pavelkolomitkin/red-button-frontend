@@ -1,0 +1,14 @@
+.federal-district-item
+{
+    fill: #0075ff;
+    stroke: #61a9ff;
+    stroke-width: 1px;
+    stroke-miterlimit: 12;
+    stroke-opacity: 0.5;
+    cursor: pointer;
+}
+
+.federal-district-item:hover
+{
+    opacity: 0.9;
+}

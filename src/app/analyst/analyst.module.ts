@@ -9,13 +9,21 @@ import {RegionStatisticPageComponent} from './components/region-statistic-page/r
 import {Store} from '@ngrx/store';
 import {State} from '../app.state';
 import {FederalDistrictGetListStart} from '../core/data/federal-district.actions';
+import { YearTimeFilterComponent } from './components/common/year-time-filter/year-time-filter.component';
+import { CountryMapComponent } from './components/common/vector-map/country-map/country-map.component';
+import { MapContainerComponent } from './components/common/vector-map/map-container/map-container.component';
+import { FederalDistrictComponent } from './components/common/vector-map/federal-district/federal-district.component';
 
 @NgModule({
   declarations: [
       CommonLayoutComponent,
       CommonCountryStatisticPageComponent,
       FederalDistrictStatisticPageComponent,
-      RegionStatisticPageComponent
+      RegionStatisticPageComponent,
+      YearTimeFilterComponent,
+      CountryMapComponent,
+      MapContainerComponent,
+      FederalDistrictComponent
   ],
   imports: [
     CommonModule,
