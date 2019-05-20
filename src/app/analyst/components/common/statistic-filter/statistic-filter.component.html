@@ -1,0 +1,12 @@
+<div>
+  <div class="year-list" *ngIf="!!years">
+    <ul>
+      <li *ngFor="let year of years"
+          class="year-item margin-r-5"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+        <a [routerLink]="'/analytics/statistic/common/' + year">{{ year }}</a>
+      </li>
+    </ul>
+  </div>
+</div>

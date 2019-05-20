@@ -24,6 +24,8 @@ import * as companyIssueReducer from './company/data/issue.reducer';
 import * as companyComplaintReducer from './company/data/complaint.reducer';
 import * as companyProfileReducer from './company/data/profile.reducer';
 
+import * as analyticsFilterReducer from './analyst/data/filter.reducer';
+
 export interface State
 {
   security: securityReducer.State;
@@ -51,4 +53,6 @@ export interface State
   companyIssue: companyIssueReducer.State;
   companyComplaint: companyComplaintReducer.State;
   companyProfile: companyProfileReducer.State;
+
+  analyticsFilter: analyticsFilterReducer.State;
 }

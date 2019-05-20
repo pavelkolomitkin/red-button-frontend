@@ -77,7 +77,7 @@ import {SignatureItemComponent} from './components/issue/signature-list/signatur
     NgbModule,
       RouterModule,
       LightboxModule,
-      NgxPermissionsModule.forChild()
+      NgxPermissionsModule.forChild(),
 
   ],
     exports: [

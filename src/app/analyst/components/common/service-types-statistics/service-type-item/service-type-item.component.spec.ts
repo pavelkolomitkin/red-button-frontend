@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { YearTimeFilterComponent } from './year-time-filter.component';
+import { ServiceTypeItemComponent } from './service-type-item.component';
 
-describe('YearTimeFilterComponent', () => {
-  let component: YearTimeFilterComponent;
-  let fixture: ComponentFixture<YearTimeFilterComponent>;
+describe('ServiceTypeItemComponent', () => {
+  let component: ServiceTypeItemComponent;
+  let fixture: ComponentFixture<ServiceTypeItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ YearTimeFilterComponent ]
+      declarations: [ ServiceTypeItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(YearTimeFilterComponent);
+    fixture = TestBed.createComponent(ServiceTypeItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

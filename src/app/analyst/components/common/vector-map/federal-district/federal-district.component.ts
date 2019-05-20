@@ -10,6 +10,7 @@ import { FEDERAL_DISTRICTS } from '../../../../../core/data/map-vector-paths';
 export class FederalDistrictComponent implements OnInit {
 
   @Input() data: FederalDistrict;
+  @Input() title: string;
 
   graphicData: Array<any>;
 

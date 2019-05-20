@@ -22,6 +22,18 @@ const routes: Routes = [
                 }
             },
             {
+                path: 'statistic/common/:year',
+                component: CommonCountryStatisticPageComponent,
+                data: {
+                    pageTitle: 'Россия',
+                    pageSubTitle: '',
+                    breadCrumbs: [
+                        new BreadCrumb('Home', '/', 'home'),
+                        new BreadCrumb('Country', null, 'bar-chart')
+                    ]
+                }
+            },
+            {
                 path: 'statistic/federal-district/:id',
                 component: FederalDistrictStatisticPageComponent,
                 data: {

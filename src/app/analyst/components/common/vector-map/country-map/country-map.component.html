@@ -5,6 +5,7 @@
                 *ngFor="let item of (federalDistricts | async)"
                 [data]="item"
                 class="federal-district-item"
+                [title]="getItemTitle(item)"
         ></svg:g>
     </ng-container>
 </app-analyst-map-container>
