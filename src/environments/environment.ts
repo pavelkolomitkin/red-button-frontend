@@ -16,6 +16,26 @@ export const environment = {
   clientCommonInfoInterval: 10000,
   adminCommonInfoInterval: 10000,
   companyCommonInfoInterval: 10000,
+
+  serviceTypeColors: {
+    electrosnab: '#390BDA',
+    gasosnab: '#95F600',
+    vodootvedenie: '#9100f6',
+    gorvodsnab: '#C201D6',
+    holvodsnab: '#d6009f',
+    otoplenie: '#23c2e2',
+    lift: '#4d8a3f',
+    tvcomothody: '#827512',
+    ventilazia: '#064d64',
+    domofon: '#d27dbe',
+    dorogi: '#548775',
+    molnezashita: '#f3d16b',
+    pozharobezopasnost: '#fe0011',
+    sostojaniezdaniy: '#00fed0',
+    uborkamest: '#fec000',
+    uborkauliz: '#005187',
+    others: '#cccccc'
+  }
 };
 
 /*

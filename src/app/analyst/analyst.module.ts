@@ -17,6 +17,8 @@ import { StatisticFilterComponent } from './components/common/statistic-filter/s
 import {StatisticService} from './services/statistic.service';
 import { ServiceTypesStatisticsComponent } from './components/common/service-types-statistics/service-types-statistics.component';
 import { ServiceTypeItemComponent } from './components/common/service-types-statistics/service-type-item/service-type-item.component';
+import { ServiceTypeSharesChartComponent } from './components/common/charts/service-type-shares-chart/service-type-shares-chart.component';
+import { ServiceTypePercentageItemComponent } from './components/common/charts/service-type-percentage-item/service-type-percentage-item.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ServiceTypeItemComponent } from './components/common/service-types-stat
       FederalDistrictComponent,
       StatisticFilterComponent,
       ServiceTypesStatisticsComponent,
-      ServiceTypeItemComponent
+      ServiceTypeItemComponent,
+      ServiceTypeSharesChartComponent,
+      ServiceTypePercentageItemComponent
   ],
   imports: [
     CommonModule,

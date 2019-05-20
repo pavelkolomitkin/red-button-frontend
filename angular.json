@@ -45,6 +45,7 @@
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/admin-lte/bower_components/raphael/raphael.min.js",
+              "node_modules/admin-lte/bower_components/chart.js/Chart.min.js",
               "node_modules/admin-lte/bower_components/morris.js/morris.min.js",
               "node_modules/admin-lte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js",
               "node_modules/admin-lte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js",

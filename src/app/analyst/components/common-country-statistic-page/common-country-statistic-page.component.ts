@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {StatisticService} from '../../services/statistic.service';
+import {ServiceType} from '../../../core/data/model/service-type.model';
 
 @Component({
   selector: 'app-common-country-statistic-page',
@@ -17,6 +18,7 @@ export class CommonCountryStatisticPageComponent implements OnInit, OnDestroy {
   endYear: number;
 
   statistics: { common: any, byFederalDistricts: any };
+  statisticsDynamic: any;
 
   paramSubscription: Subscription;
 
@@ -51,6 +53,7 @@ export class CommonCountryStatisticPageComponent implements OnInit, OnDestroy {
 
             //console.log(statistics);
             // { common, byFederalDistricts }
+            this.calculateServiceTypePercentage(statistics.common);
             this.statistics = statistics;
 
           })
@@ -61,7 +64,10 @@ export class CommonCountryStatisticPageComponent implements OnInit, OnDestroy {
       this.service.getCountryServiceTypeIssueNumberDynamic(this.selectedYear)
           .toPromise()
           .then((data) => {
-            console.log(data);
+
+            this.statisticsDynamic = data;
+
+            //console.log(data);
           })
           .catch((error) => {
             console.log(error);
@@ -74,6 +80,31 @@ export class CommonCountryStatisticPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
     this.paramSubscription.unsubscribe();
+
+  }
+
+  calculateServiceTypePercentage(commonStatistic: Array<{ issueNumber: number, serviceType: ServiceType, percentage?: number }>)
+  {
+    let totalIssues: number = 0;
+
+    commonStatistic.forEach((item) => {
+
+      totalIssues += item.issueNumber;
+
+    });
+
+    commonStatistic.forEach((item) => {
+
+      if (totalIssues > 0)
+      {
+        item.percentage = (item.issueNumber * 100 / totalIssues);
+      }
+      else
+      {
+        item.percentage = 0;
+      }
+
+    });
 
   }
 

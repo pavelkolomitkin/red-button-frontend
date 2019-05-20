@@ -1,0 +1,13 @@
+<div class="chart-container">
+  <input #inputElement
+          type="text"
+          class="knob"
+          [attr.value]="percentage.toFixed(2)"
+          [attr.data-width]="90"
+          [attr.data-height]="90"
+          [attr.data-fgColor]="color"
+          [attr.data-thickness]="0.1"
+         [disabled]="true"
+  >
+  <div class="knob-label">{{ serviceType ? serviceType.title : 'Others' }}(%)</div>
+</div>
