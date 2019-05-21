@@ -30,24 +30,19 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-4">
-                    <app-analyst-service-type-shares-chart [data]="statistics.common"></app-analyst-service-type-shares-chart>
+<!--                    <app-analyst-service-type-shares-chart [title]="'Common Numbers'" [data]="statistics.common"></app-analyst-service-type-shares-chart>-->
                 </div>
                 <div class="col-md-8">
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Percentages</h3>
-                        </div>
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-md-6 col-lg-3" *ngFor="let item of statistics.common">
-                                    <app-analyst-service-type-percentage-item
-                                            [percentage]="item.percentage"
-                                            [serviceType]="item.serviceType"
-                                    ></app-analyst-service-type-percentage-item>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <app-analyst-service-type-percentages [title]="'Percentages'" [data]="statistics.common"></app-analyst-service-type-percentages>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-body" *ngIf="!!statisticsDynamic">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <app-analyst-service-types-dynamic-year [title]="'Dynamics'" [data]="statisticsDynamic.statistics"></app-analyst-service-types-dynamic-year>
                 </div>
             </div>
         </div>

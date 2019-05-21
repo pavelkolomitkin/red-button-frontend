@@ -19,6 +19,8 @@ import { ServiceTypesStatisticsComponent } from './components/common/service-typ
 import { ServiceTypeItemComponent } from './components/common/service-types-statistics/service-type-item/service-type-item.component';
 import { ServiceTypeSharesChartComponent } from './components/common/charts/service-type-shares-chart/service-type-shares-chart.component';
 import { ServiceTypePercentageItemComponent } from './components/common/charts/service-type-percentage-item/service-type-percentage-item.component';
+import { ServiceTypesDynamicYearComponent } from './components/common/charts/service-types-dynamic-year/service-types-dynamic-year.component';
+import { ServiceTypePercentagesComponent } from './components/common/charts/service-type-percentages/service-type-percentages.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { ServiceTypePercentageItemComponent } from './components/common/charts/s
       ServiceTypesStatisticsComponent,
       ServiceTypeItemComponent,
       ServiceTypeSharesChartComponent,
-      ServiceTypePercentageItemComponent
+      ServiceTypePercentageItemComponent,
+      ServiceTypesDynamicYearComponent,
+      ServiceTypePercentagesComponent
   ],
   imports: [
     CommonModule,

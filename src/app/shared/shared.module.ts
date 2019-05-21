@@ -36,6 +36,7 @@ import {PaginatorComponent} from './components/paginator/paginator.component';
 import {IssueSignatureProgressComponent} from './components/issue/issue-signature-progress/issue-signature-progress.component';
 import {SignatureListComponent} from './components/issue/signature-list/signature-list.component';
 import {SignatureItemComponent} from './components/issue/signature-list/signature-item/signature-item.component';
+import { CommonChartComponent } from './components/chart/common-chart/common-chart.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import {SignatureItemComponent} from './components/issue/signature-list/signatur
       IssueSignatureProgressComponent,
       SignatureListComponent,
       SignatureItemComponent,
+      CommonChartComponent,
   ],
   imports: [
     CommonModule,
@@ -114,6 +116,7 @@ import {SignatureItemComponent} from './components/issue/signature-list/signatur
         IssueSignatureProgressComponent,
         SignatureListComponent,
         SignatureItemComponent,
+        CommonChartComponent
     ],
   entryComponents: [
       MapComponent,

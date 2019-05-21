@@ -10,14 +10,20 @@ declare var Chart: any;
 })
 export class ServiceTypeSharesChartComponent implements OnInit {
 
+    @Input() title: string;
+
   @ViewChild('chartArea') chartArea: ElementRef;
 
   _data: Array<any>;
+
+  total: number = 0;
 
   @Input()
   set data(value: Array<any>)
   {
     this._data = value;
+    this.calculateTotal();
+
     if (!!this.chartArea)
     {
       this.updateChart();
@@ -30,6 +36,13 @@ export class ServiceTypeSharesChartComponent implements OnInit {
     this.updateChart();
   }
 
+  calculateTotal()
+  {
+    this.total = 0;
+    this._data.forEach((item) => {
+      this.total += item.issueNumber;
+    });
+  }
   updateChart()
   {
     if (this.isDataEmpty() || !this.chartArea)
@@ -70,27 +83,7 @@ export class ServiceTypeSharesChartComponent implements OnInit {
 
   isDataEmpty()
   {
-    let result = true;
-
-    for(let i = 0; i < this._data.length; i++)
-    {
-      if (this._data[i].issueNumber > 0)
-      {
-        result = false;
-        break;
-      }
-    }
-
-    return result;
-  }
-
-  clearChart()
-  {
-    const canvas = this.chartArea.nativeElement;
-
-    const context = canvas.getContext('2d');
-
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    return (this.total === 0);
   }
 
 }

@@ -35,6 +35,14 @@ export const environment = {
     uborkamest: '#fec000',
     uborkauliz: '#005187',
     others: '#cccccc'
+  },
+
+  monthNames: {
+    en: [
+      'January', 'February', 'March', 'April', 'May',
+      'June', 'July', 'August', 'September',
+      'October', 'November', 'December'
+    ]
   }
 };
 
