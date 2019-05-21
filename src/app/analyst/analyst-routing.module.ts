@@ -1,8 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {CommonCountryStatisticPageComponent} from './components/common-country-statistic-page/common-country-statistic-page.component';
+import {CommonStatisticPageComponent} from './components/common-statistic-page/common-statistic-page.component';
 import {BreadCrumb} from '../core/data/model/bread-crumb.model';
-import {FederalDistrictStatisticPageComponent} from './components/federal-district-statistic-page/federal-district-statistic-page.component';
 import {RegionStatisticPageComponent} from './components/region-statistic-page/region-statistic-page.component';
 
 const routes: Routes = [
@@ -11,7 +10,7 @@ const routes: Routes = [
             { path: '', redirectTo: 'statistic/common', pathMatch: 'full' },
             {
                 path: 'statistic/common',
-                component: CommonCountryStatisticPageComponent,
+                component: CommonStatisticPageComponent,
                 data: {
                     pageTitle: 'Россия',
                     pageSubTitle: '',
@@ -23,22 +22,22 @@ const routes: Routes = [
             },
             {
                 path: 'statistic/common/:year',
-                component: CommonCountryStatisticPageComponent,
+                component: CommonStatisticPageComponent,
                 data: {
                     pageTitle: 'Россия',
                     pageSubTitle: '',
                     breadCrumbs: [
                         new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Country', null, 'bar-chart')
+                        new BreadCrumb('Statistics', null, 'bar-chart')
                     ]
                 }
             },
-            {
-                path: 'statistic/federal-district/:id',
-                component: FederalDistrictStatisticPageComponent,
-                data: {
-                }
-            },
+            // {
+            //     path: 'statistic/common/:year/:id',
+            //     component: CommonStatisticPageComponent,
+            //     data: {
+            //     }
+            // },
             {
                 path: 'statistic/region/:id',
                 component: RegionStatisticPageComponent,

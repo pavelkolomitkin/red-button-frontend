@@ -1,21 +1,22 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {combineLatest, Subscription} from 'rxjs';
 import {StatisticService} from '../../services/statistic.service';
 import {ServiceType} from '../../../core/data/model/service-type.model';
 
 @Component({
-  selector: 'app-common-country-statistic-page',
-  templateUrl: './common-country-statistic-page.component.html',
-  styleUrls: ['./common-country-statistic-page.component.css']
+  selector: 'app-analyst-common-statistic-page',
+  templateUrl: './common-statistic-page.component.html',
+  styleUrls: ['./common-statistic-page.component.css']
 })
-export class CommonCountryStatisticPageComponent implements OnInit, OnDestroy {
+export class CommonStatisticPageComponent implements OnInit, OnDestroy {
 
   static DEFAULT_YEAR_RANGE = 2;
 
   selectedYear: number;
   startYear: number;
   endYear: number;
+  federalDistrictId: number;
 
   statistics: { common: any, byFederalDistricts: any };
   statisticsDynamic: any;
@@ -32,7 +33,10 @@ export class CommonCountryStatisticPageComponent implements OnInit, OnDestroy {
 
     const currentDate = new Date();
 
-    this.paramSubscription = this.route.params.subscribe((params) => {
+    this.paramSubscription = combineLatest(this.route.params, this.route.queryParams)
+        .subscribe(([params, queryParams]) => {
+
+      this.federalDistrictId = !!queryParams ? queryParams['fd'] : undefined;
 
       if (!params['year'])
       {
@@ -44,7 +48,7 @@ export class CommonCountryStatisticPageComponent implements OnInit, OnDestroy {
         this.selectedYear = +params['year'];
       }
 
-      this.startYear = currentDate.getFullYear() - CommonCountryStatisticPageComponent.DEFAULT_YEAR_RANGE;
+      this.startYear = currentDate.getFullYear() - CommonStatisticPageComponent.DEFAULT_YEAR_RANGE;
       this.endYear = currentDate.getFullYear();
 
       this.service.getCountryServiceTypeIssueNumbers(this.selectedYear)

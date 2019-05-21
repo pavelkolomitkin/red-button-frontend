@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CommonLayoutComponent } from './components/common/common-layout/common-layout.component';
 import {SharedModule} from '../shared/shared.module';
 import {AnalystRoutingModule} from './analyst-routing.module';
-import {CommonCountryStatisticPageComponent} from './components/common-country-statistic-page/common-country-statistic-page.component';
-import {FederalDistrictStatisticPageComponent} from './components/federal-district-statistic-page/federal-district-statistic-page.component';
+import {CommonStatisticPageComponent} from './components/common-statistic-page/common-statistic-page.component';
 import {RegionStatisticPageComponent} from './components/region-statistic-page/region-statistic-page.component';
 import {Store, StoreModule} from '@ngrx/store';
 import {State} from '../app.state';
@@ -19,12 +18,12 @@ import { ServiceTypesStatisticsComponent } from './components/common/service-typ
 import { ServiceTypeItemComponent } from './components/common/service-types-statistics/service-type-item/service-type-item.component';
 import { ServiceTypeSharesChartComponent } from './components/common/charts/service-type-shares-chart/service-type-shares-chart.component';
 import { ServiceTypesDynamicYearComponent } from './components/common/charts/service-types-dynamic-year/service-types-dynamic-year.component';
+import { FederalDistrictMapComponent } from './components/common/vector-map/federal-district-map/federal-district-map.component';
 
 @NgModule({
   declarations: [
       CommonLayoutComponent,
-      CommonCountryStatisticPageComponent,
-      FederalDistrictStatisticPageComponent,
+      CommonStatisticPageComponent,
       RegionStatisticPageComponent,
       CountryMapComponent,
       MapContainerComponent,
@@ -33,7 +32,8 @@ import { ServiceTypesDynamicYearComponent } from './components/common/charts/ser
       ServiceTypesStatisticsComponent,
       ServiceTypeItemComponent,
       ServiceTypeSharesChartComponent,
-      ServiceTypesDynamicYearComponent
+      ServiceTypesDynamicYearComponent,
+      FederalDistrictMapComponent
   ],
   imports: [
     CommonModule,

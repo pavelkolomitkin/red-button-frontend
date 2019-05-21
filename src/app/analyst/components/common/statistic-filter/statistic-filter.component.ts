@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {combineLatest} from 'rxjs';
 
 @Component({
   selector: 'app-analyst-statistic-filter',
@@ -10,6 +12,7 @@ export class StatisticFilterComponent implements OnInit {
   @Input() startYear: number;
   @Input() endYear: number;
   @Input() currentYear: number;
+  @Input() federalDistrictId: string;
 
   years: Array<number>;
 

@@ -27,6 +27,7 @@ export class MainMenuComponent implements OnInit, AfterViewInit {
   companyCommonInfo: Observable<CompanyCommonInfo>;
 
   federalDistricts: Observable<Array<FederalDistrict>>;
+  currentDate: Date = new Date();
 
   constructor(private store:Store<State>)
   {
