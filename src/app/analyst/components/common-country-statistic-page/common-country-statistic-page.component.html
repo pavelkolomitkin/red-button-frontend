@@ -12,40 +12,37 @@
 
             <div class="row">
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <app-analyst-country-map [statistic]="statistics.byFederalDistricts"></app-analyst-country-map>
                 </div>
-                <div class="col-sm-6">
-                    <app-analyst-service-types-statistics [data]="statistics.common"></app-analyst-service-types-statistics>
+                <div class="col-sm-4">
+
+                        <app-analyst-service-types-statistics [data]="statistics.common"></app-analyst-service-types-statistics>
+
                 </div>
 
             </div>
 
         </div>
-
-<!--        <div class="box-body">-->
-<!--            -->
-<!--        </div>-->
 
         <div class="box-body">
             <div class="row">
-                <div class="col-md-4">
-<!--                    <app-analyst-service-type-shares-chart [title]="'Common Numbers'" [data]="statistics.common"></app-analyst-service-type-shares-chart>-->
+                <div class="col-md-6">
+                    <div>
+                        <app-analyst-service-type-shares-chart [title]="'Common Numbers'" [data]="statistics.common"></app-analyst-service-type-shares-chart>
+                    </div>
+
                 </div>
-                <div class="col-md-8">
-                    <app-analyst-service-type-percentages [title]="'Percentages'" [data]="statistics.common"></app-analyst-service-type-percentages>
+                <div class="col-md-6">
+                    <ng-container *ngIf="!!statisticsDynamic">
+                        <div>
+                            <app-analyst-service-types-dynamic-year [title]="'Dynamics'" [data]="statisticsDynamic.statistics"></app-analyst-service-types-dynamic-year>
+                        </div>
+                    </ng-container>
                 </div>
             </div>
         </div>
 
-        <div class="box-body" *ngIf="!!statisticsDynamic">
-
-            <div class="row">
-                <div class="col-md-12">
-                    <app-analyst-service-types-dynamic-year [title]="'Dynamics'" [data]="statisticsDynamic.statistics"></app-analyst-service-types-dynamic-year>
-                </div>
-            </div>
-        </div>
 
         <div class="box-footer">
 

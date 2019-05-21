@@ -38,7 +38,8 @@ export class ServiceTypesDynamicYearComponent implements OnInit, AfterViewInit {
       //   text: this.title
       // },
       tooltip: {
-        trigger: 'axis'
+        trigger: 'axis',
+        // position: [10, 10]
       },
       legend: {
         data: this._data.map((item) => {

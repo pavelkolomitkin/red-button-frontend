@@ -1,7 +1,4 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {environment} from '../../../../../../environments/environment';
-
-declare var Chart: any;
 
 @Component({
   selector: 'app-analyst-service-type-shares-chart',
@@ -10,11 +7,11 @@ declare var Chart: any;
 })
 export class ServiceTypeSharesChartComponent implements OnInit {
 
-    @Input() title: string;
-
-  @ViewChild('chartArea') chartArea: ElementRef;
+  @Input() title: string;
 
   _data: Array<any>;
+
+  chartOptions: any;
 
   total: number = 0;
 
@@ -22,12 +19,9 @@ export class ServiceTypeSharesChartComponent implements OnInit {
   set data(value: Array<any>)
   {
     this._data = value;
-    this.calculateTotal();
 
-    if (!!this.chartArea)
-    {
-      this.updateChart();
-    }
+    this.calculateTotal();
+    this.chartOptions = this.getChartOption();
   }
 
   constructor() { }
@@ -43,42 +37,56 @@ export class ServiceTypeSharesChartComponent implements OnInit {
       this.total += item.issueNumber;
     });
   }
+
+  getChartOption()
+  {
+    const result: any = {
+      tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+      },
+      legend: {
+        // type: 'scroll',
+        // orient: 'vertical',
+        // right: 10,
+        // top: 20,
+        // bottom: 20,
+        // data: this._data.map((item) => {
+        //   return !!item.serviceType ? item.serviceType.title : 'Others'
+        // }),
+        show: false
+
+        // selected: data.selected
+      },
+      series : [
+        {
+          // name: '姓名',
+          type: 'pie',
+          radius : '55%',
+          center: ['40%', '50%'],
+          data: this._data.map((item) => {
+            return {
+              name: !!item.serviceType ? item.serviceType.title : 'Others',
+              value: item.issueNumber
+            };
+          }),
+          itemStyle: {
+            emphasis: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    };
+
+    return result;
+  }
+
   updateChart()
   {
-    if (this.isDataEmpty() || !this.chartArea)
-    {
-      //this.clearChart();
-      return;
-    }
 
-    const chartData = [];
-    const colors = environment.serviceTypeColors;
-    this._data.forEach((item) => {
-
-      let label = 'Others';
-      let color = colors.others;
-      if (!!item.serviceType)
-      {
-        label = item.serviceType.title;
-        color = colors[item.serviceType.code];
-      }
-
-      chartData.push({
-        value: item.issueNumber,
-        color: color,
-        highlight: color,
-        label: label
-      });
-
-    });
-
-    const context = this.chartArea.nativeElement.getContext('2d');
-
-    const chart = new Chart(context);
-    chart.Doughnut(chartData, {
-      responsive: true,
-      maintainAspectRatio: true,
-    });
   }
 
   isDataEmpty()
