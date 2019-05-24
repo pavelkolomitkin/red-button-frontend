@@ -49,7 +49,7 @@ export class CountryMapComponent implements OnInit {
 
       if (totalIssue > 0)
       {
-        result += 'Total: ' + totalIssue;
+        result += 'Всего: ' + totalIssue;
       }
 
     }

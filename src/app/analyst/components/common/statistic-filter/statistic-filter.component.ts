@@ -12,7 +12,7 @@ export class StatisticFilterComponent implements OnInit {
   @Input() startYear: number;
   @Input() endYear: number;
   @Input() currentYear: number;
-  @Input() federalDistrictId: string;
+  @Input() federalDistrictId: any;
 
   years: Array<number>;
 
@@ -28,6 +28,18 @@ export class StatisticFilterComponent implements OnInit {
       this.years.push(i);
     }
 
+  }
+
+  getQueryParams()
+  {
+    const result: any = {};
+
+    if (!isNaN(this.federalDistrictId))
+    {
+      result.fd = this.federalDistrictId;
+    }
+
+    return result;
   }
 
 }

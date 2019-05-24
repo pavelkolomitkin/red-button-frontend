@@ -20,7 +20,7 @@ export class FederalDistrictComponent implements OnInit {
 
   ngOnInit() {
 
-    this.graphicData = FEDERAL_DISTRICTS[this.data.code];
+    this.graphicData = FEDERAL_DISTRICTS[this.data.code].graphicItems;
 
   }
 

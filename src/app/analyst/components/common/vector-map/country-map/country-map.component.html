@@ -1,10 +1,10 @@
-<app-analyst-map-container>
+<app-analyst-map-container [viewBox]="'0 0 1091.992 630.119'">
     <ng-container *ngIf="!!(federalDistricts | async)">
         <svg:g
                 app-analyst-federal-district
                 *ngFor="let item of (federalDistricts | async)"
                 [data]="item"
-                class="federal-district-item"
+                class="vector-map-element"
                 [title]="getItemTitle(item)"
         ></svg:g>
     </ng-container>

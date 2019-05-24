@@ -4,7 +4,7 @@
       <li *ngFor="let year of years"
           class="year-item margin-r-5"
           [ngClass]=" year === currentYear ? 'active' : '' ">
-        <a [routerLink]="'/analytics/statistic/common/' + year" [queryParams]="{fd: federalDistrictId}">{{ year }}</a>
+        <a [routerLink]="'/analytics/statistic/common/' + year" [queryParams]="getQueryParams()">{{ year }}</a>
       </li>
     </ul>
   </div>

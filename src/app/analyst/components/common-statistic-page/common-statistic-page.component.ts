@@ -36,7 +36,7 @@ export class CommonStatisticPageComponent implements OnInit, OnDestroy {
     this.paramSubscription = combineLatest(this.route.params, this.route.queryParams)
         .subscribe(([params, queryParams]) => {
 
-      this.federalDistrictId = !!queryParams ? queryParams['fd'] : undefined;
+      this.federalDistrictId = !!queryParams ? +queryParams['fd'] : undefined;
 
       if (!params['year'])
       {
@@ -51,31 +51,48 @@ export class CommonStatisticPageComponent implements OnInit, OnDestroy {
       this.startYear = currentDate.getFullYear() - CommonStatisticPageComponent.DEFAULT_YEAR_RANGE;
       this.endYear = currentDate.getFullYear();
 
-      this.service.getCountryServiceTypeIssueNumbers(this.selectedYear)
-          .toPromise()
-          .then(({ statistics, year }) => {
+      if (!!this.federalDistrictId)
+      {
+        this.service.getFederalDistrictServiceTypeIssueNumbers(this.federalDistrictId, this.selectedYear)
+            .toPromise()
+            .then(({ statistics, year }) => {
 
-            //console.log(statistics);
-            // { common, byFederalDistricts }
-            this.calculateServiceTypePercentage(statistics.common);
-            this.statistics = statistics;
+              // { common, byRegions }
+              this.statistics = statistics;
+            });
 
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        this.service.getFederalDistrictServiceTypeIssueNumberDynamic(this.federalDistrictId, this.selectedYear)
+            .toPromise()
+            .then((data) => {
 
-      this.service.getCountryServiceTypeIssueNumberDynamic(this.selectedYear)
-          .toPromise()
-          .then((data) => {
+              this.statisticsDynamic = data;
 
-            this.statisticsDynamic = data;
+            });
+      }
+      else
+      {
+        this.service.getCountryServiceTypeIssueNumbers(this.selectedYear)
+            .toPromise()
+            .then(({ statistics, year }) => {
 
-            //console.log(data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+              //console.log(statistics);
+              // { common, byFederalDistricts }
+
+              this.statistics = statistics;
+
+            });
+
+        this.service.getCountryServiceTypeIssueNumberDynamic(this.selectedYear)
+            .toPromise()
+            .then((data) => {
+
+              this.statisticsDynamic = data;
+
+              //console.log(data);
+            });
+      }
+
+
 
     });
 
@@ -84,31 +101,6 @@ export class CommonStatisticPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
     this.paramSubscription.unsubscribe();
-
-  }
-
-  calculateServiceTypePercentage(commonStatistic: Array<{ issueNumber: number, serviceType: ServiceType, percentage?: number }>)
-  {
-    let totalIssues: number = 0;
-
-    commonStatistic.forEach((item) => {
-
-      totalIssues += item.issueNumber;
-
-    });
-
-    commonStatistic.forEach((item) => {
-
-      if (totalIssues > 0)
-      {
-        item.percentage = (item.issueNumber * 100 / totalIssues);
-      }
-      else
-      {
-        item.percentage = 0;
-      }
-
-    });
 
   }
 

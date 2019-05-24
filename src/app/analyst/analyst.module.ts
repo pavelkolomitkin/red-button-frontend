@@ -19,6 +19,7 @@ import { ServiceTypeItemComponent } from './components/common/service-types-stat
 import { ServiceTypeSharesChartComponent } from './components/common/charts/service-type-shares-chart/service-type-shares-chart.component';
 import { ServiceTypesDynamicYearComponent } from './components/common/charts/service-types-dynamic-year/service-types-dynamic-year.component';
 import { FederalDistrictMapComponent } from './components/common/vector-map/federal-district-map/federal-district-map.component';
+import { VectorRegionItemComponent } from './components/common/vector-map/federal-district-map/vector-region-item/vector-region-item.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FederalDistrictMapComponent } from './components/common/vector-map/fede
       ServiceTypeItemComponent,
       ServiceTypeSharesChartComponent,
       ServiceTypesDynamicYearComponent,
-      FederalDistrictMapComponent
+      FederalDistrictMapComponent,
+      VectorRegionItemComponent
   ],
   imports: [
     CommonModule,

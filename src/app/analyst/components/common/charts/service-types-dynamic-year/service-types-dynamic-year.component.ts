@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {environment} from '../../../../../../environments/environment';
+import {isObject} from 'util';
 
 
 @Component({
@@ -11,6 +12,7 @@ export class ServiceTypesDynamicYearComponent implements OnInit, AfterViewInit {
 
 
   @Input() title: string;
+  @Input() year: number;
 
   _data: Array<any> = [];
 
@@ -69,13 +71,13 @@ export class ServiceTypesDynamicYearComponent implements OnInit, AfterViewInit {
 
       for (let i = 0; i < 12; i++)
       {
-        if (typeof item.months[i] === 'undefined')
+        if (!!item.years && !!item.years[this.year] && !!item.years[this.year][i])
         {
-          data.push(0);
+          data.push(item.years[this.year][i]);
         }
         else
         {
-          data.push(item.months[i]);
+          data.push(0);
         }
       }
 
