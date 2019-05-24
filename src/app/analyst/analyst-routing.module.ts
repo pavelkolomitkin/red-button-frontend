@@ -24,8 +24,8 @@ const routes: Routes = [
                 path: 'statistic/common/:year',
                 component: CommonStatisticPageComponent,
                 data: {
-                    pageTitle: 'Россия',
-                    pageSubTitle: '',
+                    // pageTitle: 'Россия',
+                    // pageSubTitle: '',
                     breadCrumbs: [
                         new BreadCrumb('Home', '/', 'home'),
                         new BreadCrumb('Statistics', null, 'bar-chart')

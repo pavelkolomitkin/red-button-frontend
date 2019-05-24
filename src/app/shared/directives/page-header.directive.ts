@@ -22,7 +22,7 @@ export class PageHeaderDirective implements OnInit{
 
     this.route.data.subscribe((data) => {
 
-      this.store.dispatch(new GlobalPageTitle(''));
+      //this.store.dispatch(new GlobalPageTitle(''));
       this.store.dispatch(new GlobalBreadCrumbs([]));
 
 

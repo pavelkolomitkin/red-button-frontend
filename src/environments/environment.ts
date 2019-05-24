@@ -43,7 +43,11 @@ export const environment = {
       'June', 'July', 'August', 'September',
       'October', 'November', 'December'
     ]
-  }
+  },
+
+  statisticColorValueSchema: ['#0075ff', '#0f0', 'yellow', 'red'],
+  statisticsColorFederalDistrictMaxIssueNumber: 100,
+  statisticsColorRegionMaxIssueNumber: 10,
 };
 
 /*

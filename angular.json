@@ -60,7 +60,8 @@
               "node_modules/admin-lte/plugins/input-mask/jquery.inputmask.js",
               "node_modules/admin-lte/plugins/input-mask/jquery.inputmask.date.extensions.js",
               "node_modules/admin-lte/plugins/input-mask/jquery.inputmask.extensions.js",
-              "node_modules/echarts/dist/echarts.min.js"
+              "node_modules/echarts/dist/echarts.min.js",
+              "node_modules/chroma-js/chroma.min.js"
             ],
             "es5BrowserSupport": true
           },

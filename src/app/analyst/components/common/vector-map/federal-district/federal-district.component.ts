@@ -11,6 +11,7 @@ export class FederalDistrictComponent implements OnInit {
 
   @Input() data: FederalDistrict;
   @Input() title: string;
+  @Input() totalNumber: number;
 
   graphicData: Array<any>;
 

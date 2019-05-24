@@ -6,6 +6,9 @@
                 [data]="item"
                 class="vector-map-element"
                 [title]="getItemTitle(item)"
+                [totalNumber]="getItemTotal(item)"
+                [ngStyle]="{fill: getFillColor(getItemTotal(item))}"
+                (click)="onFederalDistrictClickHandler(item)"
         ></svg:g>
     </ng-container>
 </app-analyst-map-container>

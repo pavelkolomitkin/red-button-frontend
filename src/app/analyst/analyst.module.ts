@@ -20,6 +20,7 @@ import { ServiceTypeSharesChartComponent } from './components/common/charts/serv
 import { ServiceTypesDynamicYearComponent } from './components/common/charts/service-types-dynamic-year/service-types-dynamic-year.component';
 import { FederalDistrictMapComponent } from './components/common/vector-map/federal-district-map/federal-district-map.component';
 import { VectorRegionItemComponent } from './components/common/vector-map/federal-district-map/vector-region-item/vector-region-item.component';
+import {ColorValueScaleService} from './services/color-value-scale.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { VectorRegionItemComponent } from './components/common/vector-map/federa
       StoreModule
   ],
     providers: [
-        StatisticService
+        StatisticService,
+        ColorValueScaleService
     ]
 })
 export class AnalystModule

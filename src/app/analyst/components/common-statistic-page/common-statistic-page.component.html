@@ -15,10 +15,17 @@
 
                 <div class="col-md-8">
                     <ng-container *ngIf="!!federalDistrictId">
-                        <app-analyst-federal-district-map [statistics]="statistics.byRegions" [districtId]="federalDistrictId"></app-analyst-federal-district-map>
+                        <app-analyst-federal-district-map
+                                [statistics]="statistics.byRegions"
+                                [districtId]="federalDistrictId"
+                                (onRegionSelect)="onRegionSelectHandler($event)"
+                        ></app-analyst-federal-district-map>
                     </ng-container>
                     <ng-container *ngIf="!federalDistrictId">
-                        <app-analyst-country-map [statistic]="statistics.byFederalDistricts"></app-analyst-country-map>
+                        <app-analyst-country-map
+                                [statistic]="statistics.byFederalDistricts"
+                                (onDistrictSelect)="onDistrictSelectHandler($event)"
+                        ></app-analyst-country-map>
                     </ng-container>
                 </div>
                 <div class="col-sm-4">
