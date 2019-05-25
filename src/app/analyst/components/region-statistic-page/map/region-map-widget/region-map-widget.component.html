@@ -1,0 +1,8 @@
+<span class="btn btn-primary" (click)="onButtonClickHandler($event)">
+  <i class="fa fa-map-marker"></i> Map
+</span>
+<app-analyst-region-map
+        *ngIf="isMapVisible"
+        [region]="region"
+        (onClose)="onMapCloseHandler($event)"
+></app-analyst-region-map>

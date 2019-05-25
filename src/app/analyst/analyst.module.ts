@@ -21,6 +21,8 @@ import { ServiceTypesDynamicYearComponent } from './components/common/charts/ser
 import { FederalDistrictMapComponent } from './components/common/vector-map/federal-district-map/federal-district-map.component';
 import { VectorRegionItemComponent } from './components/common/vector-map/federal-district-map/vector-region-item/vector-region-item.component';
 import {ColorValueScaleService} from './services/color-value-scale.service';
+import { RegionMapWidgetComponent } from './components/region-statistic-page/map/region-map-widget/region-map-widget.component';
+import { RegionMapComponent } from './components/region-statistic-page/map/region-map/region-map.component';
 
 @NgModule({
   declarations: [
@@ -36,15 +38,17 @@ import {ColorValueScaleService} from './services/color-value-scale.service';
       ServiceTypeSharesChartComponent,
       ServiceTypesDynamicYearComponent,
       FederalDistrictMapComponent,
-      VectorRegionItemComponent
+      VectorRegionItemComponent,
+      RegionMapWidgetComponent,
+      RegionMapComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    AnalystRoutingModule,
+    imports: [
+        CommonModule,
+        SharedModule,
+        AnalystRoutingModule,
 
-      StoreModule.forFeature('analyticsFilter', filterReducer)
-  ],
+        StoreModule.forFeature('analyticsFilter', filterReducer),
+    ],
   exports: [
       SharedModule,
       StoreModule

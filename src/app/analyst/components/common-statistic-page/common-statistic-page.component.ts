@@ -152,7 +152,7 @@ export class CommonStatisticPageComponent implements OnInit, OnDestroy {
 
   onRegionSelectHandler(region: Region)
   {
-    this.router.navigateByUrl('/analytics/statistic/region/' + region.id);
+    this.router.navigateByUrl('/analytics/statistic/region/' + region.id + '/' + this.selectedYear);
   }
 
 }

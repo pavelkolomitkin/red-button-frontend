@@ -1,0 +1,16 @@
+<div class="map-container">
+    <app-map #map
+             (onReady)="onMapReadyHandler($event)"
+             (onViewBoxChange)="onViewBoxChangeHandler($event)"
+    ></app-map>
+    <div class="control-panel">
+        <div class="pull-right">
+            <span class="btn btn-default" (click)="onCenterMapButtonClickHandler($event)">
+                <i class="fa fa-arrows"></i>
+            </span>
+            <span class="btn btn-default" (click)="onCloseButtonClickHandler($event)">
+                <i class="fa fa-close"></i>
+            </span>
+        </div>
+    </div>
+</div>

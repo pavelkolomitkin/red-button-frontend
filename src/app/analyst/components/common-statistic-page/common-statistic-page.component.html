@@ -13,7 +13,7 @@
 
             <div class="row">
 
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <ng-container *ngIf="!!federalDistrictId">
                         <app-analyst-federal-district-map
                                 [statistics]="statistics.byRegions"
@@ -28,7 +28,7 @@
                         ></app-analyst-country-map>
                     </ng-container>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <app-analyst-service-types-statistics [data]="statistics.common"></app-analyst-service-types-statistics>
                 </div>
 
