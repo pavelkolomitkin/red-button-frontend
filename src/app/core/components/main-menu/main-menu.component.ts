@@ -28,9 +28,11 @@ export class MainMenuComponent implements OnInit, AfterViewInit {
 
   federalDistricts: Observable<Array<FederalDistrict>>;
   currentDate: Date = new Date();
+  currentYear: number
 
   constructor(private store:Store<State>)
   {
+    this.currentYear = this.currentDate.getFullYear();
     this.user = this.store.pipe(select(state => state.security.authorizedUser));
 
 

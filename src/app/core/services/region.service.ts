@@ -12,4 +12,13 @@ export class RegionService extends BaseService
             })
         );
     }
+
+    get(id)
+    {
+        return this.http.get<{ region: Region }>('/region/' + id).pipe(
+            map(({ region }) => {
+                return region
+            })
+        );
+    }
 }

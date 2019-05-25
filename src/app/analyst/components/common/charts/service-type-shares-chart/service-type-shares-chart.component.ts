@@ -1,9 +1,10 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-analyst-service-type-shares-chart',
   templateUrl: './service-type-shares-chart.component.html',
-  styleUrls: ['./service-type-shares-chart.component.css']
+  styleUrls: ['./service-type-shares-chart.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ServiceTypeSharesChartComponent implements OnInit {
 

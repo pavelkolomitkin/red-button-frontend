@@ -44,6 +44,13 @@ const routes: Routes = [
                 data: {
 
                 }
+            },
+            {
+                path: 'statistic/region/:id/:year',
+                component: RegionStatisticPageComponent,
+                data: {
+
+                }
             }
 
         ]

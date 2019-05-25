@@ -9,6 +9,7 @@ import {select, Store} from '@ngrx/store';
 import {State} from '../../../app.state';
 import {GlobalPageTitle} from '../../../core/data/actions';
 import {filter, withLatestFrom} from 'rxjs/operators';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-analyst-common-statistic-page',
@@ -16,8 +17,6 @@ import {filter, withLatestFrom} from 'rxjs/operators';
   styleUrls: ['./common-statistic-page.component.css']
 })
 export class CommonStatisticPageComponent implements OnInit, OnDestroy {
-
-  static DEFAULT_YEAR_RANGE = 2;
 
   selectedYear: number;
   startYear: number;
@@ -41,8 +40,6 @@ export class CommonStatisticPageComponent implements OnInit, OnDestroy {
       ) { }
 
   ngOnInit() {
-
-    const currentDate = new Date();
 
     this.paramSubscription = this.router.events.pipe(
         filter(event => event instanceof NavigationEnd),
@@ -82,7 +79,7 @@ export class CommonStatisticPageComponent implements OnInit, OnDestroy {
       this.selectedYear = +params['year'];
     }
 
-    this.startYear = currentDate.getFullYear() - CommonStatisticPageComponent.DEFAULT_YEAR_RANGE;
+    this.startYear = environment.statisticsStartYear;
     this.endYear = currentDate.getFullYear();
     this.updatePageHeader();
     if (!!this.federalDistrictId)

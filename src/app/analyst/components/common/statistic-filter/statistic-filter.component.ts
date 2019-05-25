@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {combineLatest} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 
 @Component({
   selector: 'app-analyst-statistic-filter',
@@ -9,14 +9,18 @@ import {combineLatest} from 'rxjs';
 })
 export class StatisticFilterComponent implements OnInit {
 
+  @Input() routePrefix: string;
   @Input() startYear: number;
   @Input() endYear: number;
   @Input() currentYear: number;
-  @Input() federalDistrictId: any;
 
   years: Array<number>;
 
-  constructor() {
+  queryParams: Observable<any>
+
+  constructor(private route: ActivatedRoute) {
+
+    this.queryParams = this.route.queryParams;
 
   }
 
@@ -28,18 +32,6 @@ export class StatisticFilterComponent implements OnInit {
       this.years.push(i);
     }
 
-  }
-
-  getQueryParams()
-  {
-    const result: any = {};
-
-    if (!isNaN(this.federalDistrictId))
-    {
-      result.fd = this.federalDistrictId;
-    }
-
-    return result;
   }
 
 }

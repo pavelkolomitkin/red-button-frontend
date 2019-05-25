@@ -48,6 +48,7 @@ export const environment = {
   statisticColorValueSchema: ['#0075ff', '#0f0', 'yellow', 'red'],
   statisticsColorFederalDistrictMaxIssueNumber: 100,
   statisticsColorRegionMaxIssueNumber: 10,
+  statisticsStartYear: 2018
 };
 
 /*

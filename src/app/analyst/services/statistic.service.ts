@@ -1,5 +1,6 @@
 import {BaseService} from '../../core/services/base.service';
 import {map} from 'rxjs/operators';
+import {Region} from '../../core/data/model/region.model';
 
 export class StatisticService extends BaseService
 {
@@ -56,5 +57,15 @@ export class StatisticService extends BaseService
     getFederalDistrictServiceTypeIssueNumberDynamic(districtId: number, year: number)
     {
         return this.http.get('/analytics/statistics/federal-district-numbers/dynamic/' + districtId + '/' + year);
+    }
+
+    getRegionServiceTypeIssueNumbers(region: Region, year: number)
+    {
+        return this.http.get<{ statistics: any, year: number }>('/analytics/statistics/region/' + region.id + '/' + year);
+    }
+
+    getRegionServiceTypeIssueNumberDynamic(region: Region, year: number)
+    {
+        return this.http.get('/analytics/statistics/region-numbers/dynamic/' + region.id + '/' + year);
     }
 }
