@@ -1,6 +1,6 @@
 import {MapViewConfiguratorBase} from './map-view-configurator-base';
-import {MapComponent} from '../../../shared/components/map/map.component';
-import {GeoLocation} from '../../data/model/geo-location.model';
+import {MapComponent} from '../../../../shared/components/map/map.component';
+import {GeoLocation} from '../../../data/model/geo-location.model';
 
 export class MapViewSinglePointConfigurator extends MapViewConfiguratorBase
 {

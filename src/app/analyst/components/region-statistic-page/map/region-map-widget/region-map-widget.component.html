@@ -4,5 +4,6 @@
 <app-analyst-region-map
         *ngIf="isMapVisible"
         [region]="region"
+        [year]="year"
         (onClose)="onMapCloseHandler($event)"
 ></app-analyst-region-map>

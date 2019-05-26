@@ -9,11 +9,16 @@
     background: #ffffff;
 }
 
+.filter-container
+{
+    margin-top: 15px;
+}
+
 .control-panel
 {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50px;
     right: 0;
     height: 30px;
 }

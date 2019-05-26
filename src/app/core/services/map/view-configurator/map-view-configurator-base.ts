@@ -1,4 +1,4 @@
-import {MapComponent} from '../../../shared/components/map/map.component';
+import {MapComponent} from '../../../../shared/components/map/map.component';
 
 export abstract class MapViewConfiguratorBase
 {

@@ -1,6 +1,6 @@
 import {MapViewConfiguratorBase} from './map-view-configurator-base';
-import {MapComponent} from '../../../shared/components/map/map.component';
-import {GeoLocation} from '../../data/model/geo-location.model';
+import {MapComponent} from '../../../../shared/components/map/map.component';
+import {GeoLocation} from '../../../data/model/geo-location.model';
 
 export class MapViewPointsBoundaryConfigurator extends MapViewConfiguratorBase
 {
@@ -41,7 +41,7 @@ export class MapViewPointsBoundaryConfigurator extends MapViewConfiguratorBase
         });
 
 
-        this.map.setViewBoundaries(topLeftPosition, bottomRightPosition);
+        this.map.setViewBoundaries(topLeftPosition, bottomRightPosition, null, true, [50, 50, 50, 50]);
     }
 
 }

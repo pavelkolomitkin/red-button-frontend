@@ -37,6 +37,7 @@ import {IssueSignatureProgressComponent} from './components/issue/issue-signatur
 import {SignatureListComponent} from './components/issue/signature-list/signature-list.component';
 import {SignatureItemComponent} from './components/issue/signature-list/signature-item/signature-item.component';
 import { CommonChartComponent } from './components/chart/common-chart/common-chart.component';
+import { DateTimeViewComponent } from './components/date-time-view/date-time-view.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { CommonChartComponent } from './components/chart/common-chart/common-cha
       SignatureListComponent,
       SignatureItemComponent,
       CommonChartComponent,
+      DateTimeViewComponent,
   ],
   imports: [
     CommonModule,
@@ -116,7 +118,8 @@ import { CommonChartComponent } from './components/chart/common-chart/common-cha
         IssueSignatureProgressComponent,
         SignatureListComponent,
         SignatureItemComponent,
-        CommonChartComponent
+        CommonChartComponent,
+        DateTimeViewComponent
     ],
   entryComponents: [
       MapComponent,

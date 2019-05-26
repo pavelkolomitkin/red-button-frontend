@@ -28,6 +28,7 @@ export class MapBalloonComponent implements OnInit, OnDestroy {
    * using bootstrap colors: 'default', 'danger', 'success'
    */
   @Input() colorStyle: string = 'default';
+  @Input() color: string;
 
   @Output('onToggleCollapse') toggleCollapse: EventEmitter<boolean> = new EventEmitter();
 

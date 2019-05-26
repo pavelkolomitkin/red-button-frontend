@@ -23,6 +23,9 @@ import { VectorRegionItemComponent } from './components/common/vector-map/federa
 import {ColorValueScaleService} from './services/color-value-scale.service';
 import { RegionMapWidgetComponent } from './components/region-statistic-page/map/region-map-widget/region-map-widget.component';
 import { RegionMapComponent } from './components/region-statistic-page/map/region-map/region-map.component';
+import {ServiceTypeListLoadStart} from '../core/data/service-type.actions';
+import {IssueService} from './services/issue.service';
+import { IssueBalloonComponent } from './components/common/map/issue-balloon/issue-balloon.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,8 @@ import { RegionMapComponent } from './components/region-statistic-page/map/regio
       FederalDistrictMapComponent,
       VectorRegionItemComponent,
       RegionMapWidgetComponent,
-      RegionMapComponent
+      RegionMapComponent,
+      IssueBalloonComponent
   ],
     imports: [
         CommonModule,
@@ -55,7 +59,11 @@ import { RegionMapComponent } from './components/region-statistic-page/map/regio
   ],
     providers: [
         StatisticService,
-        ColorValueScaleService
+        ColorValueScaleService,
+        IssueService
+    ],
+    entryComponents: [
+        IssueBalloonComponent
     ]
 })
 export class AnalystModule
@@ -63,6 +71,7 @@ export class AnalystModule
   constructor(private store: Store<State>) {
 
     this.store.dispatch(new FederalDistrictGetListStart());
+    this.store.dispatch(new ServiceTypeListLoadStart());
 
   }
 }

@@ -28,11 +28,24 @@
 
 </div>
 
-<div
-        class="mark"
-        *ngIf="isCollapsed"
-        [ngClass]="colorStyle == 'default' ? 'bg-primary' : 'bg-' + colorStyle"
-        (click)="onToggleCollapseHandler($event)"
->
+<ng-container *ngIf="!!color; else defaultMark;">
+  <div
+          class="mark"
+          *ngIf="isCollapsed"
+          [ngStyle]="{ backgroundColor: color }"
+          (click)="onToggleCollapseHandler($event)"
+  >
 
-</div>
+  </div>
+</ng-container>
+<ng-template #defaultMark>
+  <div
+          class="mark"
+          *ngIf="isCollapsed"
+          [ngClass]="colorStyle == 'default' ? 'bg-primary' : 'bg-' + colorStyle"
+          (click)="onToggleCollapseHandler($event)"
+  >
+
+  </div>
+</ng-template>
+

@@ -62,7 +62,7 @@ import {OSMSearchService} from './services/osm-search.service';
 import {RegionService} from './services/region.service';
 import {RegionEffects} from './data/effects/region.effects';
 import {NgxPermissionsModule} from 'ngx-permissions';
-import {MapViewConfiguratorFactory} from './services/map/map-view-configurator.factory';
+import {MapViewConfiguratorFactory} from './services/map/view-configurator/map-view-configurator.factory';
 import {FederalDistrictService} from './services/federal-district.service';
 import {FederalDistrictEffects} from './data/effects/federal-district.effects';
 

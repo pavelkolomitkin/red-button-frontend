@@ -9,6 +9,7 @@ import {Region} from '../../../../../core/data/model/region.model';
 export class RegionMapWidgetComponent implements OnInit {
 
   @Input() region: Region;
+  @Input() year: number;
 
   isMapVisible: boolean = false;
 
