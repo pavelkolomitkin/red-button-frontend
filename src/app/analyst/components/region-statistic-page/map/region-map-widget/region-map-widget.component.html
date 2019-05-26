@@ -9,7 +9,7 @@
 </div>
 <app-analyst-region-map
         *ngIf="isMapVisible"
-        [region]="region"
+        [region]="_region"
         [year]="year"
         (onClose)="onMapCloseHandler($event)"
 ></app-analyst-region-map>

@@ -91,6 +91,13 @@ export class RegionMapComponent implements OnInit, OnDestroy, AfterViewInit {
     this.serviceTypes = this.store.pipe(select(state => state.serviceType.list));
   }
 
+  onMapRenderHandler(event)
+  {
+    const { osmRegion: { boundingTopLeft, boundingBottomRight } } = this.region;
+
+    this.map.setViewBoundaries(boundingTopLeft, boundingBottomRight, null, false, [0, 0, 0, 0]);
+  }
+
   ngOnDestroy(): void {
 
     this.searchSubscription.unsubscribe();

@@ -2,6 +2,7 @@
     <app-map #map
              (onReady)="onMapReadyHandler($event)"
              (onViewBoxChange)="onViewBoxChangeHandler($event)"
+             (onRender)="onMapRenderHandler($event)"
     ></app-map>
     <div class="control-panel">
         <div class="row">

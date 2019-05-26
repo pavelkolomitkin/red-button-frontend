@@ -8,7 +8,14 @@ import {Region} from '../../../../../core/data/model/region.model';
 })
 export class RegionMapWidgetComponent implements OnInit {
 
-  @Input() region: Region;
+  _region: Region;
+
+  @Input()
+  set region(value: Region)
+  {
+    this._region = value;
+  }
+
   @Input() year: number;
   @Input() issueNumber: number;
 

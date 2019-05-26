@@ -55,8 +55,6 @@ export class RegionStatisticPageComponent implements OnInit, OnDestroy {
 
       if (!this.region || (this.region.id !== +params['id']))
       {
-        this.store.dispatch(new GlobalPageTitle(''));
-
         try
         {
           this.region = await this.regionService.get(+params['id']).toPromise();

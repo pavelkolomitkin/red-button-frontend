@@ -33,6 +33,7 @@ export class MapComponent implements OnInit, OnDestroy {
   @Output('onLocationClick') locationClick: EventEmitter<GeoLocation> = new EventEmitter();
   @Output('onReady') ready: EventEmitter<any> = new EventEmitter();
   @Output('onViewBoxChange') viewBoxChangeEvent: EventEmitter<MapViewBox> = new EventEmitter();
+  @Output('onRender') postRenderEvent: EventEmitter<void> = new EventEmitter();
 
   // input fields
   @Input() defaultCenter: GeoLocation;
@@ -71,6 +72,9 @@ export class MapComponent implements OnInit, OnDestroy {
 
     this.map.on('singleclick', this.onMapClickHandler);
     this.map.on('moveend', this.onManMoveEndHandler);
+    this.map.once('postrender', () => {
+      this.postRenderEvent.emit();
+    });
 
     this.ready.emit();
   }
