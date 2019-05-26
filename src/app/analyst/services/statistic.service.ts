@@ -1,6 +1,8 @@
 import {BaseService} from '../../core/services/base.service';
 import {map} from 'rxjs/operators';
 import {Region} from '../../core/data/model/region.model';
+import {Company} from '../../core/data/model/company.model';
+import {EntityTransformer} from '../../core/services/helper/entity-transformer.helper';
 
 export class StatisticService extends BaseService
 {
@@ -67,5 +69,14 @@ export class StatisticService extends BaseService
     getRegionServiceTypeIssueNumberDynamic(region: Region, year: number)
     {
         return this.http.get('/analytics/statistics/region-numbers/dynamic/' + region.id + '/' + year);
+    }
+
+    getRegionPopularCompanies(region: Region, year: number)
+    {
+        return this
+            .http
+            .get<{ statistics: Array<{ company: Company, issueNumber: number }>, year: number }>(
+                '/analytics/company/region/' + region.id + '/' + year + '/popular'
+            );
     }
 }

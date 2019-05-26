@@ -1,4 +1,6 @@
-.year-list {}
+.year-list {
+    margin-bottom: 10px;
+}
 .year-list .year-item {
     display: inline-block;
 

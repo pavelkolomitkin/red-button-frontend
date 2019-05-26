@@ -1,18 +1,57 @@
 <app-analyst-common-layout>
+  <ng-container *ngIf="!!region">
+    <app-analyst-statistic-filter
+            [currentYear]="selectedYear"
+            [endYear]="endYear"
+            [startYear]="startYear"
+            [routePrefix]="'/analytics/statistic/region/' + region.id + '/'"
+    ></app-analyst-statistic-filter>
+  </ng-container>
+
+  <ng-container *ngIf="!!statistics">
+
+    <div class="row">
+      <div class="col-md-4">
+        <app-analyst-region-map-widget [region]="region" [year]="selectedYear" [issueNumber]="statistics.statistics.number"></app-analyst-region-map-widget>
+      </div>
+    </div>
+  </ng-container>
+
   <div class="box box-primary" *ngIf="!!region">
-    <div class="box-body">
-      <app-analyst-statistic-filter
-              [currentYear]="selectedYear"
-              [endYear]="endYear"
-              [startYear]="startYear"
-              [routePrefix]="'/analytics/statistic/region/' + region.id + '/'"
-      ></app-analyst-statistic-filter>
-    </div>
 
-    <div class="box-body">
-      <app-analyst-region-map-widget [region]="region" [year]="selectedYear"></app-analyst-region-map-widget>
-    </div>
+    <ng-container *ngIf="!!companies">
 
+      <section class="content-header">
+        <h1>
+          Companies
+          <small>Most problematic</small>
+        </h1>
+      </section>
+
+      <div class="box-body">
+
+        <div class="row" *ngIf="companies.statistics.length > 0; else noCompanies;">
+          <div class="col-lg-3 col-xs-6" *ngFor="let item of companies.statistics">
+            <app-analyst-company-item
+                    [company]="item.company"
+                    [issueNumber]="item.issueNumber"
+            ></app-analyst-company-item>
+          </div>
+        </div>
+        <ng-template #noCompanies>
+          <div style="margin-left: 7px;">
+            <span class="text-muted">No Data</span>
+          </div>
+        </ng-template>
+      </div>
+
+    </ng-container>
+
+    <section class="content-header">
+      <h1>
+        Statistics
+      </h1>
+    </section>
     <div class="box-body">
       <div class="row">
         <div class="col-sm-6">

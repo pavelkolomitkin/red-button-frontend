@@ -1,6 +1,12 @@
-<span class="btn btn-primary" (click)="onButtonClickHandler($event)">
-  <i class="fa fa-map-marker"></i> Map
-</span>
+<div class="info-box widget" (click)="onButtonClickHandler($event)">
+  <span class="info-box-icon bg-aqua"><i class="fa fa-map-marker"></i></span>
+
+  <div class="info-box-content">
+    <span class="info-box-text">Issues</span>
+    <span class="info-box-number">{{ issueNumber }}</span>
+  </div>
+  <!-- /.info-box-content -->
+</div>
 <app-analyst-region-map
         *ngIf="isMapVisible"
         [region]="region"

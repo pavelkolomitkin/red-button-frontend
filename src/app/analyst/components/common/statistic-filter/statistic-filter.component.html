@@ -1,6 +1,6 @@
 <div>
   <div class="year-list" *ngIf="!!years">
-    <ul>
+    <ul class="no-padding">
       <li *ngFor="let year of years"
           class="year-item margin-r-5"
           [ngClass]=" year === currentYear ? 'active' : '' ">

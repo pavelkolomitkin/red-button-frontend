@@ -26,6 +26,7 @@ import { RegionMapComponent } from './components/region-statistic-page/map/regio
 import {ServiceTypeListLoadStart} from '../core/data/service-type.actions';
 import {IssueService} from './services/issue.service';
 import { IssueBalloonComponent } from './components/common/map/issue-balloon/issue-balloon.component';
+import { CompanyItemComponent } from './components/region-statistic-page/company-item/company-item.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { IssueBalloonComponent } from './components/common/map/issue-balloon/iss
       VectorRegionItemComponent,
       RegionMapWidgetComponent,
       RegionMapComponent,
-      IssueBalloonComponent
+      IssueBalloonComponent,
+      CompanyItemComponent
   ],
     imports: [
         CommonModule,

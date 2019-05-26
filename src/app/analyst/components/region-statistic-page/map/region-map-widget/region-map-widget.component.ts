@@ -10,6 +10,7 @@ export class RegionMapWidgetComponent implements OnInit {
 
   @Input() region: Region;
   @Input() year: number;
+  @Input() issueNumber: number;
 
   isMapVisible: boolean = false;
 

@@ -23,7 +23,8 @@ export class RegionStatisticPageComponent implements OnInit, OnDestroy {
   region: Region;
 
   statistics: any;
-  dynamics: any
+  dynamics: any;
+  companies: any;
 
   routeParamsSubscription: Subscription;
 
@@ -69,9 +70,11 @@ export class RegionStatisticPageComponent implements OnInit, OnDestroy {
 
       const statistics = this.statisticService.getRegionServiceTypeIssueNumbers(this.region, this.selectedYear).toPromise();
       const dynamics = this.statisticService.getRegionServiceTypeIssueNumberDynamic(this.region, this.selectedYear).toPromise();
+      const companies = this.statisticService.getRegionPopularCompanies(this.region, this.selectedYear).toPromise();
 
       this.statistics = await statistics;
       this.dynamics = await dynamics;
+      this.companies = await companies;
     });
   }
 
