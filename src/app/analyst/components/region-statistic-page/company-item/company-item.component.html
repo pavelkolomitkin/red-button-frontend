@@ -1,0 +1,13 @@
+<div class="small-box bg-primary">
+  <div class="inner">
+    <h3>{{ issueNumber }} issue(s)</h3>
+
+    <p class="title" [title]="company.title">{{ company.title }}</p>
+  </div>
+  <div class="icon">
+    <i class="fa fa-building-o"></i>
+  </div>
+  <a [routerLink]="'/analytics/statistic/company/' + company.id + '/' + year" class="small-box-footer">
+    More info <i class="fa fa-arrow-circle-right"></i>
+  </a>
+</div>

@@ -1,0 +1,4 @@
+<ng-container *ngFor="let graphicItem of graphicItems">
+  <svg:path *ngIf="graphicItem.type === 'path'" [attr.d]="graphicItem.d"><title>{{ title }}</title></svg:path>
+  <svg:polygon *ngIf="graphicItem.type === 'polygon'" [attr.points]="graphicItem.points"><title>{{ title }}</title></svg:polygon>
+</ng-container>

@@ -1,0 +1,29 @@
+.year-list {
+    margin-bottom: 10px;
+}
+.year-list .year-item {
+    display: inline-block;
+
+}
+
+.year-list .year-item.active {
+
+}
+
+.year-list .year-item a
+{
+    display: block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: #f5f5f5;
+}
+
+.year-list .year-item a:hover {
+    background: #cccccc;
+    color: #ffffff;
+}
+
+.year-list .year-item.active a {
+    color: #ffffff;
+    background: #0075ff;
+}

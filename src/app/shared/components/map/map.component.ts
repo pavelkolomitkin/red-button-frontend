@@ -33,10 +33,11 @@ export class MapComponent implements OnInit, OnDestroy {
   @Output('onLocationClick') locationClick: EventEmitter<GeoLocation> = new EventEmitter();
   @Output('onReady') ready: EventEmitter<any> = new EventEmitter();
   @Output('onViewBoxChange') viewBoxChangeEvent: EventEmitter<MapViewBox> = new EventEmitter();
+  @Output('onRender') postRenderEvent: EventEmitter<void> = new EventEmitter();
 
   // input fields
   @Input() defaultCenter: GeoLocation;
-  @Input() defaultZoom: number = 10;
+  @Input() defaultZoom: number = null;
 
   @ViewChild('mapContainer', { read: ViewContainerRef }) mapContainerRef: ViewContainerRef;
 
@@ -48,8 +49,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    const { latitude, longitude } = this.defaultCenter;
-
     this.map = new Map({
       target: 'map',
       layers: [
@@ -58,15 +57,24 @@ export class MapComponent implements OnInit, OnDestroy {
           })
       ],
       overlays: [],
-      view: new View({
-        center: fromLonLat([longitude, latitude]),
-        zoom: this.defaultZoom
-      })
+      view: new View()
     });
 
+    if (!!this.defaultCenter)
+    {
+      this.setCenter(this.defaultCenter);
+    }
+
+    if (!!this.defaultZoom)
+    {
+      this.setZoom(this.defaultZoom);
+    }
 
     this.map.on('singleclick', this.onMapClickHandler);
     this.map.on('moveend', this.onManMoveEndHandler);
+    this.map.once('postrender', () => {
+      this.postRenderEvent.emit();
+    });
 
     this.ready.emit();
   }
@@ -128,7 +136,13 @@ export class MapComponent implements OnInit, OnDestroy {
     return result;
   }
 
-  setViewBoundaries(topLeft: GeoLocation, bottomRight: GeoLocation, callBack: Function = null, withAnimation: boolean = true)
+  setViewBoundaries(
+      topLeft: GeoLocation,
+      bottomRight: GeoLocation,
+      callBack: Function = null,
+      withAnimation: boolean = true,
+      padding = [20, 20, 20, 20]
+  )
   {
     const extent = transformExtent([
       topLeft.longitude,
@@ -138,7 +152,7 @@ export class MapComponent implements OnInit, OnDestroy {
     ], 'EPSG:4326', 'EPSG:3857');
 
     this.map.getView().fit(extent, {
-      padding: [20, 20, 20, 20],
+      padding: padding,
       duration: withAnimation ? MapComponent.DEFAULT_ANIMATION_DURATION : 0,
       callback: callBack
     });

@@ -1,0 +1,5 @@
+<ng-container *ngFor="let graphicItem of graphicData">
+  <svg:path *ngIf="graphicItem.type === 'path'" [attr.d]="graphicItem.d">
+    <title>{{ title }}</title>
+  </svg:path>
+</ng-container>

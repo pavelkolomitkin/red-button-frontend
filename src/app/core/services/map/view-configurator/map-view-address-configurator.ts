@@ -1,7 +1,7 @@
 import {MapViewConfiguratorBase} from './map-view-configurator-base';
-import {MapComponent} from '../../../shared/components/map/map.component';
-import {OSMSearchService} from '../osm-search.service';
-import {OSMSearchResult} from '../../data/model/osm-search-result.model';
+import {MapComponent} from '../../../../shared/components/map/map.component';
+import {OSMSearchService} from '../../osm-search.service';
+import {OSMSearchResult} from '../../../data/model/osm-search-result.model';
 
 export class MapViewAddressConfigurator extends MapViewConfiguratorBase
 {

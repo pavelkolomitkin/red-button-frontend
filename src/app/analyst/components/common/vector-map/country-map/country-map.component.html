@@ -1,0 +1,14 @@
+<app-analyst-map-container [viewBox]="'0 0 1091.992 630.119'">
+    <ng-container *ngIf="!!(federalDistricts | async)">
+        <svg:g
+                app-analyst-federal-district
+                *ngFor="let item of (federalDistricts | async)"
+                [data]="item"
+                class="vector-map-element"
+                [title]="getItemTitle(item)"
+                [totalNumber]="getItemTotal(item)"
+                [ngStyle]="{fill: getFillColor(getItemTotal(item))}"
+                (click)="onFederalDistrictClickHandler(item)"
+        ></svg:g>
+    </ng-container>
+</app-analyst-map-container>

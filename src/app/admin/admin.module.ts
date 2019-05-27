@@ -112,11 +112,12 @@ import {IssueCommentService} from './services/issue-comment.service';
         AccountService,
         IssueCommentService
     ],
-  exports: [
-    StoreModule,
-    EffectsModule,
-    SharedModule
-  ]
+    exports: [
+        StoreModule,
+        EffectsModule,
+        SharedModule,
+        AnalystListPageComponent
+    ]
 })
 export class AdminModule {
 

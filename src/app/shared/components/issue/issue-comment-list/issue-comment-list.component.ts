@@ -21,6 +21,8 @@ export class IssueCommentListComponent implements OnInit {
 
   constructor(private service: IssueCommentService) { }
 
+  @Input() canComment: boolean = true;
+
   @Input()
   set issue(value: Issue)
   {

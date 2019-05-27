@@ -1,5 +1,9 @@
+import {Region} from './region.model';
 
-export interface FederalDistrict {
+export class FederalDistrict {
     id ?: number;
     title: string;
+    code: string;
+
+    regions: Array<Region> = [];
 }

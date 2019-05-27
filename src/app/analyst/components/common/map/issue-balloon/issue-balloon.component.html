@@ -1,0 +1,63 @@
+<app-map-balloon [isCollapsed]="true"
+                 [populateCollapsing]="true"
+                 [location]="issue.location"
+                 [hasToCenteredOnOpen]="true"
+                 [color]="color"
+>
+
+  <div class="balloon-title" title="{{ issue.address.displayName }}">{{ issue.region.title }}</div>
+
+  <div class="balloon-content">
+    <p class="text-primary" *ngIf="!!issue.serviceType">
+      <span class="text-primary"> {{ issue.serviceType.title }}</span>
+    </p>
+    <p class="text-muted">{{
+      issue.message.length > 150 ?
+              (issue.message | slice:0:150) + '...'
+              : issue.message }}
+    </p>
+
+    <p *ngIf="issue.complaintConfirmations.length > 0" title="Signatures">
+      <app-issue-signature-progress [issue]="issue"></app-issue-signature-progress>
+    </p>
+
+    <p *ngIf="(issue.pictures.length > 0) || (issue.videos.length > 0)">
+      <ng-container *ngIf="issue.pictures.length > 0">
+        <div>
+          <app-picture-item
+                  *ngFor="let picture of issue.pictures | slice:0:5"
+                  [picture]="picture" [size]="'previewExtraSmall'">
+          </app-picture-item>
+        </div>
+        <div>
+          <span class="small" *ngIf="issue.pictures.length > 0">{{ issue.pictures.length + ' picture(s)' }}&nbsp;</span>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="issue.videos.length > 0">
+
+        <div>
+          <app-video-item *ngFor="let video of issue.videos | slice:0:5" [video]="video" [size]="'extra-small'"></app-video-item>
+        </div>
+
+        <div>
+          <span class="small" *ngIf="issue.videos.length > 0">{{ issue.videos.length + ' video' }}</span>
+        </div>
+
+      </ng-container>
+    </p>
+    <p>
+      <small class="text-muted">{{ issue.likeNumber }} like(s) </small>
+      <small class="text-muted">{{ issue.commentNumber }} comment(s)</small>
+    </p>
+  </div>
+
+  <div class="balloon-footer">
+    <div class="pull-left">
+      <a class="btn btn-primary" [routerLink]="'/analytics/issue/' + issue.id">More</a>
+    </div>
+    <div class="pull-right">
+      <small class="text-muted" app-date-time [value]="issue.createdAt"></small>
+    </div>
+  </div>
+
+</app-map-balloon>

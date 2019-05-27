@@ -1,0 +1,11 @@
+<app-analyst-map-container *ngIf="!!federalDistrict" [viewBox]="viewBox">
+  <svg:g
+          app-analyst-vector-region-item
+          *ngFor="let item of federalDistrict.regions"
+          [region]="item"
+          class="vector-map-element"
+          [title]="getRegionTitle(item)"
+          [ngStyle]="{ fill: getRegionColor(item) }"
+          (click)="onRegionClickHandler(item)"
+  ></svg:g>
+</app-analyst-map-container>

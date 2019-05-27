@@ -1,0 +1,11 @@
+<div>
+  <div class="year-list" *ngIf="!!years">
+    <ul class="no-padding">
+      <li *ngFor="let year of years"
+          class="year-item margin-r-5"
+          [ngClass]=" year === currentYear ? 'active' : '' ">
+        <a [routerLink]="routePrefix + year" [queryParams]="this.queryParams | async">{{ year }}</a>
+      </li>
+    </ul>
+  </div>
+</div>
