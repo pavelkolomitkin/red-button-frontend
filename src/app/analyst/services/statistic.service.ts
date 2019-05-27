@@ -3,6 +3,7 @@ import {map} from 'rxjs/operators';
 import {Region} from '../../core/data/model/region.model';
 import {Company} from '../../core/data/model/company.model';
 import {EntityTransformer} from '../../core/services/helper/entity-transformer.helper';
+import {Issue} from '../../core/data/model/issue.model';
 
 export class StatisticService extends BaseService
 {
@@ -88,6 +89,18 @@ export class StatisticService extends BaseService
     getCompanyServiceTypeIssueNumberDynamic(company: Company, year: number)
     {
         return this.http.get<{ statistics: any, year: number }>('/analytics/statistics/company-numbers/dynamic/' + company.id + '/' + year);
+    }
+
+    getCompanyPopularIssues(company: Company, year: number)
+    {
+        return this.http.get<{ statistics: Array<Issue>, year: number }>('/analytics/statistics/company/' + company.id + '/' + year + '/popular-issues').pipe(
+            map((data) => {
+
+                data.statistics = data.statistics.map(item => EntityTransformer.transformIssue(item));
+
+                return data;
+            })
+        );
     }
 
 }

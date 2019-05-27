@@ -20,28 +20,49 @@
 
   </ng-container>
 
-  <div class="box box-primary" *ngIf="!!company">
-
+  <ng-container *ngIf="!!popularIssues">
     <section class="content-header">
       <h1>
-        Statistics
+        Issues
+        <small>Most problematic</small>
       </h1>
     </section>
     <div class="box-body">
-      <div class="row">
-        <div class="col-sm-6">
-          <ng-container *ngIf="!!statistics">
-            <app-analyst-service-type-shares-chart [title]="'Common Numbers'" [data]="statistics.statistics.common"></app-analyst-service-type-shares-chart>
-          </ng-container>
+      <ng-container *ngIf="popularIssues.length > 0; else noIssues;">
+        <div class="row">
+          <div class="col-md-4 issue-col" *ngFor="let issue of popularIssues">
+            <app-analyst-issue-item [issue]="issue"></app-analyst-issue-item>
+          </div>
         </div>
-        <div class="col-sm-6">
-          <ng-container *ngIf="!!dynamics">
-            <app-analyst-service-types-dynamic-year [year]="selectedYear" [title]="'Dynamics'" [data]="dynamics.statistics"></app-analyst-service-types-dynamic-year>
-          </ng-container>
-        </div>
+      </ng-container>
+      <ng-template #noIssues>
+        <span class="small text-muted">(No Issues)</span>
+      </ng-template>
+    </div>
+  </ng-container>
+
+  <section class="content-header" *ngIf="!!statistics && !!dynamics">
+    <h1>
+      Statistics
+    </h1>
+  </section>
+
+  <div class="box-body" *ngIf="!!company">
+    <div class="row">
+      <div class="col-sm-6">
+        <ng-container *ngIf="!!statistics">
+          <app-analyst-service-type-shares-chart [title]="'Common Numbers'" [data]="statistics.statistics.common"></app-analyst-service-type-shares-chart>
+        </ng-container>
+      </div>
+      <div class="col-sm-6">
+        <ng-container *ngIf="!!dynamics">
+          <app-analyst-service-types-dynamic-year [year]="selectedYear" [title]="'Dynamics'" [data]="dynamics.statistics"></app-analyst-service-types-dynamic-year>
+        </ng-container>
       </div>
     </div>
-
   </div>
+
+
+
 
 </app-analyst-common-layout>

@@ -32,6 +32,7 @@ import { IssueDetailsPageComponent } from './components/issue-details-page/issue
 import {CompanyService} from './services/company.service';
 import { CompanyMapComponent } from './components/company-statistic-page/map/company-map/company-map.component';
 import { CompanyMapWidgetComponent } from './components/company-statistic-page/map/company-map-widget/company-map-widget.component';
+import { IssueItemComponent } from './components/company-statistic-page/issue-item/issue-item.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { CompanyMapWidgetComponent } from './components/company-statistic-page/m
       CompanyStatisticPageComponent,
       IssueDetailsPageComponent,
       CompanyMapComponent,
-      CompanyMapWidgetComponent
+      CompanyMapWidgetComponent,
+      IssueItemComponent
   ],
     imports: [
         CommonModule,

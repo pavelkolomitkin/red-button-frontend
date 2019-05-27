@@ -70,9 +70,11 @@ export class CompanyStatisticPageComponent implements OnInit, OnDestroy {
 
       const statistics = this.statisticService.getCompanyServiceTypeIssueNumbers(this.company, this.selectedYear).toPromise();
       const dynamics = this.statisticService.getCompanyServiceTypeIssueNumberDynamic(this.company, this.selectedYear).toPromise();
+      const issues = this.statisticService.getCompanyPopularIssues(this.company, this.selectedYear).toPromise();
 
       this.statistics = await statistics;
       this.dynamics = await dynamics;
+      this.popularIssues = (await issues).statistics;
 
     });
 
