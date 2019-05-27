@@ -10,6 +10,16 @@
   </ng-container>
 
 
+  <ng-container *ngIf="!!statistics">
+
+    <div class="row">
+      <div class="col-md-4">
+        <app-analyst-company-map-widget [company]="company" [year]="selectedYear" [issueNumber]="statistics.statistics.number"></app-analyst-company-map-widget>
+      </div>
+    </div>
+
+  </ng-container>
+
   <div class="box box-primary" *ngIf="!!company">
 
     <section class="content-header">

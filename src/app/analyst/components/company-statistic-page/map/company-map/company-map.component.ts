@@ -10,33 +10,35 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {MapComponent} from '../../../../../shared/components/map/map.component';
-import {Region} from '../../../../../core/data/model/region.model';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../../app.state';
-import {Observable, of, Subject, Subscription} from 'rxjs';
-import {ServiceType} from '../../../../../core/data/model/service-type.model';
 import {IssueService} from '../../../../services/issue.service';
-import {MapViewBox} from '../../../../../shared/data/model/map-view-box.model';
-import {debounceTime, distinctUntilChanged, filter, mergeMap, take} from 'rxjs/operators';
-import {Issue} from '../../../../../core/data/model/issue.model';
-import {IssueBalloonComponent} from '../../../common/map/issue-balloon/issue-balloon.component';
 import {MapViewConfiguratorFactory} from '../../../../../core/services/map/view-configurator/map-view-configurator.factory';
+import {MapComponent} from '../../../../../shared/components/map/map.component';
+import {empty, from, iif, Observable, of, Subject, Subscription} from 'rxjs';
+import {ServiceType} from '../../../../../core/data/model/service-type.model';
+import {buffer, debounceTime, filter, flatMap, map, mergeMap, switchMap, tap} from 'rxjs/operators';
+import {Issue} from '../../../../../core/data/model/issue.model';
 import {GlobalNotifyWarningMessage} from '../../../../../core/data/actions';
 import {NotifyMessage} from '../../../../../core/data/model/notify-message.model';
-import {GeoLocation} from '../../../../../core/data/model/geo-location.model';
 import {MapBalloonManager} from '../../../../../core/services/map/map-balloon-manager';
+import {IssueBalloonComponent} from '../../../common/map/issue-balloon/issue-balloon.component';
+import {GeoLocation} from '../../../../../core/data/model/geo-location.model';
+import {Company} from '../../../../../core/data/model/company.model';
+import {MapViewBox} from '../../../../../shared/data/model/map-view-box.model';
+import {environment} from '../../../../../../environments/environment';
+import {isArray} from 'util';
 
 @Component({
-  selector: 'app-analyst-region-map',
-  templateUrl: './region-map.component.html',
-  styleUrls: ['./region-map.component.css']
+  selector: 'app-analyst-company-map',
+  templateUrl: './company-map.component.html',
+  styleUrls: ['./company-map.component.css']
 })
-export class RegionMapComponent implements OnInit, OnDestroy, AfterViewInit {
+export class CompanyMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Output('onClose') closeEvent: EventEmitter<void> = new EventEmitter();
 
-  @Input() region: Region;
+  @Input() company: Company;
   @Input() year: number;
 
   @ViewChild('map') map: MapComponent;
@@ -55,9 +57,7 @@ export class RegionMapComponent implements OnInit, OnDestroy, AfterViewInit {
       private store: Store<State>,
       private issueService: IssueService,
       private mapViewConfiguratorFactory: MapViewConfiguratorFactory
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
 
@@ -89,14 +89,9 @@ export class RegionMapComponent implements OnInit, OnDestroy, AfterViewInit {
     ;
 
     this.serviceTypes = this.store.pipe(select(state => state.serviceType.list));
+
   }
 
-  onMapRenderHandler(event)
-  {
-    const { osmRegion: { boundingTopLeft, boundingBottomRight } } = this.region;
-
-    this.map.setViewBoundaries(boundingTopLeft, boundingBottomRight, null, false, [0, 0, 0, 0]);
-  }
 
   ngOnDestroy(): void {
 
@@ -112,6 +107,11 @@ export class RegionMapComponent implements OnInit, OnDestroy, AfterViewInit {
       this.balloonManager.release();
       this.balloonManager = null;
     }
+
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
   onMapReadyHandler(event)
@@ -125,35 +125,21 @@ export class RegionMapComponent implements OnInit, OnDestroy, AfterViewInit {
         (issue, balloon: ComponentRef<IssueBalloonComponent>) => {
           balloon.instance.issue = issue;
         }
-        );
-
-    const { osmRegion: { boundingTopLeft, boundingBottomRight } } = this.region;
+    );
 
     this.map.setZoom(7);
-    this.map.setViewBoundaries(boundingTopLeft, boundingBottomRight, null, false, [0, 0, 0, 0]);
-
-    // this.searchIssues({
-    //   year: this.year
-    // });
+    this.map.setCenter(environment.defaultGeoPosition);
 
     this.centeringBalloonSubscription = this.store.pipe(select(state => state.map.centeringBalloonLocation), filter(result => !!result))
         .subscribe((location: GeoLocation) => {
           this.map.setCenter(location, true);
         });
-  }
 
-  ngAfterViewInit(): void {
 
-    const { osmRegion: { boundingTopLeft, boundingBottomRight } } = this.region;
-
-    this.map.setViewBoundaries(boundingTopLeft, boundingBottomRight, null, false, [0, 0, 0, 0]);
-  }
-
-  adjustMap(withAnimation = false)
-  {
-    const { osmRegion: { boundingTopLeft, boundingBottomRight } } = this.region;
-
-    this.map.setViewBoundaries(boundingTopLeft, boundingBottomRight, null, withAnimation, [0, 0, 0, 0]);
+    this.searchByForm = true;
+    this.searchSubject.next({
+      year: this.year
+    });
   }
 
   onViewBoxChangeHandler(event)
@@ -189,14 +175,22 @@ export class RegionMapComponent implements OnInit, OnDestroy, AfterViewInit {
     this.searchSubject.next(params);
   }
 
+
   searchIssues(params)
   {
-    return this.issueService.searchByRegion(this.region, params);
+    return this.issueService.searchByCompany(this.company, params);
   }
 
   onCenterMapButtonClickHandler(event)
   {
-    this.adjustMap(true);
+    this.searchByForm = true;
+
+    this.selectedServiceType = null;
+    const params = {
+      year: this.year
+    };
+
+    this.searchSubject.next(params);
   }
 
   @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent)
@@ -218,5 +212,4 @@ export class RegionMapComponent implements OnInit, OnDestroy, AfterViewInit {
 
     return a.id === b.id;
   }
-
 }
