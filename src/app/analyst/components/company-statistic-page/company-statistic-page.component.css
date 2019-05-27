@@ -8,3 +8,8 @@
 {
     flex: 1;
 }
+
+.company-detail-field-name
+{
+    white-space: nowrap;
+}

@@ -20,6 +20,76 @@
 
   </ng-container>
 
+  <ng-container *ngIf="!!company">
+
+    <section class="content-header">
+      <h1>
+        Details
+        <small>Contacts</small>
+      </h1>
+    </section>
+
+    <div class="box-body">
+      <div class="box box-primary">
+        <div class="box-body">
+          <table class="table">
+            <tbody>
+            <tr>
+              <th class="company-detail-field-name">Full Name</th>
+              <td>{{ company.fullName }}</td>
+            </tr>
+            <tr>
+              <th class="company-detail-field-name">INN / OGRN</th>
+              <td>{{ company.INN }} / {{ company.OGRN }}</td>
+            </tr>
+            <tr>
+              <th class="company-detail-field-name">Head Name</th>
+              <td>{{ company.headName }} </td>
+            </tr>
+            <tr>
+              <th class="company-detail-field-name">Legal Address</th>
+              <td>{{ company.legalAddress }}</td>
+            </tr>
+            <tr>
+              <th class="company-detail-field-name">Actual Address</th>
+              <td>{{ company.actualAddress }}</td>
+            </tr>
+            <tr>
+              <th class="company-detail-field-name">Email</th>
+              <td>{{ company.email }}</td>
+            </tr>
+            <tr>
+              <th class="company-detail-field-name">Phone Numbers</th>
+              <td>{{ company.phoneNumbers }}</td>
+            </tr>
+            <tr>
+              <th class="company-detail-field-name">Office Hours</th>
+              <td>{{ company.officeHours }}</td>
+            </tr>
+            <tr>
+              <th class="company-detail-field-name">Postal Address</th>
+              <td>{{ company.postalAddress }}</td>
+            </tr>
+            <tr>
+              <th class="company-detail-field-name">Site</th>
+              <td>
+                <a *ngIf="!!company.site"
+                   href="http://{{ company.site }}"
+                   target="_blank">{{ company.site }}</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </ng-container>
+
   <ng-container *ngIf="!!popularIssues">
     <section class="content-header">
       <h1>
