@@ -29,4 +29,13 @@ export class IssueService extends BaseService
             })
         );
     }
+
+    get(id: number)
+    {
+        return this.http.get<{ issue: Issue }>('/analytics/issue/' + id).pipe(
+            map(({ issue }) => {
+                return EntityTransformer.transformIssue(issue);
+            })
+        );
+    }
 }

@@ -1,3 +1,95 @@
-<p>
-  issue-details-page works!
-</p>
+<app-analyst-common-layout>
+
+  <ng-container *ngIf="!!issue">
+
+    <div class="box box-primary">
+
+
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ issue.region.title }} <span class="text-muted">({{ issue.region.federalDistrict.title }})</span></h3>
+
+      </div>
+
+
+      <div class="box-body">
+
+        <p>
+          <app-issue-map-view [issue]="issue"></app-issue-map-view>
+        </p>
+
+        <p>
+          <b>Address</b>
+          <br/>
+          {{ issue.address.displayName }}
+        </p>
+
+        <p>
+          <b>Author</b>
+          <br/>
+          <span class="text text-primary">{{ issue.client.fullName }}</span>
+        </p>
+        <p>
+          <b>Signatures</b>
+          <br/>
+          <app-issue-signature-list [issue]="issue"></app-issue-signature-list>
+        </p>
+        <p>
+          <b>Service Type</b>
+          <br/>
+          <span class="text text-primary" *ngIf="!!issue.serviceType; else noServiceType">{{ issue.serviceType.title }}</span>
+          <ng-template #noServiceType>
+            <span class="text-muted">(None)</span>
+          </ng-template>
+        </p>
+
+        <p>
+          <b>Company</b>
+          <br />
+          <ng-container *ngIf="!!issue.company; else noCompany">
+            <a [routerLink]="'/analytics/statistic/company/' + issue.company.id">{{ issue.company.title }}</a>
+          </ng-container>
+          <ng-template #noCompany>
+            <span class="text-muted">(None)</span>
+          </ng-template>
+
+        </p>
+
+        <p>
+          <b>Message</b>
+          <br/>
+          <span class="text" [innerHTML]="issue.message | multiLine"></span>
+        </p>
+        <p>
+          <b>Pictures</b>
+          <br/>
+          <ng-container *ngIf="issue.pictures.length > 0; else noPictures">
+            <app-picture-list [list]="issue.pictures"></app-picture-list>
+          </ng-container>
+          <ng-template #noPictures>
+            <span class="text-muted">(None)</span>
+          </ng-template>
+        </p>
+        <p>
+          <b>Videos</b>
+          <br />
+          <ng-container *ngIf="issue.videos.length > 0; else noVideo">
+            <app-video-list [list]="issue.videos"></app-video-list>
+          </ng-container>
+          <ng-template #noVideo>
+            <span class="text-muted">(None)</span>
+          </ng-template>
+        </p>
+      </div>
+
+      <div class="box-footer">
+        <small class="pull-right text-muted" app-date-time [value]="issue.createdAt"></small>
+      </div>
+
+    </div>
+
+    <app-issue-comment-list [issue]="issue" [canComment]="false"></app-issue-comment-list>
+
+  </ng-container>
+
+
+</app-analyst-common-layout>

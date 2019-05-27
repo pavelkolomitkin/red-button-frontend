@@ -4,6 +4,7 @@ import {CommonStatisticPageComponent} from './components/common-statistic-page/c
 import {BreadCrumb} from '../core/data/model/bread-crumb.model';
 import {RegionStatisticPageComponent} from './components/region-statistic-page/region-statistic-page.component';
 import {CompanyStatisticPageComponent} from './components/company-statistic-page/company-statistic-page.component';
+import {IssueDetailsPageComponent} from './components/issue-details-page/issue-details-page.component';
 
 const routes: Routes = [
     {
@@ -57,6 +58,13 @@ const routes: Routes = [
             {
                 path: 'statistic/company/:id/:year',
                 component: CompanyStatisticPageComponent,
+                data: {
+
+                }
+            },
+            {
+                path: 'issue/:id',
+                component: IssueDetailsPageComponent,
                 data: {
 
                 }
