@@ -1,0 +1,37 @@
+<app-analyst-common-layout>
+
+  <ng-container *ngIf="!!company">
+    <app-analyst-statistic-filter
+            [currentYear]="selectedYear"
+            [endYear]="endYear"
+            [startYear]="startYear"
+            [routePrefix]="'/analytics/statistic/company/' + company.id + '/'"
+    ></app-analyst-statistic-filter>
+  </ng-container>
+
+
+  <div class="box box-primary" *ngIf="!!company">
+
+    <section class="content-header">
+      <h1>
+        Statistics
+      </h1>
+    </section>
+    <div class="box-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <ng-container *ngIf="!!statistics">
+            <app-analyst-service-type-shares-chart [title]="'Common Numbers'" [data]="statistics.statistics.common"></app-analyst-service-type-shares-chart>
+          </ng-container>
+        </div>
+        <div class="col-sm-6">
+          <ng-container *ngIf="!!dynamics">
+            <app-analyst-service-types-dynamic-year [year]="selectedYear" [title]="'Dynamics'" [data]="dynamics.statistics"></app-analyst-service-types-dynamic-year>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</app-analyst-common-layout>

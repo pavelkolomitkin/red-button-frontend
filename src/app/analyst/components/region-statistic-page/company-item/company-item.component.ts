@@ -10,6 +10,7 @@ export class CompanyItemComponent implements OnInit {
 
   @Input() company: Company;
   @Input() issueNumber: number;
+  @Input() year: number;
 
   constructor() { }
 

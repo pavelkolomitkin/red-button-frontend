@@ -69,7 +69,7 @@ export class ServiceTypesDynamicYearComponent implements OnInit, AfterViewInit {
 
       const data = [];
 
-      for (let i = 0; i < 12; i++)
+      for (let i = 1; i <= 12; i++)
       {
         if (!!item.years && !!item.years[this.year] && !!item.years[this.year][i])
         {

@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {CommonStatisticPageComponent} from './components/common-statistic-page/common-statistic-page.component';
 import {BreadCrumb} from '../core/data/model/bread-crumb.model';
 import {RegionStatisticPageComponent} from './components/region-statistic-page/region-statistic-page.component';
+import {CompanyStatisticPageComponent} from './components/company-statistic-page/company-statistic-page.component';
 
 const routes: Routes = [
     {
@@ -32,12 +33,6 @@ const routes: Routes = [
                     ]
                 }
             },
-            // {
-            //     path: 'statistic/common/:year/:id',
-            //     component: CommonStatisticPageComponent,
-            //     data: {
-            //     }
-            // },
             {
                 path: 'statistic/region/:id',
                 component: RegionStatisticPageComponent,
@@ -48,6 +43,20 @@ const routes: Routes = [
             {
                 path: 'statistic/region/:id/:year',
                 component: RegionStatisticPageComponent,
+                data: {
+
+                }
+            },
+            {
+                path: 'statistic/company/:id',
+                component: CompanyStatisticPageComponent,
+                data: {
+
+                }
+            },
+            {
+                path: 'statistic/company/:id/:year',
+                component: CompanyStatisticPageComponent,
                 data: {
 
                 }

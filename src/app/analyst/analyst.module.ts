@@ -27,6 +27,9 @@ import {ServiceTypeListLoadStart} from '../core/data/service-type.actions';
 import {IssueService} from './services/issue.service';
 import { IssueBalloonComponent } from './components/common/map/issue-balloon/issue-balloon.component';
 import { CompanyItemComponent } from './components/region-statistic-page/company-item/company-item.component';
+import { CompanyStatisticPageComponent } from './components/company-statistic-page/company-statistic-page.component';
+import { IssueDetailsPageComponent } from './components/issue-details-page/issue-details-page.component';
+import {CompanyService} from './services/company.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,9 @@ import { CompanyItemComponent } from './components/region-statistic-page/company
       RegionMapWidgetComponent,
       RegionMapComponent,
       IssueBalloonComponent,
-      CompanyItemComponent
+      CompanyItemComponent,
+      CompanyStatisticPageComponent,
+      IssueDetailsPageComponent
   ],
     imports: [
         CommonModule,
@@ -62,7 +67,8 @@ import { CompanyItemComponent } from './components/region-statistic-page/company
     providers: [
         StatisticService,
         ColorValueScaleService,
-        IssueService
+        IssueService,
+        CompanyService
     ],
     entryComponents: [
         IssueBalloonComponent

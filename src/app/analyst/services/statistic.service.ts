@@ -76,7 +76,18 @@ export class StatisticService extends BaseService
         return this
             .http
             .get<{ statistics: Array<{ company: Company, issueNumber: number }>, year: number }>(
-                '/analytics/company/region/' + region.id + '/' + year + '/popular'
+                '/analytics/statistics/region/' + region.id + '/' + year + '/popular-companies'
             );
     }
+
+    getCompanyServiceTypeIssueNumbers(company: Company, year: number)
+    {
+        return this.http.get<{ statistics: any, year: number }>('/analytics/statistics/company/' + company.id + '/' + year);
+    }
+
+    getCompanyServiceTypeIssueNumberDynamic(company: Company, year: number)
+    {
+        return this.http.get<{ statistics: any, year: number }>('/analytics/statistics/company-numbers/dynamic/' + company.id + '/' + year);
+    }
+
 }

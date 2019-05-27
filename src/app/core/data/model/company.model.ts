@@ -8,7 +8,7 @@ export class Company
 
     fullName: string;
 
-    legalForm: string;
+    legalFormText: string;
 
     legalAddress: string;
 
