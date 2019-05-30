@@ -9,8 +9,9 @@
 
             <app-login-form [errors]="errors" (onSubmitEvent)="onFormSubmit($event)"></app-login-form>
 
-<!--            <a href="#">I forgot my password</a><br>-->
             <a routerLink="/security/register" class="text-center">Register a new membership</a>
+            <br/>
+            <a routerLink="/security/password-recovery-request" class="text-center text-danger">Restore password</a>
         </div>
     </div>
 </div>
