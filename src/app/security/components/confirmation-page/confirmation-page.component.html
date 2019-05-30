@@ -1,6 +1,20 @@
-<p class="alert alert-success" *ngIf="activatedUser">
-  You have confirmed your profile! Now use your login and password to <a routerLink="/security/login">sign in!</a>
-</p>
-<p class="alert alert-danger" *ngIf="activationErrors">
-  {{ activationErrors }}
-</p>
+<div class="login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <span><b>Red</b>Button</span>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+
+      <p class="alert alert-success" *ngIf="activatedUser">
+        You have confirmed your profile! Now use your login and password to <a routerLink="/security/login">sign in!</a>
+      </p>
+      <p class="alert alert-danger" *ngIf="activationErrors">
+        {{ activationErrors }}
+      </p>
+
+      <a routerLink="/security/login" class="text-center">Login</a>
+
+    </div>
+  </div>
+</div>

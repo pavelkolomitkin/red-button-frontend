@@ -12,7 +12,7 @@ export class LoginFormComponent implements OnInit {
 
   @Input() errors: Observable<Object>;
 
-  @Output() onSubmitEvent: EventEmitter<LoginCredentials> = new EventEmitter();
+  @Output() onSubmitEvent: EventEmitter<{credentials: LoginCredentials, rememberUser: boolean}> = new EventEmitter();
 
   constructor() { }
 
@@ -26,7 +26,10 @@ export class LoginFormComponent implements OnInit {
       password: form.value.password
     };
 
-    this.onSubmitEvent.emit(credentials);
+    this.onSubmitEvent.emit({
+      credentials: credentials,
+      rememberUser: form.value.rememberMe
+    });
   }
 
 }

@@ -38,7 +38,7 @@ export class AuthEffects
 
       return this.service.login(credentials).pipe(
         map((token: string) => {
-          return new UserLoginSuccess(token);
+          return new UserLoginSuccess(token, action.rememberUser);
         }),
         catchError((errors) => {
           return of(new UserLoginError(errors.error));
@@ -55,7 +55,9 @@ export class AuthEffects
   loginSuccess: Observable<Action> = this.actions.pipe(
     ofType(USER_LOGIN_SUCCESS),
     tap((action: UserLoginSuccess) => {
-      this.localStorageService.set('token', action.token);
+
+      this.localStorageService.set('token', action.token, action.rememberUser);
+
       this.store.dispatch(new GlobalProgressShow());
     }),
 
