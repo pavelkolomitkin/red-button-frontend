@@ -28,6 +28,7 @@
   </div>
 
   <div class="form-group has-feedback">
+    <p class="small text-muted"><b>Optional</b></p>
     <div class="input-group">
       <div class="input-group-addon">
         <i class="fa">+7</i>
@@ -76,13 +77,17 @@
     <div class="col-xs-8">
       <div class="checkbox icheck" style="margin-left: 20px;">
         <label>
-          <input type="checkbox"> I agree to the terms
+          <input
+                  type="checkbox"
+                  ngModel
+                  name="agreement"
+                  required> I agree to the terms
         </label>
       </div>
     </div>
     <!-- /.col -->
     <div class="col-xs-4">
-      <button type="submit" [disabled]="!form.valid" class="btn btn-primary btn-block btn-flat">Register</button>
+      <button type="submit" [disabled]="!form.valid" class="btn btn-primary btn-block btn-flat btn-block">Register</button>
     </div>
     <!-- /.col -->
   </div>
