@@ -11,21 +11,21 @@ export class SecurityService
 {
   constructor(private http: HttpClient) {}
 
-  public registerUser(data: RegisterData): Observable<User>
+  registerUser(data: RegisterData): Observable<User>
   {
     return this.http.post<{ user: User }>('/security/register', data).pipe(
       map(result => <User> result.user)
     );
   }
 
-  public registerConfirm(confirmationKey: string): Observable<User>
+  registerConfirm(confirmationKey: string): Observable<User>
   {
     return this.http.post<{ user: User }>('/security/confirm-register/' + confirmationKey, {}).pipe(
       map(result => <User> result.user)
     );
   }
 
-  public login(credentials: LoginCredentials)
+  login(credentials: LoginCredentials)
   {
     return this.http.post<{ token: string }>('/security/login_check', {
       username: credentials.email,
@@ -35,12 +35,29 @@ export class SecurityService
     );
   }
 
-  public getAuthorizedUser()
+  getAuthorizedUser()
   {
     return this.http.get<{user: User}>('/security/profile').pipe(
       map((result) => {
         return User.createFromRawData(result.user);
       })
     );
+  }
+
+  passwordRecoverRequest(email)
+  {
+    return this.http.post('/security/recovery-request', {
+      email: email
+    });
+  }
+
+  verifyRecoveryKey(key)
+  {
+    return this.http.get('/security/verify-recovery-key/' + key);
+  }
+
+  resetPassword(key: string, data: Object)
+  {
+    return this.http.put('/security/reset-password/' + key, data)
   }
 }

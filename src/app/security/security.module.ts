@@ -8,6 +8,8 @@ import { RegisterFormComponent } from './components/register-form/register-form.
 import { ConfirmationPageComponent } from './components/confirmation-page/confirmation-page.component';
 import { SecurityRoutingModule } from './security-routing.module';
 import { RegisterSuccessfulPageComponent } from './components/register-successful-page/register-successful-page.component';
+import { PasswordRecoveryRequestPageComponent } from './components/password-recovery-request-page/password-recovery-request-page.component';
+import { PasswordResetPageComponent } from './components/password-reset-page/password-reset-page.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { RegisterSuccessfulPageComponent } from './components/register-successfu
     LoginFormComponent,
     RegisterFormComponent,
     ConfirmationPageComponent,
-    RegisterSuccessfulPageComponent
+    RegisterSuccessfulPageComponent,
+    PasswordRecoveryRequestPageComponent,
+    PasswordResetPageComponent
   ],
   imports: [
     CommonModule,
