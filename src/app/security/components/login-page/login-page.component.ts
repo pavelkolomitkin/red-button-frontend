@@ -39,9 +39,9 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.authUserSubscription.unsubscribe();
   }
 
-  onFormSubmit(credentials: LoginCredentials)
+  onFormSubmit({credentials, rememberUser})
   {
-    this.store.dispatch(new UserLoginStart(credentials));
+    this.store.dispatch(new UserLoginStart(credentials, rememberUser));
   }
 
 }

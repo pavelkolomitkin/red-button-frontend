@@ -71,14 +71,14 @@ export class UserLoginStart implements Action
 {
   readonly type = USER_LOGIN_START;
 
-  constructor(public credentials: LoginCredentials) {}
+  constructor(public credentials: LoginCredentials, public rememberUser: boolean = false) {}
 }
 
 export class UserLoginSuccess implements Action
 {
   readonly type = USER_LOGIN_SUCCESS;
 
-  constructor(public token: string) {}
+  constructor(public token: string, public rememberUser: boolean = false) {}
 }
 
 export class UserLoginError implements Action
