@@ -33,4 +33,5 @@ import { AppLayoutComponent } from './components/app-layout/app-layout.component
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -80,3 +80,9 @@ button.dropdown-item
 {
     opacity: 0.9;
 }
+
+.login-box .footer-links
+{
+    padding-left: 0;
+    padding-right: 0;
+}

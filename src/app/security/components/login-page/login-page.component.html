@@ -5,13 +5,18 @@
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">{{ 'LOGIN_HEADER' | translate }}</p>
 
             <app-login-form [errors]="errors" (onSubmitEvent)="onFormSubmit($event)"></app-login-form>
 
-            <a routerLink="/security/register" class="text-center">Register a new membership</a>
-            <br/>
-            <a routerLink="/security/password-recovery-request" class="text-center text-danger">Restore password</a>
+            <div class="box-body footer-links">
+                <div class="pull-left">
+                    <a routerLink="/security/register" class="text-center">{{ 'REGISTER' | translate }}</a>
+                </div>
+                <div class="pull-right">
+                    <a routerLink="/security/password-recovery-request" class="text-center text-danger">{{ 'RESTORE_PASSWORD' | translate }}</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

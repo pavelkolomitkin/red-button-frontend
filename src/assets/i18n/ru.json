@@ -1,0 +1,31 @@
+{
+  "RED_BUTTON_RED":  "Красная",
+  "RED_BUTTON_BUTTON": "Кнопка",
+  "YOU_HAVE_CONFIRMED_YOUR_PROFILE": "Вы подтвердили свой аккаунт! Используйте свой email и пароль, чтобы",
+  "SING_IN": "Авторизоваться",
+  "REGISTER" : "Регистрация",
+  "LOGIN_HEADER": "Вход",
+  "LOGIN": "Войти",
+  "SING_IN_TO_START": "Авторизуйтесь, чтобы начать работу",
+  "RESTORE_PASSWORD": "Восстановить пароль",
+  "OPTIONAL": "Необязательно",
+
+  "EMAIL": "Е-мейл",
+  "PASSWORD": "Пароль",
+  "RETYPE_PASSWORD": "Введите пароль ещё раз",
+  "REMEMBER_ME": "Запомнить меня",
+
+  "PASSWORD_RECOVERY": "Восстановление пароля",
+  "SUBMIT_OK": "Ok",
+  "MESSAGE_WITH_PASSWORD_RECOVERY_WAS_SENT": "На ваш эл. адрес выслано письмо с ссылкой для восстановления пароля",
+
+  "RESET_PASSWORD": "Смена пароля",
+  "CHECKING_LINK": "Проверка ссылки",
+  "INVALID_RESTORE_LINK": "Ссылка недействительна",
+  "YOU_RESTORED_YOUR_PASSWORD": "Вы сменили свой пароль",
+
+  "YOUR_FULL_NAME": "Ваше полное имя",
+  "YOUR_PHONE_NUMBER": "Ваш телефон",
+  "I_ACCEPT_AGREEMENT": "Согласен с правилами сайта",
+  "YOU_REGISTERED_SUCCESSFUL_CHECK_EMAIL": "Вы успешно зарегистрировались! На Ваш эл. адрес выслана ссылка для подтверждения Вашего аккаунта"
+}

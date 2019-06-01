@@ -38,6 +38,9 @@ import {SignatureListComponent} from './components/issue/signature-list/signatur
 import {SignatureItemComponent} from './components/issue/signature-list/signature-item/signature-item.component';
 import { CommonChartComponent } from './components/chart/common-chart/common-chart.component';
 import { DateTimeViewComponent } from './components/date-time-view/date-time-view.component';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {environment} from '../../environments/environment';
+import {TranslationLoaderService} from './services/translation-loader.service';
 
 
 @NgModule({
@@ -82,7 +85,13 @@ import { DateTimeViewComponent } from './components/date-time-view/date-time-vie
       RouterModule,
       LightboxModule,
       NgxPermissionsModule.forChild(),
-
+      TranslateModule.forRoot({
+          loader: {
+              provide: TranslateLoader,
+              useClass: TranslationLoaderService
+          },
+          useDefaultLang: true
+      })
   ],
     exports: [
         FormsModule,
@@ -119,7 +128,8 @@ import { DateTimeViewComponent } from './components/date-time-view/date-time-vie
         SignatureListComponent,
         SignatureItemComponent,
         CommonChartComponent,
-        DateTimeViewComponent
+        DateTimeViewComponent,
+        TranslateModule
     ],
   entryComponents: [
       MapComponent,
@@ -128,4 +138,10 @@ import { DateTimeViewComponent } from './components/date-time-view/date-time-vie
       ComplaintDetailsBalloonComponent,
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+
+    constructor(private translate: TranslateService)
+    {
+        this.translate.setDefaultLang(environment.lang);
+    }
+}

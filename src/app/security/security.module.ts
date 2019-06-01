@@ -22,10 +22,10 @@ import { PasswordResetPageComponent } from './components/password-reset-page/pas
     PasswordRecoveryRequestPageComponent,
     PasswordResetPageComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    SecurityRoutingModule,
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        SecurityRoutingModule
+    ]
 })
 export class SecurityModule { }

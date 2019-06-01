@@ -5,7 +5,7 @@
         </div>
 
         <div class="register-box-body">
-            <p class="login-box-msg">Register a new membership</p>
+            <p class="login-box-msg">{{ 'REGISTER' | translate }}</p>
 
             <app-register-form (onSubmit)="onFormSubmit($event)" [validationErrors]="errors"></app-register-form>
 
@@ -17,7 +17,7 @@
 <!--                    Google+</a>-->
 <!--            </div>-->
 
-            <a routerLink="/security/login" class="text-center">I already have a membership</a>
+            <a routerLink="/security/login" class="text-center">{{ 'LOGIN' | translate }}</a>
         </div>
         <!-- /.form-box -->
     </div>
