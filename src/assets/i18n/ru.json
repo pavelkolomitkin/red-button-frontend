@@ -71,6 +71,7 @@
   "POST_ADDRESS": "Почтовый адрес",
   "SITE": "Сайт",
   "ADMINISTRATIVE_UNITS": "Административные районы",
+  "MOST_PROBLEMATIC_ONES": "Самые проблематичные",
 
   "REQUEST_ONE": "запрос",
   "REQUEST_TWO": "запроса",
@@ -80,6 +81,10 @@
   "COMMENT_TWO": "комментария",
   "COMMENT_FIVE": "комментариев",
   "LIKE":  "нравится",
+
+  "ISSUE_ONE": "отчет",
+  "ISSUE_TWO": "отчета",
+  "ISSUE_FIVE": "отчетов",
 
   "PHOTO": "фото",
   "VIDEO": "видео",
@@ -118,6 +123,9 @@
   "NEW_ISSUE": "Новый отчет",
   "EDIT_ISSUE": "Редактировать отчет",
   "MY_ISSUES": "Мои отчеты",
+  "STATISTICS": "Статистика",
+  "DETAILS": "Подробно",
+  "CONTACTS": "Контакты",
 
   "PAGE_NOT_FOUND": "Страница не найдена",
   "DESCRIBE_A_PROBLEM": "Опишите проблему",
@@ -149,6 +157,7 @@
   "ISSUE_DESCRIBE_THE_PROBLEM_AND_COLLECT_SIGNS": "Подробно опишите проблему и запросите подписи у других людей",
   "SELECT_THE_MAP_POINT_AND_COLLECT_SIGNS": "Укажите точку на карте и запросите подписи у других людей",
   "NONE": "Нет",
+  "NO_DATA": "Нет данных",
   "PERIOD": "Период",
 
   "CANNOT_IDENTIFY_THE_REGION": "Не удалось определить регион",
@@ -190,6 +199,11 @@
   "ALL_COMPLAINTS": "Все жалобы",
   "LATEST_COMMENTS": "Последние комментарии",
   "LATEST_ISSUES": "Последние отчеты",
-  "ALL_ISSUES": "Все отчеты"
+  "ALL_ISSUES": "Все отчеты",
+  "ALL_SERVICE_TYPES": "Все типы услуг",
 
+  "COMMON_NUMBERS_STATISTICS": "Общее количество",
+  "DYNAMIC_STATISTICS": "Динамика",
+  "TOTAL": "Всего",
+  "OTHERS": "Остальные"
 }

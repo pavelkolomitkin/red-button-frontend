@@ -12,7 +12,7 @@
               : issue.message }}
     </p>
 
-    <p *ngIf="issue.complaintConfirmations.length > 0" title="Signatures">
+    <p *ngIf="issue.complaintConfirmations.length > 0" title="{{ 'SIGNATURES' | translate }}">
       <app-issue-signature-progress [issue]="issue"></app-issue-signature-progress>
     </p>
 
@@ -25,7 +25,7 @@
             </app-picture-item>
           </div>
           <div>
-            <span class="small" *ngIf="issue.pictures.length > 0">{{ issue.pictures.length + ' picture(s)' }}&nbsp;</span>
+            <span class="small" *ngIf="issue.pictures.length > 0">{{ issue.pictures.length }} {{ 'PHOTO' | translate }}</span>
           </div>
         </ng-container>
       </div>
@@ -37,7 +37,7 @@
           </div>
 
           <div>
-            <span class="small" *ngIf="issue.videos.length > 0">{{ issue.videos.length + ' video(s)' }}</span>
+            <span class="small" *ngIf="issue.videos.length > 0">{{ issue.videos.length }} {{ 'VIDEO' | translate }}</span>
           </div>
 
         </ng-container>
@@ -45,13 +45,13 @@
 
 
     <div>
-      <small class="text-muted">{{ issue.likeNumber }} like(s) </small>
-      <small class="text-muted">{{ issue.commentNumber }} comment(s)</small>
+      <small class="text-muted">{{ issue.likeNumber }} {{ 'LIKE' | translate }} </small>
+      <small class="text-muted">{{ issue.commentNumber }} {{ issue.commentNumber | noun:('COMMENT_ONE' | translate ):('COMMENT_TWO' | translate):('COMMENT_FIVE' | translate) }}</small>
     </div>
   </div>
   <div class="box-footer">
     <div class="pull-left">
-      <a class="btn btn-success" [routerLink]="'/analytics/issue/' + issue.id">More</a>
+      <a class="btn btn-success" [routerLink]="'/analytics/issue/' + issue.id">{{ 'MORE' | translate }}</a>
     </div>
     <div class="pull-right">
       <small class="text-muted" app-date-time [value]="issue.createdAt"></small>

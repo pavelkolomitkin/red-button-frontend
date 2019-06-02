@@ -22,8 +22,8 @@
 
     <section class="content-header">
       <h1>
-        Companies
-        <small>Most problematic</small>
+        {{ 'COMPANIES' | translate }}
+        <small>{{ 'MOST_PROBLEMATIC_ONES' | translate }}</small>
       </h1>
     </section>
 
@@ -40,7 +40,7 @@
       </div>
       <ng-template #noCompanies>
         <div style="margin-left: 7px;">
-          <span class="text-muted">No Data</span>
+          <span class="text-muted">{{ 'NO_DATA' | translate }}</span>
         </div>
       </ng-template>
     </div>
@@ -60,12 +60,12 @@
       <div class="row">
         <div class="col-sm-6">
           <ng-container *ngIf="!!statistics">
-            <app-analyst-service-type-shares-chart [title]="'Common Numbers'" [data]="statistics.statistics.common"></app-analyst-service-type-shares-chart>
+            <app-analyst-service-type-shares-chart [title]="'COMMON_NUMBERS_STATISTICS' | translate" [data]="statistics.statistics.common"></app-analyst-service-type-shares-chart>
           </ng-container>
         </div>
         <div class="col-sm-6">
           <ng-container *ngIf="!!dynamics">
-            <app-analyst-service-types-dynamic-year [year]="selectedYear" [title]="'Dynamics'" [data]="dynamics.statistics"></app-analyst-service-types-dynamic-year>
+            <app-analyst-service-types-dynamic-year [year]="selectedYear" [title]="'DYNAMIC_STATISTICS' | translate" [data]="dynamics.statistics"></app-analyst-service-types-dynamic-year>
           </ng-container>
         </div>
       </div>

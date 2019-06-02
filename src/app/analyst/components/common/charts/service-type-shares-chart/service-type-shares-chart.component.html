@@ -7,7 +7,7 @@
   </div>
 
   <div class="box-footer" >
-    <span *ngIf="isDataEmpty()" class="text-muted">No Data</span>
-    <span *ngIf="!isDataEmpty()" class="text-muted">Total: {{ total }}</span>
+    <span *ngIf="isDataEmpty()" class="text-muted">{{ 'NO_DATA' | translate }}</span>
+    <span *ngIf="!isDataEmpty()" class="text-muted">{{ 'TOTAL' | translate }}: {{ total }}</span>
   </div>
 </div>

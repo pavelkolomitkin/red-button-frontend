@@ -15,9 +15,9 @@ import {State} from '../../../../../app.state';
 import {IssueService} from '../../../../services/issue.service';
 import {MapViewConfiguratorFactory} from '../../../../../core/services/map/view-configurator/map-view-configurator.factory';
 import {MapComponent} from '../../../../../shared/components/map/map.component';
-import {empty, from, iif, Observable, of, Subject, Subscription} from 'rxjs';
+import {Observable, Subject, Subscription} from 'rxjs';
 import {ServiceType} from '../../../../../core/data/model/service-type.model';
-import {buffer, debounceTime, filter, flatMap, map, mergeMap, switchMap, tap} from 'rxjs/operators';
+import {debounceTime, filter, mergeMap} from 'rxjs/operators';
 import {Issue} from '../../../../../core/data/model/issue.model';
 import {GlobalNotifyWarningMessage} from '../../../../../core/data/actions';
 import {NotifyMessage} from '../../../../../core/data/model/notify-message.model';
@@ -27,7 +27,6 @@ import {GeoLocation} from '../../../../../core/data/model/geo-location.model';
 import {Company} from '../../../../../core/data/model/company.model';
 import {MapViewBox} from '../../../../../shared/data/model/map-view-box.model';
 import {environment} from '../../../../../../environments/environment';
-import {isArray} from 'util';
 
 @Component({
   selector: 'app-analyst-company-map',
@@ -79,7 +78,7 @@ export class CompanyMapComponent implements OnInit, OnDestroy, AfterViewInit {
             }
             else
             {
-              this.store.dispatch(new GlobalNotifyWarningMessage(new NotifyMessage('No Issues')));
+              this.store.dispatch(new GlobalNotifyWarningMessage(new NotifyMessage('NO_ISSUES')));
             }
           }
 

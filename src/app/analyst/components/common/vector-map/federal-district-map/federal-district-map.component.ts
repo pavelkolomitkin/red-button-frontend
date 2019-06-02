@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs';
 import {FEDERAL_DISTRICTS} from '../../../../../core/data/map-vector-paths';
 import {Region} from '../../../../../core/data/model/region.model';
 import {ColorValueScaleService} from '../../../../services/color-value-scale.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-analyst-federal-district-map',
@@ -31,15 +32,19 @@ export class FederalDistrictMapComponent implements OnInit, OnDestroy {
   federalDistricts: Array<FederalDistrict> = [];
 
   federalDistrict: FederalDistrict;
-  viewBox: string
+  viewBox: string;
 
   districtSubscription: Subscription;
+
+  OTHERS_LABEL: string;
+  TOTAL_LABEL: string;
 
 
   constructor(
       private store: Store<State>,
       private colorService: ColorValueScaleService,
-      private changeDetector: ChangeDetectorRef
+      private changeDetector: ChangeDetectorRef,
+      private translator: TranslateService
   ) {
 
   }
@@ -54,7 +59,7 @@ export class FederalDistrictMapComponent implements OnInit, OnDestroy {
     this.changeDetector.markForCheck();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     this.districtSubscription = this.store.pipe(
         select(state => state.federalDistrict.list)
@@ -62,6 +67,9 @@ export class FederalDistrictMapComponent implements OnInit, OnDestroy {
       this.federalDistricts = list;
       this.updateMap();
     });
+
+    this.OTHERS_LABEL = await this.translator.get('OTHERS').toPromise();
+    this.TOTAL_LABEL = await this.translator.get('TOTAL').toPromise();
   }
 
   ngOnDestroy(): void {
@@ -81,21 +89,20 @@ export class FederalDistrictMapComponent implements OnInit, OnDestroy {
       return item.code === region.code;
     });
 
-
     if (!!statisticData)
     {
       statisticData.serviceTypes.forEach((serviceType) => {
 
         if (serviceType.issueNumber > 0)
         {
-          result += (serviceType.title ? serviceType.title : 'Остальные') + ': ' + serviceType.issueNumber + '\n';
+          result += (serviceType.title ? serviceType.title : this.OTHERS_LABEL) + ': ' + serviceType.issueNumber + '\n';
         }
 
       });
 
       if (statisticData.totalIssues > 0)
       {
-        result += 'Всего: ' + statisticData.totalIssues;
+        result += this.TOTAL_LABEL + ': ' + statisticData.totalIssues;
       }
 
     }

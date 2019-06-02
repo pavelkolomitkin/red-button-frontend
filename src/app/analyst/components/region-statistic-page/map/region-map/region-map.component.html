@@ -17,7 +17,7 @@
                             name="selectedServiceType"
                             id="selectedServiceType"
                     >
-                        <option [value]="null">Все типы услуг</option>
+                        <option [value]="null">{{ 'ALL_SERVICE_TYPES' | translate }}</option>
                         <option *ngFor="let serviceType of serviceTypes | async" [ngValue]="serviceType">{{ serviceType.title }}</option>
                     </select>
                 </div>

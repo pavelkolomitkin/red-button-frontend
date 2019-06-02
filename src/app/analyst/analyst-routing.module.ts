@@ -17,8 +17,8 @@ const routes: Routes = [
                     pageTitle: 'Россия',
                     pageSubTitle: '',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Country', null, 'bar-chart')
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('Россия', null, 'bar-chart')
                     ]
                 }
             },
@@ -29,8 +29,8 @@ const routes: Routes = [
                     // pageTitle: 'Россия',
                     // pageSubTitle: '',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Statistics', null, 'bar-chart')
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('STATISTICS', null, 'bar-chart')
                     ]
                 }
             },

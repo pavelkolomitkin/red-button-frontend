@@ -18,7 +18,7 @@ import {Observable, of, Subject, Subscription} from 'rxjs';
 import {ServiceType} from '../../../../../core/data/model/service-type.model';
 import {IssueService} from '../../../../services/issue.service';
 import {MapViewBox} from '../../../../../shared/data/model/map-view-box.model';
-import {debounceTime, distinctUntilChanged, filter, mergeMap, take} from 'rxjs/operators';
+import {debounceTime, filter, mergeMap} from 'rxjs/operators';
 import {Issue} from '../../../../../core/data/model/issue.model';
 import {IssueBalloonComponent} from '../../../common/map/issue-balloon/issue-balloon.component';
 import {MapViewConfiguratorFactory} from '../../../../../core/services/map/view-configurator/map-view-configurator.factory';
@@ -79,7 +79,7 @@ export class RegionMapComponent implements OnInit, OnDestroy, AfterViewInit {
             }
             else
             {
-              this.store.dispatch(new GlobalNotifyWarningMessage(new NotifyMessage('No Issues')));
+              this.store.dispatch(new GlobalNotifyWarningMessage(new NotifyMessage('NO_ISSUES')));
             }
           }
 
