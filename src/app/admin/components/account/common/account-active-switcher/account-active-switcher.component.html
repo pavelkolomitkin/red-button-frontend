@@ -4,6 +4,6 @@
         [ngStyle]="{ cursor: !isLoading ? 'pointer' : 'default' }"
         [ngClass]="account.isActive ? 'label-success' : 'label-default'"
         (click)="onClickHandler($event)">
-  <ng-container *ngIf="account.isActive; else inActive;">Yes</ng-container>
-  <ng-template #inActive>No</ng-template>
+  <ng-container *ngIf="account.isActive; else inActive;">{{ 'YES' | translate }}</ng-container>
+  <ng-template #inActive>{{ 'NO' | translate }}</ng-template>
 </span>

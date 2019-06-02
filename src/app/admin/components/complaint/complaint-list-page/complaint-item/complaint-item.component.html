@@ -18,7 +18,7 @@
     <span class="text-muted small">{{ complaint.message.length > 150 ? ( complaint.message |slice:0:150 ) + '...' : complaint.message }}</span>
   </td>
 
-  <td>{{ complaint.createdAt | amFromUnix }}</td>
+  <td app-date-time [value]="complaint.createdAt"></td>
 
   <td>
     <span *ngIf="complaint.pictures.length > 0">{{ complaint.pictures.length }}</span>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {AccountService} from '../../../../services/account.service';
 import User from '../../../../../core/data/model/user.model';
 import {Store} from '@ngrx/store';
@@ -17,7 +17,7 @@ export class AccountActiveSwitcherComponent implements OnInit {
 
   isLoading: boolean = false;
 
-  constructor(private service: AccountService, private store: Store<State>) { }
+  constructor(private service: AccountService, private store: Store<State>, private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit() {
 
@@ -38,10 +38,10 @@ export class AccountActiveSwitcherComponent implements OnInit {
     this.service.changeActive(<User>account)
         .toPromise()
         .then((account) => {
-
           this.account = account;
           this.isLoading = false;
 
+          this.changeDetector.markForCheck();
         })
         .catch((error) => {
 
@@ -49,7 +49,9 @@ export class AccountActiveSwitcherComponent implements OnInit {
               'Cannot to change active status of account "' + this.account.fullName
           )));
 
-          this.isLoading = false
+          this.isLoading = false;
+
+          this.changeDetector.markForCheck();
         });
   }
 

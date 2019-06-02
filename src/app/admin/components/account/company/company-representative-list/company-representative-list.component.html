@@ -3,7 +3,7 @@
   <div class="box">
 
     <div class="box-header">
-      <h3 class="box-title">Company Accounts <small class="text-muted" *ngIf="total !== null">({{ total }})</small></h3>
+      <h3 class="box-title">{{ 'COMPANY_REPRESENTATIVE_ACCOUNTS' | translate }} <small class="text-muted" *ngIf="total !== null">({{ total }})</small></h3>
     </div>
 
 
@@ -28,7 +28,7 @@
 
   </div>
 
-  <div class="alert alert-info" *ngIf="total === 0">No Accounts</div>
+  <div class="alert alert-info" *ngIf="total === 0">{{ 'NO_ACCOUNTS' | translate }}</div>
 
 
 </app-admin-common-layout>

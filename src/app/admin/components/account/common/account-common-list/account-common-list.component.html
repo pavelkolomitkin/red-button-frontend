@@ -2,22 +2,22 @@
   <tbody>
     <tr>
       <th [ngStyle]="{ minWidth: '40px' }">#</th>
-      <th>Email</th>
-      <th>Full Name</th>
+      <th>{{ 'EMAIL' | translate }}</th>
+      <th>{{ 'FULL_NAME' | translate }}</th>
 
       <ng-container *ngIf="accountType === 'company-representative'">
-        <th>Company</th>
+        <th>{{ 'COMPANY' | translate }}</th>
       </ng-container>
 
       <ng-container *ngIf="accountType === 'client'">
-        <th>Phone Number</th>
+        <th>{{ 'PHONE_NUMBER' | translate }}</th>
       </ng-container>
 
-      <th>Active</th>
-      <th>Created</th>
+      <th>{{ 'ACTIVE' | translate }}</th>
+      <th>{{ 'CREATED' | translate }}</th>
 
       <ng-container *ngIf="accountType !== 'client'">
-        <th>Controls</th>
+        <th>{{ 'TO_CONTROL' | translate }}</th>
       </ng-container>
 
     </tr>
@@ -51,7 +51,7 @@
         <app-account-active-switcher [account]="account"></app-account-active-switcher>
       </td>
 
-      <td>{{ account.createdAt | amFromUnix}}</td>
+      <td app-date-time [value]="account.createdAt"></td>
       <ng-container *ngIf="accountType !== 'client'">
         <td>
           <div class="box-tools">

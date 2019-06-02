@@ -5,9 +5,9 @@
       <h3 class="box-title">
         {{ (account | async).fullName }}
 
-        <span class="text-muted" *ngIf="(account | async).isClient()">(Client)</span>
-        <span class="text-muted" *ngIf="(account | async).isCompanyRepresentative()">(Company Representative)</span>
-        <span class="text-muted" *ngIf="(account | async).isAnalyst()">(Analyst)</span>
+        <span class="text-muted" *ngIf="(account | async).isClient()">({{ 'CLIENT_ACCOUNT' | translate }})</span>
+        <span class="text-muted" *ngIf="(account | async).isCompanyRepresentative()">({{ 'COMPANY_REPRESENTATIVE_ACCOUNT' | translate }})</span>
+        <span class="text-muted" *ngIf="(account | async).isAnalyst()">({{ 'ANALYST_ACCOUNT' | translate }})</span>
       </h3>
       <div class="box-tools pull-right">
         <a
@@ -24,28 +24,28 @@
     <div class="box-body">
 
       <p>
-        <b>Email</b>
+        <b>{{ 'EMAIL' | translate }}</b>
         <br/>
         <span class="text-primary">{{ (account | async).email }}</span>
       </p>
 
       <p *ngIf="(account | async).isClient()">
-        <b>Phone Number</b>
+        <b>{{ 'PHONE_NUMBER' | translate }}</b>
         <br/>
         <span *ngIf="!!(account | async).phoneNumber; else noPhone;">{{ (account | async).phoneNumber }}</span>
         <ng-template #noPhone>
-          <span class="text-muted">(None)</span>
+          <span class="text-muted">({{ 'NONE' | translate }})</span>
         </ng-template>
       </p>
 
       <p>
-        <b>Active</b>
+        <b>{{ 'ACTIVE' | translate }}</b>
         <br/>
         <app-account-active-switcher [account]="(account | async)"></app-account-active-switcher>
       </p>
 
       <p *ngIf="(account | async).isCompanyRepresentative()">
-        <b>Company</b>
+        <b>{{ 'COMPANY' | translate }}</b>
         <br/>
         <span class="text-primary">{{ (account | async).company.title }}</span>
         <br/>
@@ -54,15 +54,14 @@
       </p>
 
       <p>
-        <b>Password</b>
+        <b>{{ 'PASSWORD' | translate }}</b>
         <br/>
-        <span class="btn btn-danger" (click)="onResetPasswordClickHandler($event)">Reset Password</span>
+        <span class="btn btn-danger" (click)="onResetPasswordClickHandler($event)">{{ 'RESET_PASSWORD' | translate }}</span>
       </p>
 
     </div>
     <div class="box-footer">
-      <span class="pull-right small">{{ (account | async).createdAt | amFromUnix }}</span>
-
+      <span class="pull-right small" app-date-time [value]="(account | async).createdAt"></span>
     </div>
 
   </div>

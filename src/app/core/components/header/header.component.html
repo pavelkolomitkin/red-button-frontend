@@ -88,7 +88,7 @@
                               <a routerLink="/client/profile" class="btn btn-default btn-flat">{{ 'PROFILE' | translate }}</a>
                           </div>
                           <div class="pull-right">
-                              <span (click)="onLogoutClickHandler()" class="btn btn-default btn-flat">{{ 'SING_OUT'| translate }}</span>
+                              <span (click)="onLogoutClickHandler()" class="btn btn-default btn-flat">{{ 'SIGN_OUT'| translate }}</span>
                           </div>
                       </li>
                   </ul>
@@ -104,17 +104,17 @@
 
               <li class="dropdown notifications-menu">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                      <i class="fa fa-plus"></i> Account
+                      <i class="fa fa-plus"></i> {{ 'ACCOUNT' | translate }}
                   </a>
                   <ul class="dropdown-menu">
-                      <li class="header">Account Type</li>
+                      <li class="header">{{ 'ACCOUNT_TYPE' | translate }}</li>
                       <li>
                           <ul class="menu">
-                              <li>
-                                  <a [routerLink]="'/admin/account/company-representative/create'"><i class="fa fa-users text-aqua"></i> Company Representative Account</a>
+                              <li title="{{ 'COMPANY_REPRESENTATIVE_ACCOUNT' | translate }}">
+                                  <a [routerLink]="'/admin/account/company-representative/create'"><i class="fa fa-users text-aqua"></i> {{ 'COMPANY_REPRESENTATIVE_ACCOUNT' | translate }}</a>
                               </li>
-                              <li>
-                                  <a [routerLink]="'/admin/account/analyst/create'"><i class="fa fa-users text-red"></i> Analyst Account</a>
+                              <li title="{{ 'ANALYST_ACCOUNT' | translate }}">
+                                  <a [routerLink]="'/admin/account/analyst/create'"><i class="fa fa-users text-red"></i> {{ 'ANALYST_ACCOUNT' | translate }}</a>
                               </li>
 
                           </ul>
@@ -132,11 +132,11 @@
                   <ul class="dropdown-menu">
 
                       <li class="user-footer">
-                          <div class="pull-left">
-                              <a routerLink="/admin/profile" class="btn btn-default btn-flat">Profile</a>
-                          </div>
-                          <div class="pull-right">
-                              <span (click)="onLogoutClickHandler()" class="btn btn-default btn-flat">Sign out</span>
+<!--                          <div class="pull-left">-->
+<!--                              <a routerLink="/admin/profile" class="btn btn-default btn-flat">{{ 'PROFILE' | translate }}</a>-->
+<!--                          </div>-->
+                          <div>
+                              <span (click)="onLogoutClickHandler()" class="btn btn-default btn-flat center-block">{{ 'SIGN_OUT' | translate }}</span>
                           </div>
                       </li>
                   </ul>
@@ -164,7 +164,7 @@
 
                       <li class="user-footer">
                           <div>
-                              <span (click)="onLogoutClickHandler()" class="btn btn-default btn-flat center-block">Sign out</span>
+                              <span (click)="onLogoutClickHandler()" class="btn btn-default btn-flat center-block">{{ 'SIGN_OUT' | translate }}</span>
                           </div>
                       </li>
                   </ul>
@@ -178,13 +178,13 @@
               <li class="dropdown user user-menu">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <!--            <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->
-                      <span class="hidden-xs">{{ (user | async).fullName }} </span><b class="small">(Analytics)</b>
+                      <span class="hidden-xs">{{ (user | async).fullName }} </span><b class="small">({{ 'ANALYTICS'| translate }})</b>
                   </a>
                   <ul class="dropdown-menu">
 
                       <li class="user-footer">
                           <div>
-                              <span (click)="onLogoutClickHandler()" class="btn btn-default btn-flat center-block">Sign out</span>
+                              <span (click)="onLogoutClickHandler()" class="btn btn-default btn-flat center-block">{{ 'SIGN_OUT' | translate }}</span>
                           </div>
                       </li>
                   </ul>

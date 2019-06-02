@@ -3,12 +3,12 @@
   <div class="box-body">
 
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email">{{ 'EMAIL' | translate }}</label>
       <input
               type="email"
               class="form-control"
               id="email"
-              placeholder="Email"
+              placeholder="{{ 'EMAIL' | translate }}"
               [(ngModel)]="account.email"
               name="email"
               required
@@ -17,12 +17,12 @@
     </div>
 
     <div class="form-group">
-      <label for="fullName">Full Name</label>
+      <label for="fullName">{{ 'FULL_NAME' | translate }}</label>
       <input
               type="text"
               class="form-control"
               id="fullName"
-              placeholder="Full Name"
+              placeholder="{{ 'FULL_NAME' | translate }}"
               [(ngModel)]="account.fullName"
               name="fullName"
               required
@@ -33,7 +33,7 @@
     <ng-container *ngIf="!account.id">
 
       <div class="form-group has-feedback">
-        <label for="password">Password</label>
+        <label for="password">{{ 'PASSWORD' | translate }}</label>
         <input
                 ngModel
                 id="password"
@@ -42,14 +42,14 @@
                 required
                 type="password"
                 class="form-control"
-                placeholder="Password"
+                placeholder="{{ 'PASSWORD' | translate }}"
         >
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         <app-form-field-error-list [field]="'password'" [errors]="(errors | async).plainPassword ? (errors | async).plainPassword : {}"></app-form-field-error-list>
       </div>
 
       <div class="form-group has-feedback">
-        <label for="passwordRepeat">Repeat Password</label>
+        <label for="passwordRepeat">{{ 'RETYPE_PASSWORD' | translate }}</label>
         <input
                 ngModel
                 id="passwordRepeat"
@@ -58,7 +58,7 @@
                 required
                 type="password"
                 class="form-control"
-                placeholder="Retype password"
+                placeholder="{{ 'RETYPE_PASSWORD' | translate }}"
         >
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
         <app-form-field-error-list [field]="'passwordRepeat'" [errors]="(errors | async).plainPassword ? (errors | async).plainPassword : {}"></app-form-field-error-list>
@@ -74,7 +74,7 @@
                   [(ngModel)]="account.isActive"
                   name="isActive"
           >
-          Active
+          {{ 'ACTIVE' | translate }}
         </label>
         <app-form-field-error-list [field]="'isActive'" [errors]="errors"></app-form-field-error-list>
       </div>
@@ -87,7 +87,7 @@
   <div class="box-footer">
     <button type="submit"
             class="btn btn-primary"
-            [disabled]="!form.valid || (!!additionValidation && !additionValidation())">Save</button>
+            [disabled]="!form.valid || (!!additionValidation && !additionValidation())">{{ 'SAVE' | translate }}</button>
   </div>
 
 </form>

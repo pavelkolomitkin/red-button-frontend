@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../../app.state';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -13,7 +13,8 @@ import {NotifyMessage} from '../../../../../core/data/model/notify-message.model
 @Component({
   selector: 'app-account-common-details-page',
   templateUrl: './account-common-details-page.component.html',
-  styleUrls: ['./account-common-details-page.component.css']
+  styleUrls: ['./account-common-details-page.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AccountCommonDetailsPageComponent implements OnInit, OnDestroy {
 
@@ -75,6 +76,6 @@ export class AccountCommonDetailsPageComponent implements OnInit, OnDestroy {
   {
     this.resetPasswordWindow.close();
 
-    this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage('The account password has been reset!')));
+    this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage('THE_PASSWORD_HAS_BEEN_RESET')));
   }
 }

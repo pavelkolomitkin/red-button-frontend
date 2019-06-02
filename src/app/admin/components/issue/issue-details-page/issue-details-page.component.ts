@@ -45,7 +45,7 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
       
       this.issue = issue;
 
-      this.store.dispatch(new GlobalPageTitle('Issue', '#' + this.issue.id.toString()));
+      this.store.dispatch(new GlobalPageTitle('ISSUE', this.issue.client.fullName));
 
     });
 
@@ -99,11 +99,11 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
   {
     const confirmation: ActionConfirmation = new ActionConfirmation(
         IssueDetailsPageComponent.DELETE_ISSUE_ID + this.issue.id,
-        'Delete Issue?',
-        'Are you sure you want to delete it?',
+        'DELETE_ISSUE_QUESTION',
+        'ARE_YOU_SURE_YOU_WANT_TO_DELETE_IT',
         [
-          new ConfirmationActionOption(ConfirmationActionOption.CONFIRM_ID, 'Yes', 'danger'),
-          new ConfirmationActionOption(ConfirmationActionOption.CANCEL_ID, 'Cancel')
+          new ConfirmationActionOption(ConfirmationActionOption.CONFIRM_ID, 'YES', 'danger'),
+          new ConfirmationActionOption(ConfirmationActionOption.CANCEL_ID, 'CANCEL')
         ],
         this.issue
     );

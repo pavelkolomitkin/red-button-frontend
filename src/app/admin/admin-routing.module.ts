@@ -21,27 +21,13 @@ const routes: Routes = [
     { path: '', children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             {
-                path: 'profile',
-                component: ProfilePageComponent,
-                data: {
-                    pageTitle: 'Profile',
-                    pageSubTitle: '',
-                    breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('My Profile', null, 'user')
-                    ]
-                }
-
-            },
-
-            {
                 path: 'dashboard',
                 component: DashboardPageComponent,
                 data: {
-                    pageTitle: 'Dashboard',
+                    pageTitle: 'HOME',
                     pageSubTitle: '',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
+                        new BreadCrumb('HOME', '/', 'home'),
                         new BreadCrumb('Dashboard', null, 'dashboard')
                     ]
                 }
@@ -51,11 +37,11 @@ const routes: Routes = [
                 path: 'complaint/list',
                 component: ComplaintListPageComponent,
                 data: {
-                    pageTitle: 'Complaints',
-                    pageSubTitle: 'latest',
+                    pageTitle: 'COMPLAINTS',
+                    pageSubTitle: 'LATEST',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Complaints', null, 'file-text-o')
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('COMPLAINTS', null, 'file-text-o')
                     ]
                 }
             },
@@ -65,11 +51,11 @@ const routes: Routes = [
                 path: 'issue/list',
                 component: IssueListPageComponent,
                 data: {
-                    pageTitle: 'Issues',
-                    pageSubTitle: 'latest',
+                    pageTitle: 'ISSUES',
+                    pageSubTitle: 'LATEST',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Issues', null, 'file-text-o')
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('ISSUES', null, 'file-text-o')
                     ]
                 }
             },
@@ -86,11 +72,11 @@ const routes: Routes = [
                 path: 'account/client/list',
                 component: ClientListPageComponent,
                 data: {
-                    pageTitle: 'Client Accounts',
-                    pageSubTitle: 'latest',
+                    pageTitle: 'CLIENT_ACCOUNTS',
+                    pageSubTitle: 'LATEST',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Client Accounts', null, 'users'),
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('CLIENT_ACCOUNTS', null, 'users'),
                     ]
                 }
             },
@@ -99,11 +85,11 @@ const routes: Routes = [
                 path: 'account/company-representative/list',
                 component: CompanyRepresentativeListComponent,
                 data: {
-                    pageTitle: 'Company Accounts',
-                    pageSubTitle: 'latest',
+                    pageTitle: 'COMPANY_REPRESENTATIVE_ACCOUNTS',
+                    pageSubTitle: 'LATEST',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Company Accounts', null, 'users'),
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('COMPANY_REPRESENTATIVE_ACCOUNTS', null, 'users'),
                     ]
                 }
             },
@@ -112,12 +98,12 @@ const routes: Routes = [
                 path: 'account/company-representative/create',
                 component: CompanyRepresentativeCreateAccountPageComponent,
                 data: {
-                    pageTitle: 'Create Account',
-                    pageSubTitle: 'Company Representative',
+                    pageTitle: 'CREATE_AN_ACCOUNT',
+                    pageSubTitle: 'COMPANY_REPRESENTATIVE_ACCOUNT',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Accounts', '/account/company-representative/list', 'users'),
-                        new BreadCrumb('New Account', null, 'user'),
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('ACCOUNTS', '/account/company-representative/list', 'users'),
+                        new BreadCrumb('NEW_ACCOUNT', null, 'user'),
                     ]
                 }
             },
@@ -125,12 +111,12 @@ const routes: Routes = [
                 path: 'account/company-representative/:id/edit',
                 component: CompanyRepresentativeEditAccountPageComponent,
                 data: {
-                    pageTitle: 'Edit Account',
-                    pageSubTitle: 'Company Representative',
+                    pageTitle: 'EDIT_ACCOUNT',
+                    pageSubTitle: 'COMPANY_REPRESENTATIVE_ACCOUNT',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Accounts', '/account/company-representative/list', 'users'),
-                        new BreadCrumb('Edit Account', null, 'user'),
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('ACCOUNTS', '/account/company-representative/list', 'users'),
+                        new BreadCrumb('EDIT_ACCOUNT', null, 'user'),
                     ]
                 },
                 pathMatch: 'full'
@@ -140,11 +126,11 @@ const routes: Routes = [
                 path: 'account/analyst/list',
                 component: AnalystListPageComponent,
                 data: {
-                    pageTitle: 'Analyst Accounts',
-                    pageSubTitle: 'latest',
+                    pageTitle: 'ANALYSTS',
+                    pageSubTitle: 'LATEST',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Analyst Accounts', null, 'users'),
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('ANALYSTS', null, 'users'),
                     ]
                 }
             },
@@ -153,12 +139,12 @@ const routes: Routes = [
                 path: 'account/analyst/create',
                 component: AnalystAccountCreatePageComponent,
                 data: {
-                    pageTitle: 'Create Account',
-                    pageSubTitle: 'Analyst',
+                    pageTitle: 'CREATE_AN_ACCOUNT',
+                    pageSubTitle: 'ANALYST_ACCOUNT',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Accounts', '/account/analyst/list', 'users'),
-                        new BreadCrumb('New Account', null, 'user'),
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('ACCOUNTS', '/account/analyst/list', 'users'),
+                        new BreadCrumb('NEW_ACCOUNT', null, 'user'),
                     ]
                 }
             },
@@ -167,12 +153,12 @@ const routes: Routes = [
                 path: 'account/analyst/:id/edit',
                 component: AnalystAccountEditPageComponent,
                 data: {
-                    pageTitle: 'Create Account',
-                    pageSubTitle: 'Analyst',
+                    pageTitle: 'EDIT_ACCOUNT',
+                    pageSubTitle: 'ANALYST_ACCOUNT',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Accounts', '/account/analyst/list', 'users'),
-                        new BreadCrumb('Edit Account', null, 'user'),
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('ACCOUNTS', '/account/analyst/list', 'users'),
+                        new BreadCrumb('EDIT_ACCOUNT', null, 'user'),
                     ]
                 },
                 pathMatch: 'full'
@@ -182,11 +168,11 @@ const routes: Routes = [
                 path: 'account/:id',
                 component: AccountCommonDetailsPageComponent,
                 data: {
-                    pageTitle: 'Account Details',
+                    pageTitle: 'ACCOUNT',
                     pageSubTitle: '',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Account Details', null, 'user'),
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('ACCOUNT', null, 'user'),
                     ]
                 },
                 pathMatch: 'full'

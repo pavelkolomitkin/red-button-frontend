@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ProfilePageComponent} from './components/profile-page/profile-page.component';
 import {BreadCrumb} from '../core/data/model/bread-crumb.model';
 import {IssueListPageComponent} from './components/issue/issue-list-page/issue-list-page.component';
 import {IssueDetailsPageComponent} from './components/issue/issue-details-page/issue-details-page.component';

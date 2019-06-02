@@ -6,17 +6,24 @@
         [location]="complaint.location"
     >
   <div class="balloon-title" [title]="complaint.address.displayName">
-    <a [routerLink]="'/client/complaint/' + complaint.id">{{ 'COMPLAINT' | translate }}</a>
+    <ng-container *ngxPermissionsOnly="['ROLE_CLIENT_USER']">
+      <a [routerLink]="'/client/complaint/' + complaint.id">{{ 'COMPLAINT' | translate }}</a>
+    </ng-container>
+    <ng-container *ngxPermissionsOnly="['ROLE_ADMIN_USER']">
+      <a [routerLink]="'/admin/complaint/' + complaint.id">{{ 'COMPLAINT' | translate }}</a>
+    </ng-container>
+    <ng-container *ngxPermissionsOnly="['ROLE_COMPANY_REPRESENTATIVE_USER']">
+      <a [routerLink]="'/company/complaint/' + complaint.id">{{ 'COMPLAINT' | translate }}</a>
+    </ng-container>
+    <ng-container *ngxPermissionsOnly="['ROLE_ANALYST_USER']">
+      <span>{{ 'COMPLAINT' | translate }}</span>
+    </ng-container>
   </div>
 
   <div class="balloon-content">
     <div class="text-primary">{{ complaint.client.fullName }}</div>
     {{ complaint.address.displayName }}
-    <div class="text-muted">{{ complaint.message.length > 150 ? (complaint.message | slice:0:150) : complaint.message }}
-      <ng-container *ngxPermissionsOnly="['ROLE_CLIENT_USER']">
-        <a [routerLink]="'/client/complaint/' + complaint.id">{{ 'MORE' | translate }}...</a>
-      </ng-container>
-    </div>
+    <div class="text-muted">{{ complaint.message.length > 150 ? (complaint.message | slice:0:150) : complaint.message }}</div>
     <div class="text-primary" *ngIf="!!complaint.serviceType">{{ complaint.serviceType.title }}</div>
   </div>
   <div class="balloon-footer">

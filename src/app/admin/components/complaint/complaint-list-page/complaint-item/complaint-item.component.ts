@@ -61,11 +61,11 @@ export class ComplaintItemComponent implements OnInit, OnDestroy {
   {
     const confirmation: ActionConfirmation = new ActionConfirmation(
         ComplaintItemComponent.CONFIRMATION_ID + this.complaint.id,
-        'Delete Complaint?',
-        'Are you sure you want to delete it?',
+        'DELETE_COMPLAINT_QUESTION',
+        'ARE_YOU_SURE_YOU_WANT_TO_DELETE_IT',
         [
-          new ConfirmationActionOption(ConfirmationActionOption.CONFIRM_ID, 'Yes', 'danger'),
-          new ConfirmationActionOption(ConfirmationActionOption.CANCEL_ID, 'Cancel')
+          new ConfirmationActionOption(ConfirmationActionOption.CONFIRM_ID, 'YES', 'danger'),
+          new ConfirmationActionOption(ConfirmationActionOption.CANCEL_ID, 'CANCEL')
         ],
         this.complaint
     );
