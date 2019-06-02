@@ -10,6 +10,7 @@ import { SecurityRoutingModule } from './security-routing.module';
 import { RegisterSuccessfulPageComponent } from './components/register-successful-page/register-successful-page.component';
 import { PasswordRecoveryRequestPageComponent } from './components/password-recovery-request-page/password-recovery-request-page.component';
 import { PasswordResetPageComponent } from './components/password-reset-page/password-reset-page.component';
+import { CommonHeaderComponent } from './components/common-header/common-header.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PasswordResetPageComponent } from './components/password-reset-page/pas
     ConfirmationPageComponent,
     RegisterSuccessfulPageComponent,
     PasswordRecoveryRequestPageComponent,
-    PasswordResetPageComponent
+    PasswordResetPageComponent,
+    CommonHeaderComponent
   ],
     imports: [
         CommonModule,
