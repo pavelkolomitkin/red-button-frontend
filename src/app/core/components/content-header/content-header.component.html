@@ -1,13 +1,13 @@
 <section class="content-header">
   <h1>
-    {{ title | async }}
-    <small>{{ subTitle | async }}</small>
+    {{ (title | async) | translate }}
+    <small>{{ (subTitle | async) | translate }}</small>
   </h1>
   <ng-container *ngIf="(breadCrumbs|async).length > 0">
     <ol class="breadcrumb">
       <li *ngFor="let item of (breadCrumbs|async); last as isLast" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <a *ngIf="!isLast" routerLink="{{ item.route }}"><i [ngClass]="'fa fa-' + item.icon"></i> {{ item.title }}</a>
-        <span *ngIf="isLast" class="text-muted"><i [ngClass]="'fa fa-' + item.icon"></i> {{ item.title }}</span>
+        <a *ngIf="!isLast" routerLink="{{ item.route }}"><i [ngClass]="'fa fa-' + item.icon"></i> {{ item.title | translate }}</a>
+        <span *ngIf="isLast" class="text-muted"><i [ngClass]="'fa fa-' + item.icon"></i> {{ item.title | translate }}</span>
       </li>
     </ol>
   </ng-container>

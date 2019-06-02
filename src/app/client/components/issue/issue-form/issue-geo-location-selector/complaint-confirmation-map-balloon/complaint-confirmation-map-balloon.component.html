@@ -5,7 +5,7 @@
         [location]="confirmation.complaint.location">
 
   <div class="balloon-title">
-    Signature
+    {{ 'SIGNATURE_REQUESTED' | translate }}
     <i class="fa fa-check-circle" *ngIf="confirmation.status.code === 'confirmed'"></i>
     <i class="fa fa-ban" *ngIf="confirmation.status.code === 'rejected'"></i>
     <i class="fa fa-clock-o" *ngIf="confirmation.status.code === 'pending'"></i>
@@ -17,7 +17,7 @@
       confirmation.complaint.message.length > 150 ?
               (confirmation.complaint.message | slice:0:150) + '...'
               : confirmation.complaint.message }}
-      <a [routerLink]="'/client/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">More...</a>
+      <a [routerLink]="'/client/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">{{ 'MORE' | translate }}...</a>
     </p>
     <p>
       <ng-container *ngIf="confirmation.complaint.pictures.length > 0">
@@ -28,7 +28,7 @@
           </app-picture-item>
         </div>
         <div>
-          <span class="small" *ngIf="confirmation.complaint.pictures.length > 0">{{ confirmation.complaint.pictures.length.toString() + ' picture(s)' }}&nbsp;</span>
+          <span class="small" *ngIf="confirmation.complaint.pictures.length > 0">{{ confirmation.complaint.pictures.length }} {{ 'PHOTO' | translate }}&nbsp;</span>
         </div>
       </ng-container>
 
@@ -39,20 +39,20 @@
         </div>
 
         <div>
-          <span class="small" *ngIf="confirmation.complaint.videos.length > 0">{{ confirmation.complaint.videos.length.toString() + ' video' }}</span>
+          <span class="small" *ngIf="confirmation.complaint.videos.length > 0">{{ confirmation.complaint.videos.length }} {{ 'VIDEO' | translate }}</span>
         </div>
 
       </ng-container>
     </p>
     <div>
       <small class="text-primary pull-left" *ngIf="!!confirmation.complaint.serviceType">{{ confirmation.complaint.serviceType.title }}</small>
-      <small class="text-muted pull-right">{{ confirmation.complaint.createdAt | amFromUnix }}</small>
+      <small class="text-muted pull-right" app-date-time [value]="confirmation.complaint.createdAt"></small>
     </div>
   </div>
 
   <div class="balloon-footer">
     <span class="btn btn-danger" (click)="onDeleteButtonClickHandler($event)">
-      <i class="fa fa-trash"></i> Delete
+      <i class="fa fa-trash"></i> {{ 'DELETE' | translate }}
     </span>
   </div>
 

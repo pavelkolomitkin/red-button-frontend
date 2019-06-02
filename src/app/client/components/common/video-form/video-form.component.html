@@ -1,13 +1,13 @@
 <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title">Add video</h3>
+    <h3 class="box-title">{{ 'ADD_YOUTUBE_VIDEO' | translate }}</h3>
   </div>
 
   <form (ngSubmit)="onSubmitHandler(form)" #form="ngForm">
 
     <div class="box-body">
       <div class="form-group url-form-field">
-        <label for="videoUrl">Url</label>
+        <label for="videoUrl">{{ 'URL' | translate }}</label>
         <input
                 class="form-control"
                 type="text"
@@ -23,7 +23,7 @@
     </div>
 
     <div class="box-footer">
-      <button type="submit" class="btn btn-primary" [disabled]="form.invalid || (currentState !== 'READY_STATE')">Submit</button>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid || (currentState !== 'READY_STATE')">{{ 'SUBMIT_OK' | translate }}</button>
     </div>
 
   </form>

@@ -1,7 +1,7 @@
 <form #form="ngForm">
 
   <div class="form-group">
-    <label>Service Type</label>
+    <label>{{ 'SERVICE_TYPE' | translate }}</label>
     <select
             class="form-control"
             ngModel
@@ -11,13 +11,13 @@
             id="selectedServiceType"
             (ngModelChange)="onServiceTypeChangeHandler($event)"
     >
-      <option value="" [selected]="true">All</option>
+      <option value="" [selected]="true">{{ 'ALL' | translate }}</option>
       <option *ngFor="let serviceType of serviceTypes | async" [ngValue]="serviceType">{{ serviceType.title }}</option>
     </select>
   </div>
 
   <div class="form-group">
-    <label>Tags</label>
+    <label>{{ 'POINT_HASH_TAGS' | translate }}</label>
 
     <div class="tag-list">
       <ng-container *ngIf="tagItems.length > 0; else noTags;">
@@ -31,7 +31,7 @@
         ></app-search-tag-item>
       </ng-container>
       <ng-template #noTags>
-        <span class="text-muted">None</span>
+        <span class="text-muted">{{ 'NONE' | translate }}</span>
       </ng-template>
     </div>
   </div>

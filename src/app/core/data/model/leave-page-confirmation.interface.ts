@@ -1,4 +1,4 @@
 export interface LeavePageConfirmationInterface
 {
-    getPromptMessage(): string;
+    getPromptMessage(): string | null;
 }

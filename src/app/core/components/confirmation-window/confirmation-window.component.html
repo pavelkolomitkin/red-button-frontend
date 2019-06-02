@@ -4,14 +4,15 @@
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
         <span aria-hidden="true">&times;</span>
       </button>
-      <h4 class="modal-title" id="modal-basic-title">{{ confirmation.title }}</h4>
+      <h4 class="modal-title" id="modal-basic-title">{{ confirmation.title | translate }}</h4>
     </div>
     <div class="modal-body">
-      <b>{{ confirmation.message }}</b>
+      <b>{{ confirmation.message | translate }}</b>
     </div>
     <div class="modal-footer">
       <app-control-item
-              *ngFor="let item of confirmation.userActions" [action]="item"
+              [ngClass]="!isLast ? 'margin-r-5' : ''"
+              *ngFor="let item of confirmation.userActions; last as isLast" [action]="item"
               (onAction)="onActControlHandler($event)"
       ></app-control-item>
     </div>

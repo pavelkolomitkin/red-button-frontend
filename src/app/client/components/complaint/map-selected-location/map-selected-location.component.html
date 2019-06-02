@@ -7,8 +7,8 @@
 
   <div class="balloon-title">
     <ng-container *ngIf="currentState === 'STATE_LOADING'"></ng-container>
-    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">Confirm the location</ng-container>
-    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'">Cannot identify the region!</ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">{{ 'CONFIRM_THE_LOCATION' | translate }}</ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'">{{ 'CANNOT_IDENTIFY_THE_REGION' | translate }}!</ng-container>
   </div>
 
   <div class="balloon-content">
@@ -26,14 +26,14 @@
       </div>
     </ng-container>
     <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'">
-      Cannot identify the region! Try only to choose location in a Russia!
+      {{ 'CANNOT_IDENTIFY_THE_REGION_USE_ONLY_RUSSIAN_AREA' | translate }}
     </ng-container>
   </div>
 
   <div class="balloon-footer">
     <ng-container *ngIf="currentState === 'STATE_LOADING'"></ng-container>
     <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">
-      <span class="btn btn-success" (click)="onConfirmAddressClick($event)">Confirm</span>
+      <span class="btn btn-success" (click)="onConfirmAddressClick($event)">{{ 'CONFIRM' | translate }}</span>
     </ng-container>
     <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'"></ng-container>
   </div>

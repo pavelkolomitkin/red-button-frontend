@@ -2,7 +2,7 @@
 
   <div class="box-body">
     <div class="form-group">
-      <label>Select Geo Location and signatures from other people</label>
+      <label>{{ 'SELECT_THE_MAP_POINT_AND_COLLECT_SIGNS' | translate }}</label>
       <app-issue-geo-location-selector-field
               [issue]="issue"
               (onAddressUpdate)="onAddressUpdateHandler($event);onFormFieldChangeHandler($event)"
@@ -11,7 +11,7 @@
     </div>
 
     <div class="form-group">
-      <label>Select a company<span class="text-muted">(optional)</span></label>
+      <label>{{ 'SELECT_A_COMPANY' | translate }} <span class="text-muted">({{ 'OPTIONAL' | translate }})</span></label>
       <app-issue-company-selector-field
               [issue]="issue"
               (onSelect)="onCompanySelectHandler($event);onFormFieldChangeHandler($event)"
@@ -20,7 +20,7 @@
     </div>
 
     <div class="form-group">
-      <label>Service Type <span class="text-muted">(optional)</span></label>
+      <label>{{ 'SELECT_SERVICE_TYPE' | translate }} <span class="text-muted">({{ 'OPTIONAL' | translate }})</span></label>
       <select
               class="form-control"
               [(ngModel)]="issue.serviceType"
@@ -37,7 +37,7 @@
     </div>
 
     <div class="form-group">
-      <label for="issueMessage">Message</label>
+      <label for="issueMessage">{{ 'YOUR_MESSAGE' | translate }}</label>
       <textarea class="form-control"
                 required
                 id="issueMessage"
@@ -50,7 +50,7 @@
     </div>
 
     <div class="form-group">
-      <label>Pictures</label>
+      <label>{{ 'ATTACH_PICTURES' | translate }} <span class="text-muted">({{ 'OPTIONAL' | translate }})</span></label>
       <app-issue-picture-list-field
               [pictures]="issue.pictures"
               (onChange)="onFormFieldChangeHandler($event)"
@@ -59,7 +59,7 @@
     </div>
 
     <div class="form-group">
-      <label>Video Links(use youtube to point videos)</label>
+      <label>{{ 'ATTACH_VIDEO_MATERIALS' | translate }} <span class="text-muted">({{ 'OPTIONAL' | translate }})</span></label>
       <app-video-list-field
               [list]="issue.videos"
               (onChange)="onFormFieldChangeHandler($event)"
@@ -70,6 +70,6 @@
   </div>
 
   <div class="box-footer">
-    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">{{ 'SUBMIT_OK' | translate }}</button>
   </div>
 </form>

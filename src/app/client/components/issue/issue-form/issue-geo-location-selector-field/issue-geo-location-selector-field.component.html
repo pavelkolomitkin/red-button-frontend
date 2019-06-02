@@ -6,7 +6,7 @@
   </p>
   <div *ngIf="issue.complaintConfirmations.length > 0">
 
-    <div><b>Signatures<span class="text-muted">({{ issue.complaintConfirmations.length }})</span></b></div>
+    <div><b>{{ 'SIGNATURES' | translate }}<span class="text-muted">({{ issue.complaintConfirmations.length }})</span></b></div>
     <p>
       <span
               class="label complaint-signature"
@@ -18,7 +18,9 @@
   </div>
 </div>
 <div>
-  <span class="btn btn-primary" (click)="onChooseButtonClickHandler($event)">Choose a location and gather signatures from other people</span>
+  <span class="btn btn-primary" (click)="onChooseButtonClickHandler($event)">
+    <i class="fa fa-map-marker"></i> {{ 'OPEN_THE_MAP' | translate }}
+  </span>
 </div>
 <app-issue-geo-location-selector
         *ngIf="isSelectorOpen"

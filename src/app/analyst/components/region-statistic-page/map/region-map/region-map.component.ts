@@ -132,10 +132,6 @@ export class RegionMapComponent implements OnInit, OnDestroy, AfterViewInit {
     this.map.setZoom(7);
     this.map.setViewBoundaries(boundingTopLeft, boundingBottomRight, null, false, [0, 0, 0, 0]);
 
-    // this.searchIssues({
-    //   year: this.year
-    // });
-
     this.centeringBalloonSubscription = this.store.pipe(select(state => state.map.centeringBalloonLocation), filter(result => !!result))
         .subscribe((location: GeoLocation) => {
           this.map.setCenter(location, true);

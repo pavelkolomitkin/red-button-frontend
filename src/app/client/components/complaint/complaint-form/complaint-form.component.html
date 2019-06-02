@@ -1,7 +1,7 @@
 <form appPreventEnterSubmitForm (ngSubmit)="onSubmitHandler($event)" #form="ngForm">
   <div class="box-body">
     <div class="form-group">
-      <label>Select Geo Location</label>
+      <label>{{ 'SELECT_GEO_LOCATION' | translate }}</label>
       <app-geo-location-selector-field
               [complaint]="complaint"
               (onAddressSelect)="onFieldValueChangeHandler($event)"></app-geo-location-selector-field>
@@ -9,7 +9,7 @@
     </div>
 
     <div class="form-group">
-      <label>Service Type <span class="text-muted">(optional)</span></label>
+      <label>{{ 'SELECT_SERVICE_TYPE' | translate }} <span class="text-muted">({{ 'OPTIONAL' | translate }})</span></label>
       <select
               class="form-control"
               [(ngModel)]="complaint.serviceType"
@@ -26,7 +26,7 @@
     </div>
 
     <div class="form-group">
-      <label for="complaintMessage">Message</label>
+      <label for="complaintMessage">{{ 'YOUR_MESSAGE' | translate }}</label>
       <textarea class="form-control"
                 required
                 id="complaintMessage"
@@ -38,7 +38,7 @@
     </div>
 
     <div class="form-group">
-      <label>Pictures</label>
+      <label>{{ 'ATTACH_PICTURES' | translate }} <span class="text-muted">({{ 'OPTIONAL' | translate }})</span></label>
       <app-complaint-pictures-field
               [pictures]="complaint.pictures"
               (onChange)="onFieldValueChangeHandler($event)"
@@ -47,7 +47,7 @@
     </div>
 
     <div class="form-group">
-      <label>Video Links(use youtube to point videos)</label>
+      <label>{{ 'ATTACH_VIDEO_MATERIALS' | translate }} <span class="text-muted">({{ 'OPTIONAL' | translate }})</span></label>
       <app-video-list-field
               [list]="complaint.videos"
               (onChange)="onFieldValueChangeHandler($event)"
@@ -56,7 +56,7 @@
     </div>
 
     <div class="form-group">
-      <label>Tags</label>
+      <label>{{ 'POINT_HASH_TAGS' | translate }} <span class="text-muted">({{ 'OPTIONAL' | translate }})</span></label>
       <app-tag-list-field
               [tags]="complaint.tags"
               (onChange)="onFieldValueChangeHandler($event)"
@@ -65,7 +65,7 @@
   </div>
 
   <div class="box-footer">
-    <button type="submit" class="btn btn-primary" [disabled]="!isValid()">Save</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!isValid()">{{ 'SUBMIT_OK' | translate }}</button>
   </div>
 
 </form>

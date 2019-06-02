@@ -92,11 +92,11 @@ export class IssueCommentItemComponent implements OnInit, OnDestroy {
   {
     const confirmation: ActionConfirmation = new ActionConfirmation(
         IssueCommentItemComponent.DELETE_COMMENT_ID + this.comment.id,
-        'Delete Comment?',
-        'Are you sure you want to delete it?',
+        'DELETE_COMMENT_QUESTION',
+        'ARE_YOU_SURE_YOU_WANT_TO_DELETE_IT',
         [
-          new ConfirmationActionOption(ConfirmationActionOption.CONFIRM_ID, 'Yes', 'danger'),
-          new ConfirmationActionOption(ConfirmationActionOption.CANCEL_ID, 'Cancel')
+          new ConfirmationActionOption(ConfirmationActionOption.CONFIRM_ID, 'YES', 'danger'),
+          new ConfirmationActionOption(ConfirmationActionOption.CANCEL_ID, 'CANCEL')
         ],
         this.comment
     );

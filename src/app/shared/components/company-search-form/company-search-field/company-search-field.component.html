@@ -1,11 +1,12 @@
 <div class="form-group url-form-field">
-  <label for="company-search">Company Name</label>
+  <label for="company-search">{{ 'COMPANY_NAME' | translate }}</label>
   <input
           #inputElement
           id="company-search"
           type="text"
           class="form-control"
           name="company"
+          [placeholder]="'BEGIN_TO_INPUT_A_COMPANY_NAME' | translate"
           [(ngModel)]="model"
           [ngbTypeahead]="search"
           [inputFormatter]="formatter"

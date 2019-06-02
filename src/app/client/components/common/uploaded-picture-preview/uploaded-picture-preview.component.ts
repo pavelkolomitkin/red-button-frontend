@@ -8,6 +8,7 @@ import {PictureInterface} from '../../../../shared/data/model/picture-interface.
 })
 export class UploadedPicturePreviewComponent implements OnInit {
 
+  @Output('onImageClick') imageClickEvent: EventEmitter<PictureInterface> = new EventEmitter();
   @Output('onDelete') deleteEvent: EventEmitter<PictureInterface> = new EventEmitter();
 
   @Input() picture: PictureInterface;
@@ -23,4 +24,8 @@ export class UploadedPicturePreviewComponent implements OnInit {
     this.deleteEvent.emit(this.picture);
   }
 
+  onImageClickHandler(event)
+  {
+    this.imageClickEvent.emit(this.picture);
+  }
 }

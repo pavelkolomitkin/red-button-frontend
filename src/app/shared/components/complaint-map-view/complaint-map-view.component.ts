@@ -1,7 +1,11 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Complaint} from '../../../core/data/model/complaint.model';
 import {MapComponent} from '../map/map.component';
 import {ComplaintDetailsBalloonComponent} from './complaint-details-balloon/complaint-details-balloon.component';
+import {select, Store} from '@ngrx/store';
+import {State} from '../../../app.state';
+import {filter} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-complaint-map-view',

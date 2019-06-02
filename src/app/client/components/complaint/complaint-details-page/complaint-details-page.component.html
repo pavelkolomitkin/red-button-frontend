@@ -1,5 +1,5 @@
 <app-client-common-layout>
-    <div class="box box-primary" *ngIf="!!complaint">
+    <div class="box box-primary details" *ngIf="!!complaint">
         <div class="box-header with-border">
             <h3 class="box-title">{{ complaint.region.title }} <span class="text-muted">({{ complaint.region.federalDistrict.title }})</span></h3>
 
@@ -15,17 +15,16 @@
             <p *ngIf="!!complaint.serviceType">
                 <span class="text text-primary">{{ complaint.serviceType.title }}</span>
             </p>
-            <p>
-                <b>Message</b>
-                <br/>
-                <span class="text" [innerHTML]="complaint.message | multiLine"></span>
-            </p>
+
+            <b class="section-head">{{ 'MESSAGE' | translate }}</b>
+            <p class="text detailed-message" [innerHTML]="complaint.message | multiLine"></p>
+
             <p *ngIf="complaint.pictures.length > 0">
-                <b>Pictures</b>
-                <br/>
+                <b class="section-head">{{ 'PHOTOS' | translate }}</b>
                 <app-picture-list [list]="complaint.pictures"></app-picture-list>
             </p>
             <p>
+                <b class="section-head">{{ 'VIDEOS' | translate }}</b>
                 <app-video-list [list]="complaint.videos"></app-video-list>
             </p>
         </div>
@@ -35,7 +34,7 @@
                 <app-common-tag-item *ngFor="let tag of complaint.tags" [tag]="tag"></app-common-tag-item>
             </div>
 
-            <small class="pull-right text-muted">{{ complaint.createdAt | amFromUnix }}</small>
+            <small class="pull-right text-muted" app-date-time [value]="complaint.createdAt"></small>
         </div>
     </div>
 </app-client-common-layout>

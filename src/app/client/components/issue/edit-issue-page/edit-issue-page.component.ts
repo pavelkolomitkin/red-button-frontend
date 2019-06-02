@@ -75,7 +75,7 @@ export class EditIssuePageComponent implements OnInit, OnDestroy, LeavePageConfi
         filter(result => result !== null)).subscribe(
         (issue: Issue) => {
 
-          this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage('The issue has edited')));
+          this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage('ISSUE_HAS_BEEN_EDITED')));
           this.router.navigateByUrl('/client/issue/' + issue.id.toString());
         }
     );
@@ -97,13 +97,8 @@ export class EditIssuePageComponent implements OnInit, OnDestroy, LeavePageConfi
     this.store.dispatch(new IssueUpdateStart(issue));
   }
 
-  needToConfirm(): boolean
-  {
-    return this.form.form.dirty;
-  }
-
   getPromptMessage(): string {
-    return 'Are you sure you want to leave?';
+    return null;
   }
 
 }

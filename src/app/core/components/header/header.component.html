@@ -26,11 +26,11 @@
           <ng-container *ngxPermissionsOnly="['ROLE_CLIENT_USER']">
 
               <li [routerLinkActive]="'active'">
-                  <a routerLink="/client/geo" class="btn"><i class="fa fa-map-marker"></i></a>
+                  <a routerLink="/client/geo" class="btn" title="{{ 'ON_THE_MAP' | translate }}"><i class="fa fa-map-marker"></i></a>
               </li>
 
               <li class="dropdown notifications-menu">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" title="Signature Requests">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" title="{{ 'SIGNATURE_REQUESTS' | translate }}">
                       <i class="fa fa-bell-o"></i>
                       <ng-container *ngIf="(clientCommonInfo | async) !== null">
                           <span class="label label-warning" *ngIf="(clientCommonInfo | async).confirmationNumber > 0">{{ (clientCommonInfo | async).confirmationNumber }}</span>
@@ -42,7 +42,9 @@
                       <ul class="dropdown-menu">
 
                           <ng-container *ngIf="(clientCommonInfo | async).confirmations.length > 0; else noConfirmations">
-                              <li class="header">You have {{ (clientCommonInfo | async).confirmations.length }} request(s)</li>
+                              <li class="header">{{ 'YOU_HAVE_NUMBER_SIGNATURE_REQUESTS' | translate }} <b>{{ (clientCommonInfo | async).confirmations.length }} {{ (clientCommonInfo | async).confirmations.length | noun:("REQUEST_ONE" | translate):("REQUEST_TWO" | translate):("REQUEST_FIVE" | translate) }}</b>
+                                  {{ 'YOU_HAVE_NUMBER_SIGNATURE_REQUESTS_TO_SIGN' | translate }}
+                              </li>
                               <li>
                                   <!-- inner menu: contains the actual data -->
                                   <ul class="menu">
@@ -56,7 +58,7 @@
                           </ng-container>
 
                           <ng-template #noConfirmations>
-                              <li class="header">No new confirmations</li>
+                              <li class="header">{{ 'NO_REQUESTS_TO_SIGN' | translate }}</li>
                           </ng-template>
 
                       </ul>
@@ -68,10 +70,10 @@
 
 
               <li [routerLinkActive]="'active'">
-                  <a routerLink="/client/issue/create" class="btn"><i class="fa fa-plus"></i> Issue</a>
+                  <a routerLink="/client/issue/create" class="btn"><i class="fa fa-plus"></i> {{ 'ISSUE_MENU' | translate }} ({{ 'FOR_ACTIVISTS' | translate }})</a>
               </li>
               <li [routerLinkActive]="'active'">
-                  <a routerLink="/client/complaint/create" class="btn bg-red"><i class="fa fa-plus"></i> Complaint</a>
+                  <a routerLink="/client/complaint/create" class="btn bg-red"><i class="fa fa-warning"></i> {{ 'TO_COMPLAIN' | translate }}</a>
               </li>
 
               <li class="dropdown user user-menu">
@@ -83,10 +85,10 @@
 
                       <li class="user-footer">
                           <div class="pull-left">
-                              <a routerLink="/client/profile" class="btn btn-default btn-flat">Profile</a>
+                              <a routerLink="/client/profile" class="btn btn-default btn-flat">{{ 'PROFILE' | translate }}</a>
                           </div>
                           <div class="pull-right">
-                              <span (click)="onLogoutClickHandler()" class="btn btn-default btn-flat">Sign out</span>
+                              <span (click)="onLogoutClickHandler()" class="btn btn-default btn-flat">{{ 'SING_OUT'| translate }}</span>
                           </div>
                       </li>
                   </ul>
@@ -172,15 +174,6 @@
 
 
           <ng-container *ngxPermissionsOnly="['ROLE_ANALYST_USER']">
-
-
-<!--              <li [routerLinkActive]="'active'">-->
-<!--                  <a routerLink="/company/issue/geo" class="btn"><i class="fa fa-map-marker"></i>-->
-<!--                      <ng-container *ngIf="(companyCommonInfo | async) !== null">-->
-<!--                          <span class="label label-warning" *ngIf="(companyCommonInfo | async).issueNumber > 0">{{ (companyCommonInfo | async).issueNumber }}</span>-->
-<!--                      </ng-container>-->
-<!--                  </a>-->
-<!--              </li>-->
 
               <li class="dropdown user user-menu">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">

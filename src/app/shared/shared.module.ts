@@ -41,6 +41,7 @@ import { DateTimeViewComponent } from './components/date-time-view/date-time-vie
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {environment} from '../../environments/environment';
 import {TranslationLoaderService} from './services/translation-loader.service';
+import { NounFormPipe } from './pipes/noun-form.pipe';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import {TranslationLoaderService} from './services/translation-loader.service';
       SignatureItemComponent,
       CommonChartComponent,
       DateTimeViewComponent,
+      NounFormPipe,
   ],
   imports: [
     CommonModule,
@@ -129,7 +131,8 @@ import {TranslationLoaderService} from './services/translation-loader.service';
         SignatureItemComponent,
         CommonChartComponent,
         DateTimeViewComponent,
-        TranslateModule
+        TranslateModule,
+        NounFormPipe
     ],
   entryComponents: [
       MapComponent,

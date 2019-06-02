@@ -8,6 +8,7 @@ import {Video} from '../../../../core/data/model/video.model';
 })
 export class VideoItemFormFieldComponent implements OnInit {
 
+  @Output('onVideoClick') videoClickEvent: EventEmitter<Video> = new EventEmitter();
   @Output('onDelete') deleteVideo: EventEmitter<Video> = new EventEmitter();
 
   @Input() video: Video;
@@ -20,6 +21,11 @@ export class VideoItemFormFieldComponent implements OnInit {
   onDeleteHandler(event)
   {
     this.deleteVideo.emit(this.video);
+  }
+
+  onVideoClickHandler(event)
+  {
+    this.videoClickEvent.emit(this.video);
   }
 
 }

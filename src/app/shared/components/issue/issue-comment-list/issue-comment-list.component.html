@@ -1,6 +1,6 @@
 <div class="box box-solid">
   <div class="box-header with-border">
-    <b>Comments <span class="text-muted small" *ngIf="total !== null">({{ total }})</span></b>
+    <b>{{ 'COMMENTS' | translate }} <span class="text-muted small" *ngIf="total !== null">({{ total }})</span></b>
   </div>
   <div class="box-body with-border" *ngIf="canComment">
     <app-issue-comment-form
@@ -24,7 +24,7 @@
     ></app-issue-comment-item>
 
     <ng-container *ngIf="total === 0">
-      <span class="text-muted">No Comments</span>
+      <span class="text-muted">{{ 'NO_COMMENTS' | translate }}</span>
     </ng-container>
   </div>
 

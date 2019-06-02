@@ -19,7 +19,7 @@
                       [attr.autocomplete]="'off'"
                       (click)="isSelectingLocation = !isSelectingLocation"
               >
-                <i class="fa fa-mouse-pointer"></i> Select location
+                <i class="fa fa-mouse-pointer"></i> {{ 'SELECT_THE_POINT' | translate }}
               </button>
             </p>
           </ng-container>
@@ -31,13 +31,13 @@
                       [disabled]="!internalIssue.isAddressInit()"
                       (click)="onConfirmButtonClickHandler($event)"
               >
-                <i class="fa fa-check"></i>Confirm
+                <i class="fa fa-check"></i> {{ 'CONFIRM' | translate }}
               </button>
             </p>
           </ng-container>
           <p>
             <span class="btn btn-default" (click)="onCancelButtonClickHandler($event)">
-                <i class="fa fa-close"></i> Cancel
+                <i class="fa fa-close"></i> {{ 'CANCEL' | translate }}
               </span>
             </p>
         </div>

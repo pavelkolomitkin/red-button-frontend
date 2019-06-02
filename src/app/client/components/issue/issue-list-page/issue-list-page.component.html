@@ -14,7 +14,7 @@
 
     </div>
 
-    <p class="alert alert-info" *ngIf="total === 0">You have no issue! <a routerLink="/client/issue/create">Create a new one</a></p>
+    <p class="alert alert-info" *ngIf="total === 0">{{ 'YOU_HAVE_NO_ISSUES' | translate}}! <a routerLink="/client/issue/create">{{ 'ADD_NEW_ONE' | translate}}</a></p>
 
   </div>
 </app-client-common-layout>

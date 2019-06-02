@@ -1,12 +1,14 @@
 <div class="control-container">
-  <span class="btn btn-success" (click)="onAddVideoClickHandler($event)"><i class="fa fa-plus"></i> Add video</span>
+  <span class="btn btn-success" (click)="onAddVideoClickHandler($event)"><i class="fa fa-plus"></i> {{ 'ADD_YOUTUBE_VIDEO' | translate }}</span>
 </div>
 
 <div class="row">
   <div class="col-md-4 col-sm-4 col-lg-2 col-xl-2 col-4" *ngFor="let video of list">
     <app-video-item-form-field
             [video]="video"
-            (onDelete)="onVideoDeleteHandler($event)"></app-video-item-form-field>
+            (onDelete)="onVideoDeleteHandler($event)"
+            (onVideoClick)="onVideoClickHandler($event)"
+    ></app-video-item-form-field>
   </div>
 </div>
 
@@ -19,12 +21,28 @@
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
       <span aria-hidden="true">&times;</span>
     </button>
-    <h4 class="modal-title" id="modal-basic-title">Remove video?</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{ 'REMOVE_VIDEO' | translate }}?</h4>
   </div>
   <div class="modal-body">
-    <b>Do you really want to remove the video?</b>
+    <b>{{ 'DO_YOU_REALLY_WANT_TO_REMOVE_VIDEO' | translate }}?</b>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-danger" (click)="modal.close()">Remove</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close()">{{ 'REMOVE' | translate }}</button>
   </div>
 </ng-template>
+
+<ng-template #viewModal let-modal>
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">{{ selectedVideo.title }}</h4>
+  </div>
+  <div class="modal-body">
+    <app-video-frame [video]="selectedVideo"></app-video-frame>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="modal.close()">{{ 'CLOSE' | translate }}</button>
+  </div>
+</ng-template>
+

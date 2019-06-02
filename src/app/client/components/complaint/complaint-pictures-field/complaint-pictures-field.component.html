@@ -10,10 +10,12 @@
 
 <div class="complaint-completed-pictures row">
 
-  <div class="col-md-4 col-sm-4 col-lg-2 col-xl-2 col-4" *ngFor="let picture of pictures">
+  <div class="col-md-4 col-sm-4 col-lg-2 col-xl-2 col-4" *ngFor="let picture of pictures; let i = index">
     <app-uploaded-picture-preview
             [picture]="picture"
-            (onDelete)="onPictureDeleteHandler($event)">
+            (onDelete)="onPictureDeleteHandler($event)"
+            (onImageClick)="onPictureClickHandler($event, i)"
+    >
     </app-uploaded-picture-preview>
   </div>
 
@@ -32,12 +34,12 @@
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
       <span aria-hidden="true">&times;</span>
     </button>
-    <h4 class="modal-title" id="modal-basic-title">Remove picture?</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{ 'REMOVE_PICTURE' | translate }}?</h4>
   </div>
   <div class="modal-body">
-    <b>Do you really want to remove the picture?</b>
+    <b>{{ 'DO_YOU_REALLY_WANT_TO_REMOVE_THE_PICTURE' | translate }}?</b>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-danger" (click)="modal.close()">Remove</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close()">{{ 'REMOVE' | translate }}</button>
   </div>
 </ng-template>

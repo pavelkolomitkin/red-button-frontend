@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Issue} from '../../../../../../core/data/model/issue.model';
 import {GeoLocationService} from '../../../../../../core/services/geo-location.service';
 import {Subscription} from 'rxjs';
@@ -16,13 +16,16 @@ export class IssueMapBalloonComponent implements OnInit {
 
   @Output('onLocationUpdateSuccess') locationUpdateSuccessEvent: EventEmitter<Issue> = new EventEmitter();
   @Output('onLocationUpdateError') locationUpdateErrorEvent: EventEmitter<Issue> = new EventEmitter();
+
   @Output('onLocationCancel') locationCancelEvent: EventEmitter<Issue> = new EventEmitter();
 
   @Input() issue: Issue;
 
   currentState: string = IssueMapBalloonComponent.STATE_LOADING;
 
-  constructor(private service: GeoLocationService)
+  isCollapsed: boolean = false;
+
+  constructor(private service: GeoLocationService, private changeDetector: ChangeDetectorRef)
   {
 
   }
@@ -61,9 +64,13 @@ export class IssueMapBalloonComponent implements OnInit {
     }
   }
 
-  onCancelClickHandler = () => {
+  onCancelClickHandler = (event) => {
     this.issue.region = null;
     this.issue.address = null;
     this.locationCancelEvent.emit(this.issue);
-  }
+  };
+
+  onCollapseClickHandler = (event) => {
+    this.isCollapsed = true;
+  };
 }

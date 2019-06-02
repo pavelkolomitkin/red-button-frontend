@@ -8,6 +8,7 @@ import {UploadItem} from '../../../../../shared/data/model/upload-item.model';
 import {PictureInterface} from '../../../../../shared/data/model/picture-interface.model';
 import {IssuePictureUploadReset, IssuePictureUploadSelect} from '../../../../data/issue-picture.actions';
 import {OperatorFunction} from 'rxjs';
+import {Lightbox} from 'ngx-lightbox';
 
 @Component({
   selector: 'app-issue-picture-list-field',
@@ -16,12 +17,12 @@ import {OperatorFunction} from 'rxjs';
 })
 export class IssuePictureListFieldComponent extends UploadPictureListFormFieldComponent implements OnInit
 {
-  constructor(store: Store<State>, modal: NgbModal)
+  constructor(store: Store<State>, modal: NgbModal, lightBox: Lightbox)
   {
 
     store.dispatch(new IssuePictureUploadReset());
 
-    super(store, modal);
+    super(store, modal, lightBox);
 
   }
 

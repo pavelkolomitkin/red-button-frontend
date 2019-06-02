@@ -1,7 +1,7 @@
 <app-map-balloon [colorStyle]="
     currentState === 'STATE_LOCATION_DETECTED_SUCCESS' ? 'issue' :
     currentState === 'STATE_LOCATION_DETECTED_ERROR' ? 'danger' : 'default'"
-    [isCollapsed]="false"
+    [(isCollapsed)]="isCollapsed"
     [populateCollapsing]="false"
     [location]="issue.location"
     [hasToCenteredOnOpen]="true"
@@ -10,8 +10,8 @@
   <div class="balloon-title">
 
     <ng-container *ngIf="currentState === 'STATE_LOADING'"></ng-container>
-    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">Issue Location</ng-container>
-    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'">Cannot identify the region!</ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">{{ 'ISSUE' | translate }}</ng-container>
+    <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'">{{ 'CANNOT_IDENTIFY_THE_REGION' | translate }}!</ng-container>
 
   </div>
 
@@ -31,15 +31,21 @@
       </div>
     </ng-container>
     <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_ERROR'">
-      Cannot identify the region! Try only to choose location in a Russia!
+      {{ 'CANNOT_IDENTIFY_THE_REGION_USE_ONLY_RUSSIAN_AREA' | translate}}
     </ng-container>
 
   </div>
 
   <div class="balloon-footer">
     <ng-container *ngIf="currentState === 'STATE_LOCATION_DETECTED_SUCCESS'">
+      <p>
+        <span class="text-muted"><b>{{ 'REQUEST_SIGNATURES_FROM_PEOPLE_NEAR_BY' | translate }}</b></span>
+      </p>
+      <span class="btn btn-success margin-r-5" (click)="onCollapseClickHandler($event)">
+        <i class="fa fa-minus"></i> {{ 'COLLAPSE' | translate }}
+      </span>
       <span class="btn btn-danger" (click)="onCancelClickHandler($event)">
-        <i class="fa fa-remove"></i> Cancel
+        <i class="fa fa-remove"></i> {{ 'CANCEL' | translate }}
       </span>
     </ng-container>
   </div>

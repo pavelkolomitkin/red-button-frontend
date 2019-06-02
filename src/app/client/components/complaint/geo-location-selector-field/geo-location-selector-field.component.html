@@ -4,7 +4,7 @@
   <span class="text-muted">{{ complaint.address.displayName }}</span>
 </div>
 <div>
-  <span class="btn btn-primary" (click)="onChooseButtonClickHandler($event)">Choose a location</span>
+  <span class="btn btn-primary" (click)="onChooseButtonClickHandler($event)"><i class="fa fa-map-marker"></i> {{ 'OPEN_THE_MAP' | translate }}</span>
 </div>
 
 <app-geo-location-selector

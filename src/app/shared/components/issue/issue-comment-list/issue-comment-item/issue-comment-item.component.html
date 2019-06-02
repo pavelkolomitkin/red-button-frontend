@@ -15,7 +15,7 @@
       <span class="username">{{ comment.author.fullName }}
         <small *ngIf="comment.author.isAdmin()" class="text-danger">(admin)</small>
         <small *ngIf="comment.author.isCompanyRepresentative()" class="text-primary">(Company - {{ comment.author.company.title }})</small>
-        <span class="text-muted pull-right" title="{{ comment.createdAt | amFromUnix }}">{{ comment.createdAt | amFromUnix }}</span>
+        <span class="text-muted pull-right" app-date-time [value]="comment.createdAt"></span>
       </span>
       {{ comment.message }}
     </div>

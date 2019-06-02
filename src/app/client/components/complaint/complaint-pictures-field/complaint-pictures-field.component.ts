@@ -7,6 +7,7 @@ import {OperatorFunction} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {UploadPictureListFormFieldComponent} from '../../common/upload-picture-list-form-field/upload-picture-list-form-field.component';
 import {PictureInterface} from '../../../../shared/data/model/picture-interface.model';
+import {Lightbox} from 'ngx-lightbox';
 
 @Component({
   selector: 'app-complaint-pictures-field',
@@ -15,11 +16,11 @@ import {PictureInterface} from '../../../../shared/data/model/picture-interface.
 })
 export class ComplaintPicturesFieldComponent extends UploadPictureListFormFieldComponent implements OnInit
 {
-  constructor(store: Store<State>, modal: NgbModal) {
+  constructor(store: Store<State>, modal: NgbModal, lightBox: Lightbox) {
 
     store.dispatch(new ComplaintPictureUploadReset());
 
-    super(store, modal);
+    super(store, modal, lightBox);
   }
 
   protected getUploadingItemsSelect(): OperatorFunction<State, any>

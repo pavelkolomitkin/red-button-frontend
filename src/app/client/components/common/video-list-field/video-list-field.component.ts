@@ -22,6 +22,11 @@ export class VideoListFieldComponent implements OnInit {
   @ViewChild('removeAlertModal') removeVideoModalWindowTemplate: TemplateRef<any>;
   removeVideoModalWindow: NgbModalRef = null;
 
+  @ViewChild('viewModal') viewModalWindowTemplate: TemplateRef<any>;
+  viewVideoModalWindow: NgbModalRef = null;
+
+  selectedVideo: Video = null;
+
   constructor(private modal: NgbModal) { }
 
   ngOnInit() {
@@ -69,5 +74,18 @@ export class VideoListFieldComponent implements OnInit {
         }, () => {
           this.addVideoWindow = null;
         });
+  }
+
+  onVideoClickHandler(video: Video)
+  {
+      this.selectedVideo = video;
+
+      this.viewVideoModalWindow = this.modal.open(this.viewModalWindowTemplate, {centered: true});
+      this.viewVideoModalWindow.result
+          .then((result) => {
+              this.viewVideoModalWindow = null;
+          }, () => {
+              this.viewVideoModalWindow = null;
+          });
   }
 }
