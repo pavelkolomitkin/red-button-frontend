@@ -107,6 +107,7 @@
   "CLIENT_ACCOUNT": "Клиент",
   "COMPANY_REPRESENTATIVE_ACCOUNT": "Представитель управляющей компании",
   "ANALYST_ACCOUNT": "Аналитик",
+  "ADMIN_ACCOUNT": "Администратор",
   "COMPANIES": "Компании",
   "ANALYSTS": "Аналитики",
   "CLIENTS": "Клиенты",
@@ -161,6 +162,8 @@
   "COMPLAINT_IS_CREATED": "Жалоба создана",
 
   "NO_COMMENTS": "Нет комментариев",
+  "NO_ISSUES": "Отчеты не найдены",
+  "POPULAR_ONES": "Популярные",
   "COMMENTS": "Комментарии",
   "DELETE_COMMENT_QUESTION": "Удалить комментарий?",
   "YOUR_COMMENT": "Ваш комментарий",

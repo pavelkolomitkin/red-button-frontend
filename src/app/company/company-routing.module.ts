@@ -15,11 +15,11 @@ const routes: Routes = [
                 path: 'issue/list',
                 component: IssueListPageComponent,
                 data: {
-                    pageTitle: 'Issues',
-                    pageSubTitle: 'latest',
+                    pageTitle: 'ISSUES',
+                    pageSubTitle: 'LATEST',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Issues', null, 'file-text-o')
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('ISSUES', null, 'file-text-o')
                     ]
                 }
             },
@@ -27,11 +27,11 @@ const routes: Routes = [
                 path: 'issue/geo',
                 component: IssueGeographyPageComponent,
                 data: {
-                    pageTitle: 'Issues',
-                    pageSubTitle: 'map',
+                    pageTitle: 'ISSUES',
+                    pageSubTitle: 'ON_THE_MAP',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Issue Geography', null, 'map-marker')
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('ON_THE_MAP', null, 'map-marker')
                     ]
                 }
             },

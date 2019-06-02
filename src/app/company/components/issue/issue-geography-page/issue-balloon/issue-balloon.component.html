@@ -13,10 +13,10 @@
       issue.message.length > 150 ?
               (issue.message | slice:0:150) + '...'
               : issue.message }}
-      <a [routerLink]="'/company/issue/' + issue.id" [target]="'_blank'">More...</a>
+      <a [routerLink]="'/company/issue/' + issue.id" [target]="'_blank'">{{ 'MORE' | translate }}...</a>
     </p>
 
-    <p *ngIf="issue.complaintConfirmations.length > 0" title="Signatures">
+    <p *ngIf="issue.complaintConfirmations.length > 0" title="{{ 'SIGNATURES' | translate }}">
       <app-issue-signature-progress [issue]="issue"></app-issue-signature-progress>
     </p>
 
@@ -29,7 +29,7 @@
           </app-picture-item>
         </div>
         <div>
-          <span class="small" *ngIf="issue.pictures.length > 0">{{ issue.pictures.length.toString() + ' picture(s)' }}&nbsp;</span>
+          <span class="small" *ngIf="issue.pictures.length > 0">{{ issue.pictures.length }} {{ 'PHOTO' | translate }}&nbsp;</span>
         </div>
       </ng-container>
       <ng-container *ngIf="issue.videos.length > 0">
@@ -39,7 +39,7 @@
         </div>
 
         <div>
-          <span class="small" *ngIf="issue.videos.length > 0">{{ issue.videos.length.toString() + ' video' }}</span>
+          <span class="small" *ngIf="issue.videos.length > 0">{{ issue.videos.length }} {{ 'VIDEO' | translate }}</span>
         </div>
 
       </ng-container>
@@ -48,11 +48,11 @@
 
   <div class="balloon-footer">
     <div class="pull-left">
-      <small class="text-muted">{{ issue.likeNumber }} like(s) </small>
-      <small class="text-muted">{{ issue.commentNumber }} comment(s)</small>
+      <small class="text-muted">{{ issue.likeNumber }} {{ 'LIKE' | translate }} </small>
+      <small class="text-muted">{{ issue.commentNumber }} {{ issue.commentNumber | noun:('COMMENT_ONE'|translate):('COMMENT_TWO'|translate):('COMMENT_FIVE'|translate) }}</small>
     </div>
     <div class="pull-right">
-      <small class="text-muted" title="{{ issue.createdAt | amFromUnix }}">{{ issue.createdAt | amFromUnix | amTimeAgo }}</small>
+      <small class="text-muted" app-date-time [value]="issue.createdAt"></small>
     </div>
   </div>
 

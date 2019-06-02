@@ -13,8 +13,8 @@
 
     <div class="comment-text">
       <span class="username">{{ comment.author.fullName }}
-        <small *ngIf="comment.author.isAdmin()" class="text-danger">(admin)</small>
-        <small *ngIf="comment.author.isCompanyRepresentative()" class="text-primary">(Company - {{ comment.author.company.title }})</small>
+        <small *ngIf="comment.author.isAdmin()" class="text-danger">({{ 'ADMIN_ACCOUNT' | translate }})</small>
+        <small *ngIf="comment.author.isCompanyRepresentative()" class="text-primary">({{ 'COMPANY_REPRESENTATIVE_ACCOUNT' | translate }} <b>{{ comment.author.company.title }})</b></small>
         <span class="text-muted pull-right" app-date-time [value]="comment.createdAt"></span>
       </span>
       {{ comment.message }}

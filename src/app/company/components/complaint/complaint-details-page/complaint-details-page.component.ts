@@ -37,7 +37,7 @@ export class ComplaintDetailsPageComponent implements OnInit, OnDestroy {
     ).subscribe((complaint: Complaint) => {
 
       this.complaint = complaint;
-      this.store.dispatch(new GlobalPageTitle('Complaint', '#' + this.complaint.id));
+      this.store.dispatch(new GlobalPageTitle('COMPLAINT', this.complaint.client.fullName));
 
     });
 

@@ -2,7 +2,7 @@
 
   <ng-container *ngIf="!!issue">
 
-    <div class="box box-primary">
+    <div class="box box-primary details">
 
 
       <div class="box-header with-border">
@@ -18,67 +18,59 @@
 
         <p>
           <span class="pull-right label label-default" [ngStyle]="{ padding: '10px' }">
-            <i class="fa fa-thumbs-o-up"></i> {{ issue.likeNumber }} like(s)
+            <i class="fa fa-thumbs-o-up"></i> {{ issue.likeNumber }} {{ 'LIKE' | translate }}
           </span>
         </p>
 
         <p>
-          <b>Address</b>
-          <br/>
-          {{ issue.address.displayName }}
+          <b class="section-head">{{ 'ADDRESS' | translate }}</b>
+          <span>{{ issue.address.displayName }}</span>
         </p>
 
         <p>
-          <b>Author</b>
-          <br/>
+          <b class="section-head">{{ 'AUTHOR' | translate }}</b>
           <span class="text text-primary">{{ issue.client.fullName }}</span>
         </p>
         <p>
-          <b>Signatures</b>
-          <br/>
+          <b class="section-head">{{ 'SIGNATURES' | translate }}</b>
           <app-issue-signature-item
                   *ngFor="let confirmation of issue.complaintConfirmations"
                   [confirmation]="confirmation"
           ></app-issue-signature-item>
         </p>
         <p>
-          <b>Service Type</b>
-          <br/>
+          <b class="section-head">{{ 'SERVICE_TYPE' | translate }}</b>
           <span class="text text-primary" *ngIf="!!issue.serviceType; else noServiceType">{{ issue.serviceType.title }}</span>
           <ng-template #noServiceType>
-            <span class="text-muted">(None)</span>
+            <span class="text-muted">({{ 'NONE' | translate }})</span>
           </ng-template>
         </p>
 
-        <p>
-          <b>Message</b>
-          <br/>
-          <span class="text" [innerHTML]="issue.message | multiLine"></span>
+        <b class="section-head">{{ 'MESSAGE' | translate }}</b>
+        <p class="text detailed-message" [innerHTML]="issue.message | multiLine">
         </p>
         <p>
-          <b>Pictures</b>
-          <br/>
+          <b>{{ 'PHOTOS' | translate }}</b>
           <ng-container *ngIf="issue.pictures.length > 0; else noPictures">
             <app-picture-list [list]="issue.pictures"></app-picture-list>
           </ng-container>
           <ng-template #noPictures>
-            <span class="text-muted">(None)</span>
+            <span class="text-muted">({{ 'NONE' | translate }})</span>
           </ng-template>
         </p>
         <p>
-          <b>Videos</b>
-          <br />
+          <b class="section-head">{{ 'VIDEOS' | translate }}</b>
           <ng-container *ngIf="issue.videos.length > 0; else noVideo">
             <app-video-list [list]="issue.videos"></app-video-list>
           </ng-container>
           <ng-template #noVideo>
-            <span class="text-muted">(None)</span>
+            <span class="text-muted">({{ 'NONE' | translate }})</span>
           </ng-template>
         </p>
       </div>
 
       <div class="box-footer">
-        <small class="pull-right text-muted">{{ issue.createdAt | amFromUnix }}</small>
+        <small class="pull-right text-muted" app-date-time [value]="issue.createdAt"></small>
       </div>
 
     </div>
