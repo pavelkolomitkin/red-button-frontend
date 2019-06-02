@@ -20,7 +20,8 @@
             required
             type="password" class="form-control" placeholder="{{ 'PASSWORD' | translate }}">
     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-    <app-form-field-error-list [field]="'message'" [errors]="errors"></app-form-field-error-list>
+
+    <app-form-field-error-list [field]="'message'" [errors]="{ message: (errors | async).message ? ('LOGIN_ERROR' | translate) : null }"></app-form-field-error-list>
   </div>
   <div class="row">
     <div class="col-xs-6">

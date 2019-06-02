@@ -205,5 +205,6 @@
   "COMMON_NUMBERS_STATISTICS": "Общее количество",
   "DYNAMIC_STATISTICS": "Динамика",
   "TOTAL": "Всего",
-  "OTHERS": "Остальные"
+  "OTHERS": "Остальные",
+  "LOGIN_ERROR": "Неверный эл. адрес или пароль"
 }
