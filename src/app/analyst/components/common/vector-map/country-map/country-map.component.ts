@@ -4,6 +4,7 @@ import {State} from '../../../../../app.state';
 import {Observable} from 'rxjs';
 import {FederalDistrict} from '../../../../../core/data/model/federal-district.model';
 import {ColorValueScaleService} from '../../../../services/color-value-scale.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-analyst-country-map',
@@ -19,15 +20,22 @@ export class CountryMapComponent implements OnInit {
 
   federalDistricts: Observable<Array<FederalDistrict>>;
 
+  OTHERS_LABEL: string;
+  TOTAL_LABEL: string;
+
+
   constructor(
       private store: Store<State>,
-      private colorService: ColorValueScaleService
+      private colorService: ColorValueScaleService,
+      private translator: TranslateService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     this.federalDistricts = this.store.pipe(select(state => state.federalDistrict.list));
 
+     this.OTHERS_LABEL = await this.translator.get('OTHERS').toPromise();
+     this.TOTAL_LABEL = await this.translator.get('TOTAL').toPromise();
   }
 
   getItemTitle(district: FederalDistrict)
@@ -43,7 +51,6 @@ export class CountryMapComponent implements OnInit {
       return item.code === district.code;
     });
 
-
     if (!!statisticData)
     {
 
@@ -51,16 +58,15 @@ export class CountryMapComponent implements OnInit {
 
         if (serviceType.issueNumber > 0)
         {
-          result += (serviceType.title ? serviceType.title : 'Others') + ': ' + serviceType.issueNumber + '\n';
+          result += (serviceType.title ? serviceType.title : this.OTHERS_LABEL) + ': ' + serviceType.issueNumber + '\n';
         }
 
       });
 
       if (statisticData.totalIssues > 0)
       {
-        result += 'Всего: ' + statisticData.totalIssues;
+        result += this.TOTAL_LABEL + ': ' + statisticData.totalIssues;
       }
-
     }
 
     return result;

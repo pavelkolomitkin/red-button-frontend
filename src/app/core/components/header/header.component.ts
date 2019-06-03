@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../app.state';
 import {Observable} from 'rxjs';
@@ -6,12 +6,13 @@ import User from '../../data/model/user.model';
 import {UserLogout} from '../../../security/data/actions';
 import {filter} from 'rxjs/operators';
 import {ProfileCommonInfo} from '../../../client/data/model/profile-common-info.model';
-import { ProfileCommonInfo as CompanyCommonInfo } from '../../../company/data/model/profile-common-info.model';
+import {ProfileCommonInfo as CompanyCommonInfo} from '../../../company/data/model/profile-common-info.model';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
 

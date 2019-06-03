@@ -31,6 +31,7 @@ export class MapBalloonComponent implements OnInit, OnDestroy {
   @Input() color: string;
 
   @Output('onToggleCollapse') toggleCollapse: EventEmitter<boolean> = new EventEmitter();
+  @Output('isCollapsedChange') isCollapsedChange: EventEmitter<boolean> = new EventEmitter();
 
   @Input() isCollapsed: boolean;
   @Input() location: GeoLocation;
@@ -68,6 +69,7 @@ export class MapBalloonComponent implements OnInit, OnDestroy {
     this.isCollapsed = !this.isCollapsed;
 
     this.toggleCollapse.emit(this.isCollapsed);
+    this.isCollapsedChange.emit(this.isCollapsed);
 
     this.handleOpenedState();
   }

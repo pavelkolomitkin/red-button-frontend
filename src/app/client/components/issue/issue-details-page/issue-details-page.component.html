@@ -1,7 +1,7 @@
 <app-client-common-layout>
 
   <ng-container *ngIf="!!issue">
-    <div class="box box-primary">
+    <div class="box box-primary details">
       <div class="box-header with-border">
         <h3 class="box-title">{{ issue.region.title }} <span class="text-muted">({{ issue.region.federalDistrict.title }})</span></h3>
 
@@ -20,37 +20,43 @@
             <app-issue-like-control [issue]="issue"></app-issue-like-control>
           </div>
         </div>
+        <br/>
         <p *ngIf="!!issue.serviceType">
           <span class="text text-primary">{{ issue.serviceType.title }}</span>
         </p>
         <p>
-          <b>Company</b>
-          <br />
+          <a
+                  [routerLink]="'/client/complaint/' + confirmation.complaint.id"
+                  class="label complaint-signature"
+                  *ngFor="let confirmation of issue.complaintConfirmations"
+                  [ngClass]="confirmation.status.code === 'confirmed' ? 'bg-green' : (confirmation.status.code === 'rejected' ? 'bg-red' : 'bg-gray')"
+                  [attr.title]="confirmation.status.title"
+          >{{ confirmation.complaint.client.fullName }}</a>
+        </p>
+        <p>
+          <b class="section-head">{{ 'COMPANY' | translate }}</b>
           <ng-container *ngIf="!!issue.company; else noCompany">
             <span class="text-primary" >{{ issue.company.fullName }}</span><span class="text-muted"> ({{ issue.company.actualAddress }})</span>
           </ng-container>
           <ng-template #noCompany>
-            <span class="text-muted">(None)</span>
+            <span class="text-muted">({{ 'NONE' | translate }})</span>
           </ng-template>
         </p>
-        <p>
-          <b>Message</b>
-          <br/>
-          <span class="text" [innerHTML]="issue.message | multiLine"></span>
-        </p>
+        <b class="section-head">{{ 'MESSAGE' | translate }}</b>
+        <p class="text detailed-message" [innerHTML]="issue.message | multiLine"></p>
         <p *ngIf="issue.pictures.length > 0">
-          <b>Pictures</b>
-          <br/>
+          <b class="section-head">{{ 'PHOTOS' | translate }}</b>
           <app-picture-list [list]="issue.pictures"></app-picture-list>
         </p>
         <p>
+          <b class="section-head">{{ 'VIDEOS' | translate }}</b>
           <app-video-list [list]="issue.videos"></app-video-list>
         </p>
       </div>
 
       <div class="box-footer">
         <span class="text text-primary">{{ issue.client.fullName }} </span>
-        <small class="pull-right text-muted">{{ issue.createdAt | amFromUnix }}</small>
+        <small class="pull-right text-muted" app-date-time [value]="issue.createdAt"></small>
       </div>
     </div>
 

@@ -3,7 +3,10 @@
     position: relative;
 }
 
-.item .preview-container {}
+.item .preview-container
+{
+    text-align: center;
+}
 .item .preview-container img
 {
     width: 100%;

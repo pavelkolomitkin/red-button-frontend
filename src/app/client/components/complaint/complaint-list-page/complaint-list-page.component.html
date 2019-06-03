@@ -13,7 +13,7 @@
       </div>
 
     </div>
-    <p class="alert alert-info" *ngIf="total === 0">You have no complaints! <a routerLink="/client/complaint/create">Create a new one</a></p>
+    <p class="alert alert-info" *ngIf="total === 0">{{ 'YOU_HAVE_NO_COMPLAINTS' | translate}}! <a routerLink="/client/complaint/create">{{ 'ADD_NEW_ONE' | translate}}</a></p>
 
   </div>
 </app-client-common-layout>

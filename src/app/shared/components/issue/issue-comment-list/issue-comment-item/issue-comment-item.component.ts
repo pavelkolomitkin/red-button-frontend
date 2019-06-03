@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {IssueComment} from '../../../../../core/data/model/issue-comment.model';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../../app.state';
@@ -9,13 +9,12 @@ import {ActionConfirmation} from '../../../../../core/data/model/action-confirma
 import {ConfirmationActionOption} from '../../../../../core/data/model/confirmation-action-option.model';
 import {GlobalConfirmationInit} from '../../../../../core/data/actions';
 import {filter} from 'rxjs/operators';
-import {Issue} from '../../../../../core/data/model/issue.model';
-import {IssueDeleteStart} from '../../../../../client/data/issue.actions';
 
 @Component({
   selector: 'app-issue-comment-item',
   templateUrl: './issue-comment-item.component.html',
-  styleUrls: ['./issue-comment-item.component.css']
+  styleUrls: ['./issue-comment-item.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IssueCommentItemComponent implements OnInit, OnDestroy {
 
@@ -33,7 +32,7 @@ export class IssueCommentItemComponent implements OnInit, OnDestroy {
 
   deleteSubscription: Subscription;
 
-  constructor(private store: Store<State>, private service: IssueCommentService) {
+  constructor(private store: Store<State>, private service: IssueCommentService, private changeDetector: ChangeDetectorRef) {
 
     this.user = this.store.pipe(select(state => state.security.authorizedUser));
   }
@@ -77,9 +76,13 @@ export class IssueCommentItemComponent implements OnInit, OnDestroy {
         .then((comment) => {
           this.comment = comment;
           this.isEditing = false;
+
+          this.changeDetector.markForCheck();
         })
         .catch((errors) => {
           this.editErrors = errors.error.errors;
+
+          this.changeDetector.markForCheck();
         });
   }
 
@@ -92,11 +95,11 @@ export class IssueCommentItemComponent implements OnInit, OnDestroy {
   {
     const confirmation: ActionConfirmation = new ActionConfirmation(
         IssueCommentItemComponent.DELETE_COMMENT_ID + this.comment.id,
-        'Delete Comment?',
-        'Are you sure you want to delete it?',
+        'DELETE_COMMENT_QUESTION',
+        'ARE_YOU_SURE_YOU_WANT_TO_DELETE_IT',
         [
-          new ConfirmationActionOption(ConfirmationActionOption.CONFIRM_ID, 'Yes', 'danger'),
-          new ConfirmationActionOption(ConfirmationActionOption.CANCEL_ID, 'Cancel')
+          new ConfirmationActionOption(ConfirmationActionOption.CONFIRM_ID, 'YES', 'danger'),
+          new ConfirmationActionOption(ConfirmationActionOption.CANCEL_ID, 'CANCEL')
         ],
         this.comment
     );

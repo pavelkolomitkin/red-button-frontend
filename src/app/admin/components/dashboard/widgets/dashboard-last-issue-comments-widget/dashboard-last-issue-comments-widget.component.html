@@ -1,6 +1,6 @@
 <div class="box box-warning direct-chat direct-chat-warning">
   <div class="box-header with-border">
-    <h3 class="box-title">Latest Comments</h3>
+    <h3 class="box-title">{{ 'LATEST_COMMENTS' | translate }}</h3>
   </div>
   <!-- /.box-header -->
   <div class="box-body">
@@ -11,7 +11,7 @@
       <div class="direct-chat-msg right" *ngFor="let comment of comments">
         <div class="direct-chat-info clearfix">
           <span class="direct-chat-name pull-right">{{ comment.author.fullName }}</span>
-          <span class="direct-chat-timestamp pull-left">{{ comment.createdAt | amFromUnix }}</span>
+          <span class="direct-chat-timestamp pull-left" app-date-time [value]="comment.createdAt"></span>
         </div>
         <!-- /.direct-chat-info -->
         <img class="direct-chat-img" src="../../../../../../assets/default_user_avatar/icons8-user-100.png">
@@ -20,7 +20,7 @@
           {{ comment.message.length > 150 ? (comment.message | slice:0:150) + '...' : comment.message }}
         </div>
         <div class="pull-left">
-          <a [routerLink]="'/admin/issue/' + comment.issue.id">{{ comment.issue.serviceType ? comment.issue.serviceType.title : 'Issue >' }}</a>
+          <a [routerLink]="'/admin/issue/' + comment.issue.id">{{ comment.issue.serviceType ? comment.issue.serviceType.title : ('ISSUE' | translate) + ' >' }}</a>
         </div>
         <!-- /.direct-chat-text -->
       </div>

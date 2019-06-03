@@ -1,16 +1,14 @@
 <div class="login-page">
   <div class="login-box">
-    <div class="login-logo">
-      <span><b>Red</b>Button</span>
-    </div>
+    <app-security-common-header></app-security-common-header>
     <!-- /.login-logo -->
     <div class="login-box-body">
 
       <p class="alert alert-success">
-        You have registered successful! Check your mail to confirm your profile!
+        {{ 'YOU_REGISTERED_SUCCESSFUL_CHECK_EMAIL' | translate }}
       </p>
 
-      <a routerLink="/security/login" class="text-center">Login</a>
+      <a routerLink="/security/login" class="text-center">{{ 'LOGIN' | translate }}</a>
 
     </div>
   </div>

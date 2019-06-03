@@ -42,7 +42,7 @@ export class IssueDetailsPageComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl('/analytics/404');
       }
 
-      this.store.dispatch(new GlobalPageTitle('Issue', '#' + this.issue.id));
+      this.store.dispatch(new GlobalPageTitle('ISSUE', this.issue.client.fullName));
 
     });
 

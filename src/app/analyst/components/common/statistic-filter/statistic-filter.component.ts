@@ -16,7 +16,7 @@ export class StatisticFilterComponent implements OnInit {
 
   years: Array<number>;
 
-  queryParams: Observable<any>
+  queryParams: Observable<any>;
 
   constructor(private route: ActivatedRoute) {
 

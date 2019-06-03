@@ -2,10 +2,6 @@
 
   <div class="box box-default" *ngIf="!!account">
 
-    <div class="box-header with-border">
-      <h3>Edit Company Representative Account</h3>
-    </div>
-
     <app-company-representative-form
             [account]="account"
             (onSubmit)="onSubmitFormHandler($event)"

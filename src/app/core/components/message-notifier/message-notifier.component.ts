@@ -4,6 +4,7 @@ import {State} from "../../../app.state";
 import {NotifyMessage} from "../../data/model/notify-message.model";
 import {ToastrService} from "ngx-toastr";
 import {filter} from "rxjs/operators";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-message-notifier',
@@ -14,7 +15,9 @@ export class MessageNotifierComponent implements OnInit {
 
   constructor(
     private store: Store<State>,
-    private toastr: ToastrService)
+    private toastr: ToastrService,
+    private translator: TranslateService
+  )
   {
 
   }
@@ -22,20 +25,29 @@ export class MessageNotifierComponent implements OnInit {
   ngOnInit() {
 
     this.store.pipe(select(state => state.core.lastSuccessMessage), filter(message => !!message)).subscribe(
-      (message: NotifyMessage) => {
-        this.toastr.success(message.text, 'Success!');
+      async (message: NotifyMessage) => {
+        this.toastr.success(
+            await this.translator.get(message.text).toPromise(),
+            'Success!'
+        );
       }
     );
 
     this.store.pipe(select(state => state.core.lastWarningMessage), filter(message => !!message)).subscribe(
-        (message: NotifyMessage) => {
-          this.toastr.warning(message.text, 'Warning!');
+        async (message: NotifyMessage) => {
+          this.toastr.warning(
+              await this.translator.get(message.text).toPromise(),
+              'Warning!'
+          );
         }
     );
 
     this.store.pipe(select(state => state.core.lastErrorMessage), filter(message => !!message)).subscribe(
-      (message: NotifyMessage) => {
-        this.toastr.error(message.text, 'Oops!')
+      async (message: NotifyMessage) => {
+        this.toastr.error(
+            await this.translator.get(message.text).toPromise(),
+            'Oops!'
+        )
       }
     );
   }

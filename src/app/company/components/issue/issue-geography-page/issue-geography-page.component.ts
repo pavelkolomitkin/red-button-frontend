@@ -70,7 +70,7 @@ export class IssueGeographyPageComponent implements OnInit, OnDestroy {
       }
       else
       {
-        this.store.dispatch(new GlobalNotifyWarningMessage(new NotifyMessage('No Issues')));
+        this.store.dispatch(new GlobalNotifyWarningMessage(new NotifyMessage('NO_ISSUES')));
       }
 
     });

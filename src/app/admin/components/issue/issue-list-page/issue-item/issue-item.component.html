@@ -16,7 +16,7 @@
   <td>
     <span class="text-muted small">{{ issue.message.length > 150 ? ( issue.message |slice:0:150 ) + '...' : issue.message }}</span>
   </td>
-  <td>{{ issue.createdAt | amFromUnix }}</td>
+  <td app-date-time [value]="issue.createdAt"></td>
   <td>
     <app-issue-signature-progress [issue]="issue"></app-issue-signature-progress>
   </td>

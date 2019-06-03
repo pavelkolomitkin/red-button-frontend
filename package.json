@@ -23,6 +23,7 @@
     "@ngrx/core": "^1.2.0",
     "@ngrx/effects": "^7.4.0",
     "@ngrx/store": "^7.4.0",
+    "@ngx-translate/core": "^11.0.1",
     "admin-lte": "^2.4.10",
     "bootstrap": "^3.4.1",
     "chroma-js": "^2.0.3",

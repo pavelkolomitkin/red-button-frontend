@@ -37,7 +37,7 @@ export class CreateIssuePageComponent implements OnInit, OnDestroy, LeavePageCon
         filter(result => result !== null))
         .subscribe((issue: Issue) => {
 
-          this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage('A new issue has created')));
+          this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage('NEW_ISSUE_IS_CREATED')));
           this.router.navigateByUrl('/client/issue/' + issue.id.toString());
 
         });
@@ -62,6 +62,6 @@ export class CreateIssuePageComponent implements OnInit, OnDestroy, LeavePageCon
   }
 
   getPromptMessage(): string {
-    return 'Are you sure you want to leave?';
+    return null;
   }
 }

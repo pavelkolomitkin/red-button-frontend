@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-md-4">
-    <label>Period</label>
+    <label>{{ 'PERIOD' | translate }}</label>
     <app-date-range-picker (onChange)="onDatePeriodChangeHandler($event); onChangeHandler($event)"></app-date-range-picker>
   </div>
   <div class="col-md-6">
-    <label for="popularField">Populars</label>
+    <label for="popularField">{{ 'POPULAR_ONES' | translate }}</label>
     <br>
     <input
             id="popularField"

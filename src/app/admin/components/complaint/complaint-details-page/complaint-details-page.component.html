@@ -2,7 +2,7 @@
 
   <ng-container *ngIf="!!complaint">
 
-    <div class="box box-primary">
+    <div class="box box-primary details">
       <div class="box-header with-border">
         <h3 class="box-title">{{ complaint.region.title }} <span class="text-muted">({{ complaint.region.federalDistrict.title }})</span></h3>
 
@@ -14,31 +14,28 @@
         <p>
             <app-complaint-map-view [complaint]="complaint"></app-complaint-map-view>
         </p>
+
         <p>
-          <b>Address</b>
-          <br/>
-          {{ complaint.address.displayName }}
+          <b class="section-head">{{ 'ADDRESS' | translate }}</b>
+          <span>{{ complaint.address.displayName }}</span>
         </p>
 
         <p>
-          <b>Author</b>
-          <br/>
+          <b class="section-head">{{ 'AUTHOR' | translate }}</b>
           <span class="text text-primary">{{ complaint.client.fullName }}</span>
         </p>
         <p *ngIf="!!complaint.serviceType">
+          <b class="section-head">{{ 'SERVICE_TYPE' | translate }}</b>
           <span class="text text-primary">{{ complaint.serviceType.title }}</span>
         </p>
-        <p>
-          <b>Message</b>
-          <br/>
-          <span class="text" [innerHTML]="complaint.message | multiLine"></span>
-        </p>
+        <b class="section-head">{{ 'MESSAGE' | translate }}</b>
+        <p class="text detailed-message" [innerHTML]="complaint.message | multiLine"></p>
         <p *ngIf="complaint.pictures.length > 0">
-          <b>Pictures</b>
-          <br/>
+          <b class="section-head">{{ 'PHOTOS' | translate }}</b>
           <app-picture-list [list]="complaint.pictures"></app-picture-list>
         </p>
         <p>
+          <b class="section-head">{{ 'VIDEOS' | translate }}</b>
           <app-video-list [list]="complaint.videos"></app-video-list>
         </p>
       </div>
@@ -50,7 +47,7 @@
           >{{ tag.title }}</div>
         </div>
 
-        <small class="pull-right text-muted">{{ complaint.createdAt | amFromUnix }}</small>
+        <small class="pull-right text-muted" app-date-time [value]="complaint.createdAt"></small>
       </div>
     </div>
 

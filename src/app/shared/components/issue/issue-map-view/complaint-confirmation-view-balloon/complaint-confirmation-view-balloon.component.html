@@ -6,10 +6,10 @@
         [location]="confirmation.complaint.location">
 
   <div class="balloon-title">
-    Signature
-    <i class="fa fa-check-circle" *ngIf="confirmation.status.code === 'confirmed'"></i>
-    <i class="fa fa-ban" *ngIf="confirmation.status.code === 'rejected'"></i>
-    <i class="fa fa-clock-o" *ngIf="confirmation.status.code === 'pending'"></i>
+    {{ 'SIGNATURE_REQUESTED' | translate }}
+    <i class="fa fa-check-circle" *ngIf="confirmation.status.code === 'confirmed'" [title]="confirmation.status.title"></i>
+    <i class="fa fa-ban" *ngIf="confirmation.status.code === 'rejected'" [title]="confirmation.status.title"></i>
+    <i class="fa fa-clock-o" *ngIf="confirmation.status.code === 'pending'" [title]="confirmation.status.title"></i>
   </div>
 
   <div class="balloon-content">
@@ -19,13 +19,13 @@
               (confirmation.complaint.message | slice:0:150) + '...'
               : confirmation.complaint.message }}
       <ng-container *ngxPermissionsOnly="['ROLE_CLIENT_USER']">
-        <a [routerLink]="'/client/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">More...</a>
+        <a [routerLink]="'/client/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">{{ 'MORE' | translate }}...</a>
       </ng-container>
       <ng-container *ngxPermissionsOnly="['ROLE_ADMIN_USER']">
-        <a [routerLink]="'/admin/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">More...</a>
+        <a [routerLink]="'/admin/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">{{ 'MORE' | translate }}...</a>
       </ng-container>
       <ng-container *ngxPermissionsOnly="['ROLE_COMPANY_REPRESENTATIVE_USER']">
-        <a [routerLink]="'/company/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">More...</a>
+        <a [routerLink]="'/company/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">{{ 'MORE' | translate }}...</a>
       </ng-container>
     </p>
     <p>
@@ -37,7 +37,9 @@
           </app-picture-item>
         </div>
         <div>
-          <span class="small" *ngIf="confirmation.complaint.pictures.length > 0">{{ confirmation.complaint.pictures.length.toString() + ' picture(s)' }}&nbsp;</span>
+          <span class="small" *ngIf="confirmation.complaint.pictures.length > 0">
+            {{ confirmation.complaint.pictures.length }} {{ 'PHOTO' | translate }}
+          </span>
         </div>
       </ng-container>
 
@@ -48,14 +50,16 @@
         </div>
 
         <div>
-          <span class="small" *ngIf="confirmation.complaint.videos.length > 0">{{ confirmation.complaint.videos.length.toString() + ' video' }}</span>
+          <span class="small" *ngIf="confirmation.complaint.videos.length > 0">
+            {{ confirmation.complaint.videos.length }} {{ 'VIDEO' | translate }}
+          </span>
         </div>
 
       </ng-container>
     </p>
     <div>
       <small class="text-primary pull-left" *ngIf="!!confirmation.complaint.serviceType">{{ confirmation.complaint.serviceType.title }}</small>
-      <small class="text-muted pull-right">{{ confirmation.complaint.createdAt | amFromUnix }}</small>
+      <small class="text-muted pull-right" app-date-time [value]="confirmation.complaint.createdAt"></small>
     </div>
   </div>
 

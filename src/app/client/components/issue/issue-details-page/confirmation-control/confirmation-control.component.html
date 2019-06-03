@@ -3,12 +3,12 @@
           class="btn btn-warning"
           *ngIf="userConfirmation.status.code === 'pending' && !isConfirming"
           (click)="onConfirmSignatureClickHandler($event)"
-  >Confirm your signature!</span>
+  >{{ 'CONFIRM_YOUR_SIGNATURE'| translate }}!</span>
   <span class="btn btn-default disabled" *ngIf="isConfirming">
-    <i class="fa fa-clock-o"></i>Confirming
+    <i class="fa fa-clock-o"></i>{{ 'CONFIRMING' | translate }}
   </span>
   <span
           class="btn btn-default disabled text-muted"
-          *ngIf="userConfirmation.status.code === 'confirmed'">You have confirmed it</span>
+          *ngIf="userConfirmation.status.code === 'confirmed'">{{ 'YOU_HAVE_CONFIRMED_IT' | translate }}</span>
 
 </ng-container>

@@ -31,7 +31,7 @@ export class ComplaintCreatePageComponent implements OnInit, OnDestroy {
         filter(result => result !== null)
     ).subscribe((complaint: Complaint) => {
 
-      this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage('A new complaint has created')));
+      this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage('COMPLAINT_IS_CREATED')));
       this.router.navigateByUrl('/client/complaint/' + complaint.id.toString());
 
     });

@@ -13,7 +13,7 @@
     </div>
 
 
-    <div class="box box-primary">
+    <div class="box box-primary details">
 
 
       <div class="box-header with-border">
@@ -31,80 +31,75 @@
         </p>
 
         <p>
-          <b>Address</b>
-          <br/>
+          <b class="section-head">{{ 'ADDRESS' | translate }}</b>
           {{ issue.address.displayName }}
         </p>
 
         <p>
-          <b>Author</b>
-          <br/>
+          <b class="section-head">{{ 'AUTHOR' | translate }}</b>
           <span class="text text-primary">{{ issue.client.fullName }}</span>
         </p>
       <p>
-        <b>Signatures</b>
-        <br/>
+        <b class="section-head">{{ 'SIGNATURES' | translate }}</b>
         <app-issue-signature-list [issue]="issue"></app-issue-signature-list>
       </p>
         <p>
-          <b>Service Type</b>
-          <br/>
+          <b class="section-head">{{ 'SERVICE_TYPE' | translate }}</b>
           <span class="text text-primary" *ngIf="!!issue.serviceType; else noServiceType">{{ issue.serviceType.title }}</span>
           <ng-template #noServiceType>
-            <span class="text-muted">(None)</span>
+            <span class="text-muted">({{ 'NONE' | translate }})</span>
           </ng-template>
         </p>
 
 
         <p>
-          <b>Company</b>
-          <br />
+          <b class="section-head">{{ 'COMPANY' | translate }}</b>
           <ng-container *ngIf="!!issue.company; else noCompany">
 
             <table class="table table-bordered">
               <tbody>
                 <tr>
-                  <td>Title</td>
+                  <td>{{ 'TITLE' | translate }}</td>
                   <td>{{ issue.company.title }}</td>
                 </tr>
                 <tr>
-                  <td>Full Name</td>
+                  <td>{{ 'FULL_TITLE' | translate }}</td>
                   <td>{{ issue.company.fullName }}</td>
                 </tr>
                 <tr>
-                  <td>INN / OGRN</td>
+                  <td>{{ 'INN' | translate }} / {{ 'OGRN' | translate }}</td>
                   <td>{{ issue.company.INN }} / {{ issue.company.OGRN }}</td>
                 </tr>
                 <tr>
-                  <td>Head Name</td>
+                  <td>{{ 'HEAD_NAME' | translate}}</td>
                   <td>{{ issue.company.headName }} </td>
                 </tr>
                 <tr>
-                  <td>Legal Address</td>
+                  <td>{{ 'LEGAL_ADDRESS' | translate }}</td>
                   <td>{{ issue.company.legalAddress }}</td>
                 </tr>
                 <tr>
-                  <td>Actual Address</td>
+                  <td>{{ 'ACTUAL_ADDRESS' | translate }}</td>
                   <td>{{ issue.company.actualAddress }}</td>
                 </tr>
                 <tr>
-                  <td>Email</td>
+                  <td>{{ 'EMAIL' | translate }}</td>
                   <td>{{ issue.company.email }}</td>
                 </tr>
                 <tr>
-                  <td>Phone Numbers</td>
+                  <td>{{ 'PHONE_NUMBER' | translate }}</td>
                   <td>{{ issue.company.phoneNumbers }}</td>
                 </tr>
                 <tr>
-                  <td>Office Hours</td>
+                  <td>{{ 'OFFICE_HOURS' | translate }}</td>
                   <td>{{ issue.company.officeHours }}</td>
                 </tr>
                 <tr>
-                  <td>Postal Address</td>
+                  <td>{{ 'POST_ADDRESS' | translate }}</td>
                   <td>{{ issue.company.postalAddress }}</td>
                 </tr>
                 <tr>
-                  <td>Site</td>
+                  <td>{{ 'SITE' | translate }}</td>
                   <td>
                     <a *ngIf="!!issue.company.site"
                        href="http://{{ issue.company.site }}"
@@ -112,7 +107,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>Administrative Units</td>
+                  <td>{{ 'ADMINISTRATIVE_UNITS' | translate }}</td>
                   <td>
                     <ng-container *ngIf="issue.company.administrativeUnits.length > 0; else noAdministrativeUnits">
                       <div *ngFor="let unit of issue.company.administrativeUnits; last as isLast">
@@ -121,7 +116,7 @@
                       </div>
                     </ng-container>
                     <ng-template #noAdministrativeUnits>
-                      <span class="text-muted">(None)</span>
+                      <span class="text-muted">({{ 'NONE' | translate }})</span>
                     </ng-template>
                   </td>
                 </tr>
@@ -129,40 +124,35 @@
             </table>
           </ng-container>
           <ng-template #noCompany>
-            <span class="text-muted">(None)</span>
+            <span class="text-muted">({{ 'NONE' | translate }})</span>
           </ng-template>
 
         </p>
 
+        <b class="section-head">{{ 'MESSAGE' | translate }}</b>
+        <p class="text detailed-message" [innerHTML]="issue.message | multiLine"></p>
         <p>
-          <b>Message</b>
-          <br/>
-          <span class="text" [innerHTML]="issue.message | multiLine"></span>
-        </p>
-        <p>
-          <b>Pictures</b>
-          <br/>
+          <b class="section-head">{{ 'PHOTOS' | translate }}</b>
           <ng-container *ngIf="issue.pictures.length > 0; else noPictures">
             <app-picture-list [list]="issue.pictures"></app-picture-list>
           </ng-container>
           <ng-template #noPictures>
-            <span class="text-muted">(None)</span>
+            <span class="text-muted">({{ 'NONE' | translate }})</span>
           </ng-template>
         </p>
         <p>
-          <b>Videos</b>
-          <br />
+          <b class="section-head">{{ 'VIDEOS' | translate }}</b>
           <ng-container *ngIf="issue.videos.length > 0; else noVideo">
             <app-video-list [list]="issue.videos"></app-video-list>
           </ng-container>
           <ng-template #noVideo>
-            <span class="text-muted">(None)</span>
+            <span class="text-muted">({{ 'NONE' | translate }})</span>
           </ng-template>
         </p>
       </div>
 
       <div class="box-footer">
-        <small class="pull-right text-muted">{{ issue.createdAt | amFromUnix }}</small>
+        <small class="pull-right text-muted" app-date-time [value]="issue.createdAt"></small>
       </div>
 
     </div>

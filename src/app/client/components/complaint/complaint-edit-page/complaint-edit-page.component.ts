@@ -68,7 +68,7 @@ export class ComplaintEditPageComponent implements OnInit, OnDestroy {
         filter(result => result !== null)).subscribe(
         (complaint: Complaint) => {
 
-            this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage('The complaint has edited')));
+            this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage('COMPLAINT_HAS_BEEN_EDITED')));
           this.router.navigateByUrl('/client/complaint/' + complaint.id.toString());
         }
     );

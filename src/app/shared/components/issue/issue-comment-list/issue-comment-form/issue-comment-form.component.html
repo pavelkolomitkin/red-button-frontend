@@ -4,9 +4,10 @@
                 id="message"
                 class="form-control"
                 [(ngModel)]="_comment.message"
-                placeholder="Enter your message..."
+                placeholder="{{ 'YOUR_COMMENT' | translate }}..."
                 name="message"
                 required
+                (keydown.control.enter)="onSubmitHandler(form)"
         ></textarea>
         <app-form-field-error-list [errors]="errors" [field]="'message'"></app-form-field-error-list>
       </div>
@@ -16,12 +17,12 @@
               type="submit"
               class="btn btn-primary"
               [disabled]="!form.valid"
-      >Save</button>&nbsp;
+      >{{ 'SAVE' | translate }}</button>&nbsp;
       <span
               class="btn btn-default"
               (click)="onCancelClickHandler($event)"
               *ngIf="withCancel"
-      >Cancel</span>
+      >{{ 'CANCEL' | translate }}</span>
     </div>
 
 </form>

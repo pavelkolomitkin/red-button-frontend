@@ -24,8 +24,8 @@
 
     <section class="content-header">
       <h1>
-        Details
-        <small>Contacts</small>
+        {{ 'DETAILS' | translate }}
+        <small>{{ 'CONTACTS' | translate }}</small>
       </h1>
     </section>
 
@@ -35,43 +35,43 @@
           <table class="table">
             <tbody>
             <tr>
-              <th class="company-detail-field-name">Full Name</th>
+              <th class="company-detail-field-name">{{ 'FULL_TITLE' | translate}}</th>
               <td>{{ company.fullName }}</td>
             </tr>
             <tr>
-              <th class="company-detail-field-name">INN / OGRN</th>
+              <th class="company-detail-field-name">{{ 'INN' | translate}} / {{ 'OGRN' | translate}}</th>
               <td>{{ company.INN }} / {{ company.OGRN }}</td>
             </tr>
             <tr>
-              <th class="company-detail-field-name">Head Name</th>
+              <th class="company-detail-field-name">{{ 'HEAD_NAME' | translate }}</th>
               <td>{{ company.headName }} </td>
             </tr>
             <tr>
-              <th class="company-detail-field-name">Legal Address</th>
+              <th class="company-detail-field-name">{{ 'LEGAL_ADDRESS' | translate }}</th>
               <td>{{ company.legalAddress }}</td>
             </tr>
             <tr>
-              <th class="company-detail-field-name">Actual Address</th>
+              <th class="company-detail-field-name">{{ 'ACTUAL_ADDRESS' | translate }}</th>
               <td>{{ company.actualAddress }}</td>
             </tr>
             <tr>
-              <th class="company-detail-field-name">Email</th>
+              <th class="company-detail-field-name">{{ 'EMAIL' | translate }}</th>
               <td>{{ company.email }}</td>
             </tr>
             <tr>
-              <th class="company-detail-field-name">Phone Numbers</th>
+              <th class="company-detail-field-name">{{ 'PHONE_NUMBER' | translate }}</th>
               <td>{{ company.phoneNumbers }}</td>
             </tr>
             <tr>
-              <th class="company-detail-field-name">Office Hours</th>
+              <th class="company-detail-field-name">{{ 'OFFICE_HOURS' | translate }}</th>
               <td>{{ company.officeHours }}</td>
             </tr>
             <tr>
-              <th class="company-detail-field-name">Postal Address</th>
+              <th class="company-detail-field-name">{{ 'POST_ADDRESS' | translate }}</th>
               <td>{{ company.postalAddress }}</td>
             </tr>
             <tr>
-              <th class="company-detail-field-name">Site</th>
+              <th class="company-detail-field-name">{{ 'SITE' | translate }}</th>
               <td>
                 <a *ngIf="!!company.site"
                    href="http://{{ company.site }}"
@@ -93,8 +93,8 @@
   <ng-container *ngIf="!!popularIssues">
     <section class="content-header">
       <h1>
-        Issues
-        <small>Most problematic</small>
+        {{ 'ISSUES' | translate }}
+        <small>{{ 'MOST_PROBLEMATIC_ONES' | translate }}</small>
       </h1>
     </section>
     <div class="box-body">
@@ -106,14 +106,14 @@
         </div>
       </ng-container>
       <ng-template #noIssues>
-        <span class="small text-muted">(No Issues)</span>
+        <span class="small text-muted">({{ 'NO_ISSUES' | translate }})</span>
       </ng-template>
     </div>
   </ng-container>
 
   <section class="content-header" *ngIf="!!statistics && !!dynamics">
     <h1>
-      Statistics
+      {{ 'STATISTICS' | translate }}
     </h1>
   </section>
 
@@ -121,18 +121,15 @@
     <div class="row">
       <div class="col-sm-6">
         <ng-container *ngIf="!!statistics">
-          <app-analyst-service-type-shares-chart [title]="'Common Numbers'" [data]="statistics.statistics.common"></app-analyst-service-type-shares-chart>
+          <app-analyst-service-type-shares-chart [title]="'COMMON_NUMBERS_STATISTICS' | translate" [data]="statistics.statistics.common"></app-analyst-service-type-shares-chart>
         </ng-container>
       </div>
       <div class="col-sm-6">
         <ng-container *ngIf="!!dynamics">
-          <app-analyst-service-types-dynamic-year [year]="selectedYear" [title]="'Dynamics'" [data]="dynamics.statistics"></app-analyst-service-types-dynamic-year>
+          <app-analyst-service-types-dynamic-year [year]="selectedYear" [title]="'DYNAMIC_STATISTICS' | translate" [data]="dynamics.statistics"></app-analyst-service-types-dynamic-year>
         </ng-container>
       </div>
     </div>
   </div>
-
-
-
 
 </app-analyst-common-layout>

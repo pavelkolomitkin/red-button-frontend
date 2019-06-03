@@ -9,6 +9,7 @@ import {GlobalNotifyErrorMessage} from '../../../../core/data/actions';
 import {NotifyMessage} from '../../../../core/data/model/notify-message.model';
 import {PictureInterface} from '../../../../shared/data/model/picture-interface.model';
 import {filter} from 'rxjs/operators';
+import {Lightbox} from 'ngx-lightbox';
 
 export abstract class UploadPictureListFormFieldComponent implements OnInit, OnDestroy
 {
@@ -16,6 +17,8 @@ export abstract class UploadPictureListFormFieldComponent implements OnInit, OnD
     @Output('onSelectError') selectErrorEvent: EventEmitter<string> = new EventEmitter();
 
     @Input() pictures: Array<PictureInterface> = [];
+
+    lightBoxItems: Array<{ src: string, caption: string, thumb: string }> = [];
 
     @ViewChild('fileSelector') fileSelector: ElementRef;
     @ViewChild('removeAlertModal') removePictureModalWindowTemplate: TemplateRef<any>;
@@ -25,7 +28,7 @@ export abstract class UploadPictureListFormFieldComponent implements OnInit, OnD
 
     uploadSubscription: Subscription;
 
-    protected constructor(protected store: Store<State>, protected modal: NgbModal)
+    protected constructor(protected store: Store<State>, protected modal: NgbModal, private lightBox: Lightbox)
     {
         this.uploadingFiles = this.store.pipe(this.getUploadingItemsSelect());
 
@@ -35,7 +38,7 @@ export abstract class UploadPictureListFormFieldComponent implements OnInit, OnD
         ).subscribe((item: UploadItem<PictureInterface>) => {
 
             this.pictures.push(item.uploaded);
-
+            this.updateLightBoxItems();
         });
     }
 
@@ -65,6 +68,7 @@ export abstract class UploadPictureListFormFieldComponent implements OnInit, OnD
     }
 
     ngOnInit() {
+        this.updateLightBoxItems();
     }
 
     ngOnDestroy(): void {
@@ -136,11 +140,28 @@ export abstract class UploadPictureListFormFieldComponent implements OnInit, OnD
                     this.pictures.splice(removingItemIndex, 1);
 
                     this.changeEvent.emit(this.pictures);
+                    this.updateLightBoxItems();
                 }
 
                 this.removePictureModalWindow = null;
             }, () => {
                 this.removePictureModalWindow = null;
             });
+    }
+
+    updateLightBoxItems()
+    {
+        this.lightBoxItems = this.pictures.map((item) => {
+            return {
+                src: item.sources['previewNormal'] as string,
+                caption: '',
+                thumb: item.sources['previewMiddle'] as string
+            }
+        });
+    }
+
+    onPictureClickHandler(event, index)
+    {
+        this.lightBox.open(this.lightBoxItems, index);
     }
 }

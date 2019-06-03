@@ -1,11 +1,15 @@
-<div class="item box box-default">
-  <div class="box-body">
-    <div class="preview-container">
-      <img [src]="video.metaData.thumbnail_url" />
-    </div>
-    <div>
-      <span class="text-muted">{{ video.title }}</span>
-    </div>
+<div class="item">
+  <div class="preview-container">
+    <app-video-item
+            [ngStyle]="{ cursor: 'pointer' }"
+            [video]="video"
+            [size]="''"
+            (click)="onVideoClickHandler($event)"
+    ></app-video-item>
   </div>
+  <div>
+    <span class="text-muted">{{ video.title }}</span>
+  </div>
+
   <span class="close" (click)="onDeleteHandler($event)"><i class="fa fa-trash"></i></span>
 </div>

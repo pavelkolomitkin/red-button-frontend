@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ComponentRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {GeoLocation} from '../../../../core/data/model/geo-location.model';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../app.state';
 import {environment} from '../../../../../environments/environment';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {MapComponent} from '../../../../shared/components/map/map.component';
 import {MapViewBox} from '../../../../shared/data/model/map-view-box.model';
 import {IssueService} from '../../../services/issue.service';
@@ -13,6 +13,8 @@ import {Complaint} from '../../../../core/data/model/complaint.model';
 import {ComplaintDetailsBalloonComponent} from '../../../../shared/components/complaint-map-view/complaint-details-balloon/complaint-details-balloon.component';
 import {IssueBalloonComponent} from './issue-balloon/issue-balloon.component';
 import {OSMSearchResult} from '../../../../core/data/model/osm-search-result.model';
+import {MapBalloonManager} from '../../../../core/services/map/map-balloon-manager';
+import {debounceTime, filter, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-geography-page',
@@ -31,8 +33,16 @@ export class GeographyPageComponent implements OnInit, OnDestroy {
   searchParams: any = {};
   showComplaints: boolean = false;
 
-  issueBalloons: Array<any> = [];
-  complaintBalloons: Array<any> = [];
+  complaintBalloonManager: MapBalloonManager = null;
+  issueBalloonManager: MapBalloonManager = null;
+
+  searchDelaySubject = new Subject<any>();
+  searchDelaySubscription: Subscription;
+
+  searchFormSubject = new Subject<any>();
+  searchFormSubscription: Subscription;
+
+  centeringMapSubscription: Subscription;
 
   constructor(
       private store: Store<State>,
@@ -48,25 +58,100 @@ export class GeographyPageComponent implements OnInit, OnDestroy {
         }
     );
 
+    this.searchDelaySubscription = this.searchDelaySubject.pipe(
+        debounceTime(300),
+        mergeMap(params => this.requestData(params))
+    ).subscribe(this.searchResultHandler);
+
+    this.searchFormSubscription = this.searchFormSubject.pipe(
+        mergeMap(params => this.requestData(params))
+    ).subscribe(this.searchResultHandler);
+
+
+  }
+
+  searchResultHandler = ({ issues, complaints }) =>
+  {
+    this.issueBalloonManager.setItems(issues);
+    this.complaintBalloonManager.setItems(complaints);
   }
 
   ngOnDestroy()
   {
     this.deviceLocationSubscription.unsubscribe();
+
+    if (!!this.complaintBalloonManager)
+    {
+      this.complaintBalloonManager.release();
+      this.complaintBalloonManager = null;
+    }
+
+    if (!!this.issueBalloonManager)
+    {
+      this.issueBalloonManager.release();
+      this.issueBalloonManager = null;
+    }
+
+    this.searchDelaySubscription.unsubscribe();
+    this.searchFormSubscription.unsubscribe();
+
+    if (!!this.centeringMapSubscription)
+    {
+      this.centeringMapSubscription.unsubscribe();
+    }
   }
 
   onMapReadyHandler(event)
   {
+    this.complaintBalloonManager = new MapBalloonManager(
+        this.map,
+        ComplaintDetailsBalloonComponent,
+        item => item.id,
+        item => item.location,
+        (complaint, component: ComponentRef<ComplaintDetailsBalloonComponent>) => {
+          component.instance.complaint = complaint;
+        }
+    );
 
+    this.issueBalloonManager = new MapBalloonManager(
+        this.map,
+        IssueBalloonComponent,
+        item => item.id,
+        item => item.location,
+        (issue, component: ComponentRef<IssueBalloonComponent>) => {
+          component.instance.issue = issue;
+        }
+    );
+
+    this.centeringMapSubscription = this.store.pipe(select(state => state.map.centeringBalloonLocation), filter(result => !!result))
+        .subscribe((item) => {
+          this.map.setCenter(item, true);
+        });
   }
 
-  updateData()
+  async requestData(params: any)
+  {
+    const issuesRequest = this.issueService.geoSearch(params).toPromise();
+
+    let complaintsRequest = null;
+    if (this.showComplaints)
+    {
+      complaintsRequest = this.complaintService.search(params).toPromise();
+    }
+
+    const issues = await issuesRequest;
+    const complaints = (!!complaintsRequest) ? await complaintsRequest : [];
+
+    return {issues: issues, complaints: complaints };
+  }
+
+  updateData(searchForm: boolean)
   {
     const zoom = this.map.getZoom();
     if (zoom < GeographyPageComponent.UPDATING_DATA_MIN_ZOOM)
     {
-      this.updateIssueBalloons([]);
-      this.updateComplaintBalloons([]);
+      this.complaintBalloonManager.setItems([]);
+      this.issueBalloonManager.setItems([]);
 
       return;
     }
@@ -80,76 +165,28 @@ export class GeographyPageComponent implements OnInit, OnDestroy {
       bottomRightLongitude: viewbox.bottomRight.longitude
     };
 
-    this.issueService.geoSearch(searchParams)
-        .toPromise()
-        .then((issues: Array<Issue>) => {
-          this.updateIssueBalloons(issues);
-        })
-        .catch(() => {
-          this.updateIssueBalloons([]);
-        });
 
-    if (this.showComplaints)
+    if (searchForm)
     {
-      this.complaintService.search(searchParams)
-          .toPromise()
-          .then((complaints: Array<Complaint>) => {
-            this.updateComplaintBalloons(complaints);
-          })
-          .catch(() => {
-            this.updateComplaintBalloons([]);
-          });
+      this.searchFormSubject.next(searchParams);
     }
     else
     {
-      this.updateComplaintBalloons([]);
+      this.searchDelaySubject.next(searchParams);
     }
 
   }
-
-  updateIssueBalloons(list: Array<Issue>)
-  {
-    this.issueBalloons.forEach((item) => {
-      this.map.removeBalloon(item);
-    });
-
-    list.forEach((item) => {
-      const balloon = this.map.addBalloon(IssueBalloonComponent, item.location);
-      balloon.instance.issue = item;
-
-      this.issueBalloons.push(balloon);
-    });
-  }
-
-  updateComplaintBalloons(list: Array<Complaint>)
-  {
-    this.complaintBalloons.forEach((item) => {
-      this.map.removeBalloon(item);
-    });
-
-    this.complaintBalloons = [];
-    list.forEach((item) => {
-
-      const balloon = this.map.addBalloon(ComplaintDetailsBalloonComponent, item.location);
-      balloon.instance.complaint = item;
-
-      this.complaintBalloons.push(balloon);
-
-    });
-  }
-
-
 
   onSearchFilterChangeHandler({ period, withComplaints })
   {
     this.showComplaints = withComplaints;
 
-    this.updateData();
+    this.updateData(true);
   }
 
   onViewBoxChangeHandler(event)
   {
-    this.updateData();
+    this.updateData(false);
   }
 
   onSearchAddressResultHandler(addresses: Array<OSMSearchResult>)

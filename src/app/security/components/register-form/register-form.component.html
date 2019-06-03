@@ -9,7 +9,7 @@
             required
             type="email"
             class="form-control"
-            placeholder="Email"
+            placeholder="{{ 'EMAIL' | translate }}"
     >
     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
     <app-form-field-error-list [field]="'email'" [errors]="validationErrors"></app-form-field-error-list>
@@ -21,14 +21,14 @@
             name="fullName"
             type="text"
             class="form-control"
-            placeholder="Full name"
+            placeholder="{{ 'YOUR_FULL_NAME' | translate }}"
     >
     <span class="glyphicon glyphicon-user form-control-feedback"></span>
     <app-form-field-error-list [field]="'fullName'" [errors]="validationErrors"></app-form-field-error-list>
   </div>
 
   <div class="form-group has-feedback">
-    <p class="small text-muted"><b>Optional</b></p>
+    <p class="small text-muted"><b>{{ 'OPTIONAL' | translate }}</b></p>
     <div class="input-group">
       <div class="input-group-addon">
         <i class="fa">+7</i>
@@ -38,7 +38,7 @@
               name="phoneNumber"
               type="text"
               class="form-control"
-              placeholder="Phone number(optional)"
+              placeholder="{{ 'YOUR_PHONE_NUMBER' | translate }}({{ 'OPTIONAL' | translate }})"
       >
       <span class="glyphicon glyphicon-phone form-control-feedback" style="z-index: 5;"></span>
     </div>
@@ -53,7 +53,7 @@
             required
             type="password"
             class="form-control"
-            placeholder="Password"
+            placeholder="{{ 'PASSWORD' | translate }}"
     >
     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
     <app-form-field-error-list [field]="'password'" [errors]="validationErrors.plainPassword ? validationErrors.plainPassword : {}"></app-form-field-error-list>
@@ -67,7 +67,7 @@
             required
             type="password"
             class="form-control"
-            placeholder="Retype password"
+            placeholder="{{ 'RETYPE_PASSWORD' | translate }}"
     >
     <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
     <app-form-field-error-list [field]="'passwordRepeat'" [errors]="validationErrors.plainPassword ? validationErrors.plainPassword : {}"></app-form-field-error-list>
@@ -81,13 +81,13 @@
                   type="checkbox"
                   ngModel
                   name="agreement"
-                  required> I agree to the terms
+                  required> {{ 'I_ACCEPT_AGREEMENT' | translate }}
         </label>
       </div>
     </div>
     <!-- /.col -->
     <div class="col-xs-4">
-      <button type="submit" [disabled]="!form.valid" class="btn btn-primary btn-block btn-flat btn-block">Register</button>
+      <button type="submit" [disabled]="!form.valid" class="btn btn-primary btn-block btn-flat btn-block">{{ 'SUBMIT_OK' | translate }}</button>
     </div>
     <!-- /.col -->
   </div>

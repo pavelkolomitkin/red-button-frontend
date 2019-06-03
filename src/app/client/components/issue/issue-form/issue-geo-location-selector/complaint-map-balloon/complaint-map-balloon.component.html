@@ -1,7 +1,12 @@
-<app-map-balloon [isCollapsed]="true" [hasToCenteredOnOpen]="true" [location]="complaint.location">
+<app-map-balloon
+        [isCollapsed]="true"
+        [hasToCenteredOnOpen]="true"
+        [location]="complaint.location"
+        [colorStyle]="'primary'"
+>
 
   <div class="balloon-title">
-    Complaint
+    {{ 'COMPLAINT' | translate }}
   </div>
 
   <div class="balloon-content">
@@ -10,7 +15,7 @@
       complaint.message.length > 150 ?
               (complaint.message | slice:0:150) + '...'
               : complaint.message }}
-      <a [routerLink]="'/client/complaint/' + complaint.id.toString()" [target]="'_blank'">More...</a>
+      <a [routerLink]="'/client/complaint/' + complaint.id.toString()" [target]="'_blank'">{{ 'MORE' | translate }}...</a>
     </p>
     <p>
       <ng-container *ngIf="complaint.pictures.length > 0">
@@ -21,7 +26,7 @@
           </app-picture-item>
         </div>
         <div>
-          <span class="small" *ngIf="complaint.pictures.length > 0">{{ complaint.pictures.length.toString() + ' picture(s)' }}&nbsp;</span>
+          <span class="small" *ngIf="complaint.pictures.length > 0">{{ complaint.pictures.length }} {{ 'PHOTO' | translate }}&nbsp;</span>
         </div>
       </ng-container>
 
@@ -32,24 +37,24 @@
         </div>
 
         <div>
-          <span class="small" *ngIf="complaint.videos.length > 0">{{ complaint.videos.length.toString() + ' video' }}</span>
+          <span class="small" *ngIf="complaint.videos.length > 0">{{ complaint.videos.length }} {{ 'VIDEO' | translate }}</span>
         </div>
 
       </ng-container>
     </p>
     <div>
       <small class="text-primary pull-left" *ngIf="!!complaint.serviceType">{{ complaint.serviceType.title }}</small>
-      <small class="pull-right text-muted">{{ complaint.createdAt | amFromUnix }}</small>
+      <small class="pull-right text-muted" app-date-time [value]="complaint.createdAt"></small>
     </div>
   </div>
 
   <div class="balloon-footer">
     <ng-container *ngIf="withRequestSignatureControl">
       <span class="btn btn-primary" (click)="onRequestButtonClickHandler($event)" *ngIf="!!isRequestingSignatureAvailable && isRequestingSignatureAvailable(complaint)">
-        <i class="fa fa-plus"></i> Request a signature
+        <i class="fa fa-plus"></i> {{ 'REQUEST_SIGNATURE' | translate }}
       </span>
-      <span class="btn btn-default disabled" *ngIf="!!isRequestingSignatureAvailable && !isRequestingSignatureAvailable(complaint)" title="You have already requested signature from this user!">
-        <i class="fa fa-warning"></i> Request a signature
+      <span class="btn btn-default disabled" *ngIf="!!isRequestingSignatureAvailable && !isRequestingSignatureAvailable(complaint)" title="{{ 'YOU_HAVE_ALREADY_REQUESTED_A_SIGNATURE_FROM_THIS_USER' | translate }}!">
+        <i class="fa fa-warning"></i> {{ 'REQUEST_SIGNATURE' | translate }}
       </span>
     </ng-container>
 

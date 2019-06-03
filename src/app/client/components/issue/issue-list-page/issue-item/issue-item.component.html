@@ -13,7 +13,9 @@
       <span class="text" *ngIf="!!issue.company">{{ issue.company.title }} </span>
       <span class="text-primary" *ngIf="!!issue.serviceType">{{ issue.serviceType.title }}</span>
     </p>
-    <p class="text-muted">{{ issue.message }}</p>
+    <p class="text-muted">
+      {{ issue.message.length > 150 ? ( issue.message | slice:0:150 ) + '...' : issue.message }}
+    </p>
     <p *ngIf="issue.pictures.length > 0">
       <app-picture-item
               *ngFor="let picture of issue.pictures"
@@ -28,19 +30,19 @@
               [size]="'small'"
       ></app-video-item>
     </p>
-    <p *ngIf="issue.complaintConfirmations.length > 0">
+    <div *ngIf="issue.complaintConfirmations.length > 0">
       <span
           class="label complaint-signature"
           *ngFor="let confirmation of issue.complaintConfirmations"
           [ngClass]="confirmation.status.code === 'confirmed' ? 'bg-green' : (confirmation.status.code === 'rejected' ? 'bg-red' : 'bg-gray')"
           [attr.title]="confirmation.status.title"
       >{{ confirmation.complaint.client.fullName }}</span>
-    </p>
+    </div>
   </div>
 
   <div class="box-footer">
-    <span class="text-muted pull-left">{{ issue.likeNumber }} like(s)&nbsp;</span>
-    <span class="text-muted pull-left">{{ issue.commentNumber }} comment(s)</span>
-    <small class="pull-right text-muted">{{ issue.createdAt | amFromUnix }}</small>
+    <span class="text-muted pull-left">{{ issue.likeNumber }} {{ 'LIKE' | translate }},&nbsp;</span>
+    <span class="text-muted pull-left">{{ issue.commentNumber }} {{ issue.commentNumber | noun:('COMMENT_ONE' | translate):('COMMENT_TWO'|translate):('COMMENT_FIVE' | translate) }}</span>
+    <small class="pull-right text-muted" app-date-time [value]="issue.createdAt"></small>
   </div>
 </div>

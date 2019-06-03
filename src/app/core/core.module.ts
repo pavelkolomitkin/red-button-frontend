@@ -92,7 +92,7 @@ const httpInterceptorProviders = [
     CommonModule,
     RouterModule,
     HttpClientModule,
-      NgxPermissionsModule.forRoot(),
+    NgxPermissionsModule.forRoot(),
     SharedModule,
     ToastrModule.forRoot(),
     StoreModule.forRoot({

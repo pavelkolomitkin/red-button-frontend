@@ -7,7 +7,7 @@
               name="address"
               [(ngModel)]="searchString"
               required
-              placeholder="Search a place..."
+              placeholder="{{ 'SEARCHING_PLACE_BY_ADDRESS' | translate }}..."
               (keydown.enter)="onSubmitHandler(form)"
       >
       <div class="input-group-btn">
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div>
-      <span class="text text-danger small" *ngIf="isSearchingError">Searching error. Try to find anything else</span>
+      <span class="text text-danger small" *ngIf="isSearchingError">{{ 'SEARCHING_PLACE_BY_ADDRESS_ERROR' | translate }}</span>
     </div>
   </form>
 </div>

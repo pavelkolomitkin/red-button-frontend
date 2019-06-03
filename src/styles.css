@@ -80,3 +80,22 @@ button.dropdown-item
 {
     opacity: 0.9;
 }
+
+.login-box .footer-links
+{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.detailed-message
+{
+    padding: 10px;
+    border: 1px dashed #ccc;
+    background: #ccc6;
+}
+
+.details b.section-head
+{
+    display: block;
+    padding-bottom: 5px;
+}

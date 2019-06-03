@@ -1,4 +1,4 @@
 <div class="item-container">
-  <img [src]="picture.sources.previewMiddle">
+  <img [src]="picture.sources.previewMiddle" (click)="onImageClickHandler($event)">
   <div class="close control" (click)="onRemoveClickHandler()"><i class="fa fa-fw fa-trash"></i></div>
 </div>

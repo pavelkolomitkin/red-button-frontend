@@ -33,6 +33,6 @@
     <div class="tag-list">
       <app-common-tag-item *ngFor="let tag of complaint.tags" [tag]="tag"></app-common-tag-item>
     </div>
-    <small class="pull-right text-muted">{{ complaint.createdAt | amFromUnix }}</small>
+    <small class="pull-right text-muted" app-date-time [value]="complaint.createdAt"></small>
   </div>
 </div>

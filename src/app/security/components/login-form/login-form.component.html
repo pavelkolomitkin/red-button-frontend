@@ -8,7 +8,7 @@
             required
             type="email"
             class="form-control"
-            placeholder="Email">
+            placeholder="{{ 'EMAIL' | translate }}">
     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
   </div>
   <div class="form-group has-feedback">
@@ -18,25 +18,26 @@
             name="password"
             autocomplete
             required
-            type="password" class="form-control" placeholder="Password">
+            type="password" class="form-control" placeholder="{{ 'PASSWORD' | translate }}">
     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-    <app-form-field-error-list [field]="'message'" [errors]="errors"></app-form-field-error-list>
+
+    <app-form-field-error-list [field]="'message'" [errors]="{ message: (errors | async).message ? ('LOGIN_ERROR' | translate) : null }"></app-form-field-error-list>
   </div>
   <div class="row">
-    <div class="col-xs-8">
+    <div class="col-xs-6">
       <div class="checkbox icheck" style="padding-left: 20px">
         <label>
           <input
                   type="checkbox"
                   ngModel
                   name="rememberMe"
-          > Remember Me
+          > {{ 'REMEMBER_ME' | translate }}
         </label>
       </div>
     </div>
     <!-- /.col -->
-    <div class="col-xs-4">
-      <button type="submit" class="btn btn-primary btn-block" [disabled]="!form.valid">Sign In</button>
+    <div class="col-xs-6">
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="!form.valid">{{ 'SING_IN' | translate }}</button>
     </div>
     <!-- /.col -->
   </div>

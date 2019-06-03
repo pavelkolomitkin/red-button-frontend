@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  lang: 'ru',
   baseApiUrl: 'http://localhost:7777/api',
   defaultGeoPosition: {
     latitude: 55.75184939,

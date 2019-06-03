@@ -2,7 +2,7 @@
 
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Issues <small class="text-muted" *ngIf="total !== null">({{ total }})</small></h3>
+            <h3 class="box-title">{{ 'ISSUES' | translate }} <small class="text-muted" *ngIf="total !== null">({{ total }})</small></h3>
         </div>
 
         <div class="box-body with-border">
@@ -19,16 +19,16 @@
 
                         <tr>
                             <td [ngStyle]="{ minWidth: '40px' }">#</td>
-                            <th>Author</th>
-                            <td>Service Type</td>
-                            <th>Region</th>
-                            <th>Message</th>
-                            <th>Date</th>
-                            <th>Signatures</th>
-                            <th>Photos</th>
-                            <th>Videos</th>
-                            <th>Likes</th>
-                            <th>Comments</th>
+                            <th>{{ 'AUTHOR' | translate }}</th>
+                            <td>{{ 'SERVICE_TYPE' | translate }}</td>
+                            <th>{{ 'REGION' | translate }}</th>
+                            <th>{{ 'MESSAGE' | translate }}</th>
+                            <th>{{ 'CREATED' | translate }}</th>
+                            <th>{{ 'SIGNATURES' | translate }}</th>
+                            <th>{{ 'PHOTOS' | translate }}</th>
+                            <th>{{ 'VIDEOS' | translate }}</th>
+                            <th>{{ 'LIKE' | translate }}</th>
+                            <th>{{ 'COMMENTS' | translate }}</th>
                         </tr>
 
                         <tr *ngFor="let issue of list">
@@ -51,8 +51,7 @@
                             <td>
                                 <span class="text-muted small">{{ issue.message.length > 150 ? (issue.message | slice:0:150) + '...' : issue.message }}</span>
                             </td>
-                            <td title="{{ issue.createdAt | amFromUnix }}">
-                                {{ issue.createdAt | amFromUnix | amTimeAgo }}
+                            <td app-date-time [value]="issue.createdAt">
                             </td>
                             <td>
                                 <app-issue-signature-progress [issue]="issue" [noneMessage]="'-'"></app-issue-signature-progress>
@@ -88,7 +87,7 @@
                 ></app-paginator>
             </div>
 
-            <div class="alert alert-info" *ngIf="total === 0">No Issues</div>
+            <div class="alert alert-info" *ngIf="total === 0">{{ 'NO_ISSUES' | translate }}</div>
 
         </ng-container>
 

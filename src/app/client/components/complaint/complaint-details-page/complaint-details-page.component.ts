@@ -50,7 +50,7 @@ export class ComplaintDetailsPageComponent implements OnInit, OnDestroy {
 
         this.complaint = complaint;
 
-        this.store.dispatch(new GlobalPageTitle('Complaint details', this.complaint.client.fullName));
+        this.store.dispatch(new GlobalPageTitle('COMPLAINT', this.complaint.client.fullName));
     });
 
     this.detailsErrorSubscription = this.store.pipe(
@@ -102,11 +102,11 @@ export class ComplaintDetailsPageComponent implements OnInit, OnDestroy {
   {
     const confirmation: ActionConfirmation = new ActionConfirmation(
         ComplaintDetailsPageComponent.DELETE_COMPLAINT_CONFIRMATION_ID + this.complaint.id,
-        'Delete Complaint?',
-        'Are you sure you want to delete it?',
+        'DELETE_COMPLAINT_QUESTION',
+        'ARE_YOU_SURE_YOU_WANT_TO_DELETE_IT',
         [
-          new ConfirmationActionOption(ConfirmationActionOption.CONFIRM_ID, 'Yes', 'danger'),
-          new ConfirmationActionOption(ConfirmationActionOption.CANCEL_ID, 'Cancel')
+          new ConfirmationActionOption(ConfirmationActionOption.CONFIRM_ID, 'YES', 'danger'),
+          new ConfirmationActionOption(ConfirmationActionOption.CANCEL_ID, 'CANCEL')
         ],
         this.complaint
     );

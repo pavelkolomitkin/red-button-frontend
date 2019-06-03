@@ -23,11 +23,11 @@ const routes: Routes = [
                 path: 'geo',
                 component: GeographyPageComponent,
                 data: {
-                    pageTitle: 'Geography',
+                    pageTitle: 'MAP',
                     pageSubTitle: '',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Geography', null, 'map-marker')
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('MAP', null, 'map-marker')
                     ]
                 }
             },
@@ -35,11 +35,11 @@ const routes: Routes = [
                 path: 'profile',
                 component: ProfilePageComponent,
                 data: {
-                    pageTitle: 'Profile',
+                    pageTitle: 'PROFILE',
                     pageSubTitle: '',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Profile', null, 'user')
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('PROFILE', null, 'user')
                     ]
                 }
             },
@@ -47,11 +47,11 @@ const routes: Routes = [
                 path: 'complaint/list',
                 component: ComplaintListPageComponent,
                 data: {
-                    pageTitle: 'My Complaints',
-                    pageSubTitle: 'latest',
+                    pageTitle: 'MY_COMPLAINTS',
+                    pageSubTitle: 'LATEST',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('My Complaints', null, 'file-text-o')
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('MY_COMPLAINTS', null, 'file-text-o')
                     ]
                 }
             },
@@ -60,11 +60,11 @@ const routes: Routes = [
                 component: ComplaintCreatePageComponent,
                 canDeactivate: [ConfirmLeavePageGuardService],
                 data: {
-                    pageTitle: 'New Complaint',
+                    pageTitle: 'DESCRIBE_A_PROBLEM',
                     pageSubTitle: '',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Add Complaint', null, 'file-text-o')
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('TO_COMPLAIN', null, 'file-text-o')
                     ]
                 }
             },
@@ -73,11 +73,11 @@ const routes: Routes = [
                 component: ComplaintEditPageComponent,
                 canDeactivate: [ConfirmLeavePageGuardService],
                 data: {
-                    pageTitle: 'Edit Complaint',
+                    pageTitle: 'EDIT_COMPLAINT',
                     pageSubTitle: '',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Edit Complaint', null, 'edit')
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('EDIT_COMPLAINT', null, 'edit')
                     ]
                 }
             },
@@ -92,11 +92,11 @@ const routes: Routes = [
                 component: CreateIssuePageComponent,
                 canDeactivate: [ConfirmLeavePageGuardService],
                 data: {
-                    pageTitle: 'New Issue',
+                    pageTitle: 'NEW_ISSUE',
                     pageSubTitle: '',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Add Issue', null, 'file-text-o')
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('NEW_ISSUE', null, 'file-text-o')
                     ]
                 }
             },
@@ -106,11 +106,11 @@ const routes: Routes = [
                 component: EditIssuePageComponent,
                 canDeactivate: [ConfirmLeavePageGuardService],
                 data: {
-                    pageTitle: 'Edit Issue',
+                    pageTitle: 'EDIT_ISSUE',
                     pageSubTitle: '',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Edit Issue', null, 'file-edit')
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('EDIT_ISSUE', null, 'file-edit')
                     ]
                 }
             },
@@ -119,11 +119,11 @@ const routes: Routes = [
                 path: 'issue/list',
                 component: IssueListPageComponent,
                 data: {
-                    pageTitle: 'My Issues',
-                    pageSubTitle: 'latest',
+                    pageTitle: 'MY_ISSUES',
+                    pageSubTitle: 'LATEST',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('My Issues', null, 'file-edit')
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('MY_ISSUES', null, 'file-edit')
                     ]
                 }
             },
@@ -132,11 +132,11 @@ const routes: Routes = [
                 path: 'issue/:id',
                 component: IssueDetailsPageComponent,
                 data: {
-                    pageTitle: 'Issue',
+                    pageTitle: 'ISSUE',
                     pageSubTitle: '',
                     breadCrumbs: [
-                        new BreadCrumb('Home', '/', 'home'),
-                        new BreadCrumb('Issue', null, 'file-text-o')
+                        new BreadCrumb('HOME', '/', 'home'),
+                        new BreadCrumb('ISSUE', null, 'file-text-o')
                     ]
                 }
             },

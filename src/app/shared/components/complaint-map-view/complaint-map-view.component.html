@@ -2,6 +2,7 @@
   <div class="map-container">
     <app-map #map
             [defaultCenter]="complaint.location"
+            [defaultZoom]="15"
             (onReady)="onMapReadyHandler($event)"
       ></app-map>
   </div>

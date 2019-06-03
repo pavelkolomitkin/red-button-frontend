@@ -4,6 +4,7 @@ import {Store} from '@ngrx/store';
 import {State} from '../../app.state';
 import {isArray} from 'util';
 import {GlobalBreadCrumbs, GlobalPageTitle} from '../../core/data/actions';
+import {TranslateService} from '@ngx-translate/core';
 
 @Directive({
   selector: '[appPageHeader]'
