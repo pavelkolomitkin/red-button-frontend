@@ -88,9 +88,8 @@ export class CommonStatisticPageComponent implements OnInit, OnDestroy {
           .toPromise()
           .then(({ statistics, year }) => {
 
-            // { common, byRegions }
             this.statistics = statistics;
-            //this.updatePageHeader();
+
           });
 
       this.service.getFederalDistrictServiceTypeIssueNumberDynamic(this.federalDistrictId, this.selectedYear)
@@ -98,8 +97,6 @@ export class CommonStatisticPageComponent implements OnInit, OnDestroy {
           .then((data) => {
 
             this.statisticsDynamic = data;
-            //this.updatePageHeader();
-
           });
     }
     else
@@ -109,8 +106,6 @@ export class CommonStatisticPageComponent implements OnInit, OnDestroy {
           .then(({ statistics, year }) => {
 
             this.statistics = statistics;
-
-            //this.updatePageHeader();
           });
 
       this.service.getCountryServiceTypeIssueNumberDynamic(this.selectedYear)
@@ -118,7 +113,6 @@ export class CommonStatisticPageComponent implements OnInit, OnDestroy {
           .then((data) => {
 
             this.statisticsDynamic = data;
-            //this.updatePageHeader();
           });
     }
   }

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterContentInit, ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../../app.state';
 import {Observable} from 'rxjs';
@@ -14,31 +14,41 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class CountryMapComponent implements OnInit {
 
+  static OTHERS_LABEL: string = null;
+  static TOTAL_LABEL: string = null;
+
   @Output('onDistrictSelect') districtSelectEvent: EventEmitter<FederalDistrict> = new EventEmitter();
 
   @Input() statistic: any;
 
   federalDistricts: Observable<Array<FederalDistrict>>;
 
-  OTHERS_LABEL: string;
-  TOTAL_LABEL: string;
-
 
   constructor(
       private store: Store<State>,
       private colorService: ColorValueScaleService,
       private translator: TranslateService
-  ) { }
+  ) {
 
-  async ngOnInit() {
+    (async () => {
+
+      if (!CountryMapComponent.OTHERS_LABEL || !CountryMapComponent.TOTAL_LABEL)
+      {
+        CountryMapComponent.OTHERS_LABEL = await this.translator.get('OTHERS').toPromise();
+        CountryMapComponent.TOTAL_LABEL = await this.translator.get('TOTAL').toPromise();
+      }
+
+    })();
+
+  }
+
+  ngOnInit (){
 
     this.federalDistricts = this.store.pipe(select(state => state.federalDistrict.list));
 
-     this.OTHERS_LABEL = await this.translator.get('OTHERS').toPromise();
-     this.TOTAL_LABEL = await this.translator.get('TOTAL').toPromise();
   }
 
-  getItemTitle(district: FederalDistrict)
+  getItemTitle = (district: FederalDistrict) =>
   {
     if (!this.statistic)
     {
@@ -58,14 +68,14 @@ export class CountryMapComponent implements OnInit {
 
         if (serviceType.issueNumber > 0)
         {
-          result += (serviceType.title ? serviceType.title : this.OTHERS_LABEL) + ': ' + serviceType.issueNumber + '\n';
+          result += (serviceType.title ? serviceType.title : CountryMapComponent.OTHERS_LABEL) + ': ' + serviceType.issueNumber + '\n';
         }
 
       });
 
       if (statisticData.totalIssues > 0)
       {
-        result += this.TOTAL_LABEL + ': ' + statisticData.totalIssues;
+        result += CountryMapComponent.TOTAL_LABEL + ': ' + statisticData.totalIssues;
       }
     }
 

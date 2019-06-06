@@ -16,6 +16,9 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class FederalDistrictMapComponent implements OnInit, OnDestroy {
 
+  static OTHERS_LABEL: string = null;
+  static TOTAL_LABEL: string = null;
+
   @Output('onRegionSelect') regionSelectEvent: EventEmitter<Region> = new EventEmitter();
 
   _districtId: number;
@@ -46,7 +49,10 @@ export class FederalDistrictMapComponent implements OnInit, OnDestroy {
       private changeDetector: ChangeDetectorRef,
       private translator: TranslateService
   ) {
-
+    (async () => {
+      FederalDistrictMapComponent.OTHERS_LABEL = await this.translator.get('OTHERS').toPromise();
+      FederalDistrictMapComponent.TOTAL_LABEL = await this.translator.get('TOTAL').toPromise();
+    })();
   }
 
   updateMap()
@@ -59,7 +65,7 @@ export class FederalDistrictMapComponent implements OnInit, OnDestroy {
     this.changeDetector.markForCheck();
   }
 
-  async ngOnInit() {
+  ngOnInit() {
 
     this.districtSubscription = this.store.pipe(
         select(state => state.federalDistrict.list)
@@ -67,9 +73,6 @@ export class FederalDistrictMapComponent implements OnInit, OnDestroy {
       this.federalDistricts = list;
       this.updateMap();
     });
-
-    this.OTHERS_LABEL = await this.translator.get('OTHERS').toPromise();
-    this.TOTAL_LABEL = await this.translator.get('TOTAL').toPromise();
   }
 
   ngOnDestroy(): void {
@@ -95,14 +98,14 @@ export class FederalDistrictMapComponent implements OnInit, OnDestroy {
 
         if (serviceType.issueNumber > 0)
         {
-          result += (serviceType.title ? serviceType.title : this.OTHERS_LABEL) + ': ' + serviceType.issueNumber + '\n';
+          result += (serviceType.title ? serviceType.title : FederalDistrictMapComponent.OTHERS_LABEL) + ': ' + serviceType.issueNumber + '\n';
         }
 
       });
 
       if (statisticData.totalIssues > 0)
       {
-        result += this.TOTAL_LABEL + ': ' + statisticData.totalIssues;
+        result += FederalDistrictMapComponent.TOTAL_LABEL + ': ' + statisticData.totalIssues;
       }
 
     }

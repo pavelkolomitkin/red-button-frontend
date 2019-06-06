@@ -86,9 +86,19 @@ export class SearchFormComponent implements OnInit {
 
           this.selectedTags = newSelectedItems;
 
-          this.tagItems = items;
+          this.setTags(items);
         }
     );
+  }
+
+  setTags(tags: Array<ComplaintTag>)
+  {
+    this.tagItems = tags;
+  }
+
+  resetSelectedTags()
+  {
+    this.selectedTags = [];
   }
 
   isTagSelected = (tag: ComplaintTag) => {

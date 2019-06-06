@@ -60,7 +60,7 @@ export class EditIssuePageComponent implements OnInit, OnDestroy, LeavePageConfi
       {
         this.issue = issue;
 
-        this.store.dispatch(new GlobalPageTitle('Edit the Issue', '#' + this.issue.id.toString()));
+        this.store.dispatch(new GlobalPageTitle('EDIT_ISSUE', '#' + this.issue.id.toString()));
       }
     });
 
