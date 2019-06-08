@@ -1,11 +1,13 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',
-  styleUrls: ['./paginator.component.css']
+  styleUrls: ['./paginator.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginatorComponent implements OnInit, OnDestroy {
 
@@ -16,6 +18,8 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   queryStringParams: {};
 
   numberOfPages: number = 0;
+
+  queryParamsSubscription: Subscription;
 
   @Input() itemsOnPage: number = 10;
 
@@ -39,7 +43,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.route.queryParams.subscribe((params) => {
+    this.queryParamsSubscription = this.route.queryParams.subscribe((params) => {
 
       this.queryStringParams = params;
 
@@ -50,6 +54,8 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+
+    this.queryParamsSubscription.unsubscribe();
 
   }
 
