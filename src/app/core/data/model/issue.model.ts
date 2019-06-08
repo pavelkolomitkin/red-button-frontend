@@ -99,7 +99,7 @@ export class Issue implements CloneInterface<Issue>, LocationInterface
             }
             else
             {
-                result = Math.floor(approvedNumber / this.complaintConfirmations.length);
+                result = (approvedNumber / this.complaintConfirmations.length) * 100;
             }
         }
 

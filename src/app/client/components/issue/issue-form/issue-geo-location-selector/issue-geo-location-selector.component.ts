@@ -46,7 +46,6 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
   isSelectingLocation: boolean = false;
   deviceLocation: GeoLocation;
 
-  searchCriteria: any = null;
   viewBoxDelayDescriptor: number = null;
 
 
@@ -121,8 +120,6 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   onSearchFormChangeHandler(criteria: Object)
   {
-    this.searchCriteria = criteria;
-
     if (this.internalIssue.isAddressInit())
     {
       this.initUnAttachedComplaintAroundIssue();
@@ -135,18 +132,13 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   getSearchFormParameters()
   {
-    let result: any = {};
-    // debugger
-    if (!!this.searchCriteria)
-    {
-      result = {
-        tags: this.searchCriteria.tags
-      };
+    let result: any = {
+      tags: this.searchForm.selectedTags
+    };
 
-      if (!!this.searchCriteria.serviceType)
-      {
-        result.serviceTypeId = this.searchCriteria.serviceType.id;
-      }
+    if (!!this.searchForm.selectedServiceType)
+    {
+      result.serviceType = this.searchForm.selectedServiceType.id;
     }
 
     return result;
@@ -309,11 +301,11 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
         centerLongitude: this.internalIssue.location.longitude
       };
 
-      this.searchForm.setGeoParameters(geoParams);
 
       let searchParams = this.getSearchFormParameters();
       searchParams = Object.assign(searchParams, geoParams);
 
+      this.searchForm.setGeoParameters(geoParams);
       this.complaintService.search(searchParams)
           .toPromise()
           .then((complaints: Array<Complaint>) => {
@@ -330,6 +322,8 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
     else
     {
       this.removeAllComplaintBalloons();
+      this.searchForm.setTags([]);
+      this.searchForm.resetSelectedTags();
     }
   };
 
@@ -345,11 +339,10 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
           bottomRightLongitude: box.bottomRight.longitude
         };
 
-        this.searchForm.setGeoParameters(geoParams);
-
         let searchParams = this.getSearchFormParameters();
         searchParams = Object.assign(searchParams, geoParams);
 
+        this.searchForm.setGeoParameters(geoParams);
         this.complaintService.search(searchParams)
             .toPromise()
             .then((complaints) => {
@@ -364,6 +357,8 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
       else
       {
         this.removeAllComplaintBalloons();
+        this.searchForm.setTags([]);
+        this.searchForm.resetSelectedTags();
       }
   };
 

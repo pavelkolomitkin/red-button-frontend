@@ -23,7 +23,7 @@
                 <b class="section-head">{{ 'PHOTOS' | translate }}</b>
                 <app-picture-list [list]="complaint.pictures"></app-picture-list>
             </p>
-            <p>
+            <p *ngIf="complaint.videos.length > 0">
                 <b class="section-head">{{ 'VIDEOS' | translate }}</b>
                 <app-video-list [list]="complaint.videos"></app-video-list>
             </p>

@@ -2,7 +2,7 @@
   <ul class="pagination pagination-sm no-margin pull-right">
     <li [ngClass]="page == 1 ? 'active': ''">
       <ng-container *ngIf="page !== 1; else firstCurrentPage">
-        <a [routerLink]="location.pathname" [queryParams]="getQueryParameters(1)">«</a>
+        <a [routerLink]="location.pathname" [queryParams]="getQueryParameters(page - 1)">«</a>
       </ng-container>
       <ng-template #firstCurrentPage>
         <span>«</span>
@@ -24,7 +24,7 @@
 
     <li [ngClass]="page == numberOfPages ? 'active' : ''">
       <ng-container *ngIf="page !== numberOfPages; else lastCurrentPage">
-        <a [routerLink]="location.pathname" [queryParams]="getQueryParameters(numberOfPages)">»</a>
+        <a [routerLink]="location.pathname" [queryParams]="getQueryParameters(+page + 1)">»</a>
       </ng-container>
       <ng-template #lastCurrentPage>
         <span>»</span>

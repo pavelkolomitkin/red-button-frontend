@@ -1,12 +1,12 @@
 <ng-container *ngIf="issue.complaintConfirmations.length > 0">
-  <div title="{{ issue.getApprovedPercent() + '%' }} {{ 'APPROVED' | translate }}">
-    <span class="text text-success">{{ approvedSignatureNumber() }}</span> / <span class="text">{{ issue.complaintConfirmations.length }}</span>
+  <div title="{{ issue.getApprovedPercent().toFixed(2) + '%' }} {{ 'APPROVED' | translate }}">
+    <span class="text text-success">{{ issue.getApprovedConfirmations().length }}</span> / <span class="text">{{ issue.complaintConfirmations.length }}</span>
   </div>
 
-  <div *ngIf="issue.complaintConfirmations.length > 0" class="progress progress-xs" title="{{ issue.getApprovedPercent() + '%' }} {{ 'APPROVED' | translate }}">
+  <div *ngIf="issue.complaintConfirmations.length > 0" class="progress progress-xs" title="{{ issue.getApprovedPercent().toFixed(2) + '%' }} {{ 'APPROVED' | translate }}">
 
     <div class="progress-bar"
-         [ngStyle]="{ width: issue.getApprovedPercent() + '%' }"
+         [ngStyle]="{ width: issue.getApprovedPercent().toFixed(2) + '%' }"
          [ngClass]="issue.getApprovedPercent() === 100 ? 'progress-bar progress-bar-success' : 'progress-bar-primary'"
     ></div>
 

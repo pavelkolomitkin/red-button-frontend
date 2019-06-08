@@ -10,13 +10,12 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {Map, View} from 'ol';
-import Overlay from 'ol/Overlay';
 import {fromLonLat, toLonLat, transformExtent } from 'ol/proj.js';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import {GeoLocation} from '../../../core/data/model/geo-location.model';
 import {MapViewBox} from '../../data/model/map-view-box.model';
-import {Subscription} from 'rxjs';
+import {MapEntityLayout} from '../../../core/services/map/map-entity-layout';
 
 @Component({
   selector: 'app-map',
@@ -41,9 +40,10 @@ export class MapComponent implements OnInit, OnDestroy {
 
   @ViewChild('mapContainer', { read: ViewContainerRef }) mapContainerRef: ViewContainerRef;
 
+  entityLayout: MapEntityLayout;
+
 
   constructor(private componentResolver: ComponentFactoryResolver) {
-
 
   }
 
@@ -75,6 +75,8 @@ export class MapComponent implements OnInit, OnDestroy {
     this.map.once('postrender', () => {
       this.postRenderEvent.emit();
     });
+
+    this.entityLayout = new MapEntityLayout(this, this.componentResolver);
 
     this.ready.emit();
   }
@@ -182,48 +184,17 @@ export class MapComponent implements OnInit, OnDestroy {
 
   addBalloon<C>(component: Type<C>, location: GeoLocation): ComponentRef<C>
   {
-    const factory = this.componentResolver.resolveComponentFactory(component);
-    const result = this.mapContainerRef.createComponent(factory);
-
-    const position = fromLonLat([location.longitude, location.latitude]);
-
-    const overlay: Overlay = this.createOverlay(result);
-    overlay.setPosition(position);
-
-    this.map.addOverlay(overlay);
-
-    return result;
+    return this.entityLayout.addEntity(component, location);
   }
 
   removeBalloon<C>(component: ComponentRef<C>)
   {
-    let result = false;
-
-    const componentIndex = this.mapContainerRef.indexOf(component.hostView);
-    if (componentIndex !== -1)
-    {
-      this.mapContainerRef.remove(componentIndex);
-      result = true;
-    }
-
-    return result;
+    return this.entityLayout.removeEntity(component);
   }
 
   removeAllBalloons()
   {
-    this.mapContainerRef.clear();
-  }
-
-  createOverlay<C>(component: ComponentRef<C>): Overlay
-  {
-    const result = new Overlay({
-      element: component.location.nativeElement,
-      autoPan: true,
-      autoPanAnimation: {
-        duration: 250
-      }
-    });
-
-    return result;
+    // while there are only balloons we can approach this way
+    this.entityLayout.removeAllEntities();
   }
 }

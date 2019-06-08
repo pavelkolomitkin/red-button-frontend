@@ -18,20 +18,4 @@ export class IssueSignatureProgressComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  approvedSignatureNumber()
-  {
-    let result = 0;
-
-    this.issue.complaintConfirmations.forEach((item) => {
-
-      if (item.status.code === ComplaintConfirmationStatus.STATUS_CONFIRMED)
-      {
-        result++;
-      }
-
-    });
-
-    return result;
-  }
 }

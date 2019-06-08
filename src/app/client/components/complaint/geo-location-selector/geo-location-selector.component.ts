@@ -79,8 +79,6 @@ export class GeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    console.log('Selector inits...');
-
     this.internalComplaint = Object.assign(new Complaint(), this.complaint);
   }
 
@@ -118,6 +116,7 @@ export class GeoLocationSelectorComponent implements OnInit, OnDestroy {
 
     instance.complaint = this.internalComplaint;
 
+    this.map.setCenter(this.internalComplaint.location, true);
   };
 
   onCloseControlClickHandler(event)

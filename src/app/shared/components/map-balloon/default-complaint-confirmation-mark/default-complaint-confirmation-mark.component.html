@@ -1,0 +1,19 @@
+<span
+        class="label label-primary"
+        [ngClass]="'bg-confirmation-' + confirmation.status.code"
+        title="{{ 'SIGNATURE_REQUESTED' | translate }}"
+  >
+  <i class="fa fa-check-circle" *ngIf="confirmation.status.code === 'confirmed'" [title]="confirmation.status.title"></i>
+  <i class="fa fa-ban" *ngIf="confirmation.status.code === 'rejected'" [title]="confirmation.status.title"></i>
+  <i class="fa fa-clock-o" *ngIf="confirmation.status.code === 'pending'" [title]="confirmation.status.title"></i>
+
+  <ng-container *ngIf="confirmation.complaint.tags.length > 0">
+    {{ confirmation.complaint.tags[0].title }}
+  </ng-container>
+  <ng-container *ngIf="!!confirmation.complaint.serviceType && (confirmation.complaint.tags.length === 0)">
+    {{ confirmation.complaint.serviceType.title }}
+  </ng-container>
+  <ng-container *ngIf="!confirmation.complaint.serviceType && (confirmation.complaint.tags.length === 0)">
+    {{ 'SIGNATURE_REQUESTED' | translate }}
+  </ng-container>
+</span>

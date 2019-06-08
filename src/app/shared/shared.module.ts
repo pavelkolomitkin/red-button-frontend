@@ -42,6 +42,10 @@ import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate
 import {environment} from '../../environments/environment';
 import {TranslationLoaderService} from './services/translation-loader.service';
 import { NounFormPipe } from './pipes/noun-form.pipe';
+import { MapBalloonGroupComponent } from './components/map-balloon-group/map-balloon-group.component';
+import { DefaultComplaintMarkComponent } from './components/map-balloon/default-complaint-mark/default-complaint-mark.component';
+import { DefaultIssueMarkComponent } from './components/map-balloon/default-issue-mark/default-issue-mark.component';
+import { DefaultComplaintConfirmationMarkComponent } from './components/map-balloon/default-complaint-confirmation-mark/default-complaint-confirmation-mark.component';
 
 
 @NgModule({
@@ -77,6 +81,10 @@ import { NounFormPipe } from './pipes/noun-form.pipe';
       CommonChartComponent,
       DateTimeViewComponent,
       NounFormPipe,
+      MapBalloonGroupComponent,
+      DefaultComplaintMarkComponent,
+      DefaultIssueMarkComponent,
+      DefaultComplaintConfirmationMarkComponent,
   ],
   imports: [
     CommonModule,
@@ -132,13 +140,17 @@ import { NounFormPipe } from './pipes/noun-form.pipe';
         CommonChartComponent,
         DateTimeViewComponent,
         TranslateModule,
-        NounFormPipe
+        NounFormPipe,
+        DefaultComplaintMarkComponent,
+        DefaultIssueMarkComponent,
+        DefaultComplaintConfirmationMarkComponent,
     ],
   entryComponents: [
       MapComponent,
       IssueViewBalloonComponent,
       ComplaintConfirmationViewBalloonComponent,
       ComplaintDetailsBalloonComponent,
+      MapBalloonGroupComponent
   ]
 })
 export class SharedModule {
