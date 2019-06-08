@@ -39,10 +39,6 @@ export class FederalDistrictMapComponent implements OnInit, OnDestroy {
 
   districtSubscription: Subscription;
 
-  OTHERS_LABEL: string;
-  TOTAL_LABEL: string;
-
-
   constructor(
       private store: Store<State>,
       private colorService: ColorValueScaleService,

@@ -1,14 +1,9 @@
 import {
   Component,
-  ComponentRef,
-  ElementRef,
   EventEmitter,
-  HostListener,
   Input, OnDestroy,
   OnInit,
   Output,
-  ViewContainerRef,
-  ViewRef
 } from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../app.state';
@@ -28,7 +23,7 @@ export class MapBalloonComponent implements OnInit, OnDestroy {
    * using bootstrap colors: 'default', 'danger', 'success'
    */
   @Input() colorStyle: string = 'default';
-  @Input() color: string;
+  @Input() color: string = '#008aef';
 
   @Output('onToggleCollapse') toggleCollapse: EventEmitter<boolean> = new EventEmitter();
   @Output('isCollapsedChange') isCollapsedChange: EventEmitter<boolean> = new EventEmitter();
@@ -53,8 +48,6 @@ export class MapBalloonComponent implements OnInit, OnDestroy {
             this.isCollapsed = true;
           }
         });
-
-    //this.handleOpenedState();
   }
 
   ngOnDestroy(): void {

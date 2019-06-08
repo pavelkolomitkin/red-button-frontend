@@ -1,0 +1,14 @@
+.bg-confirmation-confirmed
+{
+    background: #1fc346 !important;
+}
+
+.bg-confirmation-pending
+{
+    background: #a4a4a4 !important;
+}
+
+.bg-confirmation-rejected
+{
+    background: #a40600 !important;
+}

@@ -1,4 +1,5 @@
 <app-map-balloon [colorStyle]="'issue'"
+                 [color]="'orange'"
                  [isCollapsed]="true"
                  [populateCollapsing]="true"
                  [location]="issue.location"
@@ -61,5 +62,7 @@
       <small class="text-muted" app-date-time [value]="issue.createdAt"></small>
     </div>
   </div>
+
+  <div class="balloon-mark" app-default-issue-mark [issue]="issue"></div>
 
 </app-map-balloon>

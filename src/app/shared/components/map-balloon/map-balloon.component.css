@@ -68,6 +68,10 @@
     height: 50px;
 }
 
+.mark-container
+{
+    cursor: pointer;
+}
 
 .mark {
     position: absolute;
@@ -79,7 +83,6 @@
     width: 40px;
     height: 40px;
     transform: rotate(-45deg);
-    cursor: pointer;
 }
 
 .mark::after {
@@ -98,19 +101,4 @@
 .bg-issue
 {
     background: #ff8700;
-}
-
-.bg-confirmation-confirmed
-{
-    background: #1fc346;
-}
-
-.bg-confirmation-pending
-{
-    background: #a4a4a4;
-}
-
-.bg-confirmation-rejected
-{
-    background: #a40600;
 }

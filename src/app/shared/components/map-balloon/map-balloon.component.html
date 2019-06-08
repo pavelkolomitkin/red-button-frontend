@@ -28,24 +28,17 @@
 
 </div>
 
-<ng-container *ngIf="!!color; else defaultMark;">
-  <div
-          class="mark"
-          *ngIf="isCollapsed"
-          [ngStyle]="{ backgroundColor: color }"
-          (click)="onToggleCollapseHandler($event)"
-  >
+<div *ngIf="isCollapsed"
+     (click)="onToggleCollapseHandler($event)"
+     class="mark-container"
+>
 
-  </div>
-</ng-container>
-<ng-template #defaultMark>
-  <div
-          class="mark"
-          *ngIf="isCollapsed"
-          [ngClass]="colorStyle == 'default' ? 'bg-primary' : 'bg-' + colorStyle"
-          (click)="onToggleCollapseHandler($event)"
-  >
+  <div #markContent><ng-content select=".balloon-mark"></ng-content></div>
 
+  <div
+          *ngIf="markContent.children.length == 0"
+          class="mark"
+          [ngStyle]="{ backgroundColor: color }">
   </div>
-</ng-template>
+</div>
 

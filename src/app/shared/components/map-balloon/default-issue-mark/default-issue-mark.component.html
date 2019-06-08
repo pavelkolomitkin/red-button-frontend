@@ -1,0 +1,15 @@
+<div
+        class="label"
+        [ngClass]="!color ? 'label-warning' : ''"
+        [ngStyle]="{ backgroundColor: (!!color ? color: 'none') }"
+        title="{{ 'ISSUE' | translate }}">
+  <i class="fa fa-file-text"></i>
+
+  <ng-container *ngIf="!!issue.serviceType">
+    {{ issue.serviceType.title }}
+  </ng-container>
+
+  <ng-container *ngIf="!issue.serviceType">
+    {{ 'ISSUE' | translate }}
+  </ng-container>
+</div>

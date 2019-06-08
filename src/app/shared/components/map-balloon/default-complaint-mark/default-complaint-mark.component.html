@@ -1,0 +1,11 @@
+<span class="label label-primary" title="{{ 'COMPLAINT' | translate }}">
+  <ng-container *ngIf="complaint.tags.length > 0">
+    {{ complaint.tags[0].title }}
+  </ng-container>
+  <ng-container *ngIf="!!complaint.serviceType && (complaint.tags.length === 0)">
+    {{ complaint.serviceType.title }}
+  </ng-container>
+  <ng-container *ngIf="!complaint.serviceType && (complaint.tags.length === 0)">
+    {{ 'COMPLAINT' | translate }}
+  </ng-container>
+</span>
