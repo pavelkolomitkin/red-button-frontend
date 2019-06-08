@@ -150,6 +150,7 @@ import { DefaultComplaintConfirmationMarkComponent } from './components/map-ball
       IssueViewBalloonComponent,
       ComplaintConfirmationViewBalloonComponent,
       ComplaintDetailsBalloonComponent,
+      MapBalloonGroupComponent
   ]
 })
 export class SharedModule {
