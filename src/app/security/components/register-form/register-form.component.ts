@@ -14,7 +14,7 @@ export class RegisterFormComponent implements OnInit {
 
   phoneNumber: string = '';
 
-  @Input() validationErrors:{} = {
+  @Input() validationErrors:any = {
     plainPassword: {}
   };
 

@@ -24,7 +24,7 @@ export abstract class UploadPictureListFormFieldComponent implements OnInit, OnD
     @ViewChild('removeAlertModal') removePictureModalWindowTemplate: TemplateRef<any>;
     removePictureModalWindow: NgbModalRef = null;
 
-    protected uploadingFiles: Observable<Array<UploadItem<PictureInterface>>>;
+    uploadingFiles: Observable<Array<UploadItem<PictureInterface>>>;
 
     uploadSubscription: Subscription;
 

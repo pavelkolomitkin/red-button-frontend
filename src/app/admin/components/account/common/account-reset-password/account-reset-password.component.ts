@@ -14,7 +14,7 @@ export class AccountResetPasswordComponent implements OnInit {
 
   @Input() account: User;
 
-  errors = {};
+  errors:any = {};
 
   isLoading: boolean = false;
 
