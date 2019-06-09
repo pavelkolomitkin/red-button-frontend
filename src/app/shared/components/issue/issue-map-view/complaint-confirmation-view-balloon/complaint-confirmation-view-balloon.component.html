@@ -19,13 +19,13 @@
               (confirmation.complaint.message | slice:0:150) + '...'
               : confirmation.complaint.message }}
       <ng-container *ngxPermissionsOnly="['ROLE_CLIENT_USER']">
-        <a [routerLink]="'/client/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">{{ 'MORE' | translate }}...</a>
+        <a [routerLink]="'/client/complaint/' + confirmation.complaint.id.toString()">{{ 'MORE' | translate }}...</a>
       </ng-container>
       <ng-container *ngxPermissionsOnly="['ROLE_ADMIN_USER']">
-        <a [routerLink]="'/admin/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">{{ 'MORE' | translate }}...</a>
+        <a [routerLink]="'/admin/complaint/' + confirmation.complaint.id.toString()">{{ 'MORE' | translate }}...</a>
       </ng-container>
       <ng-container *ngxPermissionsOnly="['ROLE_COMPANY_REPRESENTATIVE_USER']">
-        <a [routerLink]="'/company/complaint/' + confirmation.complaint.id.toString()" [target]="'_blank'">{{ 'MORE' | translate }}...</a>
+        <a [routerLink]="'/company/complaint/' + confirmation.complaint.id.toString()">{{ 'MORE' | translate }}...</a>
       </ng-container>
     </p>
     <p>

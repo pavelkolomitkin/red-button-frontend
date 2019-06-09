@@ -55,7 +55,7 @@ export class IssueGeographyPageComponent implements OnInit, OnDestroy {
 
   }
 
-  onMapReadyHandler()
+  onMapReadyHandler(event)
   {
     this.searchSubscription = this.store.pipe(select(state => state.companyIssue.geoList), skip(1)).subscribe((list) => {
 

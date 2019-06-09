@@ -22,7 +22,7 @@ export class Issue implements CloneInterface<Issue>, LocationInterface
 
     region ?: Region;
 
-    address ?: Object;
+    address ?: any;
 
     pictures: Array<IssuePicture> = [];
 

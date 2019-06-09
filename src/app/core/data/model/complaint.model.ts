@@ -19,7 +19,7 @@ export class Complaint implements LocationInterface {
 
     region ?: Region;
 
-    address ?: Object;
+    address ?: any;
 
     pictures: Array<ComplaintPicture> = [];
 

@@ -13,7 +13,7 @@
       issue.message.length > 150 ?
               (issue.message | slice:0:150) + '...'
               : issue.message }}
-      <a [routerLink]="'/company/issue/' + issue.id" [target]="'_blank'">{{ 'MORE' | translate }}...</a>
+      <a [routerLink]="'/company/issue/' + issue.id">{{ 'MORE' | translate }}...</a>
     </p>
 
     <p *ngIf="issue.complaintConfirmations.length > 0" title="{{ 'SIGNATURES' | translate }}">
