@@ -22,6 +22,8 @@ export interface State {
   breadCrumbs: Array<BreadCrumb>;
 
   leavePageConfirmation: boolean;
+
+  isUserAgreementVisible: boolean;
 }
 
 const initialState: State = {
@@ -40,7 +42,9 @@ const initialState: State = {
 
   breadCrumbs: [],
 
-  leavePageConfirmation: false
+  leavePageConfirmation: false,
+
+  isUserAgreementVisible: false
 };
 
 export function reducer(state = initialState, action: actions.CoreActions): State {
@@ -149,6 +153,13 @@ export function reducer(state = initialState, action: actions.CoreActions): Stat
       return {
         ...state,
         leavePageConfirmation: false
+      };
+
+    case actions.GLOBAL_USER_AGREEMENT_VISIBILITY:
+
+      return {
+        ...state,
+        isUserAgreementVisible: action.isVisible
       };
 
     default:

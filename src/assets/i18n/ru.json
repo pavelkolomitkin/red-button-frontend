@@ -40,7 +40,7 @@
   "FULL_NAME": "Полное имя",
   "YOUR_PHONE_NUMBER": "Ваш телефон",
   "PHONE_NUMBER": "Телефон",
-  "I_ACCEPT_AGREEMENT": "Согласен с правилами сайта",
+  "I_ACCEPT_AGREEMENT": "Принять",
   "YOU_REGISTERED_SUCCESSFUL_CHECK_EMAIL": "Вы успешно зарегистрировались! На Ваш эл. адрес выслана ссылка для подтверждения Вашего аккаунта",
   "CONFIRM_THE_LOCATION": "Подтвердите адрес",
 
@@ -207,5 +207,6 @@
   "TOTAL": "Всего",
   "OTHERS": "Остальные",
   "LOGIN_ERROR": "Неверный эл. адрес или пароль",
-  "DEVELOPER": "Разработчик"
+  "DEVELOPER": "Разработчик",
+  "USER_AGREEMENT": "Пользовательское соглашение"
 }

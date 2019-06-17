@@ -24,6 +24,8 @@ export const GLOBAL_CONFIRMATION_RESET = 'GLOBAL_CONFIRMATION_RESET';
 export const GLOBAL_CONFIRM_LEAVE_PAGE_INIT = 'GLOBAL_CONFIRM_LEAVE_PAGE_INIT';
 export const GLOBAL_CONFIRM_LEAVE_PAGE_RESET = 'GLOBAL_CONFIRM_LEAVE_PAGE_RESET';
 
+export const GLOBAL_USER_AGREEMENT_VISIBILITY = 'GLOBAL_USER_AGREEMENT_VISIBILITY';
+
 
 export class GlobalPageTitle implements Action
 {
@@ -114,6 +116,14 @@ export class GlobalConfirmLeavePageReset implements Action
   readonly type = GLOBAL_CONFIRM_LEAVE_PAGE_RESET;
 }
 
+export class GlobalUserAgreementVisibility implements Action
+{
+  readonly type = GLOBAL_USER_AGREEMENT_VISIBILITY;
+
+  constructor(public isVisible: boolean) {}
+}
+
+
 export type CoreActions =
     GlobalProgressShow
     | GlobalProgressHide
@@ -134,4 +144,6 @@ export type CoreActions =
 
     | GlobalConfirmLeavePageInit
     | GlobalConfirmLeavePageReset
+
+    | GlobalUserAgreementVisibility
   ;

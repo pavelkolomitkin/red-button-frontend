@@ -12,8 +12,8 @@ export const environment = {
   },
   nearGeoCoordinateMaxDelta: 0.000002 ,
 
-  maxUploadPictureSize: 5242880,
-  maxUploadPictureSizeLabel: '5M',
+  maxUploadPictureSize: 7340032,
+  maxUploadPictureSizeLabel: '7M',
   uploadPictureAllowedMimeTypes: ['image/jpeg', 'image/png'],
 
   clientCommonInfoInterval: 10000,
