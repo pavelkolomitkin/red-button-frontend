@@ -1,7 +1,7 @@
 {
   "RED_BUTTON_RED":  "Красная",
   "RED_BUTTON_BUTTON": "Кнопка",
-  "YOU_HAVE_CONFIRMED_YOUR_PROFILE": "Вы подтвердили свой аккаунт! Используйте свой email и пароль, чтобы",
+  "YOU_HAVE_CONFIRMED_YOUR_PROFILE": "Вы подтвердили свой аккаунт! Используйте свой эл. адрес и пароль, чтобы",
   "SING_IN": "Авторизоваться",
   "REGISTER" : "Регистрация",
   "LOGIN_HEADER": "Вход",
@@ -130,7 +130,7 @@
   "PAGE_NOT_FOUND": "Страница не найдена",
   "DESCRIBE_A_PROBLEM": "Опишите проблему",
   "SELECT_GEO_LOCATION": "Выберите точку на карте",
-  "SELECT_THE_POINT":  "Выбирите точку",
+  "SELECT_THE_POINT":  "Выберите точку",
   "SELECT_SERVICE_TYPE": "Укажите тип коммунальной услуги",
   "SELECT_A_COMPANY": "Укажите управляющую компанию",
   "SELECT_LOCATION_FIRST": "Чтобы указать компанию, выберите точку на карте",
