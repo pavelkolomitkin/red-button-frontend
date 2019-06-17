@@ -10,6 +10,11 @@ export class DefaultHttpHeadersInterceptor implements HttpInterceptor
       return next.handle(req);
     }
 
+    if (req.headers.has('Content-Type'))
+    {
+      return next.handle(req);
+    }
+
     const headeredRequest = req.clone({
       headers: req
         .headers

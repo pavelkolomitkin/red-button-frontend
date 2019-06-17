@@ -46,6 +46,8 @@ import { MapBalloonGroupComponent } from './components/map-balloon-group/map-bal
 import { DefaultComplaintMarkComponent } from './components/map-balloon/default-complaint-mark/default-complaint-mark.component';
 import { DefaultIssueMarkComponent } from './components/map-balloon/default-issue-mark/default-issue-mark.component';
 import { DefaultComplaintConfirmationMarkComponent } from './components/map-balloon/default-complaint-confirmation-mark/default-complaint-confirmation-mark.component';
+import { UserAgreementComponent } from './components/user-agreement/user-agreement.component';
+import { UserAgreementWindowComponent } from './components/user-agreement-window/user-agreement-window.component';
 
 
 @NgModule({
@@ -85,6 +87,8 @@ import { DefaultComplaintConfirmationMarkComponent } from './components/map-ball
       DefaultComplaintMarkComponent,
       DefaultIssueMarkComponent,
       DefaultComplaintConfirmationMarkComponent,
+      UserAgreementComponent,
+      UserAgreementWindowComponent,
   ],
   imports: [
     CommonModule,
@@ -144,6 +148,8 @@ import { DefaultComplaintConfirmationMarkComponent } from './components/map-ball
         DefaultComplaintMarkComponent,
         DefaultIssueMarkComponent,
         DefaultComplaintConfirmationMarkComponent,
+        UserAgreementComponent,
+        UserAgreementWindowComponent
     ],
   entryComponents: [
       MapComponent,

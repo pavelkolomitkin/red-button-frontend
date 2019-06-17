@@ -1,6 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import RegisterData from "../../data/model/register-data.model";
+import {Store} from '@ngrx/store';
+import {State} from '../../../app.state';
+import {GlobalUserAgreementVisibility} from '../../../core/data/actions';
 declare var $: any;
 
 @Component({
@@ -20,7 +23,7 @@ export class RegisterFormComponent implements OnInit {
 
   @Output('onSubmit') onSubmitEvent: EventEmitter<RegisterData> = new EventEmitter();
 
-  constructor() { }
+  constructor(private store: Store<State>) { }
 
   ngOnInit() {
 
@@ -50,5 +53,10 @@ export class RegisterFormComponent implements OnInit {
     };
 
     this.onSubmitEvent.emit(data);
+  }
+
+  onAgreementClickHandler(event)
+  {
+    this.store.dispatch(new GlobalUserAgreementVisibility(true));
   }
 }

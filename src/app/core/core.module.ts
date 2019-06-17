@@ -65,6 +65,7 @@ import {NgxPermissionsModule} from 'ngx-permissions';
 import {MapViewConfiguratorFactory} from './services/map/view-configurator/map-view-configurator.factory';
 import {FederalDistrictService} from './services/federal-district.service';
 import {FederalDistrictEffects} from './data/effects/federal-district.effects';
+import {UserAgreementService} from './services/user-agreement-service';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -138,6 +139,7 @@ const httpInterceptorProviders = [
     FederalDistrictService,
     RegionService,
     MapViewConfiguratorFactory,
+    UserAgreementService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,

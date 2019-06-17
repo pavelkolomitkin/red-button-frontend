@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Store} from '@ngrx/store';
+import {State} from '../../../app.state';
+import {GlobalUserAgreementVisibility} from '../../data/actions';
 
 @Component({
   selector: 'app-main-footer',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainFooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<State>) { }
 
   ngOnInit() {
+  }
+
+  onAgreementClickHandler(event)
+  {
+    this.store.dispatch(new GlobalUserAgreementVisibility(true));
   }
 
 }
