@@ -364,7 +364,7 @@ export class IssueGeoLocationSelectorComponent implements OnInit, OnDestroy {
 
   onViewBoxChangeHandler(box: MapViewBox)
   {
-    if (this.internalIssue.isAddressInit())
+    if (this.internalIssue.isAddressInit() || !!this.internalIssue.location)
     {
       return;
     }

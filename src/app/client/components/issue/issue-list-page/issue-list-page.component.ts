@@ -108,11 +108,11 @@ export class IssueListPageComponent implements OnInit, OnDestroy {
   {
     const confirmation: ActionConfirmation = new ActionConfirmation(
         IssueListPageComponent.DELETE_ISSUE_CONFIRMATION_ID,
-        'Delete Issue?',
-        'Are you sure you want to delete it?',
+        'DELETE_ISSUE_QUESTION',
+        'ARE_YOU_SURE_YOU_WANT_TO_DELETE_IT',
         [
-          new ConfirmationActionOption(ConfirmationActionOption.CONFIRM_ID, 'Yes', 'danger'),
-          new ConfirmationActionOption(ConfirmationActionOption.CANCEL_ID, 'Cancel')
+          new ConfirmationActionOption(ConfirmationActionOption.CONFIRM_ID, 'YES', 'danger'),
+          new ConfirmationActionOption(ConfirmationActionOption.CANCEL_ID, 'CANCEL')
         ],
         issue
     );
