@@ -67,6 +67,7 @@ export class IssueMapBalloonComponent implements OnInit {
   onCancelClickHandler = (event) => {
     this.issue.region = null;
     this.issue.address = null;
+    this.issue.location = null;
     this.locationCancelEvent.emit(this.issue);
   };
 
